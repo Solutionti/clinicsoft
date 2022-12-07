@@ -147,6 +147,9 @@
                                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Receta Medica</button>
                               </li>
                               <li class="nav-item" role="presentation">
+                                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Ord. laboratorio</button>
+                              </li>
+                              <li class="nav-item" role="presentation">
                                  <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Información</button>
                               </li>
                            </ul>
@@ -227,7 +230,7 @@
                                        <div class="col-md-12">
                                           <h6>
                                              Receta Medica 
-                                             <li title="Agregar" class="fas fa-plus-circle  text-dark" data-bs-toggle="modal" href="#ecografiamama" role="button"></li>
+                                             <li title="Agregar" class="fas fa-plus-circle  text-dark" data-bs-toggle="modal" href="#Agregarreceta" role="button"></li>
                                           </h6>
                                           <table class="table align-items-center">
                                              <thead class="thead-light">
@@ -1350,10 +1353,10 @@
       </div>
       <!-- MODAL RECETA MEDICA -->
       <div class="modal fade" id="Agregarreceta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
       <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Historia del paciente</h5>
+      <h5 class="modal-title" id="exampleModalLabel">Recetario del Paciente</h5>
       <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
       </button>
