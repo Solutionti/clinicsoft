@@ -1362,28 +1362,48 @@
       </button>
       </div>
       <div class="modal-body">
-      <div class="form-group input-group-sm" hidden>
-      <label>paciente</label>
-      <input type="text" id="paciente"  class="form-control">
-      </div>
-      <div class="form-group input-group-sm">
-      <label>Fecha</label>
-      <input type="text" id="fecha" value="<?php echo date("d-m-Y"); ?>" class="form-control" readonly>
-      </div>
-      <div class="form-group input-group-sm">
-      <label>Medicina</label>
-      <input type="text" id="medicina" class="form-control">
-      </div>
-      <div class="form-group input-group-sm">
-      <label>Receta</label>
-      <textarea class="form-control" id="receta" rows="9"></textarea>
-      </div>
-      </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-primary" id="crear_receta">Guardar</button>
-      </div>
-      </div>
-      </div>
+      <form action="">
+          <div class="row">
+             <div class="col-md-2">
+               <div class="form-group">
+                 <label>Fecha</label>
+                 <input type="text" id="fecha" value="<?php echo date("d-m-Y"); ?>" class="form-control" readonly>
+               </div>
+             </div>
+             <div class="col-md-4">
+               <div class="form-group">
+                 <label>Doctor</label>
+                 <input type="text" class="form-control">
+               </div>
+             </div>
+             <div class="col-md-6">
+               <div class="form-group">
+                 <label>Paciente</label>
+                 <input type="text" class="form-control">
+               </div>
+             </div>
+          </div>    
+        </form>
+         <div class="row">
+             <div class="col-md-4">
+               <div class="form-group">
+                 <label>Input</label>
+                 <input type="text" class="form-control">
+               </div>
+             </div>
+             <div class="col-md-4">
+               <div class="form-group">
+                 <label>Input</label>
+                 <input type="text" class="form-control">
+               </div>
+             </div>
+             <div class="col-md-4">
+               <div class="form-group">
+                 <label>Input</label>
+                 <input type="text" class="form-control">
+               </div>
+             </div>
+          </div>
       </div>
       <!-- ventanas laterales  DOCUMENTOS -->
       <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
