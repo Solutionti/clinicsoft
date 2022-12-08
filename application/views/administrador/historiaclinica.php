@@ -1378,7 +1378,7 @@
              </div>
              <div class="col-md-6">
                <div class="form-group">
-                 <label>Paciente</label>
+                 <label>Pacient</label>
                  <input type="text" class="form-control">
                </div>
              </div>
