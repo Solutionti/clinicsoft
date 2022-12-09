@@ -1365,41 +1365,92 @@
       <form action="">
           <div class="row">
              <div class="col-md-2">
-               <div class="form-group">
+               <div class="form-group input-group-sm">
                  <label>Fecha</label>
                  <input type="text" id="fecha" value="<?php echo date("d-m-Y"); ?>" class="form-control" readonly>
                </div>
              </div>
              <div class="col-md-4">
-               <div class="form-group">
+               <div class="form-group input-group-sm">
                  <label>Doctor</label>
                  <input type="text" class="form-control">
                </div>
              </div>
              <div class="col-md-6">
-               <div class="form-group">
-                 <label>Pacient</label>
+               <div class="form-group input-group-sm">
+                 <label>Paciente</label>
                  <input type="text" class="form-control">
                </div>
              </div>
           </div>    
         </form>
          <div class="row">
+             <div class="col-md-6">
+               <div class="form-group input-group-sm">
+                 <label>Farmaco</label>
+                 <input type="text" class="form-control">
+               </div>
+             </div>
+             <div class="col-md-3">
+               <div class="form-group input-group-sm">
+                 <label>Cantidad</label>
+                 <input type="text" class="form-control">
+               </div>
+             </div>
+             <div class="col-md-3">
+               <div class="form-group input-group-sm">
+                   <label>Dosis</label>
+                   <select class="form-control" id="dosis">
+                      <option value="">Seleccione la dosis</option>
+                      <option value="Noespecificada">No especifica</option>
+                      <option value="Ampolla">Ampolla</option>
+                      <option value="Aplicación">Aplicación</option>
+                      <option value="Capsula">Capsula</option>
+                      <option value="Comprimido">Comprimido</option>
+                      <option value="Cucharada">Cucharada</option>
+                      <option value="Cucharadita_5ML">Cucharadita 5ML</option>
+                      <option value="Dosis">Dosis</option>
+                      <option value="Exposición">Exposición</option>
+                      <option value="Gota">Gota</option>
+                      <option value="Gragea">Gragea</option>
+                      <option value="Mililitros">Mililitros</option>
+                      <option value="Puff">Puff</option>
+                      <option value="Sesión">Sesión</option>
+                      <option value="Sobre">Sobre</option>
+                      <option value="Tableta">Tableta</option>
+                  </select>
+                        </div>
+                  </div>
+         </div>
+          <div class="row">
              <div class="col-md-4">
-               <div class="form-group">
-                 <label>Input</label>
+               <div class="form-group input-group-sm">
+                 <label>Via Aplicación</label>
+                 <select class="form-control" id="via_aplicaion">
+                      <option value="">Seleccione la via aplicación</option>
+                      <option value="Via_oral">Via oral</option>
+                      <option value="Via_intramuscular">Via intramuscular</option>
+                      <option value="Via_intravenoso">Via intravenoso</option>
+                      <option value="Vaginal">Vaginal</option>
+                      <option value="Primaria">Gota</option>
+                      <option value="Secundaria">Gragea</option>
+                      <option value="Superior">Mililitros</option>
+                      <option value="Preescolar">Puff</option>
+                      <option value="analfabeto">Sesión</option>
+                      <option value="Primaria">Sobre</option>
+                      <option value="Secundaria">Tableta</option>
+                  </select>
+               </div>
+             </div>
+             <div class="col-md-4">
+               <div class="form-group input-group-sm">
+                 <label>Frecuencia</label>
                  <input type="text" class="form-control">
                </div>
              </div>
              <div class="col-md-4">
-               <div class="form-group">
-                 <label>Input</label>
-                 <input type="text" class="form-control">
-               </div>
-             </div>
-             <div class="col-md-4">
-               <div class="form-group">
-                 <label>Input</label>
+               <div class="form-group input-group-sm">
+                 <label>Duración</label>
                  <input type="text" class="form-control">
                </div>
              </div>
