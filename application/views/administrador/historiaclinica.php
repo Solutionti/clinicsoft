@@ -1432,26 +1432,69 @@
                       <option value="Via_intramuscular">Via intramuscular</option>
                       <option value="Via_intravenoso">Via intravenoso</option>
                       <option value="Vaginal">Vaginal</option>
-                      <option value="Primaria">Gota</option>
-                      <option value="Secundaria">Gragea</option>
-                      <option value="Superior">Mililitros</option>
-                      <option value="Preescolar">Puff</option>
-                      <option value="analfabeto">Sesión</option>
-                      <option value="Primaria">Sobre</option>
-                      <option value="Secundaria">Tableta</option>
+                      <option value="Transtraqueal">Transtraqueal</option>
+                      <option value="Transdermica">Transdermica</option>
+                      <option value="Topica">Topica</option>
+                      <option value="Sub_lingual">Sub lingual</option>
+                      <option value="Sub_cutanea">Sub cutanea</option>
+                      <option value="Rectal">Rectal</option>
+                      <option value="Por_sng">Por sng</option>
+                      <option value="Por_gastronomica">Por gastronomica</option>
+                      <option value="Parenteral">Parenteral </option>
+                      <option value="Sub_lingual">Sub lingual</option>
+                      <option value="Sub_cutanea">Sub cutanea</option>
+                      <option value="Ojo_derecha">Ojo derecho</option>
+                      <option value="Ojo_izquierdo">Ojo izquierdo</option>
+                      <option value="Oido_derecho">Oido derecho</option>
+                      <option value="Oido_izquierdo">Oido izquierdo</option>
+                      <option value="No_especifica">No especifica</option>
                   </select>
                </div>
              </div>
              <div class="col-md-4">
                <div class="form-group input-group-sm">
                  <label>Frecuencia</label>
-                 <input type="text" class="form-control">
+                 <select class="form-control" id="frecuencia">
+                      <option value="">Seleccione la frecuencia</option>
+                      <option value="No_especifica">No especifica</option>
+                      <option value="dos_al_dia">2 veces al día</option>
+                      <option value="tres_al_dia">3 veces al día</option>
+                      <option value="al_acostarse">Al acostarse</option>
+                      <option value="al_dia">Al día</option>
+                      <option value="cada_doce_horas">Cada 12 horas</option>
+                      <option value="cada_dos_horas">Cada 2 horas</option>
+                      <option value="cada_tres_horas">Cada 3 horas</option>
+                      <option value="cada_cuatro_horas">Cada 4 horas</option>
+                      <option value="cada_seis_horas">Cada 6 horas</option>
+                      <option value="cada_ocho_horas">Cada 8 horas</option>
+                      <option value="dos_veces_por_semana">Dos veces por semana</option>
+                      <option value="en_ayunas">En ayunas</option>
+                      <option value="en_la_mañana">En la mañana</option>
+                      <option value="mañana_noche">En la mañana, noche</option>
+                      <option value="noche">En la noche</option>
+                      <option value="tarde">En la tarde</option>
+                      <option value="mañana_tarde_noche">Mañana,Tarde,Noche</option>
+                      <option value="tres_veces_semana">Tres veces por semana</option>
+                      <option value="una_vez_semana">Una vez por semana</option>      
+                  </select>
                </div>
              </div>
              <div class="col-md-4">
                <div class="form-group input-group-sm">
                  <label>Duración</label>
-                 <input type="text" class="form-control">
+                 <select class="form-control" id="duracion">
+                      <option value="">Seleccione la duración</option>
+                      <option value="No especifica">05 días</option>
+                      <option value="Via_intramuscular">10 días</option>
+                      <option value="Via_intravenoso">15 días</option>
+                      <option value="Vaginal">30 días</option>
+                      <option value="Transtraqueal">Dos días</option>
+                      <option value="Transdermica">Durante 3 meses</option>
+                      <option value="Topica">Tres días</option>
+                      <option value="Sub_lingual">Un día</option>
+                      <option value="Topica">Una semana</option>
+                      <option value="Sub_lingual">Unica vez</option>
+                  </select>
                </div>
              </div>
           </div>
