@@ -1484,16 +1484,16 @@
                  <label>Duración</label>
                  <select class="form-control" id="duracion">
                       <option value="">Seleccione la duración</option>
-                      <option value="No especifica">05 días</option>
-                      <option value="Via_intramuscular">10 días</option>
-                      <option value="Via_intravenoso">15 días</option>
-                      <option value="Vaginal">30 días</option>
-                      <option value="Transtraqueal">Dos días</option>
-                      <option value="Transdermica">Durante 3 meses</option>
-                      <option value="Topica">Tres días</option>
-                      <option value="Sub_lingual">Un día</option>
-                      <option value="Topica">Una semana</option>
-                      <option value="Sub_lingual">Unica vez</option>
+                      <option value="cinco_dias">05 días</option>
+                      <option value="diez_dias">10 días</option>
+                      <option value="quince_dias">15 días</option>
+                      <option value="treinta_dias">30 días</option>
+                      <option value="dos_dias">Dos días</option>
+                      <option value="durante_tres_meses">Durante 3 meses</option>
+                      <option value="tres_dias">Tres días</option>
+                      <option value="un dia">Un día</option>
+                      <option value="una_semana">Una semana</option>
+                      <option value="unica_vez">Unica vez</option>
                   </select>
                </div>
              </div>
