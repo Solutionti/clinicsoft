@@ -2627,18 +2627,84 @@
       </div>
       </div>
       <!-- MODAL DE ORDEN DE LABORATORIO -->
-<div class="modal fade" id="modal-ordenlaboraorio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+         <div class="modal fade" id="modal-ordenlaboraorio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-fullscreen" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+         <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">x</span>
+         </button>
+         </div>
+         <div class="modal-body">
         <!-- ACA VA EL CONTENIDO DEL FORMULARIO -->
+        <form action="">
+          <div class="row">
+             <div class="col-md-2">
+               <div class="form-group input-group-sm">
+                 <label>Fecha</label>
+                 <input type="text" id="fecha" value="<?php echo date("d-m-Y"); ?>" class="form-control" readonly>
+               </div>
+             </div>
+             <div class="col-md-4">
+               <div class="form-group input-group-sm">
+                 <label>Doctor</label>
+                 <input type="text" class="form-control">
+               </div>
+             </div>
+             <div class="col-md-6">
+               <div class="form-group input-group-sm">
+                 <label>Paciente</label>
+                 <input type="text" class="form-control">
+               </div>
+             </div>
+          </div> 
+
+      <div class="row">
+      <div class="col-md-6">
+      <label for=""> Analisis</label>
+      <div class="table-responsive">
+      <table class="table align-items-center table-borderless" id="table-laboratorio">
+      <thead class="thead-light">
+      <tr>
+      <th scope="col">ID</th>
+      <th scope="col" class="sort" data-sort="name">Codigo</th>
+      <th scope="col" class="sort" data-sort="budget">Nombre diagnostico</th>
+      </tr>
+      </thead>
+      <tbody>
+      <?php foreach($diagnostico->result() as $diagnosticos){ ?>
+      <tr>
+      <td class="budget"><?php echo $diagnosticos->id; ?></td>
+      <td class="budget"><?php echo $diagnosticos->clave; ?></td>
+      <td class="budget"><?php echo $diagnosticos->descripcion; ?></td>
+      </tr>
+      <?php } ?>
+      </tbody>
+      </table>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+      <div class="col-md-6">
+      <div class="table-responsive">
+      <table class="table align-items-center table-borderless" id="items-ginecologia-table">
+      <thead class="thead-light">
+      <tr>
+      <th scope="col">ID</th>
+      <th scope="col" class="sort" data-sort="name">Codigo</th>
+      <th scope="col" class="sort" data-sort="budget">Nombre diagnostico</th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      </table>
+      </div>
+      </div>
+      </div>   
+        </form>
+
+         </div>
+         <div class="modal-footer">
+         <button type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
