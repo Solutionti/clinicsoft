@@ -1375,28 +1375,142 @@
       </button>
       </div>
       <div class="modal-body">
-      <div class="form-group input-group-sm" hidden>
-      <label>paciente</label>
-      <input type="text" id="paciente"  class="form-control">
-      </div>
-      <div class="form-group input-group-sm">
-      <label>Fecha</label>
-      <input type="text" id="fecha" value="<?php echo date("d-m-Y"); ?>" class="form-control" readonly>
-      </div>
-      <div class="form-group input-group-sm">
-      <label>Medicina</label>
-      <input type="text" id="medicina" class="form-control">
-      </div>
-      <div class="form-group input-group-sm">
-      <label>Receta</label>
-      <textarea class="form-control" id="receta" rows="9"></textarea>
-      </div>
-      </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-primary" id="crear_receta">Guardar</button>
-      </div>
-      </div>
-      </div>
+      <form action="">
+          <div class="row">
+             <div class="col-md-2">
+               <div class="form-group input-group-sm">
+                 <label>Fecha</label>
+                 <input type="text" id="fecha" value="<?php echo date("d-m-Y"); ?>" class="form-control" readonly>
+               </div>
+             </div>
+             <div class="col-md-4">
+               <div class="form-group input-group-sm">
+                 <label>Doctor</label>
+                 <input type="text" class="form-control">
+               </div>
+             </div>
+             <div class="col-md-6">
+               <div class="form-group input-group-sm">
+                 <label>Paciente</label>
+                 <input type="text" class="form-control">
+               </div>
+             </div>
+          </div>    
+        </form>
+         <div class="row">
+             <div class="col-md-6">
+               <div class="form-group input-group-sm">
+                 <label>Farmaco</label>
+                 <input type="text" class="form-control">
+               </div>
+             </div>
+             <div class="col-md-3">
+               <div class="form-group input-group-sm">
+                 <label>Cantidad</label>
+                 <input type="text" class="form-control">
+               </div>
+             </div>
+             <div class="col-md-3">
+               <div class="form-group input-group-sm">
+                   <label>Dosis</label>
+                   <select class="form-control" id="dosis">
+                      <option value="">Seleccione la dosis</option>
+                      <option value="Noespecificada">No especifica</option>
+                      <option value="Ampolla">Ampolla</option>
+                      <option value="Aplicación">Aplicación</option>
+                      <option value="Capsula">Capsula</option>
+                      <option value="Comprimido">Comprimido</option>
+                      <option value="Cucharada">Cucharada</option>
+                      <option value="Cucharadita_5ML">Cucharadita 5ML</option>
+                      <option value="Dosis">Dosis</option>
+                      <option value="Exposición">Exposición</option>
+                      <option value="Gota">Gota</option>
+                      <option value="Gragea">Gragea</option>
+                      <option value="Mililitros">Mililitros</option>
+                      <option value="Puff">Puff</option>
+                      <option value="Sesión">Sesión</option>
+                      <option value="Sobre">Sobre</option>
+                      <option value="Tableta">Tableta</option>
+                  </select>
+                        </div>
+                  </div>
+         </div>
+          <div class="row">
+             <div class="col-md-4">
+               <div class="form-group input-group-sm">
+                 <label>Via Aplicación</label>
+                 <select class="form-control" id="via_aplicaion">
+                      <option value="">Seleccione la via aplicación</option>
+                      <option value="Via_oral">Via oral</option>
+                      <option value="Via_intramuscular">Via intramuscular</option>
+                      <option value="Via_intravenoso">Via intravenoso</option>
+                      <option value="Vaginal">Vaginal</option>
+                      <option value="Transtraqueal">Transtraqueal</option>
+                      <option value="Transdermica">Transdermica</option>
+                      <option value="Topica">Topica</option>
+                      <option value="Sub_lingual">Sub lingual</option>
+                      <option value="Sub_cutanea">Sub cutanea</option>
+                      <option value="Rectal">Rectal</option>
+                      <option value="Por_sng">Por sng</option>
+                      <option value="Por_gastronomica">Por gastronomica</option>
+                      <option value="Parenteral">Parenteral </option>
+                      <option value="Sub_lingual">Sub lingual</option>
+                      <option value="Sub_cutanea">Sub cutanea</option>
+                      <option value="Ojo_derecha">Ojo derecho</option>
+                      <option value="Ojo_izquierdo">Ojo izquierdo</option>
+                      <option value="Oido_derecho">Oido derecho</option>
+                      <option value="Oido_izquierdo">Oido izquierdo</option>
+                      <option value="No_especifica">No especifica</option>
+                  </select>
+               </div>
+             </div>
+             <div class="col-md-4">
+               <div class="form-group input-group-sm">
+                 <label>Frecuencia</label>
+                 <select class="form-control" id="frecuencia">
+                      <option value="">Seleccione la frecuencia</option>
+                      <option value="No_especifica">No especifica</option>
+                      <option value="dos_al_dia">2 veces al día</option>
+                      <option value="tres_al_dia">3 veces al día</option>
+                      <option value="al_acostarse">Al acostarse</option>
+                      <option value="al_dia">Al día</option>
+                      <option value="cada_doce_horas">Cada 12 horas</option>
+                      <option value="cada_dos_horas">Cada 2 horas</option>
+                      <option value="cada_tres_horas">Cada 3 horas</option>
+                      <option value="cada_cuatro_horas">Cada 4 horas</option>
+                      <option value="cada_seis_horas">Cada 6 horas</option>
+                      <option value="cada_ocho_horas">Cada 8 horas</option>
+                      <option value="dos_veces_por_semana">Dos veces por semana</option>
+                      <option value="en_ayunas">En ayunas</option>
+                      <option value="en_la_mañana">En la mañana</option>
+                      <option value="mañana_noche">En la mañana, noche</option>
+                      <option value="noche">En la noche</option>
+                      <option value="tarde">En la tarde</option>
+                      <option value="mañana_tarde_noche">Mañana,Tarde,Noche</option>
+                      <option value="tres_veces_semana">Tres veces por semana</option>
+                      <option value="una_vez_semana">Una vez por semana</option>      
+                  </select>
+               </div>
+             </div>
+             <div class="col-md-4">
+               <div class="form-group input-group-sm">
+                 <label>Duración</label>
+                 <select class="form-control" id="duracion">
+                      <option value="">Seleccione la duración</option>
+                      <option value="cinco_dias">05 días</option>
+                      <option value="diez_dias">10 días</option>
+                      <option value="quince_dias">15 días</option>
+                      <option value="treinta_dias">30 días</option>
+                      <option value="dos_dias">Dos días</option>
+                      <option value="durante_tres_meses">Durante 3 meses</option>
+                      <option value="tres_dias">Tres días</option>
+                      <option value="un dia">Un día</option>
+                      <option value="una_semana">Una semana</option>
+                      <option value="unica_vez">Unica vez</option>
+                  </select>
+               </div>
+             </div>
+          </div>
       </div>
       <!-- ventanas laterales  DOCUMENTOS -->
       <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
