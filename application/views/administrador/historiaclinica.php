@@ -147,7 +147,7 @@
                                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Receta Medica</button>
                               </li>
                               <li class="nav-item" role="presentation">
-                                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Ord. laboratorio</button>
+                                 <button class="nav-link" id="laboratorio-tab" data-bs-toggle="tab" data-bs-target="#laboratorio" type="button" role="tab" aria-controls="laboratorio" aria-selected="false">Ord. laboratorio</button>
                               </li>
                               <li class="nav-item" role="presentation">
                                  <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Información</button>
@@ -220,6 +220,19 @@
                                                 </tbody>
                                              </table>
                                           </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- CAMBIO NUEVO DE ORDEN DE LABORATORIO -->
+                              <div class="tab-pane fade" id="laboratorio" role="tabpanel" aria-labelledby="laboratorio-tab">
+                                 <div class="container mt-3">
+                                    <div class="row">
+                                       <div class="col-md-12">
+                                           <h6>
+                                             Orden de laboratorio 
+                                             <li title="Agregar" class="fas fa-plus-circle  text-dark" data-bs-toggle="modal" href="#modal-ordenlaboraorio" role="button"></li>
+                                          </h6>
                                        </div>
                                     </div>
                                  </div>
@@ -2613,6 +2626,23 @@
       </div>
       </div>
       </div>
+      <!-- MODAL DE ORDEN DE LABORATORIO -->
+<div class="modal fade" id="modal-ordenlaboraorio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- ACA VA EL CONTENIDO DEL FORMULARIO -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
       <?php require_once("componentes/scripts.php"); ?>
       <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js"></script>
       <script>
