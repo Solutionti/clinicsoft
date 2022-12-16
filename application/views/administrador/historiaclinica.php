@@ -1365,8 +1365,7 @@
       </div>
       </div>
       <!-- MODAL RECETA MEDICA -->
-      <!-- MODAL RECETA MEDICA -->
-      <!--<div class="modal fade" id="Agregarreceta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="Agregarreceta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
       <div class="modal-header">
@@ -1376,7 +1375,7 @@
       </button>
       </div>
       <div class="modal-body">
-      <form action="">
+      
           <div class="row">
              <div class="col-md-2">
                <div class="form-group input-group-sm">
@@ -1396,7 +1395,7 @@
                  <input type="text" class="form-control">
                </div>
              </div>    
-        </form>
+        
          <div class="row">
              <div class="col-md-6">
                <div class="form-group input-group-sm">
@@ -1509,7 +1508,13 @@
                   </select>
                </div>
              </div>
-          </div>-->
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
       
       <!-- ventanas laterales  DOCUMENTOS -->
       <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
