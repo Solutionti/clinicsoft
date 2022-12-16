@@ -1504,7 +1504,7 @@
                       <option value="tres_dias">Tres días</option>
                       <option value="un dia">Un día</option>
                       <option value="una_semana">Una semana</option>
-                      <option value="unica_vez">Unica vez</option>
+                      <option value="unica_vez">Unic vez</option>
                   </select>
                </div>
              </div>
