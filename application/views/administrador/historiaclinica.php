@@ -1394,8 +1394,7 @@
                  <label>Paciente</label>
                  <input type="text" class="form-control">
                </div>
-             </div>
-          </div>    
+             </div>    
         </form>
          <div class="row">
              <div class="col-md-6">
@@ -1434,7 +1433,6 @@
                   </select>
                         </div>
                   </div>
-         </div>
           <div class="row">
              <div class="col-md-4">
                <div class="form-group input-group-sm">
@@ -2659,48 +2657,8 @@
                </div>
              </div>
           </div> 
-
-      <div class="row">
-      <div class="col-md-6">
-      <label for=""> Analisis</label>
-      <div class="table-responsive">
-      <table class="table align-items-center table-borderless" id="table-laboratorio">
-      <thead class="thead-light">
-      <tr>
-      <th scope="col">ID</th>
-      <th scope="col" class="sort" data-sort="name">Codigo</th>
-      <th scope="col" class="sort" data-sort="budget">Nombre diagnostico</th>
-      </tr>
-      </thead>
-      <tbody>
-      <?php foreach($diagnostico->result() as $diagnosticos){ ?>
-      <tr>
-      <td class="budget"><?php echo $diagnosticos->id; ?></td>
-      <td class="budget"><?php echo $diagnosticos->clave; ?></td>
-      <td class="budget"><?php echo $diagnosticos->descripcion; ?></td>
-      </tr>
-      <?php } ?>
-      </tbody>
-      </table>
-      </div>
-      </div>
-      <div class="col-md-6">
-      <div class="table-responsive">
-      <table class="table align-items-center table-borderless" id="items-ginecologia-table">
-      <thead class="thead-light">
-      <tr>
-      <th scope="col">ID</th>
-      <th scope="col" class="sort" data-sort="name">Codigo</th>
-      <th scope="col" class="sort" data-sort="budget">Nombre diagnostico</th>
-      </tr>
-      </thead>
-      <tbody>
-      </tbody>
-      </table>
-      </div>
-      </div>
-      </div>   
-        </form>
+      </form>
+      
 
          </div>
          <div class="modal-footer">
