@@ -6,13 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Atencion extends Admin_Controller {
 
-
-
 	public function __construct() {
 
 		parent::__construct();
-
-
 
 		$this->load->model("Citas_model");
 
@@ -25,14 +21,9 @@ class Atencion extends Admin_Controller {
 		$this->load->model("Atencion_model");
 
 		$this->load->model("Pagos_model");
-
 	}
 
-	
-
-	public function index()
-
-	{
+	public function index(){
 
 		$atenciones = $this->Atencion_model->getAtenciones();
 
@@ -78,23 +69,15 @@ class Atencion extends Admin_Controller {
 
 		$result = $this->Atencion_model->searchAtencion($dni);
 
-
-
 		if($result){
-
-			echo json_encode($result);
-
+		  echo json_encode($result);
 		}
 
 		else {
-
-			echo "error";
-
+		  echo "error";
 		}
 
 	}
-
-
 
 	public function searchEspecialidad() {
 
@@ -106,10 +89,7 @@ class Atencion extends Admin_Controller {
 
 	}
 
-
-
 	public function registrarAtencion() {
-
 
 		$dni = $this->input->post("dni");
 
@@ -127,8 +107,6 @@ class Atencion extends Admin_Controller {
 
 		$cola_atencion = $this->input->post("cola_atencion");
 
-
-
 		//FACTURA
 
 		$descuento = $this->input->post("descuento");
@@ -138,8 +116,6 @@ class Atencion extends Admin_Controller {
 		$total_recibida= $this->input->post("cantidad_recibida");
 
 		$tipo_deposito = $this->input->post("forma_pago");
-
-
 
         $orden__ = 0;
 		$CountTurnos = $this->Atencion_model->CountTurnos($doctor);
@@ -153,7 +129,6 @@ class Atencion extends Admin_Controller {
 				$orden__ = 1;
 
 			}
-
 
 		$factura = [
 
@@ -176,26 +151,15 @@ class Atencion extends Admin_Controller {
 		];
 
 		$data = [
-
-			"dni" => $dni,
-
-			"nombre" => $nombre,
-
-			"especialidad" => $especialidad,
-
-			"doctor" => $doctor,
-
-			"costo" => $costo,
-
-			"comision" => $comision,
-
-			"cola_atencion" => $cola_atencion,
-			"orden__" => $orden__
-
-
+		  "dni" => $dni,
+		  "nombre" => $nombre,
+		  "especialidad" => $especialidad,
+		  "doctor" => $doctor,
+		  "costo" => $costo,
+		  "comision" => $comision,
+		  "cola_atencion" => $cola_atencion,
+		  "orden__" => $orden__
 		];
-
-
 
 		$this->Atencion_model->registrarAtencion($data);
 
@@ -203,19 +167,13 @@ class Atencion extends Admin_Controller {
 
 		$this->Atencion_model->CrearLineaTiempoAtencion($dni, $especialidad,$doctor);
 
-
-
 	}
-
-
 
 	public function countTurnos() {
 
 		$result = $this->Atencion_model->CountTurnos();
 		$data = [
-
 			"numero" => $result
-
 		];
 
 		echo  json_encode($data);
