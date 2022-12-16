@@ -1365,10 +1365,7 @@
       </div>
       </div>
       <!-- MODAL RECETA MEDICA -->
-<<<<<<< HEAD
       <!-- MODAL RECETA MEDICA -->
-=======
->>>>>>> 34e50e017c546cb634ea807735fded5d6f7bdd89
       <div class="modal fade" id="Agregarreceta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
@@ -1379,7 +1376,7 @@
       </button>
       </div>
       <div class="modal-body">
-      
+      <form action="">
           <div class="row">
              <div class="col-md-2">
                <div class="form-group input-group-sm">
@@ -1387,7 +1384,6 @@
                  <input type="text" id="fecha" value="<?php echo date("d-m-Y"); ?>" class="form-control" readonly>
                </div>
              </div>
-             <div>
              <div class="col-md-4">
                <div class="form-group input-group-sm">
                  <label>Doctor</label>
@@ -1400,7 +1396,7 @@
                  <input type="text" class="form-control">
                </div>
              </div>    
-        
+        </form>
          <div class="row">
              <div class="col-md-6">
                <div class="form-group input-group-sm">
@@ -1408,7 +1404,6 @@
                  <input type="text" class="form-control">
                </div>
              </div>
-      </div>
              <div class="col-md-3">
                <div class="form-group input-group-sm">
                  <label>Cantidad</label>
@@ -1468,7 +1463,6 @@
                   </select>
                </div>
              </div>
-      </di>
              <div class="col-md-4">
                <div class="form-group input-group-sm">
                  <label>Frecuencia</label>
@@ -1511,22 +1505,20 @@
                       <option value="tres_dias">Tres días</option>
                       <option value="un dia">Un día</option>
                       <option value="una_semana">Una semana</option>
-                      <option value="unica_vez">Unic vez</option>
+                      <option value="unica_vez">Unica vez</option>
                   </select>
                </div>
              </div>
           </div>
-<<<<<<< HEAD
       </div>
-=======
-          </div>
-          </div>
-          </div>
-          </div>
-          </div>
-          </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+          
+         
       
->>>>>>> 34e50e017c546cb634ea807735fded5d6f7bdd89
       <!-- ventanas laterales  DOCUMENTOS -->
       <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
       <div class="offcanvas-header">
