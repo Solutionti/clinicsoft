@@ -1366,7 +1366,7 @@
       </div>
       <!-- MODAL RECETA MEDICA -->
       <!-- MODAL RECETA MEDICA -->
-      <!--<div class="modal fade" id="Agregarreceta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="Agregarreceta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
       <div class="modal-header">
@@ -1384,6 +1384,7 @@
                  <input type="text" id="fecha" value="<?php echo date("d-m-Y"); ?>" class="form-control" readonly>
                </div>
              </div>
+             <div>
              <div class="col-md-4">
                <div class="form-group input-group-sm">
                  <label>Doctor</label>
@@ -1404,6 +1405,7 @@
                  <input type="text" class="form-control">
                </div>
              </div>
+      </div>
              <div class="col-md-3">
                <div class="form-group input-group-sm">
                  <label>Cantidad</label>
@@ -1463,6 +1465,7 @@
                   </select>
                </div>
              </div>
+      </di>
              <div class="col-md-4">
                <div class="form-group input-group-sm">
                  <label>Frecuencia</label>
@@ -1509,8 +1512,8 @@
                   </select>
                </div>
              </div>
-          </div>-->
-      
+          </div>
+      </div>
       <!-- ventanas laterales  DOCUMENTOS -->
       <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
       <div class="offcanvas-header">
