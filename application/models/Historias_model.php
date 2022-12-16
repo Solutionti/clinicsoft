@@ -88,7 +88,8 @@ class Historias_model extends CI_model {
             "proxima_cita" => $data["proxima_cita"],
             "firma_medico" =>  $data["firma_medico"],
             "estado" => "Activo",
-            "usuario" => $this->session->userdata("nombre")
+            "usuario" => $this->session->userdata("nombre"),
+            "tratamiento" =>$data["tratamiento"]
         ];
         $this->db->insert("h_ginecologias", $datos);
         $id = $this->db->insert_id();
