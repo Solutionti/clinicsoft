@@ -177,14 +177,11 @@ class Atencion_model extends CI_model {
 
     public function cargarFacturaAtencion($id) {
 
-        $this->db->select("a.*,p.nombre,p.documento,p.apellido,p.hc,d.nombre as doctor");
-
+        $this->db->select("a.*,p.nombre,p.documento,p.apellido,p.hc,d.nombre as doctor, e.descripcion");
         $this->db->from("atenciones a");
-
         $this->db->join("pacientes p", "a.paciente = p.documento");
-
         $this->db->join("doctores d", "a.medico = d.codigo_doctor");
-
+        $this->db->join("especialidades e", "a.especialidad = e.codigo_especialidad");
         $this->db->where("a.codigo_atencion", $id);
 
         $result = $this->db->get();
