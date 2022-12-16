@@ -77,7 +77,7 @@ class Historiaclinica extends Admin_Controller {
 		$plan_trabajo = $this->input->post("plan_trabajo"); 
 		$proxima_cita = $this->input->post("proxima_cita");
 		$firma_medico = $this->input->post("firma_medico");
-
+		$tratamiento = $this->input->post("tratamientos_gine");
 		$data1 = [
 			"paciente" => $paciente,
 			"doctor" => $doctor,
@@ -117,7 +117,8 @@ class Historiaclinica extends Admin_Controller {
 			"exa_auxiliares" => $exa_auxiliares,
 			"plan_trabajo" => $plan_trabajo,
 			"proxima_cita" => $proxima_cita,
-			"firma_medico" => $firma_medico
+			"firma_medico" => $firma_medico,
+			"tratamiento" => $tratamiento
 		];
 		
 		$id = $this->Historias_model->crearHconsultasGinecologicas($data2);

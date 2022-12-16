@@ -167,6 +167,7 @@ $("#guardarhistoriaginecologia").on("click", function(){
         locomotor = $("#locomotor1").val(),
         sistema_nervioso = $("#sistema_nervioso1").val(),
         exa_auxiliares = $("#exa_auxiliares1").val(),
+        tratamientos_gine = $("#tratamientos_gine").val(),
         plan_trabajo = $("#plan_trabajo1").val(),
         proxima_cita = $("#proxima_cita1").val(),
         firma_medico = $("#firma_medico1").val();
@@ -216,7 +217,8 @@ $("#guardarhistoriaginecologia").on("click", function(){
                 diagnosticosginecologia: diagnosticosginecologia,
                 plan_trabajo: plan_trabajo,
                 proxima_cita: proxima_cita,
-                firma_medico: firma_medico
+                firma_medico: firma_medico,
+                tratamientos_gine: tratamientos_gine
              },
              success: function () {
                 $("body").overhang({

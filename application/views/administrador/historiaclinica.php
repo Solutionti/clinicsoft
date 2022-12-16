@@ -784,14 +784,14 @@
       </div>
       <div class="tab-pane fade" id="nav-contact1" role="tabpanel" aria-labelledby="nav-contact-tab1">
       <div class="container mt-3">
-      <div class="row">
-      <div class="col-md-12">
-      <div class="form-group input-group-sm">
-      <label>Examenes Auxiliares</label>
-      <textarea  rows="2" id="exa_auxiliares1" class="form-control"></textarea>
-      </div>
-      </div>
-      </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group input-group-sm">
+              <label>Examenes Auxiliares</label>
+              <textarea  rows="2" id="exa_auxiliares1" class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
       <div class="row">
       <div class="col-md-6">
       <label for="">Diagnosticos</label>
@@ -833,10 +833,18 @@
       </div>
       </div>
       <div class="row">
+          <div class="col-md-12">
+            <div class="form-group input-group-sm">
+              <label>Tratamiento</label>
+              <textarea  rows="2" id="tratamientos_gine" class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+      <div class="row">
       <div class="col-md-12">
       <div class="form-group input-group-sm">
       <label>Plan de trabajo</label>
-      <textarea  rows="2" id="plan_trabajo1" class="form-control"></textarea>
+      <input  id="plan_trabajo1" class="form-control">
       </div>
       </div>
       </div>
