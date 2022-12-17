@@ -182,7 +182,7 @@
          </li>
          
          <li class="nav-item">
-            <a class="nav-link " href="https://farmaciasmm.saludmadreymujer.com" target="_blank">
+            <a class="nav-link " href="https://boticasmm.saludmadreymujer.com" target="_blank">
             <i class="fas fa-money-bill"></i>
             <span class="">Botica</span>
             </a>
@@ -242,18 +242,8 @@
                      <div class="collapse " id="atencion">
                         <ul class="nav nav-sm flex-column">
                            <li class="nav-item">
-                              <a class="nav-link " href="<?php echo base_url(); ?>administracion/citas">
-                              <span class="sidenav-normal"> Citas</span>
-                              </a>
-                           </li>
-                           <li class="nav-item">
                               <a class="nav-link" href="<?php echo base_url(); ?>administracion/atencion">
                               <span class="sidenav-normal"> Recepción</span>
-                              </a>
-                           </li>
-                           <li class="nav-item">
-                              <a class="nav-link " href="<?php echo base_url(); ?>administracion/laboratorio">
-                              <span class="sidenav-normal">Laboratorio</span>
                               </a>
                            </li>
                            <li class="nav-item">
@@ -266,8 +256,19 @@
                               <span class="sidenav-normal">Pacientes</span>
                               </a>
                            </li>
+                           <li class="nav-item">
+                              <a class="nav-link " href="<?php echo base_url(); ?>administracion/laboratorio">
+                              <span class="sidenav-normal">Laboratorio</span>
+                              </a>
+                           </li>
                         </ul>
                      </div>
+                     <li class="nav-item">
+                     <a class="nav-link"  href="<?php echo base_url(); ?>administracion/citas">
+                     <i class="fas fa-stethoscope"></i>
+                     <span class=" "> Citas</span>
+                     </a>
+                  </li>
                   <li class="nav-item ">
                      <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#inventarios">
                      <i class="fa fa-shopping-cart"></i>
@@ -293,12 +294,7 @@
                         </ul>
                      </div>
                   </li>
-                  <li class="nav-item">
-                     <a class="nav-link"  href="<?php echo base_url(); ?>administracion/citas">
-                     <i class="fas fa-stethoscope"></i>
-                     <span class=" "> Citas</span>
-                     </a>
-                  </li>
+                  
                   <li class="nav-item">
                      <a class="nav-link " href="<?php echo base_url(); ?>administracion/gastos">
                      <i class="fas fa-money-bill"></i>
@@ -306,7 +302,7 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link " href="https://farmaciasmm.saludmadreymujer.com" target="_blank">
+                     <a class="nav-link " href="https://boticasmm.saludmadreymujer.com" target="_blank">
                      <i class="fas fa-money-bill"></i>
                      <span class="">Botica</span>
                      </a>

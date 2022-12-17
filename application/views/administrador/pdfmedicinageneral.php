@@ -121,7 +121,7 @@ $pdf->Cell(20,6,$generales->ap_cardio, '', 0,'L', false );
 $pdf->Ln(7);
 $pdf->Cell(35,6,'E . ABDOMEN:', '', 0,'L', false );
 $pdf->Cell(45,6,$generales->abdomen, '', 0,'L', false );
-$pdf->Cell(45,6,'F . AP. GENITOURINARIO:', '', 0,'L', false );
+$pdf->Cell(45,6,'F . PIEL:', '', 0,'L', false );
 $pdf->Cell(20,6,$generales->ap_genitourinario, '', 0,'L', false );
 $pdf->Ln(7);
 $pdf->Cell(35,6,'G . LOCOMOTOR:', '', 0,'L', false );
