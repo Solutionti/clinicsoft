@@ -25,5 +25,17 @@ class Ecografias_model extends CI_model {
       $this->db->insert("ecografia_mama", $datos);
     }
 
+    public function subirDocumentoEcografias($data) {
+
+      $datos = [
+          "paciente" => $data["paciente"],
+          "titulo" => $data["titulo"],
+          "url_documento" => $data["icono"],
+          "tp_documento" => "ecografias",
+          "fecha" => date("Y-m-d")
+      ];
+      $this->db->insert("documentos_pacientes", $datos);
+  }
+
     
 }

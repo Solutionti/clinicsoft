@@ -159,21 +159,13 @@ class Laboratorio_model extends CI_model {
     public function subirDocumentoLaboratorio($data) {
 
         $datos = [
-
             "paciente" => $data["paciente"],
-
             "titulo" => $data["titulo"],
-
             "url_documento" => $data["icono"],
-
             "tp_documento" => "laboratorio",
-
             "fecha" => date("Y-m-d")
-
         ];
-
         $this->db->insert("documentos_pacientes", $datos);
-
     }
 
 
