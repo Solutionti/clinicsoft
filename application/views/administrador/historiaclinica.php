@@ -414,9 +414,11 @@
                               </li>
                               <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
                                  <div class="d-flex align-items-center">
-                                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                                       <i class="fas fa-images text-white opacity-10"></i>
-                                    </div>
+                                    <a type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling3" aria-controls="offcanvasScrolling3">
+                                       <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
+                                          <i class="fas fa-images text-white opacity-10"></i>
+                                       </div>
+                                    </a>
                                     <div class="d-flex flex-column">
                                        <h6 class="mb-1 text-dark text-sm">Ecografias</h6>
                                        <span class="text-xs font-weight-bold">+ 100%</span>
@@ -1180,7 +1182,7 @@
       <div class="row">
       <div class="col-md-12">
       <div class="form-group input-group-sm">
-      <label>AP. Genitourinario</label>
+      <label>Piel</label>
       <input type="text" id="ap_genito2" class="form-control" >
       </div>
       </div>
@@ -1729,11 +1731,37 @@
       <!-- ECOGRAFIAS -->
       <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling3" aria-labelledby="offcanvasScrollingLabel">
       <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">ECOGRAFIAS</h5>
+      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Ecografias</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas3" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-      <p>Try scrolling the rest of the page to see this option in action.</p>
+      <form action="<?php echo base_url(); ?>administracion/cargararchivoecografias" method="POST" enctype="multipart/form-data">
+      <div class="row" hidden>
+      <div class="col-md-12">
+      <div class="form-group ">
+      <label>codigo</label>
+      <input type="text" name="paciente"  value="<?php echo $pacientes->documento; ?>"  class="form-control">
+      </div>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-md-12">
+      <div class="form-group">
+      <label>Nombre del archivo</label>
+      <input type="text" name="titulo"  class="form-control" required>
+      </div>
+      </div>
+      </div>
+      <div class="row">
+      <div class="form-group">
+      <label>Archivo</label>
+      <input type="file" name="icono" id="icono"  class="form-control" accept="application/pdf" required>
+      </div> 
+      </div>
+      <div class="form-group">
+      <input type ="submit" value="guardar" class="btn btn-primary btn-sm mt-2">
+      </div>
+      </form>
       </div>
       </div>
       <!-- ECOGRAFIA TRANSVAGINAL -->

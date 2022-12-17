@@ -141,6 +141,7 @@ $route["administracion/pdfkardex"] = "administrador/inventarios/generarpdfkardex
 
 //ECOGRAFIAS
 $route["administracion/ecografiamama"] = "administrador/ecografias/ecografiamama";
+$route["administracion/cargararchivoecografias"] = "administrador/ecografias/subirdocumentoecografias";
 
 //PQRS
 $route["administracion/pqrs"] = "administrador/pqrs";
