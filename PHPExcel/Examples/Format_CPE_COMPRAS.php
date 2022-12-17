@@ -642,6 +642,7 @@
 	$objPHPExcel->getActiveSheet()->SetCellValue('E'.($base), $Global_Tot_comison );
 	
 	$base = $base + 1;
+	$base = $base + 1;
 	$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("B2"), 'D'.($base));
 	$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("H2"), 'E'.($base));
 	$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("H2"), 'F'.($base));
@@ -650,6 +651,7 @@
 	$objPHPExcel->getActiveSheet()->SetCellValue('D'.($base), "Total CAJA :" );
 	$objPHPExcel->getActiveSheet()->mergeCells('E'.($base).':G'.($base));
 	$objPHPExcel->getActiveSheet()->SetCellValue('E'.($base), $valor__);
+	$objPHPExcel->getActiveSheet()->SetCellValue('H'.($base), "(-)" );
 
 	$base = $base + 1;
 	$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("B2"), 'D'.($base));
@@ -660,6 +662,19 @@
 	$objPHPExcel->getActiveSheet()->mergeCells('E'.($base).':G'.($base));
 	$objPHPExcel->getActiveSheet()->SetCellValue('E'.($base), $Global_Tot_monto );
 
+	$base = $base + 1;
+	$valor__ = $valor__-$Global_Tot_monto;
+	$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("E8"), 'D'.($base));
+	$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("F7"), 'E'.($base));
+	if($valor__==0){
+		$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("H2"), 'E'.($base));
+	}else if($valor__<0){
+		$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("G7"), 'E'.($base));
+	}
+
+	$objPHPExcel->getActiveSheet()->SetCellValue('D'.($base), "Saldo en CAJA :" );
+	$objPHPExcel->getActiveSheet()->mergeCells('E'.($base).':G'.($base));
+	$objPHPExcel->getActiveSheet()->SetCellValue('E'.($base), $valor__ );
 
 	/*******TOTALES*/
 	$base = $base + 1;

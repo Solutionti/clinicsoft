@@ -89,20 +89,25 @@ $(document).ready(function() {
           (
             ($("#costo").val()*1>=0) &&
             ($("#descuento").val()*1>=0) &&
-            ($("#comision").val()*1>=0) &&
+            ($("#comision").val()*1>=0) /* &&
             ($("#cantidadv").val()*1>=0) &&
-            ($("#cantidadr").val()*1>=0)  
+            ($("#cantidadr").val()*1>=0)  */
           )
           &&
           ($("#comision").val()*1<=($("#costo").val()*1))
-          &&
+          /* &&
           (            
             ($("#cantidadr").val()*1>=( $("#costo").val()*1))
-          )
+          )*/
         ){
           repuesta = true;
           if($("#costo").val()*1>0){
-            $("#cantidadv").val($("#cantidadr").val()-$("#costo").val());
+            if($("#cantidadr").val()>0){
+              $("#cantidadv").val($("#cantidadr").val()-$("#costo").val());
+            }else{
+              $("#cantidadv").val(0);
+              $("#cantidadr").val(0);
+            }
             $("#total").val($("#costo").val()-$("#descuento").val());
           }else{
             $("body").overhang({type: "warning",message: "Verificar montos.",}); 

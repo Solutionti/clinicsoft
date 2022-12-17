@@ -313,13 +313,13 @@
                                     <div class="col-md-4">
                                       <div class="form-group input-group-sm">
                                           <label>Cantidad recibida</label>
-                                          <input type="number" class="form-control" id="cantidadr">
+                                          <input type="number" class="form-control" id="cantidadr" value="0">
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="form-group input-group-sm">
                                           <label>Cantidad a devolver</label>
-                                          <input type="number" class="form-control" id="cantidadv" readonly>
+                                          <input type="number" class="form-control" id="cantidadv" readonly value="0">
                                       </div>
                                     </div>
                                     <div class="col-md-3">
