@@ -16,6 +16,40 @@
         }
        });
 
+       var table_procedi =  $("#table-procedimientos").DataTable({
+        "lengthMenu": [5,10, 50, 100, 200],
+        "language":{
+          "processing": "Procesando",
+          "search": "Buscar:",
+          "lengthMenu": "Ver _MENU_  Diagnosticos",
+          "info": "Mirando _START_ a _END_ de _TOTAL_ Diagnosticos",
+          "zeroRecords": "No encontraron resultados",
+          "paginate": {
+            "first":      "Primera",
+            "last":       "Ultima",
+            "next":       "Siguiente",
+            "previous":   "Anterior"
+          }
+        }
+       });
+
+       var table_procedi2 =  $("#table-procedimientos2").DataTable({
+        "lengthMenu": [5,10, 50, 100, 200],
+        "language":{
+          "processing": "Procesando",
+          "search": "Buscar:",
+          "lengthMenu": "Ver _MENU_  Diagnosticos",
+          "info": "Mirando _START_ a _END_ de _TOTAL_ Diagnosticos",
+          "zeroRecords": "No encontraron resultados",
+          "paginate": {
+            "first":      "Primera",
+            "last":       "Ultima",
+            "next":       "Siguiente",
+            "previous":   "Anterior"
+          }
+        }
+       });
+       
        
       
      var table_general =   $("#table-diagnosticos2").DataTable({
@@ -53,6 +87,40 @@ var table_lab_mini = $("#items-ginecologia-table").DataTable({
 });
 
 var table_lab_mini2 = $("#items-general-table").DataTable({
+    "lengthMenu": [5, 50, 100, 200],
+    "language": {
+        "processing": "Procesando",
+        "search": "Buscar:",
+        "lengthMenu": "Ver _MENU_ Laboratorio",
+        "info": "Mirando _START_ a _END_ de _TOTAL_ Laboratorio",
+        "zeroRecords": "No encontraron resultados",
+        "paginate": {
+            "first": "Primera",
+            "last": "Ultima",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    }
+});
+
+var table_lab_mini3 = $("#items-procedimientos-table").DataTable({
+    "lengthMenu": [5, 50, 100, 200],
+    "language": {
+        "processing": "Procesando",
+        "search": "Buscar:",
+        "lengthMenu": "Ver _MENU_ Laboratorio",
+        "info": "Mirando _START_ a _END_ de _TOTAL_ Laboratorio",
+        "zeroRecords": "No encontraron resultados",
+        "paginate": {
+            "first": "Primera",
+            "last": "Ultima",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    }
+});
+
+var table_lab_mini4 = $("#items-procedimientos2-table").DataTable({
     "lengthMenu": [5, 50, 100, 200],
     "language": {
         "processing": "Procesando",
@@ -132,7 +200,7 @@ $('#items-ginecologia-table').on('dblclick', 'tr', function(e) {
     table_lab_mini.draw(false);
 });
 $("#guardarhistoriaginecologia").on("click", function(){
-
+    
     var url1 = baseurl + "administracion/crearhistoriaginecologia",
         dni = $("#dni1").val(),
         doctorid = $("#doctorid1").val(),
@@ -270,6 +338,77 @@ $('#items-general-table').on('dblclick', 'tr', function(e) {
     }
     $("#total").val((total_).toFixed(2));
     table_lab_mini2.draw(false);
+});
+
+var elementos_procedimientos = new Array();
+$('#table-procedimientos').on('dblclick', 'tr', function(e) {
+    elem_lab = new Array();
+    elem_lab = table_procedi.row(this).data();
+    elementos_procedimientos.push(elem_lab);
+    table_procedi.row(this).remove()
+    table_lab_mini3.row.add(elem_lab).draw(false);
+
+    total_ = 0;
+    for (let i = 0; i < elementos_procedimientos.length; i++) {
+        total_ += elementos_procedimientos[i][2] * 1;
+    }
+    $("#total").val((total_).toFixed(2));
+    table_procedi.draw(false);
+});
+
+$('#items-procedimientos-table').on('dblclick', 'tr', function(e) {
+    elem_lab = new Array();
+    elem_lab = table_lab_mini3.row(this).data();
+    table_lab_mini3.row(this).remove()
+    table_procedi.row.add(elem_lab).draw(false);
+
+    for (let i = 0; i < elementos_procedimientos.length; i++) {
+        if (elementos_procedimientos[i][0] == elem_lab[0]) {
+            elementos_procedimientos.splice(i, 1);
+            i = elementos_procedimientos.length;
+        }
+    }
+    total_ = 0;
+    for (let i = 0; i < elementos_procedimientos.length; i++) {
+        total_ += elementos_procedimientos[i][2] * 1;
+    }
+    $("#total").val((total_).toFixed(2));
+    table_lab_mini3.draw(false);
+});
+var elementos_procedimientos2 = new Array();
+$('#table-procedimientos2').on('dblclick', 'tr', function(e) {
+    elem_lab = new Array();
+    elem_lab = table_procedi2.row(this).data();
+    elementos_procedimientos2.push(elem_lab);
+    table_procedi2.row(this).remove()
+    table_lab_mini4.row.add(elem_lab).draw(false);
+
+    total_ = 0;
+    for (let i = 0; i < elementos_procedimientos2.length; i++) {
+        total_ += elementos_procedimientos2[i][2] * 1;
+    }
+    $("#total").val((total_).toFixed(2));
+    table_procedi2.draw(false);
+});
+
+$('#items-procedimientos2-table').on('dblclick', 'tr', function(e) {
+    elem_lab = new Array();
+    elem_lab = table_lab_mini4.row(this).data();
+    table_lab_mini4.row(this).remove()
+    table_procedi2.row.add(elem_lab).draw(false);
+
+    for (let i = 0; i < elementos_procedimientos2.length; i++) {
+        if (elementos_procedimientos2[i][0] == elem_lab[0]) {
+            elementos_procedimientos2.splice(i, 1);
+            i = elementos_procedimientos2.length;
+        }
+    }
+    total_ = 0;
+    for (let i = 0; i < elementos_procedimientos2.length; i++) {
+        total_ += elementos_procedimientos2[i][2] * 1;
+    }
+    $("#total").val((total_).toFixed(2));
+    table_lab_mini4.draw(false);
 });
 
 $("#guardarhistoriageneral").on("click", function (){

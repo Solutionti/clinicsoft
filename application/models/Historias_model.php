@@ -269,6 +269,15 @@ class Historias_model extends CI_model {
 
 		return $result;
 	}
+
+    public function getProcedimientos(){
+        $this->db->select("*");
+        $this->db->from("procedimientos");
+        $result = $this->db->get();
+
+        return $result;
+
+    }
     
 }
 

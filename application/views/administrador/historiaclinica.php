@@ -801,9 +801,9 @@
       <table class="table align-items-center table-borderless" id="table-diagnosticos">
       <thead class="thead-light">
       <tr>
-      <th scope="col">ID</th>
-      <th scope="col" class="sort" data-sort="name">Codigo</th>
-      <th scope="col" class="sort" data-sort="budget">Nombre diagnostico</th>
+      <th scope="col" class="text-sm">ID</th>
+      <th scope="col" class="sort text-sm" data-sort="name">Codigo</th>
+      <th scope="col" class="sort text-sm" data-sort="budget">Nombre diagnostico</th>
       </tr>
       </thead>
       <tbody>
@@ -823,9 +823,9 @@
       <table class="table align-items-center table-borderless" id="items-ginecologia-table">
       <thead class="thead-light">
       <tr>
-      <th scope="col">ID</th>
-      <th scope="col" class="sort" data-sort="name">Codigo</th>
-      <th scope="col" class="sort" data-sort="budget">Nombre diagnostico</th>
+      <th scope="col" class="text-sm">ID</th>
+      <th scope="col" class="sort text-sm" data-sort="name">Codigo</th>
+      <th scope="col" class="sort text-sm" data-sort="budget">Nombre diagnostico</th>
       </tr>
       </thead>
       <tbody>
@@ -872,15 +872,20 @@
       <div class="col-md-6">
       <label for="">Procedimientos</label>
       <div class="table-responsive">
-      <table class="table align-items-center table-borderless" id="table-diagnosticos">
+      <table class="table align-items-center table-borderless" id="table-procedimientos">
       <thead class="thead-light">
       <tr>
-      <th scope="col">ID</th>
-      <th scope="col" class="sort" data-sort="name">Codigo</th>
-      <th scope="col" class="sort" data-sort="budget">Nombre procedimiento</th>
+      <th scope="col" class="sort text-sm" data-sort="name">Codigo</th>
+      <th scope="col" class="sort text-sm" data-sort="budget">Nombre procedimiento</th>
       </tr>
       </thead>
       <tbody>
+      <?php foreach($procedimiento->result() as $procedimientos){ ?>
+         <tr>
+            <td> <?php echo $procedimientos->codigo_cpt; ?> </td>
+            <td> <?php echo $procedimientos->nombre; ?> </td>
+         </tr>
+      <?php } ?>
       </tbody>
       </table>
       </div>
@@ -888,12 +893,11 @@
       <div class="col-md-6">
       <br>
       <div class="table-responsive">
-      <table class="table align-items-center table-borderless" id="items-ginecologia-table">
+      <table class="table align-items-center table-borderless" id="items-procedimientos-table">
       <thead class="thead-light">
       <tr>
-      <th scope="col">ID</th>
-      <th scope="col" class="sort" data-sort="name">Codigo</th>
-      <th scope="col" class="sort" data-sort="budget">Nombre procedimiento</th>
+      <th scope="col" class="sort text-sm" data-sort="name">Codigo</th>
+      <th scope="col" class="sort text-sm" data-sort="budget">Nombre procedimiento</th>
       </tr>
       </thead>
       <tbody>
@@ -1234,9 +1238,9 @@
       <table class="table align-items-center table-borderless" id="table-diagnosticos2">
       <thead class="thead-light">
       <tr>
-      <th scope="col">ID</th>
-      <th scope="col" class="sort" data-sort="name">Codigo</th>
-      <th scope="col" class="sort" data-sort="budget">Nombre diagnostico</th>
+      <th scope="col" class="text-sm">ID</th>
+      <th scope="col" class="sort text-sm" data-sort="name">Codigo</th>
+      <th scope="col" class="sort text-sm" data-sort="budget">Nombre diagnostico</th>
       </tr>
       </thead>
       <tbody>
@@ -1256,9 +1260,9 @@
       <table class="table align-items-center table-borderless" id="items-general-table">
       <thead class="thead-light">
       <tr>
-      <th scope="col">ID</th>
-      <th scope="col" class="sort" data-sort="name">Codigo</th>
-      <th scope="col" class="sort" data-sort="budget">Nombre diagnostico</th>
+      <th scope="col" class="text-sm">ID</th>
+      <th scope="col" class="sort  text-sm" data-sort="name">Codigo</th>
+      <th scope="col" class="sort  text-sm" data-sort="budget">Nombre diagnostico</th>
       </tr>
       </thead>
       <tbody>
@@ -1275,15 +1279,20 @@
       <div class="col-md-6">
       <label for="">Procedimientos</label>
       <div class="table-responsive">
-      <table class="table align-items-center table-borderless" id="table-diagnosticos2">
+      <table class="table align-items-center table-borderless" id="table-procedimientos2">
       <thead class="thead-light">
       <tr>
-      <th scope="col">ID</th>
-      <th scope="col" class="sort" data-sort="name">Codigo</th>
-      <th scope="col" class="sort" data-sort="budget">Nombre procedimiento</th>
+      <th scope="col" class="sort text-sm" data-sort="name">Codigo</th>
+      <th scope="col" class="sort text-sm" data-sort="budget">Nombre procedimiento</th>
       </tr>
       </thead>
       <tbody>
+      <?php foreach($procedimiento->result() as $procedimientos){ ?>
+         <tr>
+            <td> <?php echo $procedimientos->codigo_cpt; ?> </td>
+            <td> <?php echo $procedimientos->nombre; ?> </td>
+         </tr>
+      <?php } ?>
       </tbody>
       </table>
       </div>
@@ -1291,12 +1300,11 @@
       <div class="col-md-6">
       <br>
       <div class="table-responsive">
-      <table class="table align-items-center table-borderless" id="items-general-table">
+      <table class="table align-items-center table-borderless" id="items-procedimientos2-table">
       <thead class="thead-light">
       <tr>
-      <th scope="col">ID</th>
-      <th scope="col" class="sort" data-sort="name">Codigo</th>
-      <th scope="col" class="sort" data-sort="budget">Nombre procedimiento</th>
+      <th scope="col" class="sort text-sm" data-sort="name">Codigo</th>
+      <th scope="col" class="sort text-sm" data-sort="budget">Nombre procedimiento</th>
       </tr>
       </thead>
       <tbody>

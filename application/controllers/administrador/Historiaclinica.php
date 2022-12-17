@@ -23,6 +23,7 @@ class Historiaclinica extends Admin_Controller {
 		$docPatologias = $this->Historias_model->getDocumentos($documento, "patologia");
 		$docEcografias = $this->Historias_model->getDocumentos($documento, "ecografias");
 		$diagnosticos = $this->Historias_model->getDiagnosticos();
+		$procedimientos = $this->Historias_model->getProcedimientos();
 		$lineas = $this->Lineatiempo_model->getLineaClientes_DNI($documento);
 
 		$data = [
@@ -35,7 +36,8 @@ class Historiaclinica extends Admin_Controller {
 			"docPatologia" => $docPatologias,
 			"docEcografia" => $docEcografias,
 			"diagnostico" => $diagnosticos,
-			"linea" => $lineas
+			"linea" => $lineas,
+			"procedimiento" => $procedimientos
 		];
 		$this->load->view('administrador/historiaclinica', $data);
 	}
