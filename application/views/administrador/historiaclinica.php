@@ -131,14 +131,14 @@
                   <div class="col-lg-9 mb-lg-0 mb-4">
                      <div class="card z-index-2 h-100">
                         <div class="card-header pb-0 pt-3 bg-transparent">
-                           <h6 class="text-capitalize">Historias Paciente</h6>
+                           <h6 class="text-uppercase">Historias Paciente</h6>
                            <p class="text-sm mb-0">
                               <!-- <i class="fa fa-arrow-up text-success"></i>
                                  <span class="font-weight-bold">4% more</span> in 2022
                                  -->
                            </p>
                         </div>
-                        <div class="card-body p-3">
+                        <div class="card-body p-3 text-uppercase">
                            <ul class="nav nav-tabs" id="myTab" role="tablist">
                               <li class="nav-item" role="presentation">
                                  <button class="nav-link " id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Historias</button>
@@ -161,7 +161,7 @@
                                           <div class="row">
                                              <div class="col-md-4">
                                                 <h6>
-                                                   Historia 
+                                                   Historias 
                                                    <li title="Especialidad Ginecologia" class="fas fa-plus-circle  text-danger" data-bs-toggle="modal" href="#Agregarhistoria" role="button"></li>
                                                    <li title="Especialidad Medicina General" class="fas fa-plus-circle text-primary" data-bs-toggle="modal" href="#Agregarhistoria2" role="button"></li>
                                                 </h6>
@@ -290,7 +290,7 @@
                         </div>
                         <div class="text-center mt-1">
                            <h6>
-                              Información del Paciente
+                              Información Paciente
                            </h6>
                            <div class="h6 font-weight-300">
                               <?php echo $pacientes->apellido." ".$pacientes->nombre; ?>
@@ -311,7 +311,7 @@
                      <div class="card ">
                         <div class="card-header pb-0 p-3">
                            <div class="d-flex justify-content-between">
-                              <h6 class="mb-2">Linea de tiempo<i class="fas fa-clock"></i></h6>
+                              <h6 class="mb-2">Linea de tiempo <i class="fas fa-clock"></i></h6>
                            </div>
                         </div>
                         
@@ -360,7 +360,7 @@
                   <div class="col-lg-5">
                      <div class="card">
                         <div class="card-header pb-0 p-3">
-                           <h6 class="mb-0">Adicionales</h6>
+                           <h6 class="mb-0">ADICIONALES</h6>
                         </div>
                         <div class="card-body p-3">
                            <ul class="list-group">
@@ -372,7 +372,7 @@
                                        </div>
                                     </a>
                                     <div class="d-flex flex-column">
-                                       <h6 class="mb-1 text-dark text-sm">Historial fisico</h6>
+                                       <h6 class="mb-1 text-dark text-sm text-uppercase">Historial fisico</h6>
                                        <span class="text-xs"><span class="font-weight-bold">+ 100%</span></span>
                                     </div>
                                  </div>
@@ -388,7 +388,7 @@
                                        </div>
                                     </a>
                                     <div class="d-flex flex-column">
-                                       <h6 class="mb-1 text-dark text-sm">Laboratorio</h6>
+                                       <h6 class="mb-1 text-dark text-sm text-uppercase">Laboratorio</h6>
                                        <span class="text-xs"><span class="font-weight-bold">+ 100%</span></span>
                                     </div>
                                  </div>
@@ -404,7 +404,7 @@
                                        </div>
                                     </a>
                                     <div class="d-flex flex-column">
-                                       <h6 class="mb-1 text-dark text-sm">Patologia</h6>
+                                       <h6 class="mb-1 text-dark text-sm text-uppercase">Patologia</h6>
                                        <span class="text-xs"><span class="font-weight-bold">+ 100%</span></span>
                                     </div>
                                  </div>
@@ -420,7 +420,7 @@
                                        </div>
                                     </a>
                                     <div class="d-flex flex-column">
-                                       <h6 class="mb-1 text-dark text-sm">Ecografias</h6>
+                                       <h6 class="mb-1 text-dark text-sm text-uppercase">Ecografias</h6>
                                        <span class="text-xs font-weight-bold">+ 100%</span>
                                     </div>
                                  </div>
@@ -441,8 +441,8 @@
       <div class="modal fade" id="Agregarhistoria" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-fullscreen" role="document">
       <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Historia Clinica <span class="rosa-text">GINECOLOGIA</span> del Paciente </h5>
+      <div class="modal-header bg-default">
+      <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Historia Clinica <span class="rosa-text">GINECOLOGIA</span> del Paciente </h5>
       <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
       </button>
@@ -916,8 +916,8 @@
       <div class="modal fade" id="Agregarhistoria2" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-fullscreen" role="document">
       <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Historia Clinica <span class="cyan-text">MEDICINA GENERAL</span> del Paciente </h5>
+      <div class="modal-header bg-default">
+      <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Historia Clinica <span class="cyan-text">MEDICINA GENERAL</span> del Paciente </h5>
       <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
       </button>
@@ -1375,12 +1375,11 @@
       </div>
       </div>
       <!-- MODAL RECETA MEDICA -->
-      <!-- MODAL RECETA MEDICA -->
       <div class="modal fade" id="Agregarreceta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Recetario del Paciente</h5>
+      <div class="modal-header bg-default">
+      <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Recetario del Paciente</h5>
       <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
       </button>
@@ -1529,8 +1528,8 @@
          
       <!-- ventanas laterales  DOCUMENTOS -->
       <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-      <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Historias fisico</h5>
+      <div class="offcanvas-header bg-default">
+      <h5 class="offcanvas-title text-uppercase text-white" id="offcanvasScrollingLabel">Historias fisico</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -1596,8 +1595,8 @@
       </div>
       <!-- LABORATORIO -->
       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
-      <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Laboratorio</h5>
+      <div class="offcanvas-header bg-default">
+      <h5 class="offcanvas-title text-uppercase text-white" id="offcanvasWithBackdropLabel">Laboratorio</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -1663,8 +1662,8 @@
       </div>
       <!-- PATOLOGIA -->
       <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-      <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Patologia</h5>
+      <div class="offcanvas-header bg-default">
+      <h5 class="offcanvas-title text-uppercase text-white" id="offcanvasWithBothOptionsLabel">Patologia</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -1730,8 +1729,8 @@
       </div>
       <!-- ECOGRAFIAS -->
       <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling3" aria-labelledby="offcanvasScrollingLabel">
-      <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Ecografias</h5>
+      <div class="offcanvas-header bg-default">
+      <h5 class="offcanvas-title text-uppercase text-white" id="offcanvasWithBothOptionsLabel">Ecografias</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas3" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
