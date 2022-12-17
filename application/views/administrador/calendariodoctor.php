@@ -11,7 +11,7 @@
 <div class="container-fluid">
   <div class="row mt-4">
   <div class="col-md-12">
-    <h5 >CITAS PROGRAMADAS - Pendientes y Confirmadas</h5>
+    <h5 >Citas Programadas - Pendientes y Confirmadas</h5>
    </div>
 </div>
     <div class="row">
