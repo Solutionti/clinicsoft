@@ -132,7 +132,7 @@
        <div class="col-md-12 ">
          <h5>Productos</h5>
          <br>
-         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#productos" role="button"> <i class="fas fa-plus"></i> Agregar</button>
+         <button class="btn bg-gradient-danger btn-xs" data-bs-toggle="modal" href="#productos" role="button"> <i class="fas fa-plus"></i> Agregar</button>
        </div>
      </div>
         <br>  
@@ -178,8 +178,8 @@
   <div class="modal fade" id="productos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-uppercase" id="exampleModalLabel">Agregar producto</h5>
+      <div class="modal-header bg-default">
+        <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Agregar producto</h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -282,8 +282,8 @@
 <div class="modal fade" id="historial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Historial del producto</h5>
+      <div class="modal-header bg-default">
+        <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Historial del producto</h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

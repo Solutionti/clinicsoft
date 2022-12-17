@@ -18,7 +18,7 @@
                      <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Administración</a></li>
                      <li class="breadcrumb-item text-sm text-white active" aria-current="page">Citas</li>
                   </ol>
-                  <h6 class="font-weight-bolder text-white mb-0">CITAS</h6>
+                  <h6 class="font-weight-bolder text-white mb-0">Citas</h6>
                </nav>
                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                   <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -205,14 +205,14 @@
             </div>
             <div class="col-md-12">
                <div class="container-fluid py-2" >
-                  <div class="row" style="padding: 5px;background: #b8bbbf;border-radius: 10px;">
+                  <div class="row" style="padding: 5px;background: #172b4d;border-radius: 10px;">
                      <h5 style="
                         margin:0px;
                         text-align: center;
                         color: white;
-                        text-shadow: 2px 0px 0px #6c6868;
-                        text-decoration: underline;
-                        "> Doctores y Horarios Disponibles</h5>
+                        "
+                        class="mt-2"> Doctores y horarios disponibles
+                     </h5>
                      <style>
                         .doc_p{
                         font-weight: bold;
@@ -256,7 +256,7 @@
                            <div class="row ">
                               <div style="padding: 0px 3px;" class="card card___cont">
                                  <button class="btn bg-gradient-info" style="padding: 5px 15px;margin:10px 0px;">-</button>
-                                 <span style="font-size: 12px;text-align: center;"><strong>HOY</strong></span>
+                                 <span style="font-size: 12px;text-align: center;"><strong>Hoy</strong></span>
                                  <hr style="margin: 3px;">
                                  <div class="cont_day"></div>
                               </div>
@@ -346,8 +346,8 @@
       <div class="modal fade" id="AgregarPaciente" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog  modal-lg" role="document">
             <form class="modal-content" id="AddCITA">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Registro de CITA</h5>
+               <div class="modal-header bg-default">
+                  <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Registro de CITA</h5>
                   <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>

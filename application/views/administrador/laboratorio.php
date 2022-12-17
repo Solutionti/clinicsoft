@@ -260,7 +260,7 @@
 
                   <div class="col-md-12">
 
-                     <h5>Laboratorio</h5>
+                     <h6>LABORATORIO</h6>
 
                   </div>
 

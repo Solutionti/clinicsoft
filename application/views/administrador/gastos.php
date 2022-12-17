@@ -197,8 +197,8 @@
          <div class="modal fade" id="AgregarCPE" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog  modal-xl" role="document">
                <form class="modal-content" id="AddGasto">
-                  <div class="modal-header">
-                     <h5 class="modal-title text-uppercase" id="exampleModalLabel">Registrar Gasto</h5>
+                  <div class="modal-header bg-default">
+                     <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Registrar Gasto</h5>
                      <button type="button" class=" close" data-bs-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                      </button>
@@ -217,9 +217,9 @@
                               </div>
                               <div class="col-md-4">
                                  <div class="form-group">
-                                    <h6>Tipo Comprobante
+                                    <label>Tipo Comprobante
                                        <span class="required">*</span>
-                                    </h6>
+                                    </label>
                                     <div class="controls">
                                        <select name="cpe_tipo" id="cpe_tipo" class="form-control" required>
                                           <option value="">Seleccionar</option>
@@ -239,9 +239,9 @@
                               </div>
                               <div class="col-md-4">
                                  <div class="form-group">
-                                    <h6>Nro. Serie
+                                    <label>Nro. Serie
                                        <span class="required">*</span>
-                                    </h6>
+                                    </label>
                                     <div class="controls">
                                        <input type="text" name="statee" id="statee" style="display: none;" >
                                        <input type="text" name="idgastos" id="idgastos" style="display: none;" >
@@ -251,9 +251,9 @@
                               </div>
                               <div class="col-md-4">
                                  <div class="form-group">
-                                    <h6>Nro. Correlativo
+                                    <label>Nro. Correlativo
                                        <span class="required">*</span>
-                                    </h6>
+                                    </label>
                                     <div class="controls">
                                        <input type="text" name="cpe_numero" id="cpe_numero" minlength="1" maxlength="8" class="s_n form-control" required data-validation-required-message="Complete el Numero">
                                     </div>
@@ -261,9 +261,9 @@
                               </div>
                               <div class="col-md-4">
                                  <div class="form-group">
-                                    <h6>Op. Gravada
+                                    <label>Op. Gravada
                                        <span class="required">*</span>
-                                    </h6>
+                                    </label>
                                     <div class="controls">
                                        <input type="number" require step="0.01" name="cpe_gravada" id="cpe_gravada" maxlength="8" minlength="1" class="form-control" required data-validation-required-message="Complete el Numero">
                                     </div>
@@ -271,9 +271,9 @@
                               </div>
                               <div class="col-md-4">
                                  <div class="form-group">
-                                    <h6>IGV
+                                    <label>IGV
                                        <span class="required">*</span>
-                                    </h6>
+                                    </label>
                                     <div class="controls">
                                        <input type="number" require step="0.01" name="cpe_igv" id="cpe_igv" maxlength="8" minlength="1" class="form-control" required data-validation-required-message="Complete el Numero">
                                     </div>
@@ -281,9 +281,9 @@
                               </div>
                               <div class="col-md-4">
                                  <div class="form-group">
-                                    <h6>Total *
+                                    <label>Total *
                                        <span class="required">*</span>
-                                    </h6>
+                                    </label>
                                     <div class="controls">
                                        <input type="number" step="0.01" name="cpe_total" id="cpe_total" maxlength="8" minlength="1" class="form-control" required data-validation-required-message="Complete el Numero">
                                     </div>
@@ -294,9 +294,9 @@
 
                               <div class="col-md-4">
                                  <div class="form-group">
-                                    <h6>Fe.Emisión
+                                    <label>Fe.Emisión
                                        <span class="required">*</span>
-                                    </h6>
+                                    </label>
                                     <div class="controls">
                                        <input name="f_emision" id="f_emision" type="date" class="form-control _date" required>
                                     </div>
@@ -304,9 +304,9 @@
                               </div>
                               <div class="col-md-4">
                                  <div class="form-group">
-                                    <h6>Fe.Recepción
+                                    <label>Fe.Recepción
                                        <span class="required">*</span>
-                                    </h6>
+                                    </label>
                                     <div class="controls">
                                        <input name="f_recepcion" id="f_recepcion" type="date" class="form-control _date" required>
                                     </div>
@@ -314,8 +314,8 @@
                               </div>
                               <div class="col-md-12">
                                  <div class="form-group">
-                                    <h6>Detalle / Descripción<span class="required">*</span>
-                                    </h6>
+                                    <label>Detalle / Descripción<span class="required">*</span>
+                                    </label>
                                     <div class="controls">
                                        <textarea name="descripcion" id="descripcion" cols="5" rows="5" class="form-control" style="resize: none;"  maxlength="100"></textarea>
                                     </div>
@@ -327,15 +327,15 @@
                            <div class="row">
                               <div class="col-md-12">
                                  <div class="form-group">
-                                    <h6>
+                                    <label>
                                        <strong>Información del Proveedor</strong>
-                                    </h6>
+                                    </label>
                                     <div class="dropdown-divider"></div>
                                  </div>
                               </div>
                               <div class="col-md-4">
                                  <div class="form-group">
-                                    <h6>Tipo</h6>
+                                    <label>Tipo</label>
                                     <div class="controls" class="for">
                                        <select name="prov_tipo_doc" id="prov_tipo_doc" required class="form-control manual">
                                           <option value="6" selected>RUC</option>
@@ -346,7 +346,7 @@
                               </div>
                               <div class="col-md-6">
                                  <div class="form-group input-group-sm">
-                                    <h6>N° Documento</h6>
+                                    <label>N° Documento</label>
                                     <div class="input-group">
                                        <input type="text" name="prov_nro_doc" id="prov_nro_doc" class="form-control" required data-validation-required-message="Complete el Numero" length="11" min="10000000001">
                                        <div class="input-group-append">
@@ -357,9 +357,9 @@
                               </div>
                               <div class="col-md-12">
                                  <div class="form-group">
-                                    <h6>Razón Social
+                                    <label>Razón Social
                                        <span class="required">*</span>
-                                    </h6>
+                                    </label>
                                     <div class="controls">
                                        <input type="text" name="prov_razon_social" id="prov_razon_social" maxlength="100" class="form-control" required data-validation-required-message="Complete el Numero" >
                                     </div>
@@ -367,16 +367,16 @@
                               </div>
                               <div class="col-md-12">
                                  <div class="form-group">
-                                    <h6>
+                                    <label>
                                        <strong>Información del Colaborador Responsable</strong>
-                                    </h6>
+                                    </label>
                                     <hr>
                                  </div>
                               </div>
                               <div class="col-md-12">
                                  <div class="form-group">
-                                    <h6>Responsable<span class="required">*</span>
-                                    </h6>
+                                    <label>Responsable<span class="required">*</span>
+                                    </label>
                                     <div class="controls">
                                        <select required name="codigo_usuario" id="codigo_usuario" class="form-control" >
                                           <option value="">Seleccionar Colaborador</option>

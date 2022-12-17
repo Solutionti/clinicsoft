@@ -184,8 +184,8 @@
       <div class="modal fade" id="AgregarDoctor" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog  modal-fullscreen" role="document">
             <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title text-uppercase" id="exampleModalLabel">Crear Doctor</h5>
+              <div class="modal-header bg-default">
+                  <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Crear Doctor</h5>
                   <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
@@ -256,8 +256,8 @@
       <div class="modal fade" id="Doctorparametrizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog  modal-lg" role="document">
             <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title text-uppecase" id="exampleModalLabel">Configuraciòn Doctor</h5>
+              <div class="modal-header bg-default">
+                  <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Configuraciòn Doctor</h5>
                   <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>

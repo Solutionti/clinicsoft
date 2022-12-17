@@ -10,7 +10,7 @@
 
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <title>Administracion / Colposcopia</title>
+      <title>Administracion / Atencion</title>
 
       <?php require_once("componentes/head.php"); ?>
 
@@ -167,57 +167,31 @@
                                           1 day
 
                                        </p>
-
                                     </div>
-
                                  </div>
-
                               </a>
-
                            </li>
-
                            <li>
-
                               <a class="dropdown-item border-radius-md" href="javascript:;">
-
                                  <div class="d-flex py-1">
-
                                     <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-
                                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-
                                           <title>credit-card</title>
-
                                           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-
                                              <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-
                                                 <g transform="translate(1716.000000, 291.000000)">
-
                                                    <g transform="translate(453.000000, 454.000000)">
-
                                                       <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
-
                                                       <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-
                                                    </g>
-
                                                 </g>
-
                                              </g>
-
                                           </g>
-
                                        </svg>
-
                                     </div>
-
                                     <div class="d-flex flex-column justify-content-center">
-
                                        <h6 class="text-sm font-weight-normal mb-1">
-
                                           Payment successfully completed
-
                                        </h6>
 
                                        <p class="text-xs text-secondary mb-0">
@@ -260,7 +234,7 @@
 
                   <div class="col-md-12">
 
-                     <h5 class="text-uppercase">Doctor@ <?php echo $this->session->userdata("nombre")." ".$this->session->userdata("apellido"); ?></h5>
+                     <h6 class="text-uppercase">Doctor@ <?php echo $this->session->userdata("nombre")." ".$this->session->userdata("apellido"); ?></h6>
 
                   </div>
 
@@ -344,136 +318,9 @@
 
                </div>
 
-               <hr> 
-
-               <div class="row mt-4">
-
-                  <div class="col-md-12">
-
-                     <h5 >CITAS PROGRAMADAS - Pendientes y Confirmadas</h5>
-
-                  </div>
-
-               </div>
-
-               <div class="table-responsive" >
-
-                  <table class="table align-items-center table-borderless mb-0" id="table-citas">
-
-                     <thead>
-
-                        <tr>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Estado</th>
-
-                           <th class="text-dark text-xs font-weight-bolder opacity-12">Para <i class="fa fa-clock"></i> </th>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Fecha</th>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Documento - Nombre</th>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Telefono</th>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Medico</th>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Observacion</th>
-
-                        </tr>
-
-                     </thead>
-
-                     <tbody>
-
-                        <?php foreach($cita_doc->result() as $citas) { ?>
-
-                        <tr>
-
-                           <?php if($citas->estado == "Confirmado"){ ?>
-
-                           <td class="text-xs text-dark mb-0 text-success"><?php echo  $citas->estado; ?></td>
-
-                           <?php } else if ($citas->estado == "Pendiente") { ?>
-
-                           <td class="text-xs text-dark mb-0 text-primary"><?php echo  $citas->estado; ?></td>
-
-                           <?php } else if ($citas->estado == "Cancelado"){ ?>
-
-                           <td class="text-xs text-dark mb-0 text-danger"><?php echo  $citas->estado; ?></td>
-
-                           <?php } else if ($citas->estado == "Tratado"){ ?>
-
-                           <td class="text-xs text-dark mb-0 text-info"><?php echo  $citas->estado; ?></td>
-
-                           <?php } else { ?>
-
-                           <td class="text-xs text-dark mb-0 text-info"><?php echo  "S/C;" ?></td>
-
-                           <?php } ?>
-
-                           <td class="text-xs text-dark mb-0">
-
-                              <?php 
-
-                                 $firstDate  = strtotime(date("Y-m-d"));
-
-                                 $secondDate = strtotime($citas->fecha);
-
-                                 $intvl = (($secondDate-$firstDate)/3600)/24;
-
-                                 if($intvl==0){
-
-                                    echo " - <strong>Hoy</strong> a las <strong>".$citas->hora."</strong>";
-
-                                 }else if($intvl==1){
-
-                                    echo " - <strong>Mañana</strong> a las <strong>".$citas->hora."</strong>";
-
-                                 }else if($intvl>1){
-
-                                    echo " - En ".$intvl." días a las <strong>".$citas->hora."</strong>";
-
-                                 }else if($intvl==(-1)){
-
-                                    echo " - Ayer a las <strong>".$citas->hora."</strong>";
-
-                                 }else if($intvl<(-1)){
-
-                                    echo " - Hace ".($intvl*-1)." días a las <strong>".$citas->hora."</strong>";
-
-                                 }
-
-                                 ?>
-
-                           </td>
-
-                           <td class="text-xs text-dark mb-0"><?php echo  $citas->date_cita; ?></td>
-
-                           <td class="text-xs text-dark mb-0"><?php echo  "<strong>".$citas->documento."</strong>"." - ".$citas->nombre; ?></td>
-
-                           <td class="text-xs text-dark mb-0"><?php echo  "<strong>".$citas->telefono."</strong>"; ?></td>
-
-                           <td class="text-xs text-dark mb-0"><?php echo  $citas->doctor; ?></td>
-
-                           <td class="text-xs text-dark mb-0"><?php echo  $citas->comentarios; ?></td>
-
-                        </tr>
-
-                        <?php } ?>
-
-                     </tbody>
-
-                  </table>
-
-                  <br>
-
-               </div>
-
-            </div>
-
+              
             <?php require_once("componentes/footer.php"); ?>
-
          </div>
-
       </main>
 
       <?php require_once("componentes/personalizar.php"); ?>

@@ -29,7 +29,7 @@
 
   <!-- End Navbar -->
   <main class="main-content  mt-0">
-    <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('https://dricloud.com/wp-content/uploads/2020/10/Marketing-medico.jpg'); background-position: top;">
+    <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('https://cdn.pixabay.com/photo/2021/10/11/17/37/doctor-6701410_960_720.jpg'); background-position: top;">
       <span class="mask bg-gradient-dark opacity-6"></span>
       <div class="container">
         <div class="row justify-content-center">
@@ -47,13 +47,13 @@
           <div class="messageError"></div>
           <div class="card z-index-0">
             <div class="card-header text-center pt-4">
-              <h5>Iniciar Sesión</h5>
+              <h5 class="text-uppercase">Iniciar Sesión</h5>
             </div>
             <div class="row px-xl-5 px-sm-4 px-3">
               <div class="position-relative text-center">
-                <p class="text-sm font-weight-bold  text-secondary text-border d-inline z-index-2 bg-white px-1">
+                <!-- <p class="text-sm font-weight-bold  text-secondary text-border d-inline z-index-2 bg-white px-1">
                   <span class="cyan-text lead font-weight-bold">Medical</span> <span class="rosa-text lead font-weight-bold">Clinic</span> 
-                </p>
+                </p> -->
               </div>
             </div>
             <div class="card-body">

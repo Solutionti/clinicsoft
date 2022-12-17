@@ -130,7 +130,7 @@
       <div class="card">
      <div class="row mt-4">
        <div class="col-md-12">
-         <h5>Consulta de inventario</h5>
+         <h6>CONSULTA DE INVENTARIO</h6>
          <br>
          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#entrada" role="button"> <i class="fas fa-plus"></i> Entrada</button>
          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" href="#salida" role="button"> <i class="fas fa-minus"></i> Salida</button>
@@ -195,8 +195,8 @@
   <div class="modal fade" id="entrada" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-uppercase" id="exampleModalLabel">Ingreso de productos a la clinica</h5>
+      <div class="modal-header bg-default">
+        <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Ingreso de productos a la clinica</h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -269,8 +269,8 @@
 <div class="modal fade" id="salida" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-uppercase" id="exampleModalLabel">Salida de productos de la clinica</h5>
+      <div class="modal-header bg-default">
+        <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Salida de productos de la clinica</h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

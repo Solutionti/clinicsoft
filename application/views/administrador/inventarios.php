@@ -130,7 +130,7 @@
       <div class="card">
      <div class="row mt-4">
        <div class="col-md-12">
-         <h5>Consulta de kardex</h5>
+         <h6>CONSULTA DE KARDEX</h6>
        </div>
      </div>
      <br>  

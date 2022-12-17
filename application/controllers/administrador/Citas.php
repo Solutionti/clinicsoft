@@ -132,20 +132,24 @@ class Citas extends Admin_Controller {
 	}
 
 	public function calendarioDoctor () {
-		$this->load->view("administrador/calendariodoctor");
+		$cita_doc = $this->Citas_model->getCitasDoc($this->session->userdata("codigo"));
+		$data = [
+			"cita_doc" => $cita_doc, 
+		];
+		$this->load->view("administrador/calendariodoctor", $data);
 	}
 
 	public function getdataCalendario() {
 		$citas = $this->Citas_model->getdataCalendario();
-		// $datos = array(
-		// 	'id' => $citas->codigo_cita,
-        //     'title' => $citas->apellido."".$citas->nombre." ( ".$citas->paciente." )"."  ".$citas->comentarios,
-        //     'start' => $citas->fecha." ".$citas->hora,
-        //     'end' => $citas->fecha." ".$citas->hora,
-        //     "color" => "red",
-        //     "display" => "auto",
-		// 	"type"=> 1
-		// );
+		$datos = array(
+			'id' => $citas->codigo_cita,
+            'title' => $citas->apellido."".$citas->nombre." ( ".$citas->paciente." )"."  ".$citas->comentarios,
+            'start' => $citas->fecha." ".$citas->hora,
+            'end' => $citas->fecha." ".$citas->hora,
+            "color" => "red",
+            "display" => "auto",
+			"type"=> 1
+		);
 		echo json_encode($citas);
 	}
 

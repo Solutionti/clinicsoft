@@ -203,8 +203,8 @@
       <div class="modal fade " id="modalatencion" tabindex="" aria-labelledby="modalatencionLabel" aria-hidden="true">
          <div class="modal-dialog modal-dialog modal-fullscreen">
             <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title text-uppercase">Registrar atención</h5>
+               <div class="modal-header bg-default">
+                  <h5 class="modal-title text-uppercase text-white">Registrar atención</h5>
                   <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>

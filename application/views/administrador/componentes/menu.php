@@ -149,7 +149,7 @@
                </ul>
             </div>
          </li>
-         <li class="nav-item ">
+         <!-- <li class="nav-item ">
             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#resoluciones">
             <i class="fas fa-flag"></i>
             <span class="sidenav-normal"> Resoluciones <b class="caret"></b></span>
@@ -173,7 +173,7 @@
                   </li>
                </ul>
             </div>
-         </li>
+         </li> -->
          <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url(); ?>administracion/reportes">
             <i class="fas fa-chart-pie"></i>
