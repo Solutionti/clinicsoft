@@ -2639,52 +2639,6 @@
       </div>
       </div>
       </div>
-<<<<<<< HEAD
-      <!-- MODAL DE ORDEN DE LABORATORIO -->
-         <div class="modal fade" id="modal-ordenlaboraorio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-fullscreen" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-         <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-         <span aria-hidden="true">x</span>
-         </button>
-         </div>
-         <div class="modal-body">
-        <!-- ACA VA EL CONTENIDO DEL FORMULARIO -->
-        <form action="">
-          <div class="row">
-             <div class="col-md-2">
-               <div class="form-group input-group-sm">
-                 <label>Fecha</label>
-                 <input type="text" id="fecha" value="<?php echo date("d-m-Y"); ?>" class="form-control" readonly>
-               </div>
-             </div>
-             <div class="col-md-4">
-               <div class="form-group input-group-sm">
-                 <label>Doctor</label>
-                 <input type="text" class="form-control">
-               </div>
-             </div>
-             <div class="col-md-6">
-               <div class="form-group input-group-sm">
-                 <label>Paciente</label>
-                 <input type="text" class="form-control">
-               </div>
-             </div>
-          </div> 
-      </form>
-      
-
-         </div>
-         <div class="modal-footer">
-         <button type="button" class="btn btn-primary">Guardar</button>
-      </div>
-    </div>
-  </div>
-</div>
-=======
->>>>>>> f6137bb6df12261bcbaa975f5d8d9e2216a7b01a
       <?php require_once("componentes/scripts.php"); ?>
       <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js"></script>
       <script>
