@@ -82,7 +82,7 @@ $pdf->Cell(10,6,'No', 1, 0,'L', false );
 
 $pdf->Cell(60,6,'MEDICO', 1, 0,'L', false );
 
-$pdf->Cell(27,6,'ESPECIALIDAD', 1, 0,'L', false );
+$pdf->Cell(52,6,'ESPECIALIDAD', 1, 0,'L', false );
 
 $pdf->Cell(15,6,'Efectivo', 1, 0,'L', false );
 $pdf->Cell(15,6,'Tarjeta', 1, 0,'L', false );
@@ -104,7 +104,7 @@ foreach ($reporte1->result() as $resportes1){
 
     $pdf->Cell(60,6,utf8_decode($resportes1->medico), 1, 0,'L', false );
 
-    $pdf->Cell(27,6,utf8_decode($resportes1->descripcion), 1, 0,'L', false );
+    $pdf->Cell(52,6,utf8_decode($resportes1->descripcion), 1, 0,'L', false );
 
     if($resportes1->tipo_deposito=="Efectivo"){
         $pdf->Cell(15,6,$resportes1->comision, 1, 0,'L', false );
