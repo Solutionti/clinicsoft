@@ -123,27 +123,11 @@ foreach ($reporte1->result() as $resportes1){
 
 }
 
-
-
-//$pdf->Ln(11);
-
-//$pdf->Cell(54,6,'', 0,'', false );
-
-//$pdf->Cell(82,6,'', 0,'', false );
-
-//$pdf->Cell(20,6,'TOTAL', 1, 0,'', false );
-
-//$pdf->Cell(38,6,$reportes2->total, 1, 0,'', false );
-
-//$pdf->SetFont('Times','b',9);
-
-
-
 $pdf->Ln(6);
 $pdf->Cell(42,6,'', 0,'', false );
 $pdf->Cell(10,6,'', 0,'', false );
 $pdf->Cell(60,6,'', 0,'', false );
-$pdf->Cell(27,6,'', 0,'', false );
+$pdf->Cell(52,6,'', 0,'', false );
 $pdf->Cell(15,6,$count_Efectivo, 1, 0,'', false );
 $pdf->Cell(15,6,$count_Credito, 1, 0,'', false );
 $pdf->SetFont('Times','B',9);
@@ -152,7 +136,7 @@ $pdf->Ln(6);
 $pdf->Cell(42,6,'', 0,'', false );
 $pdf->Cell(10,6,'', 0,'', false );
 $pdf->Cell(60,6,'', 0,'', false );
-$pdf->Cell(27,6,'Total Doctor', 1, 0,'', false );
+$pdf->Cell(52,6,'Total Doctor', 1, 0,'', false );
 $pdf->Cell(30,6,($count_Credito+$count_Efectivo), 1, 0,'', false );
 $pdf->SetFont('Times','B',9);
 

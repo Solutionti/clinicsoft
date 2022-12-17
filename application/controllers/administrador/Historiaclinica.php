@@ -21,6 +21,7 @@ class Historiaclinica extends Admin_Controller {
 		$docFisico = $this->Historias_model->getDocumentos($documento, "hfisico");
 		$docLaboratorios = $this->Historias_model->getDocumentos($documento, "laboratorio");
 		$docPatologias = $this->Historias_model->getDocumentos($documento, "patologia");
+		$docEcografias = $this->Historias_model->getDocumentos($documento, "ecografias");
 		$diagnosticos = $this->Historias_model->getDiagnosticos();
 		$lineas = $this->Lineatiempo_model->getLineaClientes_DNI($documento);
 
@@ -32,6 +33,7 @@ class Historiaclinica extends Admin_Controller {
 			"documento" => $docFisico,
 			"docLaboratorio" => $docLaboratorios,
 			"docPatologia" => $docPatologias,
+			"docEcografia" => $docEcografias,
 			"diagnostico" => $diagnosticos,
 			"linea" => $lineas
 		];

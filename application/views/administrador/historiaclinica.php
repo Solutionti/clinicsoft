@@ -1762,6 +1762,37 @@
       <input type ="submit" value="guardar" class="btn btn-primary btn-sm mt-2">
       </div>
       </form>
+      <div class="row">
+      <div class="col-md-12">
+      <div class="table-responsive">
+      <table class="table align-items-center ">
+      <tbody>
+      <?php foreach($docEcografia->result() as $docEcografias){ ?>
+      <tr>
+      <td class="w-30">
+      <div class="d-flex px-2 py-1 align-items-center">
+      <div>
+      <i class="fas fa-file-pdf"></i>
+      </div>
+      <div class="ms-4">
+      <p class="text-xs font-weight-bold mb-0">url:</p>
+      <a target="blank" href="<?php echo base_url(); ?>public/ecografias/<?php echo $docEcografias->url_documento; ?>">Ver documento</a>
+      </div>
+      </div>
+      </td> 
+      <td>
+      <div class="text-center">
+      <p class="text-xs font-weight-bold mb-0">Nombre:</p>
+      <h6 class="text-sm mb-0"><?php echo $docEcografias->titulo; ?></h6>
+      </div>
+      </td>
+      </tr>
+      <?php } ?>
+      </tbody>
+      </table>
+      </div>
+      </div>
+      </div>
       </div>
       </div>
       <!-- ECOGRAFIA TRANSVAGINAL -->
