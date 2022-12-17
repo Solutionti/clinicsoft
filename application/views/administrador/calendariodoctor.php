@@ -78,7 +78,6 @@
       <div class="col-md-3">
         <div class="text-center">
           <img src="<?php echo base_url(); ?>public/img/theme/team-41.jpg" width="120px;" class="img-fluid mt-4 rounded-circle">
-          <br>
           <h5>Doctor@</h5>
           <h4 class="text-uppercase"><?php echo $this->session->userdata("nombre")." ".$this->session->userdata("apellido") ?></h4>
         </div>
