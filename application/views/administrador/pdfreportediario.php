@@ -98,7 +98,7 @@ foreach ($reporte1->result() as $resportes1){
 
     $pdf->Ln(6);
 
-    $pdf->Cell(42,6,$resportes1->apellido, 1, 0,'L', false );
+    $pdf->Cell(42,6,utf8_decode($resportes1->apellido), 1, 0,'L', false );
 
     $pdf->Cell(10,6,$resportes1->codigo_pago, 1, 0,'L', false );
 
