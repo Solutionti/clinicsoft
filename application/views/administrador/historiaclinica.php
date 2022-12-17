@@ -788,7 +788,7 @@
       <div class="col-md-12">
       <div class="form-group input-group-sm">
       <label>Examenes Auxiliares</label>
-      <textarea  rows="2" id="exa_auxiliares1" class="form-control"></textarea>
+      <input id="exa_auxiliares1" class="form-control">
       </div>
       </div>
       </div>
@@ -835,8 +835,16 @@
       <div class="row">
       <div class="col-md-12">
       <div class="form-group input-group-sm">
+      <label>Tratamiento</label>
+      <textarea  rows="2" id="tratamientos_gine" class="form-control"></textarea>
+      </div>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-md-12">
+      <div class="form-group input-group-sm">
       <label>Plan de trabajo</label>
-      <textarea  rows="2" id="plan_trabajo1" class="form-control"></textarea>
+      <input id="plan_trabajo1" class="form-control"></input>
       </div>
       </div>
       </div>
@@ -1516,9 +1524,7 @@
       </div>
       </div>
       </div>
-          
          
-      
       <!-- ventanas laterales  DOCUMENTOS -->
       <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
       <div class="offcanvas-header">
