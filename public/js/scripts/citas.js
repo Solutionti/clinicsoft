@@ -102,13 +102,59 @@ function Get_Horarios(insert_hora) {
 				var stta = true;
 				if (data.acction == 1) {
 					var arrr = data.horarios_mostrar;
-					for (let i = 0; i < arrr.length; i++) {
-						if (
-							arrr[i]["hora"] > insert_hora &&
-							stta == true &&
-							insert_hora != ""
-						) {
-							stta = false;
+					if(arrr != false){
+						for (let i = 0; i < arrr.length; i++) {
+							if (
+								arrr[i]["hora"] > insert_hora &&
+								stta == true &&
+								insert_hora != ""
+							) {
+								stta = false;
+								$("#Cont_Horas").append(
+									'<button type="button" onclick="btn_clock(this,' +
+										"'" +
+										insert_hora +
+										"'" +
+										')" class="btn_clock btn bg-gradient-warning" ><i class="fa fa-clock"></i>  ' +
+										insert_hora +
+										"</button>"
+								);
+								$("#hora").append(
+									'<option value="' +
+										insert_hora +
+										'">' +
+										insert_hora +
+										"</option>"
+								);
+								/*
+								console.log(
+									'<option value="' +
+										insert_hora +
+										'">' +
+										insert_hora +
+										"</option>"
+								);
+								*/
+							}
+							$("#Cont_Horas").append(
+								'<button type="button" onclick="btn_clock(this,' +
+									"'" +
+									arrr[i]["hora"] +
+									"'" +
+									')" class="btn_clock btn bg-gradient-info" ><i class="fa fa-clock"></i>  ' +
+									arrr[i]["hora"] +
+									"</button>"
+							);
+							$("#hora").append(
+								'<option value="' +
+									arrr[i]["hora"] +
+									'">' +
+									arrr[i]["hora"] +
+									"</option>"
+							);
+						}
+					}else{
+
 							$("#Cont_Horas").append(
 								'<button type="button" onclick="btn_clock(this,' +
 									"'" +
@@ -125,32 +171,6 @@ function Get_Horarios(insert_hora) {
 									insert_hora +
 									"</option>"
 							);
-							/*
-							console.log(
-								'<option value="' +
-									insert_hora +
-									'">' +
-									insert_hora +
-									"</option>"
-							);
-							*/
-						}
-						$("#Cont_Horas").append(
-							'<button type="button" onclick="btn_clock(this,' +
-								"'" +
-								arrr[i]["hora"] +
-								"'" +
-								')" class="btn_clock btn bg-gradient-info" ><i class="fa fa-clock"></i>  ' +
-								arrr[i]["hora"] +
-								"</button>"
-						);
-						$("#hora").append(
-							'<option value="' +
-								arrr[i]["hora"] +
-								'">' +
-								arrr[i]["hora"] +
-								"</option>"
-						);
 					}
 					$("body").overhang({
 						type: "success",

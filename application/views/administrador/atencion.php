@@ -294,7 +294,7 @@
                                   <div class="col-md-4">
                                     <div class="form-group input-group-sm">
                                         <label>Costo</label>
-                                        <input type="number" class="form-control" id="costo">
+                                        <input type="number" class="form-control" id="costo" value="0">
                                     </div>
                                   </div>
                                   <div class="col-md-4">
@@ -306,7 +306,7 @@
                                   <div class="col-md-4">
                                     <div class="form-group input-group-sm">
                                         <label>Comisión</label>
-                                        <input type="number" class="form-control" id="comision">
+                                        <input type="number" class="form-control" id="comision" value="0">
                                     </div>
                                   </div>
                                 
