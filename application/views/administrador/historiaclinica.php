@@ -1739,7 +1739,7 @@
       <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling3" aria-labelledby="offcanvasScrollingLabel">
       <div class="offcanvas-header bg-default">
       <h5 class="offcanvas-title text-uppercase text-white" id="offcanvasWithBothOptionsLabel">Ecografias</h5>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas3" aria-label="Close"></button>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
       <form action="<?php echo base_url(); ?>administracion/cargararchivoecografias" method="POST" enctype="multipart/form-data">
