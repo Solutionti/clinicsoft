@@ -154,7 +154,7 @@
                                  <tr>
                                     <td class="">
                                        <div class="row">
-                                          <a class="icon icon-shape icon-sm me-2 bg-gradient-info shadow mx-3" onclick="editarCita(<?php echo $citas->codigo_cita; ?>);">
+                                          <a style="cursor: pointer;" class="icon icon-shape icon-sm me-2 bg-gradient-info shadow mx-3" onclick="editarCita(<?php echo $citas->codigo_cita; ?>);">
                                           <i class="fas fa-pen text-white opacity-10"></i>
                                           </a>
                                        </div>

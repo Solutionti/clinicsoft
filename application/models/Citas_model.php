@@ -64,7 +64,7 @@ class Citas_model extends CI_model {
 
        //$this->db->where("c.estado like 'Pendiente'");
 
-       $this->db->where("(c.estado like 'Pendiente' || c.estado like 'Confirmado') AND c.doctor = ".$id);
+       $this->db->where("(c.estado like 'Pendiente' || c.estado like 'Confirmado') AND fecha >= CURDATE() AND c.doctor = ".$id);
 
        $this->db->order_by("c.fecha ", "DESC");
 
@@ -116,7 +116,7 @@ class Citas_model extends CI_model {
 
 	 	$queryTot = $this->db->query("SET lc_time_names = 'es_ES'");
 
-        $this->db->select("c.*,d.nombre as doctor,DATE_FORMAT(fecha,'%d de %M') as date_cita ");
+        $this->db->select("c.*,d.nombre as doctor,DATE_FORMAT(fecha,'%d de %M') as date_cita ,DATE_FORMAT(hora,'%h') as hora_12h ");
 
         $this->db->from("citas c");
 
@@ -126,9 +126,9 @@ class Citas_model extends CI_model {
 
         //$this->db->where("c.estado like 'Pendiente'");
 
-        $this->db->where("c.estado like 'Pendiente' || c.estado like 'Confirmado' ");// Importante: Tiene que ser asi para despues ponerlos como TRATADOS, y desaparescan de todos lados, menos de los horarios libres
+        $this->db->where("(c.estado like 'Pendiente' || c.estado like 'Confirmado') AND fecha >= CURDATE()  ");// Importante: Tiene que ser asi para despues ponerlos como TRATADOS, y desaparescan de todos lados, menos de los horarios libres
 
-        $this->db->order_by("c.fecha ", "DESC");
+        $this->db->order_by("c.fecha ", "ASC");
 
         $result = $this->db->get();
 

@@ -84,45 +84,54 @@ $(document).ready(function() {
 
     function Cal_Total(){
       var repuesta = false;
-      if((!($("#descuento").val()*1>=($("#costo").val()-$("#comision").val()))) || $("#descuento").val()*1==0 ){
-        if(
-          (
-            ($("#costo").val()*1>=0) &&
-            ($("#descuento").val()*1>=0) &&
-            ($("#comision").val()*1>=0) /* &&
-            ($("#cantidadv").val()*1>=0) &&
-            ($("#cantidadr").val()*1>=0)  */
-          )
-          &&
-          ($("#comision").val()*1<=($("#costo").val()*1))
-          /* &&
-          (            
-            ($("#cantidadr").val()*1>=( $("#costo").val()*1))
-          )*/
-        ){
-          repuesta = true;
-          if($("#costo").val()*1>0){
-            if($("#cantidadr").val()>0){
-              $("#cantidadv").val($("#cantidadr").val()-$("#costo").val());
-            }else{
-              $("#cantidadv").val(0);
-              $("#cantidadr").val(0);
-            }
-            $("#total").val($("#costo").val()-$("#descuento").val());
-          }else{
-            $("body").overhang({type: "warning",message: "Verificar montos.",}); 
-          }
-        }else{
-          $("body").overhang({type: "warning",message: "La cantidad de dinero recibido no cubre el costo de la atención, verificar.",}); 
-        }
-       
+      if($("#costo").val()*1==0){
+        $("#descuento").val("0");
+        $("#comision").val("0");
+        $("#cantidadv").val("0");
+        $("#cantidadr").val("0");
+        $("#total").val("0");
+        return true;
       }else{
-        $("body").overhang({
-          type: "warning",
-          message: "El descuento excede lo permitido.",
-        }); 
+        if((!($("#descuento").val()*1>=($("#costo").val()-$("#comision").val()))) || $("#descuento").val()*1==0 ){
+          if(
+            (
+              ($("#costo").val()*1>=0) &&
+              ($("#descuento").val()*1>=0) &&
+              ($("#comision").val()*1>=0) /* &&
+              ($("#cantidadv").val()*1>=0) &&
+              ($("#cantidadr").val()*1>=0)  */
+            )
+            &&
+            ($("#comision").val()*1<=($("#costo").val()*1))
+            /* &&
+            (            
+              ($("#cantidadr").val()*1>=( $("#costo").val()*1))
+            )*/
+          ){
+            repuesta = true;
+            if($("#costo").val()*1>0){
+              if($("#cantidadr").val()>0){
+                $("#cantidadv").val($("#cantidadr").val()-$("#costo").val());
+              }else{
+                $("#cantidadv").val(0);
+                $("#cantidadr").val(0);
+              }
+              $("#total").val($("#costo").val()-$("#descuento").val());
+            }else{
+              $("body").overhang({type: "warning",message: "Verificar montos.",}); 
+            }
+          }else{
+            $("body").overhang({type: "warning",message: "La cantidad de dinero recibido no cubre el costo de la atención, verificar.",}); 
+          }
+         
+        }else{
+          $("body").overhang({
+            type: "warning",
+            message: "El descuento excede lo permitido.",
+          }); 
+        }
+        return repuesta;
       }
-      return repuesta;
     }
 
     $("#crear-atencion").on("click", function() {

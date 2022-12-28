@@ -307,111 +307,111 @@
 				$state_user = true; 
 
 				for ($i=0; $i < sizeof($ingresos_comision); $i++) {
+					if($ingresos_comision[$i]['codigo_doctor']!=13){
+						if($cajas[$QQ]['usuario'] == $ingresos_comision[$i]['usuario']){
 
-					if($cajas[$QQ]['usuario'] == $ingresos_comision[$i]['usuario']){
+							if($state_user){
 
-						if($state_user){
+								$state_user = false; 
 
-							$state_user = false; 
+								$base = $base + 1;
 
-							$base = $base + 1;
+								$base = $base + 1;
 
-							$base = $base + 1;
+								$objPHPExcel->getActiveSheet()->mergeCells('B'.($base).':D'.($base));
 
-							$objPHPExcel->getActiveSheet()->mergeCells('B'.($base).':D'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("A8"), 'B'.($base));
 
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("A8"), 'B'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("A8"), 'C'.($base));
 
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("A8"), 'C'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("A8"), 'D'.($base));
 
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("A8"), 'D'.($base));
+								$objPHPExcel->getActiveSheet()->SetCellValue('B'.($base), "CAJERO : ".$ingresos_comision[$i]['usuario']);
 
-							$objPHPExcel->getActiveSheet()->SetCellValue('B'.($base), "CAJERO : ".$ingresos_comision[$i]['usuario']);
-
-						}
-
-
-
-						$base = $base + 1;
-
-						if($idee_user_Docc!=$ingresos_comision[$i]['medico']){
-
-							if($idee_user_Docc!=99999999999){
-								/*******TOTALES*/
-								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("C2"), 'D'.($base));
-								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("E2"), 'E'.($base));
-								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("F2"), 'F'.($base));
-								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("G2"), 'G'.($base));
-								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("H2"), 'H'.($base));
-								$objPHPExcel->getActiveSheet()->SetCellValue('D'.($base), "Totales --> Comision S/ ".$Tot_comison." " );
-								//$objPHPExcel->getActiveSheet()->SetCellValue('E'.($base), $Tot_comison );
-								$objPHPExcel->getActiveSheet()->SetCellValue('E'.($base), $count_Credito);
-								$objPHPExcel->getActiveSheet()->SetCellValue('F'.($base), $count_Efectivo );
-								$objPHPExcel->getActiveSheet()->SetCellValue('G'.($base), $Tot_ingresos );
 							}
 
-				
 
-							/*******Nombre CAJERO*/
+
 							$base = $base + 1;
-							$base = $base + 1;
-							$idee_user_Docc = $ingresos_comision[$i]['medico'];
-							$objPHPExcel->getActiveSheet()->mergeCells('B'.($base).':D'.($base));
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("B2"), 'B'.($base));
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("B2"), 'C'.($base));
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("B2"), 'D'.($base));
-							$objPHPExcel->getActiveSheet()->SetCellValue('B'.($base), "Médico : ".$ingresos_comision[$i]['medico']);
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("E8"), 'E'.($base));
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("F8"), 'F'.($base));
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("G8"), 'G'.($base));
-							$objPHPExcel->getActiveSheet()->SetCellValue('E'.($base), "Tarjeta" );
-							$objPHPExcel->getActiveSheet()->SetCellValue('F'.($base), "Efectivo" );
-							$objPHPExcel->getActiveSheet()->SetCellValue('G'.($base), "Comision" );
+
+							if($idee_user_Docc!=$ingresos_comision[$i]['medico']){
+
+								if($idee_user_Docc!=99999999999){
+									/*******TOTALES*/
+									$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("C2"), 'D'.($base));
+									$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("E2"), 'E'.($base));
+									$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("F2"), 'F'.($base));
+									$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("G2"), 'G'.($base));
+									$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("H2"), 'H'.($base));
+									$objPHPExcel->getActiveSheet()->SetCellValue('D'.($base), "Totales --> Comision S/ ".$Tot_comison." " );
+									//$objPHPExcel->getActiveSheet()->SetCellValue('E'.($base), $Tot_comison );
+									$objPHPExcel->getActiveSheet()->SetCellValue('E'.($base), $count_Credito);
+									$objPHPExcel->getActiveSheet()->SetCellValue('F'.($base), $count_Efectivo );
+									$objPHPExcel->getActiveSheet()->SetCellValue('G'.($base), $Tot_ingresos );
+								}
+
+					
+
+								/*******Nombre CAJERO*/
+								$base = $base + 1;
+								$base = $base + 1;
+								$idee_user_Docc = $ingresos_comision[$i]['medico'];
+								$objPHPExcel->getActiveSheet()->mergeCells('B'.($base).':D'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("B2"), 'B'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("B2"), 'C'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("B2"), 'D'.($base));
+								$objPHPExcel->getActiveSheet()->SetCellValue('B'.($base), "Médico : ".$ingresos_comision[$i]['medico']);
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("E8"), 'E'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("F8"), 'F'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("G8"), 'G'.($base));
+								$objPHPExcel->getActiveSheet()->SetCellValue('E'.($base), "Tarjeta" );
+								$objPHPExcel->getActiveSheet()->SetCellValue('F'.($base), "Efectivo" );
+								$objPHPExcel->getActiveSheet()->SetCellValue('G'.($base), "Comision" );
 
 
-							$i = $i - 1;
+								$i = $i - 1;
 
-							$Tot_comison	= 0;
+								$Tot_comison	= 0;
 
-							$Tot_ingresos	= 0;
-							$count_Efectivo=0;
-							$count_Credito=0;
-						}else{
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("A9"), 'A'.($base));
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("B9"), 'B'.($base));
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("C9"), 'C'.($base));
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("D9"), 'D'.($base));
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("E9"), 'E'.($base));
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("F9"), 'F'.($base));
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("G9"), 'G'.($base));
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("H9"), 'H'.($base));
-							$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("I9"), 'I'.($base));
-
-							$objPHPExcel->getActiveSheet()->SetCellValue('A'.($base), ($i+1));
-							$objPHPExcel->getActiveSheet()->SetCellValue('B'.($base), $ingresos_comision[$i]['documento']);
-							$objPHPExcel->getActiveSheet()->SetCellValue('C'.($base), $ingresos_comision[$i]['nombre']." ".$ingresos_comision[$i]['apellido']);
-							$objPHPExcel->getActiveSheet()->SetCellValue('D'.($base), $ingresos_comision[$i]['descripcion']);
-
-							if($ingresos_comision[$i]['tipo_deposito']=="Efectivo"){
-								$objPHPExcel->getActiveSheet()->SetCellValue('E'.($base), "");
-								$objPHPExcel->getActiveSheet()->SetCellValue('F'.($base), $ingresos_comision[$i]['total']);
-								$count_Efectivo=$count_Efectivo+($ingresos_comision[$i]['total']);
-								$Global_count_Efectivo=$Global_count_Efectivo+($ingresos_comision[$i]['total']);
+								$Tot_ingresos	= 0;
+								$count_Efectivo=0;
+								$count_Credito=0;
 							}else{
-								$objPHPExcel->getActiveSheet()->SetCellValue('E'.($base), $ingresos_comision[$i]['total']);
-								$objPHPExcel->getActiveSheet()->SetCellValue('F'.($base), "");
-								$count_Credito=$count_Credito+($ingresos_comision[$i]['total']);
-								$Global_count_Credito=$Global_count_Credito+($ingresos_comision[$i]['total']);
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("A9"), 'A'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("B9"), 'B'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("C9"), 'C'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("D9"), 'D'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("E9"), 'E'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("F9"), 'F'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("G9"), 'G'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("H9"), 'H'.($base));
+								$objPHPExcel->getActiveSheet()->duplicateStyle($objPHPExcel->getActiveSheet()->getStyle("I9"), 'I'.($base));
+
+								$objPHPExcel->getActiveSheet()->SetCellValue('A'.($base), ($i+1));
+								$objPHPExcel->getActiveSheet()->SetCellValue('B'.($base), $ingresos_comision[$i]['documento']);
+								$objPHPExcel->getActiveSheet()->SetCellValue('C'.($base), $ingresos_comision[$i]['nombre']." ".$ingresos_comision[$i]['apellido']);
+								$objPHPExcel->getActiveSheet()->SetCellValue('D'.($base), $ingresos_comision[$i]['descripcion']);
+
+								if($ingresos_comision[$i]['tipo_deposito']=="Efectivo"){
+									$objPHPExcel->getActiveSheet()->SetCellValue('E'.($base), "");
+									$objPHPExcel->getActiveSheet()->SetCellValue('F'.($base), $ingresos_comision[$i]['total']);
+									$count_Efectivo=$count_Efectivo+($ingresos_comision[$i]['total']);
+									$Global_count_Efectivo=$Global_count_Efectivo+($ingresos_comision[$i]['total']);
+								}else{
+									$objPHPExcel->getActiveSheet()->SetCellValue('E'.($base), $ingresos_comision[$i]['total']);
+									$objPHPExcel->getActiveSheet()->SetCellValue('F'.($base), "");
+									$count_Credito=$count_Credito+($ingresos_comision[$i]['total']);
+									$Global_count_Credito=$Global_count_Credito+($ingresos_comision[$i]['total']);
+								}
+								
+								$objPHPExcel->getActiveSheet()->SetCellValue('G'.($base), $ingresos_comision[$i]['comision']);
+								$Tot_comison = $Tot_comison + $ingresos_comision[$i]['comision'];
+								$Global_Tot_comison = $Global_Tot_comison + $ingresos_comision[$i]['comision'];
+
 							}
-							
-							$objPHPExcel->getActiveSheet()->SetCellValue('G'.($base), $ingresos_comision[$i]['comision']);
-							$Tot_comison = $Tot_comison + $ingresos_comision[$i]['comision'];
-							$Global_Tot_comison = $Global_Tot_comison + $ingresos_comision[$i]['comision'];
 
 						}
-
 					}
-
 				}
 
 				$base = $base + 1;
