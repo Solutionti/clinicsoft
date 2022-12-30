@@ -121,7 +121,7 @@ $pdf->Cell(20,6,$generales->ap_cardio, '', 0,'L', false );
 $pdf->Ln(7);
 $pdf->Cell(35,6,'E . ABDOMEN:', '', 0,'L', false );
 $pdf->Cell(45,6,$generales->abdomen, '', 0,'L', false );
-$pdf->Cell(45,6,'F . PIEL:', '', 0,'L', false );
+$pdf->Cell(13,6,'F . PIEL:', '', 0,'L', false );
 $pdf->Cell(20,6,$generales->ap_genitourinario, '', 0,'L', false );
 $pdf->Ln(7);
 $pdf->Cell(35,6,'G . LOCOMOTOR:', '', 0,'L', false );
@@ -134,7 +134,7 @@ $pdf->Cell(27,6,'4. DIAGNOSTICO:', '', 0,'L', false );
 $pdf->SetFont('Times','',9);
 $pdf->Ln(5);
 foreach($diagnostico->result() as $diagnosticos){
-$pdf->MultiCell(160, 5,$diagnosticos->clave." - ".$diagnosticos->descripcion, '', 'L', false);
+$pdf->MultiCell(160, 5,utf8_decode($diagnosticos->clave." - ".$diagnosticos->descripcion), '', 'L', false);
 }
 $pdf->SetFont('Times','B',9);
 $pdf->Ln(5);

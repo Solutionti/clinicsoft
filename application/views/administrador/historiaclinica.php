@@ -199,14 +199,14 @@
                                                       <?php if($historias->tipo_consulta == 1){ ?>
                                                       <td>
                                                          <div class="row">
-                                                            <button type="button" class="icon icon-shape icon-sm me-2  shadow mx-3"> <i class="fas fa-pen"></i> </button>
+                                                            <button type="button" class="icon icon-shape icon-sm me-2  shadow mx-3  bg-gradient-success"> <i class="fas fa-pen"></i> </button>
                                                             <a href="<?php echo base_url(); ?>administracion/pdfgeneral/<?php echo $historias->codigo_historial_paciente; ?>/<?php echo $historias->fecha; ?>" class="icon icon-shape icon-sm me-2 bg-gradient-danger shadow " target="_blank"> <i class="fas fa-file-pdf"></i>  </a>
                                                          </div>
                                                       </td>
                                                       <?php } else { ?>
                                                       <td>
                                                          <div class="row">
-                                                            <a type="button" class="icon icon-shape icon-sm me-2  shadow mx-3" style="background-color:pink !important; color: white;"> <i class="fas fa-pen"></i> </a>
+                                                            <a href="#" class="icon icon-shape icon-sm me-2  shadow mx-3 bg-gradient-success"> <i class="fas fa-pen"></i> </a>
                                                             <a href="<?php echo base_url(); ?>administracion/pdfginecologia/<?php echo $historias->codigo_historial_paciente; ?>/<?php echo $historias->fecha; ?>" class="icon icon-shape icon-sm me-2 bg-gradient-danger shadow " target="_blank"> <i class="fas fa-file-pdf"></i>  </a>
                                                          </div>
                                                       </td>
@@ -1146,11 +1146,12 @@
       <div class="row">
       <div class="col-md-12">
       <div class="form-group input-group-sm">
-      <label>Cabeza</label>
-      <input type="text" id="cabeza2" class="form-control" >
+      <label>Piel</label>
+      <input type="text" id="ap_genito2" class="form-control" >
       </div>
       </div>
       </div>
+      
       <div class="row">
       <div class="col-md-12">
       <div class="form-group input-group-sm">
@@ -1186,8 +1187,8 @@
       <div class="row">
       <div class="col-md-12">
       <div class="form-group input-group-sm">
-      <label>Piel</label>
-      <input type="text" id="ap_genito2" class="form-control" >
+      <label>Cabeza</label>
+      <input type="text" id="cabeza2" class="form-control" >
       </div>
       </div>
       </div>
