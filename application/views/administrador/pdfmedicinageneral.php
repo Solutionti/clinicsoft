@@ -107,7 +107,7 @@ $pdf->Cell(15,6,'ORINA:', '', 0,'L', false);
 $pdf->Cell(5,6,$generales->orina, '', 0,'L', false);
 $pdf->SetFont('Times','',9);
 $pdf->Ln(7);
-$pdf->Cell(27,6,'3. EXAMEN FISICO:', '', 0,'L', false );
+$pdf->Cell(27,6,utf8_decode('3. EXAMEN FISICO:'), '', 0,'L', false );
 $pdf->Ln(7);
 $pdf->Cell(20,6,'A. CABEZA:', '', 0,'L', false );
 $pdf->Cell(60,6,$generales->cabeza, '', 0,'L', false );

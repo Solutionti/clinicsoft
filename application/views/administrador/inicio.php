@@ -236,10 +236,10 @@
         <div class="col-lg-7 mb-lg-0 mb-4">
           <div class="card z-index-2 h-100">
             <div class="card-header pb-0 pt-3 bg-transparent">
-              <h6 class="text-capitalize">Crecimiento fluvial</h6>
+              <h6 class="text-capitalize">Crecimiento de pacientes</h6>
               <p class="text-sm mb-0">
                 <i class="fa fa-arrow-up text-success"></i>
-                <span class="font-weight-bold">4% more</span> in 2022
+                <span class="font-weight-bold">4% mas</span> en 2023
               </p>
             </div>
             <div class="card-body p-3">
@@ -269,7 +269,7 @@
                     <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
                       <i class="ni ni-bulb-61 text-dark opacity-10"></i>
                     </div>
-                    <h5 class="text-white mb-1">Todos noestros clientes satisfechos</h5>
+                    <h5 class="text-white mb-1">Todos nuestros clientes satisfechos</h5>
                     <p>Nuestro lema es cumplimiento llevamos a tu empresa todo lo estipulado en resoluciones y leyes para que no tengas que pagar multas.</p>
                   </div>
                 </div>
@@ -429,7 +429,7 @@
     new Chart(ctx1, {
       type: "line",
       data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ["Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
         datasets: [{
           label: "Mobile apps",
           tension: 0.4,

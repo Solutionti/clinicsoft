@@ -1837,7 +1837,7 @@
       <div class="row">
       <div class="col-md-3">
       <div class="form-group">
-      <label>Documento</label>
+      <label>DNI</label>
       <input type="number" class="form-control form-control-sm" value="<?php echo $pacientes->documento; ?>" readonly>
       </div>
       </div>
@@ -1899,7 +1899,7 @@
       <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
       <label class="form-check-label" for="inlineRadio2">No</label>
       </div> 
-      <input type="text" class="form-control-sm form-control" value="Nohay masas solidas ni quisticas">
+      <input type="text" class="form-control-sm form-control" value="No hay masas solidas ni quisticas">
       </div>
       </div>
       <div class="col-md-8 ">
@@ -1922,7 +1922,7 @@
       <label>UTERO</label>
       </div>
       <div class="col-md-1">
-      <input type="number" class="form-control form-control-sm">
+      <input type="text" class="form-control form-control-sm">
       </div>
       <div class="col-md-1">
       <label class="mt-3">mm</label>
@@ -2105,7 +2105,7 @@
                               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
                               <label class="form-check-label" for="inlineRadio2">No</label>
                            </div>
-                           <input type="text" class="form-control-sm form-control" value="Nohay masas solidas ni quisticas">
+                           <input type="text" class="form-control-sm form-control" value="No hay masas solidas ni quisticas">
                         </div>
                      </div>
                      <div class="col-md-8 ">

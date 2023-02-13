@@ -1689,7 +1689,7 @@
       <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
       <label class="form-check-label" for="inlineRadio2">No</label>
       </div> 
-      <input type="text" class="form-control-sm form-control" value="Nohay masas solidas ni quisticas">
+      <input type="text" class="form-control-sm form-control" value="No hay masas solidas ni quisticas">
       </div>
       </div>
       <div class="col-md-8 ">
@@ -1895,7 +1895,7 @@
                               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
                               <label class="form-check-label" for="inlineRadio2">No</label>
                            </div>
-                           <input type="text" class="form-control-sm form-control" value="Nohay masas solidas ni quisticas">
+                           <input type="text" class="form-control-sm form-control" value="No hay masas solidas ni quisticas">
                         </div>
                      </div>
                      <div class="col-md-8 ">
