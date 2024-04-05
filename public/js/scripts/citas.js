@@ -47,7 +47,7 @@ function VAL_Search_DNI() {
       success: function (data) {
         if (data === "error") {
           url2 =
-            "https://apiperu.dev/api/dni/" +
+            "https://my.apidevs.pro/api/dni/" +
             dni +
             "?api_token=" +
             "e02a95cc4b8e0d521d447c0786af76cdb424b6a2ba25aea9f7cd9e9bc4712e86";
