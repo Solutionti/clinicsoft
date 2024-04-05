@@ -293,13 +293,16 @@
                               Información Paciente
                            </h6>
                            <div class="h6 font-weight-300">
-                              <?php echo $pacientes->apellido." ".$pacientes->nombre; ?>
+                           <?php echo $pacientes->apellido." ".$pacientes->nombre; ?>
                            </div>
-                           <div class="h6 mt-1">
-                              <?php echo $pacientes->documento; ?>
+                           <div >
+                              DNI: <?php echo $pacientes->documento; ?>
                            </div>
                            <div>
-                              No HC: <?php echo $pacientes->hc; ?>
+                             Edad: <?php echo $pacientes->edad; ?>
+                           </div>
+                           <div>
+                              N° historia: <?php echo $pacientes->hc; ?>
                            </div>
                         </div>
                         <br>
