@@ -1,6 +1,6 @@
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
    <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+      <i class="fas text-primary fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="<?php echo base_url(); ?>administracion/perfil">
       <img src="<?php echo base_url();?>public/img/theme/logo.png" class="navbar-brand-img h-100" alt="main_logo">
       <span class="ms-1 font-weight-bold">ClinicSoft</span>
@@ -13,37 +13,27 @@
          <?php if($this->session->userdata("rol") == "Administrador"){ ?>
          <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url(); ?>administracion/inicio">
-            <i class="fas fa-home"></i>
+            <i class="fas text-primary fa-home"></i>
             <span class=" "> Inicio</span>
             </a>
          </li>
          
           <li class="nav-item">
-            <a class="nav-link " href="<?php echo base_url(); ?>administracion/citas">
-              <i class="fa fa-calendar"></i>
+            <a class="nav-link " href="<?php echo base_url(); ?>administracion/citas" target="_blank">
+              <i class="fa fa-calendar text-primary"></i>
               <span class="sidenav-normal"> Citas</span>
             </a>
           </li>
          <li class="nav-item ">
             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#atencion">
-            <i class="fas fa-user-nurse"></i>
-            <span class="sidenav-normal "> Atención <b class="caret"></b></span>
+            <i class="fas text-primary fa-user-nurse"></i>
+            <span class="sidenav-normal "> Admisiones <b class="caret"></b></span>
             </a>
             <div class="collapse " id="atencion">
                <ul class="nav nav-sm flex-column">
                   <li class="nav-item">
                      <a class="nav-link" href="<?php echo base_url(); ?>administracion/atencion">
-                     <span class="sidenav-normal"> Recepción</span>
-                     </a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/laboratorio">
-                     <span class="sidenav-normal">Laboratorio</span>
-                     </a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/triaje">
-                     <span class="sidenav-normal"> Triaje</span>
+                     <span class="sidenav-normal"> Admision</span>
                      </a>
                   </li>
                   <li class="nav-item">
@@ -51,16 +41,27 @@
                      <span class="sidenav-normal">Pacientes</span>
                      </a>
                   </li>
+                  
                </ul>
             </div>
          </li>
          <li class="nav-item ">
             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#procedimientos">
-            <i class="fas fa-flask"></i>
+            <i class="fas text-primary fa-flask"></i>
             <span class="sidenav-normal "> Procedimientos <b class="caret"></b></span>
             </a>
             <div class="collapse " id="procedimientos">
                <ul class="nav nav-sm flex-column">
+                  <li class="nav-item">
+                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/triaje">
+                     <span class="sidenav-normal"> Triaje</span>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/laboratorio">
+                     <span class="sidenav-normal">Laboratorio</span>
+                     </a>
+                  </li>
                   <li class="nav-item">
                      <a class="nav-link" href="<?php echo base_url(); ?>administracion/colposcopia">
                      <span class="sidenav-normal"> Colposcopia</span>
@@ -71,7 +72,7 @@
          </li>
          <li class="nav-item ">
             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#inventarios">
-            <i class="fa fa-shopping-cart"></i>
+            <i class="fa fa-shopping-cart text-primary"></i>
             <span class="sidenav-normal"> Inventarios <b class="caret"></b></span>
             </a>
             <div class="collapse " id="inventarios">
@@ -96,7 +97,7 @@
          </li>
          <li class="nav-item ">
             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#usuarios">
-            <i class="fas fa-users"></i>
+            <i class="fas text-primary fa-users"></i>
             <span class="sidenav-normal"> Usuarios <b class="caret"></b></span>
             </a>
             <div class="collapse " id="usuarios">
@@ -116,16 +117,16 @@
          </li>
          <li class="nav-item ">
             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#contabilidad">
-            <i class="fas fa-money-bill"></i>
+            <i class="fas text-primary fa-money-bill"></i>
             <span class="sidenav-normal"> Contabilidad <b class="caret"></b></span>
             </a>
             <div class="collapse " id="contabilidad">
                <ul class="nav nav-sm flex-column">
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                      <a class="nav-link " href="<?php echo base_url(); ?>administracion/facturaelectronica">
                      <span class="sidenav-normal"> Factura electronica</span>
                      </a>
-                  </li>
+                  </li> -->
                   <li class="nav-item">
                      <a class="nav-link " href="<?php echo base_url(); ?>administracion/financiero">
                      <span class="sidenav-normal">Pagos</span>
@@ -151,7 +152,7 @@
          </li>
          <!-- <li class="nav-item ">
             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#resoluciones">
-            <i class="fas fa-flag"></i>
+            <i class="fas text-primary fa-flag"></i>
             <span class="sidenav-normal"> Resoluciones <b class="caret"></b></span>
             </a>
             <div class="collapse " id="resoluciones">
@@ -176,27 +177,21 @@
          </li> -->
          <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url(); ?>administracion/reportes">
-            <i class="fas fa-chart-pie"></i>
+            <i class="fas text-primary fa-chart-pie"></i>
             <span> Reportes</span>
             </a>
          </li>
          
          <li class="nav-item">
             <a class="nav-link " href="https://boticasmm.saludmadreymujer.com" target="_blank">
-            <i class="fas fa-money-bill"></i>
-            <span class="">Botica</span>
-            </a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url(); ?>administracion/tickets">
-            <i class="fas fa-money-bill"></i>
-            <span> Tickets</span>
+            <i class="fas text-primary fa-pills"></i>
+            <span class="">Farmacia</span>
             </a>
          </li>
          <li class="nav-item">
             <a class="nav-link" href="#">
-            <i class="fas fa-info-circle"></i>
-            <span> Version 2.0.0.0</span>
+            <i class="fas text-primary fa-info-circle"></i>
+            <span> Version 3.0.0.0</span>
             </a>
          </li>
       </ul>
@@ -210,25 +205,25 @@
                   <?php } else if ($this->session->userdata("rol") == "Doctor"){  ?>
                   <li class="nav-item">
                      <a class="nav-link" target="blank" href="<?php echo base_url(); ?>administracion/calendariodoctor">
-                     <i class="fas fa-home"></i>
+                     <i class="fas text-primary fa-home"></i>
                      <span class=" "> Inicio</span>
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="<?php echo base_url(); ?>administracion/atencionmedicos">
-                     <i class="fas fa-user-md"></i>
+                     <i class="fas text-primary fa-user-md"></i>
                      <span class=" "> Atención</span>
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link"  href="<?php echo base_url(); ?>administracion/pacientes">
-                     <i class="fas fa-users"></i>
+                     <i class="fas text-primary fa-users"></i>
                      <span class=" "> Pacientes</span>
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link"  href="<?php echo base_url(); ?>administracion/colposcopia">
-                     <i class="fas fa-microscope"></i>
+                     <i class="fas text-primary fa-microscope"></i>
                      <span class=" "> Colposcopia</span>
                      </a>
                   </li>
@@ -236,7 +231,7 @@
                   <?php } else if($this->session->userdata("rol") == "Enfermera") { ?>
                   <li class="nav-item ">
                      <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#atencion">
-                     <i class="fas fa-user-nurse"></i>
+                     <i class="fas text-primary fa-user-nurse"></i>
                      <span class="sidenav-normal "> Atención <b class="caret"></b></span>
                      </a>
                      <div class="collapse " id="atencion">
@@ -270,7 +265,7 @@
                      </div>
                      <li class="nav-item">
                      <a class="nav-link"  href="<?php echo base_url(); ?>administracion/citas">
-                     <i class="fas fa-stethoscope"></i>
+                     <i class="fas text-primary fa-stethoscope"></i>
                      <span class=" "> Citas</span>
                      </a>
                   </li>
@@ -302,43 +297,43 @@
                   
                   <li class="nav-item">
                      <a class="nav-link " href="<?php echo base_url(); ?>administracion/gastos">
-                     <i class="fas fa-money-bill"></i>
+                     <i class="fas text-primary fa-money-bill"></i>
                      <span class="">Gastos</span>
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link " href="https://boticasmm.saludmadreymujer.com" target="_blank">
-                     <i class="fas fa-money-bill"></i>
+                     <i class="fas text-primary fa-money-bill"></i>
                      <span class="">Botica</span>
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link"  href="<?php echo base_url(); ?>administracion/colposcopia">
-                     <i class="fas fa-microscope"></i>
+                     <i class="fas text-primary fa-microscope"></i>
                      <span class=" "> Colposcopia</span>
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link"  href="<?php echo base_url(); ?>administracion/doctores">
-                     <i class="fas fa-user-md"></i>
+                     <i class="fas text-primary fa-user-md"></i>
                      <span class=" "> Medicos</span>
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link"  href="<?php echo base_url(); ?>administracion/pacientes">
-                     <i class="fas fa-download"></i>
+                     <i class="fas text-primary fa-download"></i>
                      <span class=" "> Cargar Documentos</span>
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="<?php echo base_url(); ?>administracion/reportes">
-                     <i class="fas fa-chart-pie"></i>
+                     <i class="fas text-primary fa-chart-pie"></i>
                      <span> Reportes</span>
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="#">
-                     <i class="fas fa-info-circle"></i>
+                     <i class="fas text-primary fa-info-circle"></i>
                      <span> Version 2.0.0.0</span>
                      </a>
                   </li>
@@ -346,7 +341,7 @@
                   <?php } else if($this->session->userdata("rol") == "Laboratorista") { ?>
                   <li class="nav-item">
                      <a class="nav-link"  href="<?php echo base_url(); ?>administracion/pacientes">
-                     <i class="fas fa-download"></i>
+                     <i class="fas text-primary fa-download"></i>
                      <span class=" "> Cargar documentos</span>
                      </a>
                   </li>
@@ -354,7 +349,7 @@
                   <?php } else if($this->session->userdata("rol") == "Patologo"){ ?>
                   <li class="nav-item">
                      <a class="nav-link" href="<?php echo base_url(); ?>administracion/pacientes">
-                     <i class="fas fa-file-pdf"></i>
+                     <i class="fas text-primary fa-file-pdf"></i>
                      <span> Cargar documentos</span>
                      </a>
                   </li>

@@ -144,7 +144,7 @@ class Atencion extends Admin_Controller {
 		];
 		
 		$this->Pagos_model->CrearPagos($factura);
-		$this->Atencion_model->CrearLineaTiempoAtencion($dni, $especialidad,$doctor);
+		// $this->Atencion_model->CrearLineaTiempoAtencion($dni, $especialidad,$doctor);
 
 	}
 

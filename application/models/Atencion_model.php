@@ -35,7 +35,7 @@ class Atencion_model extends CI_model {
 
         ];
 
-        $this->db->insert("atenciones", $datos);
+        $this->db->insert("admisiones", $datos);
         return $this->db->insert_id();
 
     }
@@ -43,7 +43,7 @@ class Atencion_model extends CI_model {
     public function getAtenciones() {
 
         $this->db->select(" a.*,p.nombre as paciente,p.documento,p.apellido, m.nombre, e.descripcion");
-        $this->db->from("atenciones a");
+        $this->db->from("admisiones a");
         $this->db->join("pacientes p", "a.paciente = p.documento");
         $this->db->join("doctores m", "a.medico = m.codigo_doctor");
         $this->db->join("especialidades e", "a.especialidad = e.codigo_especialidad");
@@ -70,7 +70,7 @@ class Atencion_model extends CI_model {
     public function CountTurnos($id_doc) {
 
         $this->db->select("count(*) as Orden");
-        $this->db->from("atenciones");
+        $this->db->from("admisiones");
         $this->db->where("medico", $id_doc);
         $this->db->where("cola_atencion", "Si");
         //$this->db->where("estado = 'Consulta' OR estado = 'Atendido'");
@@ -86,14 +86,14 @@ class Atencion_model extends CI_model {
           "estado" => "Triaje"
         ];
         $this->db->where("codigo_atencion", $id);
-        $this->db->update("atenciones", $data);
+        $this->db->update("admisiones", $data);
 
     }
 
     public function mandaraConsulta($id) {
         $medico__ = 0;
         $this->db->select("a.medico");
-        $this->db->from("atenciones a");
+        $this->db->from("admisiones a");
         $this->db->where("a.codigo_atencion", $id);
         $result = $this->db->get();
 
@@ -107,13 +107,13 @@ class Atencion_model extends CI_model {
             "estado" => "Consulta"
         ];
         $this->db->where("codigo_atencion", $id);
-        $this->db->update("atenciones", $data);
+        $this->db->update("admisiones", $data);
 
     }
 
     public function cargarFacturaAtencion($id) {
         $this->db->select("a.*,p.nombre,p.documento,p.apellido,p.hc,d.nombre as doctor, e.descripcion");
-        $this->db->from("atenciones a");
+        $this->db->from("admisiones a");
         $this->db->join("pacientes p", "a.paciente = p.documento");
         $this->db->join("doctores d", "a.medico = d.codigo_doctor");
         $this->db->join("especialidades e", "a.especialidad = e.codigo_especialidad");
@@ -128,7 +128,7 @@ class Atencion_model extends CI_model {
 
         //$this->db->select(" a.*, m.nombre, e.descripcion");
         $this->db->select(" a.*,p.nombre as paciente,p.documento,p.apellido,p.hc,p.direccion,p.telefono, m.nombre, e.descripcion");
-        $this->db->from("atenciones a");
+        $this->db->from("admisiones a");
         $this->db->join("pacientes p", "a.paciente = p.documento");
         $this->db->join("doctores m", "a.medico = m.codigo_doctor");
         $this->db->join("especialidades e", "a.especialidad = e.codigo_especialidad");
@@ -148,7 +148,7 @@ class Atencion_model extends CI_model {
           "estado" => "Atendido"
         ];
         $this->db->where("codigo_atencion", $id);
-        $this->db->update("atenciones", $data);
+        $this->db->update("admisiones", $data);
 
     }
     // LINEA DE TIEMPO 

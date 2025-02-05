@@ -1,12 +1,12 @@
 $(document).ready(function() {
 
       $("#table-atencion").DataTable({
-        "lengthMenu": [10, 50, 100, 200],
+        "lengthMenu": [5, 50, 100, 200],
         "language":{
           "processing": "Procesando",
           "search": "Buscar:",
-          "lengthMenu": "Ver _MENU_ Recepcion",
-          "info": "Mirando _START_ a _END_ de _TOTAL_ Recepcion",
+          "lengthMenu": "Ver _MENU_ Admisiones",
+          "info": "Viendo _START_ a _END_ de _TOTAL_ Admisiones",
           "zeroRecords": "No encontraron resultados",
           "paginate": {
             "first":      "Primera",

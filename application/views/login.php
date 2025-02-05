@@ -27,55 +27,79 @@
   </style>
 </head>
 
-  <!-- End Navbar -->
-  <main class="main-content  mt-0">
-    <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('https://cdn.pixabay.com/photo/2021/10/11/17/37/doctor-6701410_960_720.jpg'); background-position: top;">
-      <span class="mask bg-gradient-dark opacity-6"></span>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-5 text-center mx-auto">
-              <img src="<?php echo base_url(); ?>public/img/theme/logoblanc.png" width="80px;" class="img-fluid">
-            <h1 class="text-white mb-2 mt-2">Bienvenido</h1>
-            <p class="font-weight-bold text-white">Ingrese su usuario o contraseña para entrar a la administración.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  * -->
+<!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
+<!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<div  [hidden]="spinner" class="overlay z-index">
+  <div class="dot-wave">
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+  </div>
+</div>
+<p-toast position="top-right"/>
+<main class="main-content  mt-0">
+    <section>
+    <div class="page-header min-vh-100">
     <div class="container">
-      <div class="row mt-lg-n11 mt-md-n11 mt-n11 justify-content-center">
-        <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
-          <div class="messageError"></div>
-          <div class="card z-index-0">
-            <div class="card-header text-center pt-4">
-              <h5 class="text-uppercase">Iniciar Sesión</h5>
-            </div>
-            <div class="row px-xl-5 px-sm-4 px-3">
-              <div class="position-relative text-center">
-                <!-- <p class="text-sm font-weight-bold  text-secondary text-border d-inline z-index-2 bg-white px-1">
-                  <span class="cyan-text lead font-weight-bold">Medical</span> <span class="rosa-text lead font-weight-bold">Clinic</span> 
-                </p> -->
-              </div>
-            </div>
-            <div class="card-body">
-              <form role="form" method="post" validate id="FormLOG">
-                <div class="mb-3">
-                  <input type="text" required class="form-control" id="correo" value=""  placeholder="Usuario">
-                </div>
-                <div class="mb-3">
-                  <input type="password" id="password" value="" class="form-control" required placeholder="Contraseña">
-                </div>
-                
-                <div class="text-center">
-                  <button type="submit" class="btn color-cyan text-white w-100 my-4 mb-2" id="login">Ingresar</button>
-                </div>
-                <p class="text-sm mt-3 mb-0">No tiene usuario y contraseña? <a href="javascript:;" class="text-dark font-weight-bolder">Solicitar</a></p>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="row">
+      <div class="col-6 d-lg-flex d-none h-100  position-absolute top-0 end-0 text-center justify-content-center flex-column">
+    <div
+      class="position-relative bg-gradient-danger h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
+      style="background-image: url('https://www.policlinicorisso.com/assets/uploads/especialidades/1665593423_6ef6619f6c1b9a1c11e1.jpg'); background-size: cover;"
+    >
+    <span class="mask bg-gradient-dark opacity-6"></span>
     </div>
-  </main>
+    </div>
+    <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+    <div class="card card-plain">
+    <div class="card-header pb-0 text-start">
+      <div class="text-center">
+        <img src="<?php echo base_url(); ?>public/img/theme/logo2.png" class="img-fluid mb-3" width="80px;">
+      </div>
+      <div class="text-center">
+        <span class="mx-3 font-weight-bold"> <span class="text-black h6 text-bold">ClinicSoft</span><small class="text-danger text-bold">peru</small></span>
+      </div>
+      <h4 class="font-weight-bolder text-center mt-4">Iniciar sesión</h4>
+    </div>
+    <div class="card-body">
+    <div class="messageError"></div>
+    <form role="form" method="post" validate id="FormLOG">
+      <div class="mb-3">
+        <input type="text" required class="form-control" id="correo" value=""  placeholder="Usuario">
+      </div>
+      <div class="mb-3">
+        <input type="password" id="password" value="" class="form-control" required placeholder="Contraseña">
+      </div>
+      
+      <div class="text-center">
+        <button type="submit" class="btn color-cyan text-white w-100 my-4 mb-2" id="login">Ingresar</button>
+      </div>
+      <p class="text-sm mt-3 mb-0">No tiene usuario y contraseña? <a href="javascript:;" class="text-dark font-weight-bolder">Solicitar</a></p>
+    </form>
+    </div>
+    <div class="card-footer text-center pt-0 px-lg-2 px-1">
+    <p class="mb-4 text-sm mx-auto">
+      ¿No tienes una cuenta?
+      <a
+        href="javascript:;"
+        class="text-primary text-gradient font-weight-bold"
+      >
+        Inscribete
+      </a>
+    </p>
+    </div>
+  </div>
+ </div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+
   <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
   <footer class="footer py-1">
     <div class="container">
@@ -86,9 +110,9 @@
       <div class="row">
         <div class="col-8 mx-auto text-center mt-1">
           <p class="mb-0 text-secondary">
-            Copyright © <script>
+            Todos los derechos © <script>
               document.write(new Date().getFullYear())
-            </script> clinicaenfoquesalud.com
+            </script> gofuturedigitalsolution.com
           </p>
         </div>
       </div>
