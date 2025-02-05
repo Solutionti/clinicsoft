@@ -45,6 +45,22 @@
                </ul>
             </div>
          </li>
+         
+         <li class="nav-item ">
+            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#ecografias">
+            <i class="fas text-primary fa-prescription"></i>
+            <span class="sidenav-normal "> Ecografias <b class="caret"></b></span>
+            </a>
+            <div class="collapse " id="ecografias">
+               <ul class="nav nav-sm flex-column">
+                  <li class="nav-item">
+                     <a class="nav-link" href="#">
+                     <span class="sidenav-normal"> Ecografia Pelvica</span>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </li>
          <li class="nav-item ">
             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#procedimientos">
             <i class="fas text-primary fa-flask"></i>
