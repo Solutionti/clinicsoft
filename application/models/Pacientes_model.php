@@ -67,7 +67,7 @@ class Pacientes_model extends CI_model {
         }else{
             $data = [
                 "success" => 2, // Atencion WARNING,
-                "message" => 'Ya existe un paciente con este N° Documento'  // Ya existe un paciente con este N° Documento
+                "message" => 'Ya existe un paciente con este N째 Documento'  // Ya existe un paciente con este N째 Documento
                 ,
             ];
             echo  json_encode($data);
@@ -127,7 +127,7 @@ class Pacientes_model extends CI_model {
         }else{
             $data = [
                 "success" => 2, // Atencion WARNING,
-                "message" => 'Ya existe un paciente con este N° Documento'  // Ya existe un paciente con este N° Documento
+                "message" => 'Ya existe un paciente con este N째 Documento'  // Ya existe un paciente con este N째 Documento
                 ,
             ];
             echo  json_encode($data);
@@ -181,7 +181,7 @@ class Pacientes_model extends CI_model {
 		}
 	
 		if($columns[$params['order'][0]['column']] != 'acciones'){
-			$sqlRec .= " ORDER BY ". $columns[$params['order'][0]['column']]." ".$params['order'][0]['dir']." ";
+			// $sqlRec .= " ORDER BY ". $columns[$params['order'][0]['column']]." ".$params['order'][0]['dir']." ";
 		}
 
 	 	$sqlRec .=  "  LIMIT ".$params['start']." ,".$params['length']." ";
