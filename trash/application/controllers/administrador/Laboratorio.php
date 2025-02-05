@@ -77,7 +77,7 @@ class Laboratorio extends Admin_Controller {
         $pdf->Cell(15,5,utf8_decode('Contraseña:'), '', 0,'L', false );
         $pdf->Cell(4,5,$laboratorio->password, '', 0,'L', false );
         $pdf->SetFont('Times','',8);
-
+        //prueba
         $pdf->Ln(5);
         $pdf->Cell(1,5,utf8_decode($laboratorio->apellido." ".$laboratorio->nombre), '', 0,'L', false );
         $pdf->Ln(5);
