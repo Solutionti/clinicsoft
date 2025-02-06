@@ -129,79 +129,59 @@
       <div class="row ">
       <div class="card">
      <div class="row mt-4">
-       <div class="col-md-12">
-       </div>
-     </div>
-        <br>  
-  <div class="table-responsive" >
-    <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-triaje">
-      <thead>
-        <tr>
-        <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Opciones</th>
-                    <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="status">Estado</th>
-                    <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="name">DNI</th>
-                    <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="name">Paciente</th>
-                    <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="budget">Doctor</th>
-                    <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="budget">Especialidad</th>
-                    <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="budget">Costo</th>
-          
-        </tr>
-      </thead>
-      <tbody>
-      <?php foreach($atencion->result() as $triaje) { ?>
-        <tr>
-          <td class="">
-            <div class="row">
-                <a 
-                class="icon icon-shape icon-sm me-2 bg-gradient-info shadow mx-3"
-                href="<?php echo base_url(); ?>administracion/pasarconsulta/<?php echo $triaje->codigo_atencion; ?>"
-                title="pasar a consulta"  
-                >
-                <i class="fas fa-check text-white opacity-10"></i>
-              </a>
-              <a 
-              class="icon icon-shape icon-sm bg-gradient-danger shadow text-center"
-              onclick="triajeModalData(<?php echo $triaje->codigo_atencion; ?>)"
-              >
-              <i class="fas fa-laptop-medical text-white opacity-10"></i>
-               </a>
-            </div>
-          </td>
-                        
-                        <?php if($triaje->estado == "Registrado"){ ?> 
-                      <td class="text-xs text-danger mb-0"><?php echo $triaje->estado; ?></td>
-                      <?php } else {?>
-                        <td class="text-xs text-danger mb-0"><?php echo $triaje->estado; ?></td>
-                      <?php } ?>
-                      <td class="text-xs text-dark mb-0"><?php echo $triaje->documento; ?></td>
-                    <td class="text-xs text-dark mb-0"><?php echo $triaje->apellido." ".$triaje->paciente; ?></td>
-                    <td class="text-xs text-dark mb-0"><?php echo $triaje->nombre; ?></td>
-                    <td class="text-xs text-dark mb-0"><?php echo $triaje->descripcion; ?></td>
-                    <td class="text-xs text-dark mb-0"><?php echo $triaje->costo; ?></td>
-                    </tr>
-                    <?php } ?>
-      </tbody>
-    </table>
-    <br>
-  </div>
-</div>
-   <?php require_once("componentes/footer.php"); ?>
-    </div>
-  </main>
-  <?php require_once("componentes/personalizar.php"); ?>
-
-  <!-- LARGE MODAL -->
-
-  <div class="modal fade" id="Agregartriaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog  modal-fullscreen" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Hacer evaluacion de  triaje</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+       <div class="col-md-7">
+         <div class="table-responsive" >
+           <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-triaje">
+             <thead>
+               <tr>
+                 <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Opciones</th>
+                 <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="status">Estado</th>
+                 <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="name">DNI</th>
+                 <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="name">Paciente</th>
+                 <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="budget">Doctor</th>
+                 <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="budget">Especialidad</th>
+                 <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="budget">Costo</th>
+               </tr>
+             </thead>
+             <tbody>
+             <?php foreach($atencion->result() as $triaje) { ?>
+               <tr>
+                 <td class="">
+                   <div class="row">
+                       <a 
+                       class="icon icon-shape icon-sm me-2 bg-gradient-info shadow mx-3"
+                       href="<?php echo base_url(); ?>administracion/pasarconsulta/<?php echo $triaje->codigo_atencion; ?>"
+                       title="pasar a consulta"  
+                       >
+                       <i class="fas fa-check text-white opacity-10"></i>
+                     </a>
+                     <a 
+                     class="icon icon-shape icon-sm bg-gradient-danger shadow text-center"
+                     onclick="triajeModalData(<?php echo $triaje->codigo_atencion; ?>)"
+                     >
+                     <i class="fas fa-laptop-medical text-white opacity-10"></i>
+                      </a>
+                   </div>
+                 </td>
+                               
+                               <?php if($triaje->estado == "Registrado"){ ?> 
+                             <td class="text-xs text-danger mb-0"><?php echo $triaje->estado; ?></td>
+                             <?php } else {?>
+                               <td class="text-xs text-danger mb-0"><?php echo $triaje->estado; ?></td>
+                             <?php } ?>
+                             <td class="text-xs text-dark mb-0"><?php echo $triaje->documento; ?></td>
+                           <td class="text-xs text-dark mb-0"><?php echo $triaje->apellido." ".$triaje->paciente; ?></td>
+                           <td class="text-xs text-dark mb-0"><?php echo $triaje->nombre; ?></td>
+                           <td class="text-xs text-dark mb-0"><?php echo $triaje->descripcion; ?></td>
+                           <td class="text-xs text-dark mb-0"><?php echo $triaje->costo; ?></td>
+                           </tr>
+                           <?php } ?>
+             </tbody>
+           </table>
+           <br>
+         </div>
+        </div>
+        <div class="col-md-5">
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group input-group-sm">
@@ -263,13 +243,13 @@
         <div class="row">
            <div class="col-md-4">
                <div class="form-group input-group-sm">
-                   <label>Frecuencia Respiratoria (X Minuto)</label>
+                   <label>Frecuencia Respiratoria</label>
                    <input type="number" class="form-control" id="respiratoria" autocomplete="off">
                </div>
            </div>
            <div class="col-md-4">
                <div class="form-group input-group-sm">
-                   <label>Frecuencia cardiaca(X Minuto)</label>
+                   <label>Frecuencia cardiaca</label>
                    <input type="number" class="form-control" id="cardiaca" autocomplete="off">
                </div>
            </div>
@@ -281,9 +261,9 @@
            </div>
         </div>
          <div class="row">
-           <div class="col-md-4">
+           <div class="col-md-5">
               <div class="form-group input-group-sm">
-                 <label>Peso (kg) utilice punto para decimales</label>
+                 <label>Peso (kg)</label>
                  <input type="" class="form-control" id="peso" autocomplete="off">
               </div>
             </div>
@@ -293,18 +273,43 @@
                   <input type="number" class="form-control" id="talla" autocomplete="off">
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="form-group input-group-sm">
                 <label>Imc</label>
                  <input type="number" class="form-control" id="lmc" autocomplete="off">
               </div>
             </div>
+            <div class="row">
+              <button type="button" class="btn btn-danger" id="pasar-vacio">Pasar vacio</button>
+              <button type="button" class="btn btn-primary" id="crearTriaje">Guardar</button>
+            </div>
          </div>
+        </div>
+     </div>
+        <br>  
+</div>
+   <?php require_once("componentes/footer.php"); ?>
+    </div>
+  </main>
+  <?php require_once("componentes/personalizar.php"); ?>
+
+  <!-- LARGE MODAL -->
+
+  <div class="modal fade" id="Agregartriaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-fullscreen" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Hacer evaluacion de  triaje</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
          
         </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" id="pasar-vacio">Pasar vacio</button>
-        <button type="button" class="btn btn-primary" id="crearTriaje">Guardar</button>
+        
       </div>
     </div>
   </div>
@@ -345,8 +350,7 @@ $("#table-triaje").DataTable({
             method: "GET",
             success: function (data) {
               data = JSON.parse(data);
-              console.log(data);
-                $("#Agregartriaje").modal("show");
+                // $("#Agregartriaje").modal("show");
                 $("#dni").val(data.documento);
                 $("#paciente").val(data.apellido +"  "+ data.paciente);
                 $("#edad").val(data.edad);

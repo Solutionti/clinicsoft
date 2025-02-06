@@ -9,25 +9,15 @@ class Atencion_model extends CI_model {
     public function searchAtencion($dni) {
 
         $this->db->select("nombre,hc,apellido");
-
         $this->db->from("pacientes");
-
         $this->db->where("documento", $dni);
-
         $result = $this->db->get();
-
         if($result->num_rows() > 0) {
-
             return $result->row();
-
         }
-
         else {
-
             return 0;
-
         }
-
     }
 
 
@@ -35,32 +25,20 @@ class Atencion_model extends CI_model {
     public function registrarAtencion($data) {
 
         $datos = [
-
-            "paciente" => $data["dni"],
-
-            "medico" => $data["doctor"],
-
-            "especialidad" => $data["especialidad"],
-
-            "costo" => $data["costo"],
-
-            "orden__" => $data["orden__"],
-
-            "cola_atencion" => $data["cola_atencion"],
-
-            "comision" => $data["comision"],
-
-            "estado" => "Registrado",
-
-            "fecha" => date("Y-m-d"),
-
-            "hora" => date("h:i A"),
-
-            "usuario" => $this->session->userdata("nombre")
-
+          "paciente" => $data["dni"],
+          "medico" => $data["doctor"],
+          "especialidad" => $data["especialidad"],
+          "costo" => $data["costo"],
+          "orden__" => $data["orden__"],
+          "cola_atencion" => $data["cola_atencion"],
+          "comision" => $data["comision"],
+          "estado" => "Registrado",
+          "fecha" => date("Y-m-d"),
+          "hora" => date("h:i A"),
+          "usuario" => $this->session->userdata("nombre")
         ];
-
-        $this->db->insert("atenciones", $datos);
+        $this->db->insert("admisiones", $datos);
+        return $this->db->insert_id();
 
     }
 
@@ -70,7 +48,7 @@ class Atencion_model extends CI_model {
 
         $this->db->select(" a.*,p.nombre as paciente,p.documento,p.apellido, m.nombre, e.descripcion");
 
-        $this->db->from("atenciones a");
+        $this->db->from("admisiones a");
 
         $this->db->join("pacientes p", "a.paciente = p.documento");
 
@@ -108,7 +86,7 @@ class Atencion_model extends CI_model {
 
         $this->db->select("count(*) as Orden");
 
-        $this->db->from("atenciones");
+        $this->db->from("admisiones");
 
         $this->db->where("medico", $id_doc);
 
@@ -138,7 +116,7 @@ class Atencion_model extends CI_model {
 
         $this->db->where("codigo_atencion", $id);
 
-        $this->db->update("atenciones", $data);
+        $this->db->update("admisiones", $data);
 
     }
 
@@ -147,7 +125,7 @@ class Atencion_model extends CI_model {
     public function mandaraConsulta($id) {
         $medico__ = 0;
         $this->db->select("a.medico");
-        $this->db->from("atenciones a");
+        $this->db->from("admisiones a");
         $this->db->where("a.codigo_atencion", $id);
         $result = $this->db->get();
 
@@ -169,7 +147,7 @@ class Atencion_model extends CI_model {
 
         $this->db->where("codigo_atencion", $id);
 
-        $this->db->update("atenciones", $data);
+        $this->db->update("admisiones", $data);
 
     }
 
@@ -178,7 +156,7 @@ class Atencion_model extends CI_model {
     public function cargarFacturaAtencion($id) {
 
         $this->db->select("a.*,p.nombre,p.documento,p.apellido,p.hc,d.nombre as doctor, e.descripcion");
-        $this->db->from("atenciones a");
+        $this->db->from("admisiones a");
         $this->db->join("pacientes p", "a.paciente = p.documento");
         $this->db->join("doctores d", "a.medico = d.codigo_doctor");
         $this->db->join("especialidades e", "a.especialidad = e.codigo_especialidad");
@@ -200,7 +178,7 @@ class Atencion_model extends CI_model {
 
         $this->db->select(" a.*,p.nombre as paciente,p.documento,p.apellido,p.hc,p.direccion,p.telefono, m.nombre, e.descripcion");
 
-        $this->db->from("atenciones a");
+        $this->db->from("admisiones a");
 
         $this->db->join("pacientes p", "a.paciente = p.documento");
 
@@ -238,7 +216,7 @@ class Atencion_model extends CI_model {
 
         $this->db->where("codigo_atencion", $id);
 
-        $this->db->update("atenciones", $data);
+        $this->db->update("admisiones", $data);
 
     }
 
