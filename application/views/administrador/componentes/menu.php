@@ -77,8 +77,11 @@
             <div class="collapse " id="ecografias">
                <ul class="nav nav-sm flex-column">
                   <li class="nav-item">
-                     <a class="nav-link" href="#">
-                     <span class="sidenav-normal"> Ecografia Pelvica</span>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaMamaview">
+                     <span class="sidenav-normal"> Ecografia Mama</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaGeneticaview">
+                     <span class="sidenav-normal"> Ecografia Genetica</span>
                      </a>
                   </li>
                </ul>

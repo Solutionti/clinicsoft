@@ -160,6 +160,9 @@ $route["administracion/tickets"] = "administrador/tickets";
 // PAGOS
 $route["administracion/crearpagoadicional"] = "administrador/financiero/crearpagoadicional";
 
+//vistas de las ecografias
+$route["administracion/ecografiaMamaview"] = "administrador/ecografias/ecografiaMamaview";
+$route["administracion/ecografiaGeneticaview"] = "administrador/ecografias/ecografiaGeneticaview";
 
 /*
 **********************************************************

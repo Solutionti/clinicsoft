@@ -175,6 +175,7 @@
                                                    <option value="morfologica">Ecografia Morfologica</option>
                                                    <option value="genetica">Ecografia Genetica</option>
                                                    <option value="obstetrica">Ecografia Obstetrica</option>
+                                                   <option value="tiroides">Ecografia Tiroides</option>
                                                 </select>
                                              </div>
                                              <div class="col-md-2">
