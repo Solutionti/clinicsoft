@@ -376,6 +376,7 @@
              </div>
              <br>
              <br>
+             <!-- funciona correcto -->
              <div class="custom-file">
                <input type="file" class="custom-file-input" name="imagen2" >
                <label class="custom-file-label">Seleccionar Archivo</label>
