@@ -105,11 +105,8 @@ $route["administracion/loadcpegasto"] = "administrador/gastos/loadcpegasto";
 
 //FACTURA ELECTRONICA
 $route["administracion/facturaelectronica"] = "administrador/financiero/facturaElectronica";
-<<<<<<< HEAD
-=======
 $route["administracion/getpagos/(:num)"] = "administrador/financiero/getpagosAtencion/$1";
 $route["administracion/actualizarpagos"] = "administrador/financiero/actualizarpagos";
->>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
 
 
 //REPORTES
@@ -160,13 +157,10 @@ $route["administracion/mipres"] = "administrador/mipres";
 //TICKETS
 $route["administracion/tickets"] = "administrador/tickets";
 
-<<<<<<< HEAD
-=======
 // PAGOS
 $route["administracion/crearpagoadicional"] = "administrador/financiero/crearpagoadicional";
 
 
->>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
 /*
 **********************************************************
 ***** SECCION DE CONSULTA DE LABORATORIO PAGINA WEB ******
