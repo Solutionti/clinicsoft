@@ -57,6 +57,9 @@
                      <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaMamaview">
                      <span class="sidenav-normal"> Ecografia Mama</span>
                      </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaGeneticaview">
+                     <span class="sidenav-normal"> Ecografia Genetica</span>
+                     </a>
                   </li>
                </ul>
             </div>

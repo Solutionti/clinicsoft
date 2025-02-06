@@ -129,6 +129,191 @@
      <div class="row mt-4">
        <div class="col-md-12">
          <!-- aca va el contenido del formulario  -->
+         <div class="modal fade" id="ecografiamama" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title text-uppercase" id="exampleModalLabel">Ecografia de mama</h5>
+               <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <div class="row mt-1">
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label>Doctor tratante</label>
+                        <input
+                          type="text"
+                          class="form-control form-control-sm"
+                          value="<?php echo $this->session->userdata("apellido")." ". $this->session->userdata("nombre") ?>"
+                          readonly
+                          id="codigo_doctor"
+                        >
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="form-group">
+                        <label>Fecha</label>
+                        <input
+                          type="text"
+                          class="form-control form-control-sm"
+                          value="<?php echo date("d-m-Y"); ?>"
+                          readonly
+                        >
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="form-group">
+                        <label>Hora</label>
+                        <input
+                          type="text"
+                          class="form-control form-control-sm"
+                          value="<?php echo date("h:i A"); ?>"
+                          readonly
+                        >
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-3">
+                     <div class="form-group">
+                        <label>Documento</label>
+                        <input
+                          type="number"
+                          class="form-control form-control-sm"
+                          value="<?php echo $pacientes->documento; ?>"
+                          readonly
+                          id="documento_paciente"
+                        >
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Apellidos</label>
+                        <input
+                          type="text"
+                          class="form-control form-control-sm"
+                          value="<?php echo $pacientes->apellido; ?>"
+                          readonly
+                        >
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Nombres</label>
+                        <input type="text" class="form-control form-control-sm" value="<?php echo $pacientes->nombre; ?>" readonly>
+                     </div>
+                  </div>
+                  <div class="col-md-1">
+                     <div class="form-group">
+                        <label>Edad</label>
+                        <input type="text" class="form-control form-control-sm" value="<?php echo $pacientes->edad; ?>" readonly>
+                     </div>
+                  </div>
+               </div>
+               <br>
+               <div class="row">
+                  <div class="col-md-4">
+                     <h6 class="text-danger">MAMA IZQUIERDA</h6>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label>Pezon</label>
+                              <input type="text" id="pezon-izq" class="form-control form-control-sm">
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label>TCSC</label>
+                              <input type="text" id="tcsc-izq" class="form-control form-control-sm">
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label>Tejido glandular</label>
+                              <input type="text" id="tejidoGlandular-izq" class="form-control form-control-sm">
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label>Axila</label>
+                              <input type="text" id="axila-izq" class="form-control form-control-sm">
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-12">
+                           <div class="form-group">
+                              <label>Comentario</label>
+                              <textarea class="form-control" id="comentario-mama-izq"></textarea>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <h6 class="text-primary">MAMA DERECHA</h6>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label>Pezon</label>
+                              <input type="text" id="pezon-der" class="form-control form-control-sm">
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label>TCSC</label>
+                              <input type="text" id="tcsc-der" class="form-control form-control-sm">
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label>Tejido glandular</label>
+                              <input type="text" id="tejidoGlandular-der" class="form-control form-control-sm">
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label>Axila</label>
+                              <input type="text" id="axila-der" class="form-control form-control-sm">
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-12">
+                           <div class="form-group">
+                              <label>Comentario</label>
+                              <textarea id="comentario-der" class="form-control"></textarea>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <h6 class="text-info "> FINAL </h6>
+                     <div class="form-group">
+                        <label for="">Conclusión</label>
+                        <textarea class="form-control" id="conclusion-mama"></textarea>
+                     </div>
+                     <div class="form-group">
+                        <label for="">Sugerencias</label>
+                        <textarea class="form-control" id="sugerencias-mama"></textarea>
+                     </div>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" id=""> <i class="fas fa-file-pdf"></i> PDF</button>
+                  <button type="button" class="btn btn-primary" id="">Guardar</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+      </div>
+      </div>
        </div>
      </div>
      <br>  

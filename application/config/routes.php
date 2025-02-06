@@ -162,7 +162,7 @@ $route["administracion/crearpagoadicional"] = "administrador/financiero/crearpag
 
 //vistas de las ecografias
 $route["administracion/ecografiaMamaview"] = "administrador/ecografias/ecografiaMamaview";
-
+$route["administracion/ecografiaGeneticaview"] = "administrador/ecografias/ecografiaGeneticaview";
 
 /*
 **********************************************************
