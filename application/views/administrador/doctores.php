@@ -127,22 +127,23 @@
          <div class="container-fluid py-5">
             <div class="row ">
                <div class="card">
-                  <div class="row mt-4">
+                  <div class="row mt-3">
                      <div class="col-md-12">
-                        <a class="btn bg-gradient-danger btn-xs" data-bs-toggle="modal" href="#AgregarDoctor" role="button">Agregar <i class="fas fa-plus"></i> </a>
+                     <div class="d-flex flex-row-reverse">
+                       <a class="btn bg-gradient-danger btn-xs" data-bs-toggle="modal" href="#AgregarDoctor" role="button">Agregar <i class="fas fa-plus"></i> </a>
+                     </div>
                      </div>
                   </div>
-                  <br>  
                   <div class="table-responsive" >
                      <table class="table align-items-center mb-0 text-uppercase" id="table-colposcopia">
                         <thead>
-                           <tr>
-                              <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Opciones</th>
-                              <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">CMP</th>
-                              <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Nombre</th>
-                              <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Correo</th>
-                              <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Telefono</th>
-                              <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Perfil</th>
+                           <tr class="bg-default">
+                              <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Opciones</th>
+                              <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">CMP</th>
+                              <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Nombre</th>
+                              <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Correo</th>
+                              <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Telefono</th>
+                              <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Perfil</th>
                            </tr>
                         </thead>
                         <tbody>
@@ -152,14 +153,14 @@
                                  <div class="row">
                                  <?php if($this->session->userdata("rol") != "Enfermera"){ ?>
                                     <a 
-                                       class="icon icon-shape icon-sm me-2 bg-gradient-danger shadow mx-3"
+                                       class="icon icon-shape icon-sm me-2 bg-gradient-danger shadow mx-2"
                                        href="<?php echo base_url(); ?>administracion/eliminardoctor/<?php echo $doctores->codigo_doctor; ?>"  
                                        >
                                     <i class="fas fa-times text-white opacity-10"></i>
                                     </a>
                                     <?php } ?>
                                     <a 
-                                       class="icon icon-shape icon-sm me-2 bg-gradient-info shadow mx-3"
+                                       class="icon icon-shape icon-sm  bg-gradient-info shadow "
                                        onclick="getModalDataDoctor(<?php echo $doctores->codigo_doctor; ?>)"  
                                        >
                                     <i class="fas fa-cog text-white opacity-10"></i>
@@ -186,7 +187,7 @@
       <?php require_once("componentes/personalizar.php"); ?>
       <!-- VENTANAS MODALES -->
       <div class="modal fade" id="AgregarDoctor" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-fullscreen" role="document">
+        <div class="modal-dialog  modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header bg-default">
                   <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Crear Doctor</h5>
@@ -198,7 +199,7 @@
                   <div class="row">
                     <div class="col-md-12">
                         <div class="text-center">
-                          <img class="img-fluid rounded-circle" width="130px;" src="<?php echo base_url(); ?>public/img/theme/team-41.jpg">
+                          <img class="img-fluid rounded-circle" width="90px;" src="<?php echo base_url(); ?>public/img/theme/team-41.jpg">
                         </div>
                     </div>
                   </div>
@@ -244,9 +245,9 @@
                           <input type="text" class="form-control" id="correo">
                         </div>
                     </div>
-                    <div class="col-md-6 mt-4">
+                    <div class="col-md-6">
                         <label for="">Foto del doctor</label>
-                        <input type="file" class="custom-file-input" id="customFileLangHTML">
+                        <input type="file" class="custom-file-input form-control form-control-sm" id="customFileLangHTML">
                     </div>
                   </div>
               </div>
@@ -267,14 +268,16 @@
                   </button>
               </div>
               <div class="modal-body">
-                  <div class="row">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="text-center">
+                      <img class="img-fluid rounded-circle" width="100px;" src="<?php echo base_url(); ?>public/img/theme/team-41.jpg">
+                    </div>
+                  </div>
+                </div>
+                  <div class="row mt-4">
                     <div class="col-md-6">
                         <div class="row">
-                          <div class="col-md-12">
-                              <div class="text-center">
-                                <img class="img-fluid rounded-circle" width="100px;" src="<?php echo base_url(); ?>public/img/theme/team-41.jpg">
-                              </div>
-                          </div>
                           <div class="col-md-4">
                               <div class="form-group input-group-sm">
                                 <label> Documento CPE</label>
@@ -313,8 +316,8 @@
                           </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="row">
+                    <div class="col-md-6 ">
+                        <div class="row ">
                           <label>Dias laborables</label>
                           <div class="col-md-12">
                             <div class="row">

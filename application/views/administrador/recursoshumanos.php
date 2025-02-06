@@ -128,27 +128,29 @@
     <div class="container-fluid py-5">
       <div class="row ">
       <div class="card">
-     <div class="row mt-4">
+     <div class="row mt-3">
        <div class="col-md-12">
-       <a class="btn bg-gradient-danger btn-xs" data-bs-toggle="modal" href="#Agregarusuario" role="button">Agregar <i class="fas fa-plus"></i> </a>
+       <div class="d-flex flex-row-reverse">
+         <a class="btn bg-gradient-danger btn-xs" data-bs-toggle="modal" href="#Agregarusuario" role="button">Agregar <i class="fas fa-plus"></i> </a>
+       </div>
        </div>
      </div>
         <br>  
         <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Administrador</button>
+    <button class="nav-link active text-uppercase" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Administrador</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Enfermera</button>
+    <button class="nav-link text-uppercase" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Enfermera</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Doctor</button>
+    <button class="nav-link text-uppercase" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Doctor</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="contact1-tab" data-bs-toggle="tab" data-bs-target="#contact1" type="button" role="tab" aria-controls="contact1" aria-selected="false">Laboratorio</button>
+    <button class="nav-link text-uppercase" id="contact1-tab" data-bs-toggle="tab" data-bs-target="#contact1" type="button" role="tab" aria-controls="contact1" aria-selected="false">Laboratorio</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="contact-tab2" data-bs-toggle="tab" data-bs-target="#contact2" type="button" role="tab" aria-controls="contact2" aria-selected="false">Patologia</button>
+    <button class="nav-link text-uppercase" id="contact-tab2" data-bs-toggle="tab" data-bs-target="#contact2" type="button" role="tab" aria-controls="contact2" aria-selected="false">Patologia</button>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -159,13 +161,13 @@
           <div class="table-responsive">
             <table class="table align-items-center">
               <thead class="thead-light">
-                <tr>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Opciones</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Nombre</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Usuario</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Correo</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Telefono</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Estado</th>
+                <tr class="bg-default">
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Opciones</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Nombre</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Usuario</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Correo</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Telefono</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Estado</th>
                 </tr>
               </thead>
               <tbody>
@@ -186,11 +188,11 @@
                     <i class="fas fa-pen text-white opacity-10"></i>
                   </a>
                 </div>
-                <td class="text-xs text-dark mb-0"><?php echo $administradores->nombre." ".$administradores->apellido; ?></td>
-                <td class="text-xs text-dark mb-0"><?php echo $administradores->usuario; ?></td>
-                <td class="text-xs text-dark mb-0"><?php echo $administradores->email; ?></td>
-                <td class="text-xs text-dark mb-0"><?php echo $administradores->telefono; ?></td>
-                <td class="text-xs text-success mb-0"><?php echo $administradores->estado; ?></td>
+                <td class="text-xs text-dark mb-0 text-uppercase"><?php echo $administradores->nombre." ".$administradores->apellido; ?></td>
+                <td class="text-xs text-dark mb-0 text-uppercase"><?php echo $administradores->usuario; ?></td>
+                <td class="text-xs text-dark mb-0 text-uppercase" ><?php echo $administradores->email; ?></td>
+                <td class="text-xs text-dark mb-0 text-uppercase"><?php echo $administradores->telefono; ?></td>
+                <td class="text-xs text-success mb-0 text-uppercase"><?php echo $administradores->estado; ?></td>
               </tr>
               <?php } ?>
               </tbody>
@@ -207,13 +209,13 @@
           <div class="table-responsive">
             <table class="table align-items-center">
               <thead class="thead-light">
-                <tr>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Opciones</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Nombre</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Usuario</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Correo</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Telefono</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Estado</th>
+                <tr class="bg-default">
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Opciones</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Nombre</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Usuario</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Correo</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Telefono</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Estado</th>
                 </tr>
               </thead>
               <tbody>
@@ -234,11 +236,11 @@
                     <i class="fas fa-pen text-white opacity-10"></i>
                   </a>
                 </div>
-                <td class="text-xs text-dark mb-0"><?php echo $enfermeras->nombre." ".$enfermeras->apellido; ?></td>
-                <td class="text-xs text-dark mb-0"><?php echo $enfermeras->usuario; ?></td>
-                <td class="text-xs text-dark mb-0"><?php echo $enfermeras->email; ?></td>
-                <td class="text-xs text-dark mb-0"><?php echo $enfermeras->telefono; ?></td>
-                <td class="text-xs text-success mb-0"><?php echo $enfermeras->estado; ?></td>
+                <td class="text-xs text-uppercase text-dark mb-0"><?php echo $enfermeras->nombre." ".$enfermeras->apellido; ?></td>
+                <td class="text-xs text-uppercase text-dark mb-0"><?php echo $enfermeras->usuario; ?></td>
+                <td class="text-xs text-uppercase text-dark mb-0"><?php echo $enfermeras->email; ?></td>
+                <td class="text-xs text-uppercase text-dark mb-0"><?php echo $enfermeras->telefono; ?></td>
+                <td class="text-xs text-uppercase text-success mb-0"><?php echo $enfermeras->estado; ?></td>
               </tr>
               <?php } ?>
               </tbody>
@@ -255,13 +257,13 @@
           <div class="table-responsive">
             <table class="table align-items-center">
               <thead class="thead-light">
-                <tr>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Opciones</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Nombre</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Usuario</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Correo</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Telefono</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Estado</th>
+                <tr class="bg-default">
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Opciones</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Nombre</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Usuario</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Correo</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Telefono</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Estado</th>
                 </tr>
               </thead>
               <tbody>
@@ -282,11 +284,11 @@
                     <i class="fas fa-pen text-white opacity-10"></i>
                   </a>
                 </div>
-                <td class="text-xs text-dark mb-0"><?php echo $doctores->nombre." ".$doctores->apellido; ?></td>
-                <td class="text-xs text-dark mb-0"><?php echo $doctores->usuario; ?></td>
-                <td class="text-xs text-dark mb-0"><?php echo $doctores->email; ?></td>
-                <td class="text-xs text-dark mb-0"><?php echo $doctores->telefono; ?></td>
-                <td class="text-xs text-success mb-0"><?php echo $doctores->estado; ?></td>
+                <td class="text-xs text-uppercase text-dark mb-0"><?php echo $doctores->nombre." ".$doctores->apellido; ?></td>
+                <td class="text-xs text-uppercase text-dark mb-0"><?php echo $doctores->usuario; ?></td>
+                <td class="text-xs text-uppercase text-dark mb-0"><?php echo $doctores->email; ?></td>
+                <td class="text-xs text-uppercase text-dark mb-0"><?php echo $doctores->telefono; ?></td>
+                <td class="text-xs text-uppercase text-success mb-0"><?php echo $doctores->estado; ?></td>
               </tr>
               <?php } ?>
               </tbody>
@@ -303,13 +305,13 @@
           <div class="table-responsive">
             <table class="table align-items-center">
               <thead class="thead-light">
-                <tr>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Opciones</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Nombre</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Usuario</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Correo</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Telefono</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Estado</th>
+                <tr class="bg-default">
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Opciones</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Nombre</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Usuario</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Correo</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Telefono</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Estado</th>
                 </tr>
               </thead>
               <tbody>
@@ -351,13 +353,13 @@
           <div class="table-responsive">
             <table class="table align-items-center">
               <thead class="thead-light">
-                <tr>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Opciones</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Nombre</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Usuario</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Correo</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Telefono</th>
-                  <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Estado</th>
+                <tr class="bg-default">
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Opciones</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Nombre</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Usuario</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Correo</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Telefono</th>
+                  <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Estado</th>
                 </tr>
               </thead>
               <tbody>
