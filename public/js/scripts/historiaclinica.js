@@ -534,3 +534,9 @@ $("#ecografias").on("change", function() {
 const reloadPage = () => {
     location.reload();
   }
+// $("#ecografias").on("change", function() {
+//     let seleccion = $(this).val();
+//     if (seleccion) {
+//         $("#ecografia" + seleccion).modal("show");
+//     }
+// });
