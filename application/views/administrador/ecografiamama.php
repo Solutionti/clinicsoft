@@ -219,13 +219,13 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group">
-                              <label>Pezon</label>
+                              <label class="text-danger">Pezon</label>
                               <input type="text" id="pezon-izq" class="form-control form-control-sm">
                            </div>
                         </div>
                         <div class="col-md-6">
                            <div class="form-group">
-                              <label>TCSC</label>
+                              <label class="text-danger">TCSC</label>
                               <input type="text" id="tcsc-izq" class="form-control form-control-sm">
                            </div>
                         </div>
@@ -233,13 +233,13 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group">
-                              <label>Tejido glandular</label>
+                              <label class="text-danger">Tejido glandular</label>
                               <input type="text" id="tejidoGlandular-izq" class="form-control form-control-sm">
                            </div>
                         </div>
                         <div class="col-md-6">
                            <div class="form-group">
-                              <label>Axila</label>
+                              <label class="text-danger">Axila</label>
                               <input type="text" id="axila-izq" class="form-control form-control-sm">
                            </div>
                         </div>
@@ -247,7 +247,7 @@
                      <div class="row">
                         <div class="col-md-12">
                            <div class="form-group">
-                              <label>Comentario</label>
+                              <label class="text-danger">Comentario</label>
                               <textarea class="form-control" id="comentario-mama-izq"></textarea>
                            </div>
                         </div>
@@ -258,13 +258,13 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group">
-                              <label>Pezon</label>
+                              <label class="text-primary">Pezon</label>
                               <input type="text" id="pezon-der" class="form-control form-control-sm">
                            </div>
                         </div>
                         <div class="col-md-6">
                            <div class="form-group">
-                              <label>TCSC</label>
+                              <label class="text-primary">TCSC</label>
                               <input type="text" id="tcsc-der" class="form-control form-control-sm">
                            </div>
                         </div>
@@ -272,13 +272,13 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group">
-                              <label>Tejido glandular</label>
+                              <label class="text-primary">Tejido glandular</label>
                               <input type="text" id="tejidoGlandular-der" class="form-control form-control-sm">
                            </div>
                         </div>
                         <div class="col-md-6">
                            <div class="form-group">
-                              <label>Axila</label>
+                              <label class="text-primary">Axila</label>
                               <input type="text" id="axila-der" class="form-control form-control-sm">
                            </div>
                         </div>
@@ -286,7 +286,7 @@
                      <div class="row">
                         <div class="col-md-12">
                            <div class="form-group">
-                              <label>Comentario</label>
+                              <label class="text-primary">Comentario</label>
                               <textarea id="comentario-der" class="form-control"></textarea>
                            </div>
                         </div>
