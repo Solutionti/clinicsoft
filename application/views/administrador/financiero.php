@@ -127,28 +127,28 @@
          <div class="container-fluid py-5">
          <div class="row ">
             <div class="card">
-               <div class="row mt-4">
-                  <div class="col-md-12">
-                     <a class="btn bg-gradient-danger btn-xs" data-bs-toggle="modal" href="#modal-servicio" role="button">Agregar <i class="fas fa-plus"></i> </a>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <div class="d-flex flex-row-reverse">
+                    <a class="btn bg-gradient-danger btn-xs" data-bs-toggle="modal" href="#modal-servicio" role="button">Agregar <i class="fas fa-plus"></i> </a>
                   </div>
+                </div>
                </div>
-               <br>  
                <div class="table-responsive" >
                   <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-pagos">
                      <thead>
-                        <tr>
-                        <tr>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Opciones</th>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Factura</th>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Paciente</th>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Medico</th>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Especialidad</th>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Concepto</th>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Fecha</th>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Tipo de pago</th>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Descuento</th>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Total</th>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Estado</th>
+                        <tr class="bg-default">
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Opciones</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Factura</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Paciente</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Medico</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Especialidad</th>
+                           <!-- <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Concepto</th> -->
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Fecha</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Tipo de pago</th>
+                           <!-- <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Descuento</th> -->
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Total</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Estado</th>
                         </tr>
                      </thead>
                      
@@ -173,16 +173,16 @@
                                  </a>
                               </div>
                            </td>
-                           <td class="text-xs text-dark mb-0"><?php echo $pagos->codigo_pago; ?></td>
+                           <td class="text-xs text-dark mb-0 text-center"><?php echo $pagos->codigo_pago; ?></td>
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->apellido." ".$pagos->paciente; ?></td>
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->doctor; ?></td>
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->especialidad; ?></td>
-                           <td class="text-xs text-dark mb-0"><?php echo $pagos->descripcion; ?></td>
+                           <!-- <td class="text-xs text-dark mb-0"><?php echo $pagos->descripcion; ?></td> -->
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->fecha; ?></td>
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->tipo_deposito; ?></td>
-                           <td class="text-xs text-dark mb-0"><?php echo $pagos->descuento; ?></td>
+                           <!-- <td class="text-xs text-dark mb-0"><?php echo $pagos->descuento; ?></td> -->
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->total; ?></td>
-                           <td class="text-xs text-dark mb-0"><?php echo $pagos->estado; ?></td>
+                           <td class="text-xs text-success mb-0 text-bold"><?php echo $pagos->estado; ?></td>
                         </tr>
                         <?php } ?>
                      </tbody>
