@@ -130,7 +130,6 @@
       <div class="card">
      <div class="row mt-4">
        <div class="col-md-12">
-         <h6>CONSULTA DE KARDEX</h6>
        </div>
      </div>
      <br>  
@@ -168,17 +167,16 @@
         <br>
         <div class="table-responsive">
           <table class="table table-stripped table hover">
-             <thead>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">#</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Fecha transacción</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Tipo</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Motivo</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Entrada</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Salida</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Saldo</th>
+             <thead class="bg-default">
+               <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
+               <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Fecha transacción</th>
+               <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Tipo</th>
+               <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Motivo</th>
+               <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Entrada</th>
+               <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Salida</th>
+               <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Saldo</th>
              </thead>
              <tbody id="table-kardex">
-
              </tbody>
           </table>
         </div>
