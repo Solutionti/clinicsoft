@@ -32,20 +32,43 @@
             <div class="collapse " id="atencion">
                <ul class="nav nav-sm flex-column">
                   <li class="nav-item">
+                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/pacientes">
+                     <span class="sidenav-normal">Pacientes</span>
+                     </a>
+                  </li>
+                  <li class="nav-item">
                      <a class="nav-link" href="<?php echo base_url(); ?>administracion/atencion">
                      <span class="sidenav-normal"> Admision</span>
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/pacientes">
-                     <span class="sidenav-normal">Pacientes</span>
+                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/triaje">
+                     <span class="sidenav-normal"> Triaje</span>
                      </a>
                   </li>
-                  
                </ul>
             </div>
          </li>
-         
+         <li class="nav-item ">
+            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#procedimientos">
+            <i class="fas text-primary fa-flask"></i>
+            <span class="sidenav-normal "> Procedimientos <b class="caret"></b></span>
+            </a>
+            <div class="collapse " id="procedimientos">
+               <ul class="nav nav-sm flex-column">
+                  <li class="nav-item">
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/colposcopia">
+                     <span class="sidenav-normal"> Colposcopia</span>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/laboratorio">
+                     <span class="sidenav-normal">Laboratorio</span>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </li>
          <li class="nav-item ">
             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#ecografias">
             <i class="fas text-primary fa-prescription"></i>
@@ -61,31 +84,7 @@
                </ul>
             </div>
          </li>
-         <li class="nav-item ">
-            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#procedimientos">
-            <i class="fas text-primary fa-flask"></i>
-            <span class="sidenav-normal "> Procedimientos <b class="caret"></b></span>
-            </a>
-            <div class="collapse " id="procedimientos">
-               <ul class="nav nav-sm flex-column">
-                  <li class="nav-item">
-                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/triaje">
-                     <span class="sidenav-normal"> Triaje</span>
-                     </a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/laboratorio">
-                     <span class="sidenav-normal">Laboratorio</span>
-                     </a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/colposcopia">
-                     <span class="sidenav-normal"> Colposcopia</span>
-                     </a>
-                  </li>
-               </ul>
-            </div>
-         </li>
+         
          <li class="nav-item ">
             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#inventarios">
             <i class="fa fa-shopping-cart text-primary"></i>
