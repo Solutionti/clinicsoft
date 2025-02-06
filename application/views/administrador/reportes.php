@@ -125,132 +125,330 @@
          </nav>
          <!-- End Navbar -->
          <div class="container-fluid py-5">
-            <div class="row ">
-               <div class="card">
-                  <div class="row mt-4">
-                     <div class="col-md-12">
-                        <h5>Reportes</h5>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-sm-7">
-                        <div class="card">
-                           <div class="card-body">
-                              <h6 class="card-title">Reporte de Atenciones Doctores</h6>
-                              <form target="blank" action="<?php echo base_url(); ?>administracion/reportediario" method="POST">
-                                 <div class="row">
-                                    <div class="col-md-5" style="margin-bottom:10px">
-                                       <select name="doctor" class="form-control">
-                                          <option value="">Seleccione una opcion</option>
-                                          <?php foreach($doctor->result() as $doctores){ ?>
-                                          <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre; ?></option>
-                                          <?php } ?>
-                                          <option value="all">Reporte Ingresos y Gastos</option>
-                                       </select>
-                                    </div>
-                                    <div class="col-md-5">
-                                       <input type="date" class="form-control" name="fecha" value="<?php echo date("Y-m-d"); ?>">
-                                    </div>
-                                    <div class="col-md-2">
-                                       <button type="submit" class="btn btn-primary btn-block"  title="Descargar PDF"> <i class="fa fa-download"></i> </button>
-                                    </div>
-                                 </div>
-                              </form>
-                              <hr>
-                              <h6 class="card-title">Reporte de gastos</h6>
-                              <form target="blank" action="<?php echo base_url(); ?>administracion/reportegastos" method="POST">
-                                 <div class="row">
-                                    <div class="col-md-5">
-                                       <div class="form-group">
-                                          <label for="">Desde</label>
-                                          <input type="date" name="fecha1" class="form-control" value="<?php echo date("Y-m-d"); ?>">
-                                       </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                       <div class="form-group">
-                                          <label for="">Hasta</label>
-                                          <input type="date" name="fecha2" class="form-control" value="<?php echo date("Y-m-d"); ?>">
-                                       </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                       <label for=""><br></label>
-                                       <button type="submit" class="btn btn-primary btn-block"  title="Descargar PDF"> <i class="fa fa-download"></i> </button>
-                                    </div>
-                                 </div>
-                              </form>
-                              <hr>
-                              <h5 class="card-title">Reporte Cierre de CAJA <span style="font-size:16px">(Ingresos-Gastos)</span></h5>
-                              <form id="reporteglobal" >
-                                 <div class="row">
-                                    <div class="col-md-4">
-                                       <div class="form-group">
-                                          <label for="">Desde</label>
-                                          <input type="date" name="fecha_global_1" value="<?php echo date("Y-m-d"); ?>" class="form-control">
-                                       </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                       <div class="form-group">
-                                          <label for="">Hasta</label>
-                                          <input type="date" name="fecha_global_2" value="<?php echo date("Y-m-d"); ?>" class="form-control">
-                                       </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                       <label for=""> </label>
-                                       <button type="submit" class="btn btn-primary btn-block"  title="Descargar PDF"> <i class="fa fa-download"></i> </button>
-                                    </div>
-                                    
-                                    
-                                 </div>
-                              </form>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-sm-5">
-                        <div class="card">
-                           <form target="blank" action="<?php echo base_url(); ?>administracion/reportelaboratorio" method="POST">
-                              <div class="card-body">
-                                 <h5 class="card-title">Reporte de laboratorio</h5>
-                                 <div class="row">
-                                    <div class="col-md-7"  style="margin-bottom:10px">
-                                       <input type="text" class="form-control" name="usuario" value="<?php echo $this->session->userdata("nombre"); ?>" readonly>
-                                    </div>
-                                    <div class="col-md-5">
-                                       <input type="date" name="fecha" value="<?php echo date("Y-m-d"); ?>" class="form-control"> 
-                                    </div>
-                                    <div class="col-md-6" >
-                                       <button type="submit" style="width: 100%;" class="btn btn-primary btn-block"> Generar <i class="fa fa-download"></i> </button>
-                                    </div>
-
-                                 </div>
-                                 <br>
-                              </div>
-                           </form>
-                           
-                           <div class="card-body">
-                              <h5 class="card-title">Reporte de citas listado dia a dia</h5>
-                              <label for="">Seleccione un doctor o ver todos para ver el reporte</label>
-                              <select name="" id="" class="form-control">
-                                 <option value="">SELECCIONE UNA OPCIÓN</option>
-                                 <option value="">VER TODOS</option>
-                                 <?php foreach($doctor->result() as $doctores){ ?>
-                                 <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre; ?></option>
-                                 <?php } ?>
-                              </select>
-                              <br>
-                              
-                              <div class="col-md-6" >
-                                 <button type="submit" style="width: 100%;" class="btn btn-primary btn-block"> Generar <i class="fa fa-download"></i> </button>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+         <div class="row">
+      <div class="card">
+        <div class="row mt-4">
+        <div class="col-lg-8">
+          <div class="row">
+          <div class="col-xl-6 mb-xl-0 mb-4">
+          <div class="card bg-transparent shadow-xl">
+          <div class="overflow-hidden position-relative border-radius-xl" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/card-visa.jpg');">
+          <span class="mask bg-gradient-dark"></span>
+          <div class="card-body position-relative z-index-1 p-3">
+          <i class="fas fa-wifi text-white p-2"></i>
+          <h5 class="text-white mt-4 mb-5 pb-2">****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;0001</h5>
+          <div class="d-flex">
+          <div class="d-flex">
+          <div class="me-4">
+          <p class="text-white text-sm opacity-8 mb-0">Titular de la tarjeta</p>
+          <h6 class="text-white mb-0">Salud Madre y Mujer</h6>
+          </div>
+          <div>
+          <p class="text-white text-sm opacity-8 mb-0">Expiracion</p>
+          <h6 class="text-white mb-0">01/30</h6>
+          </div>
+          </div>
+          <div class="ms-auto w-20 d-flex align-items-end justify-content-end">
+          <img class="w-60 mt-2" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          <div class="col-xl-6">
+          <div class="row">
+          <div class="col-md-6">
+          <div class="card">
+          <div class="card-header mx-4 p-3 text-center">
+          <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
+          <i class="fas fa-landmark opacity-10"></i>
+          </div>
+          </div>
+          <div class="card-body pt-0 p-3 text-center">
+          <h6 class="text-center mb-0">Efectivo</h6>
+          <!-- <span class="text-xs">Belong Interactive</span> -->
+          <hr class="horizontal dark my-3">
+          <h5 class="mb-0">+$0</h5>
+          </div>
+          </div>
+          </div>
+          <div class="col-md-6 mt-md-0 mt-4">
+          <div class="card">
+          <div class="card-header mx-4 p-3 text-center">
+          <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
+          <i class="fab fa-paypal opacity-10"></i>
+          </div>
+          </div>
+          <div class="card-body pt-0 p-3 text-center">
+          <h6 class="text-center mb-0">Tarjeta</h6>
+          <!-- <span class="text-xs">Freelance Payment</span> -->
+          <hr class="horizontal dark my-3">
+          <h5 class="mb-0">+$0</h5>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          <div class="col-md-12 mb-lg-0 mb-4">
+          <div class="card mt-4">
+          <div class="card-header pb-0 p-3">
+          <div class="row">
+          <div class="col-6 d-flex align-items-center">
+          <h6 class="mb-0">Reportes</h6>
+          </div>
+          <div class="col-6 text-end">
+          <button
+            class="btn bg-gradient-dark mb-0"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            <i class="fas fa-plus"></i>&nbsp;&nbsp;Agregar Filtros
+          </button>
+          </div>
+          </div>
+          </div>
+          <div class="card-body p-3">
+          <div class="row">
+          <div class="col-md-6 mb-md-0 mb-4">
+          <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+          <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
+          <h6 class="mb-0">Atenciones Doctores</h6>
+          <i (click)="generarPdfCaja()" class="fas fa-file-pdf ms-auto text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Generar pdf"></i>
+          </div>
+          </div>
+          <div class="col-md-6">
+          <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+          <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
+          <h6 class="mb-0">Gastos</h6>
+          <i (click)="generarPdfGastos()" class="fas fa-file-pdf ms-auto text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Generar pdf"></i>
+          </div>
+          </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+              <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
+              <h6 class="mb-0">Cierre de Caja (Ing - Gast)</h6>
+              <i class="fas fa-file-pdf ms-auto text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Generar pdf"></i>
+              </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+                <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
+                <h6 class="mb-0">Laboratorio</h6>
+                <i (click)="generarPdfLaboratorio()" class="fas fa-file-pdf ms-auto text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Generar pdf"></i>
+                </div>
+                </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card h-100">
+          <div class="card-header pb-0 p-3">
+          <div class="row">
+          <div class="col-6 d-flex align-items-center">
+          <h6 class="mb-0">Facturas Mes a Mes</h6>
+          </div>
+          <div class="col-6 text-end">
+          <button class="btn btn-outline-primary btn-sm mb-0">Ver todos</button>
+          </div>
+          </div>
+          </div>
+          <div class="card-body p-3 pb-0">
+          <ul class="list-group">
+          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+          <div class="d-flex flex-column">
+          <h6 class="mb-1 text-dark font-weight-bold text-sm">Enero, Febrero</h6>
+          <span class="text-xs">#MS-415646</span>
+          </div>
+          <div class="d-flex align-items-center text-sm">
+          0
+          <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-danger text-lg me-1 text-danger"></i> PDF</button>
+          </div>
+          </li>
+          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+          <div class="d-flex flex-column">
+          <h6 class="text-dark mb-1 font-weight-bold text-sm">Marzo, Abril</h6>
+          <span class="text-xs">#RV-126749</span>
+          </div>
+          <div class="d-flex align-items-center text-sm">
+            0
+          <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-danger text-lg me-1"></i> PDF</button>
+          </div>
+          </li>
+          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+          <div class="d-flex flex-column">
+          <h6 class="text-dark mb-1 font-weight-bold text-sm">Mayo, Junio</h6>
+          <span class="text-xs">#FB-212562</span>
+          </div>
+          <div class="d-flex align-items-center text-sm">
+            0
+          <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-danger text-lg me-1"></i> PDF</button>
+          </div>
+          </li>
+          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+          <div class="d-flex flex-column">
+          <h6 class="text-dark mb-1 font-weight-bold text-sm">Julio, Agosto</h6>
+          <span class="text-xs">#QW-103578</span>
+          </div>
+          <div class="d-flex align-items-center text-sm">
+           0
+          <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-danger text-lg me-1"></i> PDF</button>
+          </div>
+          </li>
+          <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
+          <div class="d-flex flex-column">
+          <h6 class="text-dark mb-1 font-weight-bold text-sm">Septiembre, Octubre</h6>
+          <span class="text-xs">#AR-803481</span>
+          </div>
+          <div class="d-flex align-items-center text-sm">
+            0
+          <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-danger text-lg me-1"></i> PDF</button>
+          </div>
+          </li>
+          <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
+            <div class="d-flex flex-column">
+            <h6 class="text-dark mb-1 font-weight-bold text-sm">Noviembre, Diciembre</h6>
+            <span class="text-xs">#AR-803481</span>
             </div>
+            <div class="d-flex align-items-center text-sm">
+              0
+            <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-danger text-lg me-1"></i> PDF</button>
+            </div>
+            </li>
+          </ul>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-7">
+        <!--  -->
+      </div>
+        <div class="col-md-5 mt-4">
+          <div class="card h-100 mb-4">
+          <div class="card-header pb-0 px-3">
+          <div class="row">
+          <div class="col-md-6">
+          <h6 class="mb-0">Ultimas Transacciones</h6>
+          </div>
+          <div class="col-md-6 d-flex justify-content-end align-items-center">
+          <i class="fas fa-calendar-alt me-2"></i>
+          <small>06-02-2025</small>
+          </div>
+          </div>
+          </div>
+          <div class="card-body pt-4 p-3">
+          <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Hoy</h6>
+          <ul class="list-group">
+          <li
+            class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg"
+            *ngFor="let transacciones of transaccion"
+          >
+          <div class="d-flex align-items-center">
+          <button
+            class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"
+            *ngIf="transacciones.tipoingreso == 'Ingreso'"
+            >
+            <i class="fas fa-arrow-up"></i>
+          </button>
+          <button
+            class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"
+            *ngIf="transacciones.tipoingreso == 'Gasto'"
+          >
+          <i
+            class="fas fa-arrow-down"
+          >
+          </i>
+          </button>
+          <div class="d-flex flex-column">
+          <h6 class="mb-1 text-dark text-sm">Ingreso de admision</h6>
+          <span class="text-xs">26-12-1993 a las 7:50</span>
+          </div>
+          </div>
+          <div class="d-flex align-items-center text-dark text-gradient text-sm font-weight-bold">
+            $10.000 
+          </div>
+          </li>
+          </ul>
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>   
          </div>
-         </div>
-         <?php require_once("componentes/footer.php"); ?>
-         </div>
+
+         <!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Filtro de busqueda</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="reportesForm">
+        <div class="flex align-items-center gap-3 mb-3">
+          <label>Doctores</label>
+          <select
+            class="form-control form-control-sm"
+            formControlName="doctor_reportes"
+          >
+          <option value="">Todos los Doctores</option>
+          <option
+            *ngFor="let doctor of getDoctor"
+            [value]="doctor.codigo_doctor"
+          >
+            {{ doctor.nombre }}
+          </option>
+          </select>
+        </div>
+
+        <div class="flex align-items-center gap-3 mb-3">
+          <label>Fecha Inicial</label>
+          <input
+            type="date"
+            class="form-control form-control-sm"
+            formControlName="fechainicial_reportes"
+          >
+        </div>
+
+        <div class="flex align-items-center gap-3 mb-5">
+          <label>Fecha Final</label>
+          <input
+            type="date"
+            class="form-control form-control-sm"
+            formControlName="fechafinal_reportes"
+            >
+        </div>
+       </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+        >
+          Aceptar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+            <?php require_once("componentes/footer.php"); ?>
       </main>
       <?php require_once("componentes/personalizar.php"); ?>
       <?php require_once("componentes/scripts.php"); ?>
