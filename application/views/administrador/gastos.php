@@ -251,297 +251,133 @@
          <!-- End Navbar -->
 
          <div class="container-fluid py-5">
-
          <div class="row ">
-
             <div class="card">
-
-               <div class="row mt-4">
-
+               <div class="row mt-3">
                   <div class="col-md-12">
-
-                     <a class="btn bg-gradient-danger btn-xs" data-bs-toggle="modal" href="#AgregarCPE" id="btn_AddGasto" role="button">Agregar <i class="fas fa-plus"></i> </a>
-
+                    <div class="d-flex flex-row-reverse">
+                       <a class="btn bg-gradient-danger btn-xs" data-bs-toggle="modal" href="#AgregarCPE" id="btn_AddGasto" role="button">Agregar <i class="fas fa-plus"></i> </a>
+                    </div>
                   </div>
-
                </div>
-
-               <br>  
-
                <div class="table-responsive" >
-
                   <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-gastos">
-
                      <thead>
-
-                        <tr>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" ></th>
-
-                           <!--th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Estado CPE</th-->
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Comprobante</th>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Razón Social</th>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Descripción</th>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Fe.Recepción</th>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Colaborador</th>
-
-                           <!--th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" ></th-->
-
+                        <tr class="bg-default">
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" ></th>
+                           <!--th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Estado CPE</th-->
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Comprobante</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Razón Social</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Descripción</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Fe.Recepción</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" >Colaborador</th>
+                           <!--th class="text-uppercase text-white text-xs font-weight-bolder opacity-12" ></th-->
                         </tr>
-
                      </thead>
-
                      <tbody>
-
                         <?php foreach($gastos->result() as $gastoss){ ?>
-
                         <tr>
-
                            <td>
-
                               <div class="row" style="padding-right:10px;">
-
                                  <a  
-
-                                    class="icon icon-shape icon-sm me-1 bg-gradient-info shadow mx-3"
-
-                                    onclick="editarCPE(<?php echo $gastoss->iddoc_cpe; ?>);"
-
-                                    >
-
+                                   class="icon icon-shape icon-sm me-1 bg-gradient-info shadow mx-3"
+                                   onclick="editarCPE(<?php echo $gastoss->iddoc_cpe; ?>);"
+                                 >
                                  <i class="fas fa-pencil-alt text-white opacity-10"></i>
-
                                  </a>
-
                               </div>
-
                            </td>
-
-                           <!--td>
-
-                              <div class="row">
-
-                                 <a 
-
-                                    style="cursor: pointer;" class="icon icon-shape icon-sm  <?php if($gastoss->estado==0){ echo " bg-gradient-success ";}else{ echo " bg-gradient-secondary ";} ?> shadow" title="Recepcionado"
-
-                                    >
-
-                                 <i class="fas <?php if($gastoss->estado==0){ echo " fa-check ";}else if($gastoss->estado>=0){ echo " fa-check-square ";}else{ echo " fa-square ";} ?> text-white opacity-10"></i>
-
-                                 </a>
-
-                                 <a 
-
-                                    style="cursor: pointer;" class="icon icon-shape icon-sm  <?php if($gastoss->estado==1){ echo " bg-gradient-warning ";}else{ echo " bg-gradient-secondary ";} ?> shadow" title="Reportado"
-
-                                    >
-
-                                    <i class="fas <?php if($gastoss->estado==1){ echo " fa-check ";}else if($gastoss->estado>=1){ echo " fa-check-square ";}else{ echo " fa-square ";} ?> text-white opacity-10"></i>
-
-                                 </a>
-
-                                 <a 
-
-                                    style="cursor: pointer;" class="icon icon-shape icon-sm  <?php if($gastoss->estado==2){ echo " bg-gradient-success ";}else{ echo " bg-gradient-secondary ";} ?> shadow" title="Tributado"
-
-                                    >
-
-                                 <i class="fas <?php if($gastoss->estado==2){ echo " fa-check ";}else if($gastoss->estado>=2){ echo " fa-check-square ";}else{ echo " fa-square ";} ?> text-white opacity-10"></i>
-
-                                 </a>
-
-                              </div>
-
-                           </td-->
-
                            <td class="text-xs text-dark mb-0"><?php echo $gastoss->comprobante." ".$gastoss->monto_v2; ?></td>
-
                            <td class="text-xs text-dark mb-0"><?php echo $gastoss->razon_social; ?></td>
-
                            <td class="text-xs text-dark mb-0"><?php echo $gastoss->descripcion; ?></td>
-
                            <td class="text-xs text-dark mb-0"><?php echo $gastoss->f_recepcion; ?></td>
-
                            <td class="text-xs text-dark mb-0"><?php echo $gastoss->nombre." ".$gastoss->apellido; ?></td>
-
                            <!--td class="text-xs text-dark mb-0"><?php echo $gastoss->estado; ?></td-->
-
                         </tr>
-
                         <?php } ?>
-
                      </tbody>
-
                   </table>
-
                   <br>
-
                </div>
-
             </div>
-
             <?php require_once("componentes/footer.php"); ?>
-
          </div>
 
+         <!-- MODAL DE GASTOS -->
          <div class="modal fade" id="AgregarCPE" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
             <div class="modal-dialog  modal-xl" role="document">
-
                <form class="modal-content" id="AddGasto">
-
                   <div class="modal-header bg-default">
-
                      <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Registrar Gasto</h5>
-
                      <button type="button" class=" close" data-bs-dismiss="modal" aria-label="Close">
-
                      <span aria-hidden="true">&times;</span>
-
                      </button>
-
                   </div>
-
                   <div class="modal-body">
-
                      <div class="row">
-
                         <div class="col-md-6">
-
                            <div class="row">
-
                               <div class="col-md-12">
-
                                  <div class="form-group">
-
                                     <h6>
-
                                        <strong>Información del Comprobante</strong>
-
                                     </h6>
-
                                     <div class="dropdown-divider"></div>
-
                                  </div>
-
                               </div>
-
                               <div class="col-md-4">
-
                                  <div class="form-group">
-
                                     <label>Tipo Comprobante
-
                                        <span class="required">*</span>
-
                                     </label>
-
                                     <div class="controls">
-
                                        <select name="cpe_tipo" id="cpe_tipo" class="form-control" required>
-
                                           <option value="">Seleccionar</option>
-
                                           <option value="3">Boleta</option>
-
                                           <option value="1">Factura</option>
-
                                           <option value="2">RHE</option>
-
-                                          <!--option value="7">Nota de Credito</option-->
-
-                                          <!--option value="8">Nota de Debito</option-->
-
                                           <option value="12">Maq.Ticketera</option>
-
                                           <option value="13">Doc.Ins.Financieras</option>
-
                                           <option value="14">Recibos Servicios Publicos</option>
-
                                           <option value="9001">Otras Facturas</option>
-
                                           <option value="123">Gastos VARIOS</option>
-
                                        </select>
-
                                     </div>
-
                                  </div>
-
                               </div>
-
                               <div class="col-md-4">
-
                                  <div class="form-group">
-
                                     <label>Nro. Serie
-
                                        <span class="required">*</span>
-
                                     </label>
-
                                     <div class="controls">
-
                                        <input type="text" name="statee" id="statee" style="display: none;" >
-
                                        <input type="text" name="idgastos" id="idgastos" style="display: none;" >
-
                                        <input type="text" name="cpe_serie" id="cpe_serie" maxlength="4" minlength="4" class="form-control text-uppercase" required data-validation-required-message="Complete el Numero">
-
                                     </div>
-
                                  </div>
-
                               </div>
-
                               <div class="col-md-4">
-
                                  <div class="form-group">
-
                                     <label>Nro. Correlativo
-
                                        <span class="required">*</span>
-
                                     </label>
-
                                     <div class="controls">
-
                                        <input type="text" name="cpe_numero" id="cpe_numero" minlength="1" maxlength="8" class="s_n form-control" required data-validation-required-message="Complete el Numero">
-
                                     </div>
-
                                  </div>
-
                               </div>
-
                               <div class="col-md-4">
-
                                  <div class="form-group">
-
                                     <label>Op. Gravada
-
                                        <span class="required">*</span>
-
                                     </label>
-
                                     <div class="controls">
-
                                        <input type="number" require step="0.01" name="cpe_gravada" id="cpe_gravada" maxlength="8" minlength="1" class="form-control" required data-validation-required-message="Complete el Numero">
-
                                     </div>
-
                                  </div>
-
                               </div>
-
                               <div class="col-md-4">
-
                                  <div class="form-group">
 
                                     <label>IGV
