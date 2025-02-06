@@ -1,55 +1,29 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
    <head>
-
       <meta charset="UTF-8">
-
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
       <title>Administracion / Inicio</title>
-
       <?php require_once("componentes/head.php"); ?>
-
    </head>
-
    <body class="g-sidenav-show bg-gray-100">
-
       <div class="min-height-300 bg-default position-absolute w-100"></div>
-
       <?php require_once("componentes/menu.php"); ?>
-
       <main class="main-content position-relative border-radius-lg">
-
          <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
-
             <div class="container-fluid py-1 px-3">
-
                <nav aria-label="breadcrumb">
-
                   <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-
                      <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">administración</a></li>
-
                      <li class="breadcrumb-item text-sm text-white active" aria-current="page">Laboratorio</li>
-
                   </ol>
-
                   <h6 class="font-weight-bolder text-white mb-0">Laboratorio</h6>
-
                </nav>
-
                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-
                   <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-
                      <div class="input-group">
-
                      </div>
-
                   </div>
 
                   <ul class="navbar-nav  justify-content-end">
@@ -241,61 +215,32 @@
                      </li>
 
                   </ul>
-
                </div>
-
             </div>
-
          </nav>
-
          <!-- End Navbar -->
-
          <div class="container-fluid py-5">
-
          <div class="row ">
-
             <form class="card" method="post" id="Form_Lab" validate="">
-
                <div class="row mt-4">
-
                   <div class="col-md-12">
-
-                     <h6>LABORATORIO</h6>
-
+                     <!-- <h6>LABORATORIO</h6> -->
                   </div>
-
                </div>
-
-               <br>
-
                <div class="row">
-
                   <div class="col-md-1"  hidden>
-
                      <div class="form-group input-group-sm">
-
                         <label>id</label>
-
                         <input required type="number" class="form-control" id="id" name="id" readonly>
-
                      </div>
-
                   </div>
-
                   <div class="col-md-2">
-
                      <div class="form-group input-group-sm">
-
                         <label>DNI</label>
-
                         <input required type="text" class="form-control" id="dni" name="dni">
-
                      </div>
-
                   </div>
-
                   <div class="col-md-3">
-
                      <div class="form-group input-group-sm">
 
                         <label>Nombre completo</label>
@@ -337,9 +282,7 @@
                         <input required type="date" class="form-control" value="<?php echo date("Y-m-d"); ?>" id="fecha" readonly>
 
                      </div>
-
                   </div>
-
                   <div class="col-md-2">
                      <label for="">Forma de pago</label>
                      <div class="form-group input-group-sm">
@@ -353,83 +296,44 @@
                         </div>
                      </div>
                   </div>
-
                </div>
-
                <div class="row">
-
-                  <div class="col-md-7 mt-3">
-
+                  <div class="col-md-7">
                      <div class="row">
-
                         <div class="col-md-12">
-
                            <div class="table-responsive">
-
                               <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio-items">
-
                                  <thead>
-
-                                    <tr>
-
-                                       <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">#</th>
-
-                                       <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Analisis</th>
-
-                                       <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Precio</th>
-
-                                       <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Estado</th>
-
+                                    <tr class="bg-default text-white">
+                                       <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
+                                       <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Analisis</th>
+                                       <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Precio</th>
+                                       <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Estado</th>
                                     </tr>
-
                                  </thead>
-
                                  <tbody>
-
                                  </tbody>
-
                               </table>
-
                            </div>
-
                         </div>
-
                      </div>
-
                   </div>
-
                   <div class="col-md-5">
-
                      <div class="row">
-
                         <div class="col-md-12">
-
                            <div class="form-group input-group-sm">
-
                               <label>Observación</label>
-
-                              <textarea class="form-control" id="observacion" rows="4"></textarea>
-
+                              <textarea class="form-control" id="observacion" rows="2"></textarea>
                            </div>
-
                         </div>
-
                         <div class="col-md-12">
-
-                           <div class="form-group input-group-lg mt-4">
-
+                           <div class="form-group input-group-lg mt-2">
                               <label>TOTAL DE LOS ANALISIS</label>
-
                               <input type="text" id="total" class="form-control" placeholder="Total"
-
                                  readonly>
-
                            </div>
-
                         </div>
-
                         <div class="row">
-
                            <div class="col-md-12">
 
                               <button
@@ -467,61 +371,32 @@
                   </div>
 
                </div>
-
-               <br>  
-
                <div class="table-responsive" >
-
                   <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio">
-
-                     <thead>
-
+                     <thead  class="bg-default text-white">
                         <tr>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">#</th>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Analisis</th>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Precio</th>
-
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12 ps-2">Estado</th>
-
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Analisis</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Precio</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12 ps-2">Estado</th>
                         </tr>
-
                      </thead>
-
                      <tbody>
-
                         <?php foreach($laboratorio->result() as $laboratorios){ ?>
-
                         <tr>
-
                            <td class="text-xs"><?php echo $laboratorios->codigo; ?></td>
-
                            <td class="text-xs"><?php echo $laboratorios->nombre; ?></td>
-
                            <td class="text-xs"><?php echo $laboratorios->precio; ?></td>
-
                            <td class="text-xs">ACTIVO</td>
-
                         </tr>
-
                         <?php } ?>
-
                      </tbody>
-
                   </table>
-
                   <br>
-
                </div>
-
             </form>
-
             <?php require_once("componentes/footer.php"); ?>
-
          </div>
-
       </main>
 
       <?php require_once("componentes/personalizar.php"); ?>
