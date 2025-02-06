@@ -2,19 +2,12 @@
 class Financiero_model extends CI_model {
 
     public function getPagos() {
-<<<<<<< HEAD
-        $this->db->select("t.nombre as paciente,t.apellido,d.nombre as doctor, p.* ");
-        $this->db->from("pagos p");
-        $this->db->join("pacientes t", "p.dni_paciente = t.documento");
-        $this->db->join("doctores d", "p.medico = d.codigo_doctor");
-=======
         $this->db->select("t.nombre as paciente,t.apellido,d.nombre as doctor, p.*, e.descripcion as especialidad ");
         $this->db->from("pagos p");
         $this->db->join("pacientes t", "p.dni_paciente = t.documento");
         $this->db->join("doctores d", "p.medico = d.codigo_doctor");
         $this->db->join("especialidades e", "p.especialidad = e.codigo_especialidad");
         $this->db->order_by("codigo_pago", "DESC");
->>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
         $result = $this->db->get();
 
         return $result;
@@ -32,8 +25,6 @@ class Financiero_model extends CI_model {
         $this->db->insert("gastos", $datos);
     }
 
-<<<<<<< HEAD
-=======
     public function editarPagos($estado, $atencion, $documento, $costo, $comision, $medico, $especialidad) {
          
     }
@@ -94,7 +85,6 @@ class Financiero_model extends CI_model {
       $this->db->insert("pagos", $datos); 
     }
 
->>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
 }
 
 ?>

@@ -53,15 +53,6 @@ class Laboratorio extends Admin_Controller {
         $pdf->SetFont('Times','',8);
         $pdf->Ln(13);
         $pdf->Cell(7,5,'', '', 0,'L', false );
-<<<<<<< HEAD
-        $pdf->Cell(1,5,'Centro Medico Especializado', '', 0,'L', false );
-        $pdf->Ln(4);
-        $pdf->Cell(10,5,'', '', 0,'L', false );
-        $pdf->Cell(1,5,'Salud Madre & Mujer', '', 0,'L', false );
-        $pdf->Ln(5);
-        $pdf->Cell(4,5,'', '', 0,'L', false );
-        $pdf->Cell(7,5,'Av Salaverry 1402 - Urb. Bancarios', '', 0,'L', false );
-=======
         $pdf->Cell(1,5,'CLINICA ENFOQUE SALUD', '', 0,'L', false );
         $pdf->Ln(4);
         $pdf->Cell(6,5,'', '', 0,'L', false );
@@ -69,7 +60,6 @@ class Laboratorio extends Admin_Controller {
         $pdf->Ln(5);
         $pdf->Cell(4,5,'', '', 0,'L', false );
         $pdf->Cell(7,5,'Calle Alfonso Ugarte #673', '', 0,'L', false );
->>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
         $pdf->Ln(2);
         $pdf->Cell(10,5,'____________________________________', '', 0,'L', false );
         $pdf->SetFont('Times','',8);
@@ -121,11 +111,7 @@ class Laboratorio extends Admin_Controller {
         $pdf->Cell(25,5,utf8_decode('Digitar su numero de DNI y Contraseña.'), '', 0,'L', false );
         $pdf->Ln(5);
         $pdf->Cell(11,5,'', '', 0,'L', false );
-<<<<<<< HEAD
-        $pdf->Cell(25,5,'www.saludmadreymujer.com', '', 0,'L', false );
-=======
         $pdf->Cell(25,5,'www.clinicaenfoquesalud.com', '', 0,'L', false );
->>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
         $pdf->Output();
     }
 

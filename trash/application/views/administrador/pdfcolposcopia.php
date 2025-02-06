@@ -75,11 +75,7 @@ $pdf->Cell(73,6,'', '', 0,'L', false );
 $pdf->Cell(70,6,$colposcopias->medico, '', 0,'L', false );
 $pdf->Ln(6);
 $pdf->Cell(78,6,'', '', 0,'L', false );
-<<<<<<< HEAD
-$pdf->Cell(70,6,'CPM'. $colposcopias->cmp, '', 0,'L', false );
-=======
 $pdf->Cell(70,6,'CMP'. $colposcopias->cmp, '', 0,'L', false );
->>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
 
 $pdf->Output();
 

@@ -110,15 +110,9 @@
       <div class="row">
         <div class="col-8 mx-auto text-center mt-1">
           <p class="mb-0 text-secondary">
-<<<<<<< HEAD
-            Copyright © <script>
-              document.write(new Date().getFullYear())
-            </script> saludmadremujer.com.co
-=======
             Todos los derechos © <script>
               document.write(new Date().getFullYear())
             </script> gofuturedigitalsolution.com
->>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
           </p>
         </div>
       </div>

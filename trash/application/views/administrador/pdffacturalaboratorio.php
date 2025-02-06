@@ -62,21 +62,13 @@ $pdf->Cell(1,5,'', '', 0,'L', false );
 $pdf->Cell(25,5,'Para consultar sus resultados medicos ingresar', '', 0,'L', false );
 $pdf->Ln(4);
 $pdf->Cell(5,5,'', '', 0,'L', false );
-<<<<<<< HEAD
-$pdf->Cell(10,5,'www.saludmadreymujer.com/resultados', '', 0,'L', false );
-=======
 $pdf->Cell(10,5,'www.clinicaenfoquesalud.com/resultados', '', 0,'L', false );
->>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
 $pdf->Ln(4);
 $pdf->Cell(3,5,'', '', 0,'L', false );
 $pdf->Cell(25,5,'Digitar su numero de historia mas su DNI', '', 0,'L', false );
 $pdf->Ln(6);
 $pdf->Cell(11,5,'', '', 0,'L', false );
-<<<<<<< HEAD
-$pdf->Cell(25,5,'www.saludmadreymujer.com', '', 0,'L', false );
-=======
 $pdf->Cell(25,5,'www.clinicaenfoquesalud.com', '', 0,'L', false );
->>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
 $pdf->Output();
 
 ?>
