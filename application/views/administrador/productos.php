@@ -128,41 +128,43 @@
     <div class="container py-5">
       <div class="row ">
       <div class="card ">
-     <div class="row mt-4">
+     <div class="row ">
        <div class="col-md-12 ">
-         <h5>Productos</h5>
-         <br>
-         <button class="btn bg-gradient-danger btn-xs" data-bs-toggle="modal" href="#productos" role="button"> <i class="fas fa-plus"></i> Agregar</button>
+         <div class="d-flex flex-row-reverse">
+           <button class="btn bg-gradient-danger btn-xs mt-3" data-bs-toggle="modal" href="#productos" role="button"> <i class="fas fa-plus"></i> Agregar</button>
+         </div>
        </div>
      </div>
-        <br>  
       <div class="container">
-        <div class="table-responsive">
-          <table class="table table-stripped table-borderless table hover" id="tabla-productos">
-             <thead>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Codigo</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Categoria</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Nombre</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Historial</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Valor</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Cantidad</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Stock</th>
-             </thead>
-             <tbody>
-               <?php foreach($producto->result() as $productos) { ?>
-                <tr>
-                  <td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12"><?php echo $productos->codigo; ?></td>
-                  <td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12"><?php echo $productos->categorias; ?></td>
-                  <td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12"><?php echo $productos->nombre; ?></td>
-                  <td class="text-uppercase text-dark text-xs font-weight-bolder text-center opacity-12"> <i data-bs-toggle="modal" href="#historial" role="button" class="fas fa-redo"></i> </td>
-                  <td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12"><?php echo $productos->precio; ?></td>
-                  <td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12"><?php echo $productos->cantidad; ?></td>
-                  <td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12"><?php echo $productos->stock ?></td>
-                </tr>
-               <?php } ?>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="table-responsive">
+              <table class="table table-stripped table-borderless table hover" id="tabla-productos">
+                 <thead class="bg-default">
+                   <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Codigo</th>
+                   <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Nombre</th>
+                   <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Categoria</th>
+                   <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Valor</th>
+                   <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Stock</th>
+                   <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Estado</th>
+                 </thead>
+                 <tbody>
+                   <?php foreach($producto->result() as $productos) { ?>
+                    <tr>
+                      <td class="text-uppercase text-dark text-xs  opacity-12"><?php echo $productos->codigo; ?></td>
+                      <td class="text-uppercase text-dark text-xs  opacity-12"><?php echo $productos->nombre; ?></td>
+                      <td class="text-uppercase text-dark text-xs  opacity-12"><?php echo $productos->categorias; ?></td>
+                      <td class="text-uppercase text-dark text-xs  opacity-12"><?php echo $productos->precio; ?></td>
+                      <td class="text-uppercase text-dark text-xs  opacity-12"><?php echo $productos->stock ?></td>
+                      <td class="text-uppercase text-success text-xs  opacity-12"><?php echo $productos->estado; ?></td>
+                    </tr>
+                   <?php } ?>
+    
+                 </tbody>
+              </table>
+            </div>
 
-             </tbody>
-          </table>
+          </div>
         </div>
       </div>
  
