@@ -67,11 +67,7 @@ class Pacientes_model extends CI_model {
         }else{
             $data = [
                 "success" => 2, // Atencion WARNING,
-<<<<<<< HEAD
-                "message" => 'Ya existe un paciente con este N째 Documento'  // Ya existe un paciente con este N째 Documento
-=======
                 "message" => 'Ya existe un paciente con este N° Documento'  // Ya existe un paciente con este N° Documento
->>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
                 ,
             ];
             echo  json_encode($data);
@@ -131,11 +127,7 @@ class Pacientes_model extends CI_model {
         }else{
             $data = [
                 "success" => 2, // Atencion WARNING,
-<<<<<<< HEAD
-                "message" => 'Ya existe un paciente con este N째 Documento'  // Ya existe un paciente con este N째 Documento
-=======
                 "message" => 'Ya existe un paciente con este N° Documento'  // Ya existe un paciente con este N° Documento
->>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
                 ,
             ];
             echo  json_encode($data);
