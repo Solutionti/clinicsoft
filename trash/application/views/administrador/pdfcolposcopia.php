@@ -9,13 +9,13 @@ $pdf->Image('public/colposcopia/'.$colposcopias->imagen2 , 120 ,115, 60 , 40,'JP
 $pdf->SetFont('Times','',13);
 $pdf->Ln(1);
 $pdf->Cell(65,6,'', '', 0,'L', false );
-$pdf->Cell(60,6,'Centro Medico Especializado', '', 0,'L', false );
+$pdf->Cell(60,6,'CLINICA ENFOQUE SALUD', '', 0,'L', false );
 $pdf->Ln(5);
 $pdf->Cell(72,6,'', '', 0,'L', false );
-$pdf->Cell(1,6,'Salud Madre & Mujer', '', 0,'L', false );
+$pdf->Cell(1,6,'Maternidad y Especialidades', '', 0,'L', false );
 $pdf->Ln(5);
 $pdf->Cell(60,6,'', '', 0,'L', false );
-$pdf->Cell(7,6,'Av Salaverry 1402 - Urb. Bancarios', '', 0,'L', false );
+$pdf->Cell(7,6,'Calle Alfonso Ugarte #673', '', 0,'L', false );
 $pdf->Ln(2);
 $pdf->Cell(42,5,'', '', 0,'L', false );
 $pdf->Cell(60,5,'_____________________________________________', '', 0,'L', false );
@@ -75,7 +75,11 @@ $pdf->Cell(73,6,'', '', 0,'L', false );
 $pdf->Cell(70,6,$colposcopias->medico, '', 0,'L', false );
 $pdf->Ln(6);
 $pdf->Cell(78,6,'', '', 0,'L', false );
+<<<<<<< HEAD
 $pdf->Cell(70,6,'CPM'. $colposcopias->cmp, '', 0,'L', false );
+=======
+$pdf->Cell(70,6,'CMP'. $colposcopias->cmp, '', 0,'L', false );
+>>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
 
 $pdf->Output();
 

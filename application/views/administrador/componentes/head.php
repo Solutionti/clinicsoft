@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <link  rel="icon"  href="<?php echo base_url(); ?>public/img/theme/logo2.ico" type="image/ico" />
+=======
+<link  rel="icon"  href="<?php echo base_url(); ?>public/img/theme/logo.ico" type="image/ico" />
+>>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
 <link id="pagestyle" href="<?php echo base_url(); ?>public/css/argon-dashboard.css?v=2.0.2" rel="stylesheet" />
 <link href="<?php echo base_url(); ?>public/css/overhang.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo base_url(); ?>public/fontawesome/css/fontawesome.min.css">

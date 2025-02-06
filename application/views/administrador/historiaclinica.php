@@ -175,7 +175,10 @@
                                                    <option value="morfologica">Ecografia Morfologica</option>
                                                    <option value="genetica">Ecografia Genetica</option>
                                                    <option value="obstetrica">Ecografia Obstetrica</option>
+<<<<<<< HEAD
                                                    <option value="tiroides">Ecografia Tiroides</option>
+=======
+>>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
                                                 </select>
                                              </div>
                                              <div class="col-md-2">
@@ -912,7 +915,6 @@
       </div>
       </div>
       </div>
-      
       <div class="modal-footer">
       <button type="button" class="btn btn-primary" id="guardarhistoriaginecologia">Guardar</button>
       </div>

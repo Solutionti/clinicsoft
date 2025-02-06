@@ -534,9 +534,12 @@ $("#ecografias").on("change", function() {
 const reloadPage = () => {
     location.reload();
   }
+<<<<<<< HEAD
 // $("#ecografias").on("change", function() {
 //     let seleccion = $(this).val();
 //     if (seleccion) {
 //         $("#ecografia" + seleccion).modal("show");
 //     }
 // });
+=======
+>>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2

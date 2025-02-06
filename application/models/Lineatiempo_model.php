@@ -20,6 +20,10 @@ class Lineatiempo_model extends CI_model {
         $this->db->join("especialidades E", "E.codigo_especialidad = L.tp_atencion",'left');
         $this->db->where("L.dni_paciente", $dni);
         $this->db->order_by("codigo_linea", "DESC");
+<<<<<<< HEAD
+=======
+        $this->db->limit("3", "3");
+>>>>>>> cd293fed287ac25c35f3662c0af1615de000b5a2
         $result = $this->db->get();
         return $result;
     }
