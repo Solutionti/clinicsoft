@@ -295,11 +295,11 @@
                   <div class="col-md-4">
                      <h6 class="text-info "> FINAL </h6>
                      <div class="form-group">
-                        <label for="">Conclusión</label>
-                        <textarea class="form-control" id="conclusion-mama"></textarea>
+                        <label>Conclusión</label>
+                        <textarea class="form-control" id="conclusion-mama" rows="4"></textarea>
                      </div>
                      <div class="form-group">
-                        <label for="">Sugerencias</label>
+                        <label class="mt-2">Sugerencias</label>
                         <textarea class="form-control" id="sugerencias-mama"></textarea>
                      </div>
                   </div>
