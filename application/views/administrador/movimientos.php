@@ -130,27 +130,27 @@
       <div class="card">
      <div class="row mt-4">
        <div class="col-md-12">
-         <h6>CONSULTA DE INVENTARIO</h6>
-         <br>
-         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#entrada" role="button"> <i class="fas fa-plus"></i> Entrada</button>
-         <button class="btn btn-danger btn-sm" data-bs-toggle="modal" href="#salida" role="button"> <i class="fas fa-minus"></i> Salida</button>
+         <div class="d-flex flex-row-reverse">
+           <button class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#entrada" role="button"> <i class="fas fa-plus"></i> Entrada</button>
+           <button class="btn btn-danger btn-sm mx-2" data-bs-toggle="modal" href="#salida" role="button"> <i class="fas fa-minus"></i> Salida</button>
+         </div>
        </div>
      </div>
         <br>  
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-5">
             <div class="form-group">
               <label>Sección</label>
               <select id="seccion_reporte" class="form-control-sm form-control">
-                <option value="">Salud madre y mujer</option>
+                <option value="">CLINICA PRINCIPAL DE INSUMOS</option>
               </select>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-5">
             <div class="form-group">
               <label>Por stock</label>
-              <select id="stock_reporte" class="form-control-sm form-control">
+              <select id="stock_reporte" class="form-control-sm form-control text-uppercase">
                 <option value="">Seleccione una opción</option>
                 <option value="0">Todos</option>
                 <option value="1">Stock < 0</option>
@@ -163,18 +163,15 @@
             <a class="btn btn-danger btn-sm mt-1 btn-pdf" href="#" target="blank" id="generarpdfinventario"  hidden> <i class="fas fa-file-pdf"></i> PDF</a>
           </div>
         </div>
-        
-        <br>
-        <br>
-        <div class="table-responsive">
+        <div class="table-responsive mt-2">
           <table class="table table-stripped table hover">
-             <thead>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Codigo</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Producto</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Categoria</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Costo</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Fecha ingreso</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Stock</th>
+             <thead class="bg-default">
+               <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Codigo</th>
+               <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Producto</th>
+               <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Categoria</th>
+               <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Costo</th>
+               <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Fecha ingreso</th>
+               <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Stock</th>
              </thead>
              <tbody id="table-consulta">
 

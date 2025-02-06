@@ -236,14 +236,13 @@ $("#stock_reporte").on("change", function() {
 
     var id = $("#stock_reporte").val(), 
     url = baseurl + "administracion/consultainventario/" + id ;
-    //alert($("#stock_reporte").val());
     $.ajax({
         url: url,
         method: "GET",
         success: function (data) {
             data = JSON.parse(data);
             inventario = data.map(function (inven) {
-              return '<tr><td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">'+inven.codigo+'</td><td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">'+inven.nombre+'</td><td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">'+inven.categorias+'</td><td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">'+inven.precio+'</td><td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">'+inven.fecha+'</td><td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">'+inven.stock+'</td></tr>';
+              return '<tr><td class="text-uppercase text-dark text-xs  opacity-12">'+inven.codigo+'</td><td class="text-uppercase text-dark text-xs  opacity-12">'+inven.nombre+'</td><td class="text-uppercase text-dark text-xs  opacity-12">'+inven.categorias+'</td><td class="text-uppercase text-dark text-xs  opacity-12">'+inven.precio+'</td><td class="text-uppercase text-dark text-xs  opacity-12">'+inven.fecha+'</td><td class="text-uppercase text-dark text-xs  opacity-12">'+inven.stock+'</td></tr>';
             });
             $("#table-consulta").html(inventario);
             $(".btn-pdf").attr("hidden", false);
