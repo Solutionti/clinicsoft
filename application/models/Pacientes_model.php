@@ -11,6 +11,22 @@ class Pacientes_model extends CI_model {
         return $result;
     }
 
+    public function getPacienteTabla($documento, $apellido) {
+      $this->db->select("*");
+      $this->db->from("pacientes");
+      $this->db->or_where("documento", $documento);
+      $this->db->or_like('apellido', $apellido);
+      $this->db->or_like('nombre', $apellido);
+      $result = $this->db->get();
+
+      if($result ->num_rows() > 0) {
+        return $result;
+      }
+      else {
+        return 0;
+      }
+    }
+
     public function getPacienteId($documento) {
         $this->db->select("*");
         $this->db->from("pacientes");
@@ -82,26 +98,21 @@ class Pacientes_model extends CI_model {
         return $result->row();
     }
 
-    public function actualizarPaciente($data, $id) {
+    public function actualizarPaciente($data) {
 
-        /****VALIDANDO NRO DOC** */
-        /****VALIDANDO NRO DOC** */
-        $this->db->select("codigo_paciente");
-        $this->db->from("pacientes");
-        $this->db->where("documento", $data["dni"]);
-        $resultaa = $this->db->get();
-        $resultaa_v2 = $resultaa->row();
-        //echo ($resultaa_v2->codigo_paciente);
+        // $this->db->select("codigo_paciente");
+        // $this->db->from("pacientes");
+        // $this->db->where("documento", $data["dni"]);
+        // $resultaa = $this->db->get();
+        // $resultaa_v2 = $resultaa->row();
 
-        $this->db->select("codigo_paciente");
-        $this->db->from("pacientes");
-        $this->db->where("documento = '".$data["dni"]."' AND codigo_paciente != '".$resultaa_v2->codigo_paciente."'");
-        $result = $this->db->get();
-        $result_v2 = $result->row();
-        /****VALIDANDO NRO DOC** */
-        /****VALIDANDO NRO DOC** */
+        // $this->db->select("codigo_paciente");
+        // $this->db->from("pacientes");
+        // $this->db->where("documento", $data["dni"]);
+        // $result = $this->db->get();
+        // $result_v2 = $result->row();
 
-        if($result_v2==NULL){
+        
             $datos = [
                 "direccion" => $data["direccion"],
                 "telefono" => $data["celular"],
@@ -117,21 +128,22 @@ class Pacientes_model extends CI_model {
                 "provincia" => $data["provincia"],
                 "distrito" => $data["distrito"],
             ];
-            $this->db->where("codigo_paciente", $id);
+            $this->db->where("documento", $data["dni"]);
             $this->db->update("pacientes", $datos);
+
             $data = [
-                "success" => 1, // Todo OK,
-                "message" => 'Paciente Actualizado Correctamente'  // Paciente Actualizado Correctamente,
+              "success" => 1, // Todo OK,
+              "message" => 'Paciente Actualizado Correctamente'  // Paciente Actualizado Correctamente,
             ];
             echo  json_encode($data);
-        }else{
-            $data = [
-                "success" => 2, // Atencion WARNING,
-                "message" => 'Ya existe un paciente con este N° Documento'  // Ya existe un paciente con este N° Documento
-                ,
-            ];
-            echo  json_encode($data);
-        }
+        // }
+        // else {
+        //   $data = [
+        //     "success" => 2, // Atencion WARNING,
+        //     "message" => 'Ya existe un paciente con este N° Documento'  // Ya existe un paciente con este N° Documento
+        //   ];
+        //   echo  json_encode($data);
+        // }
     }
 
     public function eliminarPaciente($id) {

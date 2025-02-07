@@ -113,7 +113,7 @@ class Pacientes extends Admin_Controller {
 			"responsable" => $responsable,
 			"fecha_nacimiento" => $fecha_nacimiento
 		];
-		$this->Pacientes_model->actualizarPaciente($data, $id);
+		$this->Pacientes_model->actualizarPaciente($data);
 	}
 
 	public function eliminarPaciente() {
@@ -139,6 +139,21 @@ class Pacientes extends Admin_Controller {
 		$data = $this->Pacientes_model->cargarPacientesPaginacion($_REQUEST);
 		$datos = array("queryRecords" => $data["queryRecords"], "totalRecords" => $data["totalRecords"], "params" => $data["params"]);
 		$this->load->view('administrador/ajax/table_pacientes.php', $datos);
+	}
+
+	public function getPacienteTabla() {
+		$id = $this->input->post("dni");
+		$apellido = $this->input->post("apellido");
+
+		$result = $this->Pacientes_model->getPacienteTabla($id, $apellido)->result();
+		
+		if($result == 0) {
+		  echo "error"; 
+		}
+		else {
+		  echo json_encode($result);
+		}
+
 	}
 
 }

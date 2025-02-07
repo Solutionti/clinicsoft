@@ -47,6 +47,7 @@ $route["administracion/pacienteid"] = "administrador/pacientes/getpacienteid";
 $route["administracion/actualizarpacientes"] = "administrador/pacientes/actualizarpaciente";
 $route["administracion/eliminarpaciente/(:num)"] = "administrador/pacientes/eliminarpaciente";
 $route["administracion/editarpaciente/(:num)"] = "administrador/pacientes/editarpaciente"; 
+$route["administracion/getpacientetabla"] = "administrador/pacientes/getpacientetabla"; 
 
 //ATENCION
 $route["buscarpaciente"] = "administrador/atencion/searchatencion";

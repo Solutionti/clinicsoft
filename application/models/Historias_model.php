@@ -27,7 +27,7 @@ class Historias_model extends CI_model {
 
     public function getatencionid($paciente) {
         $this->db->select("especialidad");
-        $this->db->from("atenciones");
+        $this->db->from("admisiones");
         $this->db->where("paciente", $paciente);
         $result = $this->db->get();
 
