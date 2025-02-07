@@ -83,6 +83,9 @@
                      <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaGeneticaview">
                      <span class="sidenav-normal"> Ecografia Genetica</span>
                      </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaMorfologicaview">
+                     <span class="sidenav-normal"> Ecografia Morfologica</span>
+                     </a>
                   </li>
                </ul>
             </div>

@@ -18,6 +18,12 @@ class Ecografias extends Admin_Controller {
     public function ecografiaGeneticaView() {
         $this->load->view("administrador/ecografiagenetica");
       }
+
+    public function ecografiaMorfologicaView() {
+        $this->load->view("administrador/ecografiamorfologica");
+      }
+
+    
     
     public function createEcografiaMama() {
 

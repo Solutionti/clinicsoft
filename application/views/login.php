@@ -64,6 +64,7 @@
       </div>
       <h4 class="font-weight-bolder text-center mt-4">Iniciar sesión</h4>
     </div>
+    
     <div class="card-body">
     <div class="messageError"></div>
     <form role="form" method="post" validate id="FormLOG">
@@ -88,6 +89,7 @@
         </a>
       </diV>
       </div>
+      
       
       <div class="text-center">
         <button type="submit" class="btn color-cyan text-white w-100 my-4 mb-2" id="login">Ingresar</button>

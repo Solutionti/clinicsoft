@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecografia de Mama</title>
+    <title>Ecografia Morfologica</title>
     <?php require_once("componentes/head.php"); ?>
-    
 </head>
 <body class="g-sidenav-show bg-gray-100">
   <div class="min-height-300 bg-default position-absolute w-100"></div> 
@@ -16,9 +15,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">administración</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">ecografia de mama</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">ecografia morfologica</li>
           </ol>
-          <h6 class="font-weight-bolder text-white mb-0">ecografia genetica</h6>
+          <h6 class="font-weight-bolder text-white mb-0">Ecografia Morfologica</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -131,7 +130,7 @@
        <div class="col-md-12">
          <!-- aca va el contenido del formulario  -->
          <div class="container mt-4">
-   <h5 class="text-uppercase">Ecografía Genetica</h5>
+   <h5 class="text-uppercase">Ecografía Morfologica</h5>
    <hr>
 
    <div class="row mt-1">
@@ -219,194 +218,6 @@
         >
         </div>
         </div>
-
-         <div class="modal fade" id="ecografiagenetica" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title text-uppercase" id="exampleModalLabel">Ecografia genetica</h5>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-               </div>
-               <div class="modal-body">
-                  <div class="row ">
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Doctor tratante</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo $this->session->userdata("apellido")." ". $this->session->userdata("nombre") ?>" readonly>
-                     </div>
-                  </div>
-                  <div class="col-md-3">
-                     <div class="form-group">
-                        <label>Fecha</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo date("d-m-Y"); ?>" readonly>
-                     </div>
-                  </div>
-                  <div class="col-md-3">
-                     <div class="form-group">
-                        <label>Hora</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo date("h:i A"); ?>" readonly>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-3">
-                     <div class="form-group">
-                        <label>Documento</label>
-                        <input type="number" class="form-control form-control-sm" value="<?php echo $pacientes->documento; ?>" readonly>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Apellidos</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo $pacientes->apellido; ?>" readonly>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Nombres</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo $pacientes->nombre; ?>" readonly>
-                     </div>
-                  </div>
-                  <div class="col-md-1">
-                     <div class="form-group">
-                        <label>Edad</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo $pacientes->edad; ?>" readonly>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                 <div class="col-md-3">
-                    <label>Feto / Embriòn</label>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                     <label class="form-check-label" for="inlineRadio1">Unico</label>
-                   </div>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                     <label class="form-check-label" for="inlineRadio2">Multiple</label>
-                   </div>
-                 </div>
-               </div>
-               <div class="row mt-2">
-               <div class="col-md-3">
-                    <label>Situaciòn</label>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                     <label class="form-check-label" for="inlineRadio1">Cefalico</label>
-                   </div>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                     <label class="form-check-label" for="inlineRadio2">Podatico</label>
-                   </div>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                     <label class="form-check-label" for="inlineRadio2">Indiferente</label>
-                   </div>
-                 </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="form-group">
-                        <label>Liquido amniotico</label>
-                        <textarea id="liquidoAmniotico" class="form-control" rows="1">volumen normal para la edad gestacional</textarea>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-1">
-                     <div class="form-group">
-                        <label>Placenta</label>
-                        <input id="placenta" type="text" class="form-control form-control-sm" placeholder="Grados"> 
-                     </div>
-                  </div>
-                  <div class="col-md-1">
-                     <label>LCR</label> 
-                     <input id="lcr" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-1 mt-4">
-                    <label class="mt-3">mm</label>
-                  </div>
-                  <div class="col-md-1">
-                     <label>LCF</label> 
-                     <input id="lcf" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-1 mt-4 text-center">
-                    <label class="mt-3">X</label>
-                  </div>
-                  <div class="col-md-1">
-                     <label>. </label> 
-                     <input id="." type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-2">
-                     <label>Art Uterina Derecha</label> 
-                     <input id="art-Uteder" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-2">
-                     <label>Art Uterina Izquierda</label> 
-                     <input id="art-Uteizq" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-2">
-                     <label>IP Promedio</label> 
-                     <input id="ippromedio" type="text" class="form-control form-control-sm">
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label for=""></label>
-                        <textarea id="huesoNasal" class="form-control" rows="1">Hueso nasal presente</textarea>
-                     </div>
-                  </div>
-                  <div class="col-md-2">
-                     <label>Translucencia nucal</label> 
-                     <input id="translucenciaNucal" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-1 mt-4">
-                    <label class="mt-3">mm</label>
-                  </div>
-                  <div class="col-md-5">
-                     <div class="form-group">
-                        <label for=""></label>
-                        <textarea id="ductudVenosa" class="form-control" rows="1">Ductus venosa onda trifasica normal.</textarea>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Conclusion</label>
-                        <textarea id="conclusion" rows="2" class="form-control"></textarea>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Sugerencia</label>
-                        <textarea id="sugerencia" rows="2" class="form-control"></textarea>
-                     </div>
-                  </div>
-               </div>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-danger">pdf</button>
-                  <button type="button" class="btn btn-primary">Guardar</button>
-               </div>
-            </div>
-         </div>
-      </div>
-      </div>
-      </div>
        </div>
      </div>
      <br>  

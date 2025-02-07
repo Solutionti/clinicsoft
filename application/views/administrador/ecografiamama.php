@@ -129,90 +129,96 @@
      <div class="row mt-4">
        <div class="col-md-12">
          <!-- aca va el contenido del formulario  -->
-         <div class="modal fade" id="ecografiamama" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-fullscreen" role="document">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title text-uppercase" id="exampleModalLabel">Ecografia de mama</h5>
-               <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-               </button>
+         <div class="container mt-4">
+   <h5 class="text-uppercase">Ecografía de Mama</h5>
+   <hr>
+
+   <div class="row mt-1">
+      <div class="col-md-6">
+         <div class="form-group">
+            <label>Doctor tratante</label>
+            <input
+               type="text"
+               class="form-control form-control-sm"
+               value="<?php echo $this->session->userdata('apellido'). ' ' . $this->session->userdata('nombre'); ?>"
+               readonly
+               id="codigo_doctor"
+            >
+         </div>
+      </div>
+      <div class="col-md-3">
+         <div class="form-group">
+            <label>Fecha</label>
+            <input
+               type="text"
+               class="form-control form-control-sm"
+               value="<?php echo date('d-m-Y'); ?>"
+               readonly
+            >
+         </div>
+      </div>
+      <div class="col-md-3">
+         <div class="form-group">
+            <label>Hora</label>
+            <input
+               type="text"
+               class="form-control form-control-sm"
+               value="<?php echo date('h:i A'); ?>"
+               readonly
+            >
+         </div>
+      </div>
+   </div>
+         <div class="row">
+          <div class="col-md-3">
+          <div class="form-group input-group-sm">
+          <label>DNI Paciente</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="dni" style="height: 32px;padding: 0px;" minlength="7" maxlength="11" required>
+           <div class="input-group-append">
+          <button type="button" style="padding: 5px;" class="btn btn-primary" id="lupa_DNI"><i class="fa fa-search"></i></button>
+              </div>
             </div>
-            <div class="modal-body">
-               <div class="row mt-1">
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Doctor tratante</label>
-                        <input
-                          type="text"
-                          class="form-control form-control-sm"
-                          value="<?php echo $this->session->userdata("apellido")." ". $this->session->userdata("nombre") ?>"
-                          readonly
-                          id="codigo_doctor"
-                        >
-                     </div>
-                  </div>
-                  <div class="col-md-3">
-                     <div class="form-group">
-                        <label>Fecha</label>
-                        <input
-                          type="text"
-                          class="form-control form-control-sm"
-                          value="<?php echo date("d-m-Y"); ?>"
-                          readonly
-                        >
-                     </div>
-                  </div>
-                  <div class="col-md-3">
-                     <div class="form-group">
-                        <label>Hora</label>
-                        <input
-                          type="text"
-                          class="form-control form-control-sm"
-                          value="<?php echo date("h:i A"); ?>"
-                          readonly
-                        >
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-3">
-                     <div class="form-group">
-                        <label>Documento</label>
-                        <input
-                          type="number"
-                          class="form-control form-control-sm"
-                          value="<?php echo $pacientes->documento; ?>"
-                          readonly
-                          id="documento_paciente"
-                        >
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Apellidos</label>
-                        <input
-                          type="text"
-                          class="form-control form-control-sm"
-                          value="<?php echo $pacientes->apellido; ?>"
-                          readonly
-                        >
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Nombres</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo $pacientes->nombre; ?>" readonly>
-                     </div>
-                  </div>
-                  <div class="col-md-1">
-                     <div class="form-group">
-                        <label>Edad</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo $pacientes->edad; ?>" readonly>
-                     </div>
-                  </div>
-               </div>
-               <br>
+          </div>
+        </div>
+    
+    <div class="col-md-3">
+        <label class="form-label">Nombre</label>
+        <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="nombre_ecografia_abdomninal"
+        >
+    </div>
+
+    <div class="col-md-3">
+        <label class="form-label">Apellidos</label>
+        <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="apellido_ecografia_abdomninal"
+        >
+    </div>
+
+    <div class="col-md-1">
+        <label class="form-label">Edad</label>
+        <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="edad_ecografia_abdomninal"
+        >
+    </div>
+
+    <div class="col-md-2">
+        <label class="form-label">HC</label>
+        <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="hc_ecografia_abdomninal"
+        >
+        </div>
+        </div>
+         
                <div class="row">
                   <div class="col-md-4">
                      <h6 class="text-danger">MAMA IZQUIERDA</h6>
