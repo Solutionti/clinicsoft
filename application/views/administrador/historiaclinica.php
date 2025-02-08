@@ -164,8 +164,8 @@
                           <li><i class="fas fa-weight text-dark mt-2"></i> Peso</li>
                           <li><i class="fas fa-child mt-2 text-warning"></i> Masa Corporal</li>
                           <li><i class="fas fa-thermometer mt-2 text-success"></i> Temperatura</li>
-                          <li><i class="fas fa-diagnoses text-dark"></i> Frecu Respira</li>
-                          <li><i class="fas fa-heartbeat mt-2 text-danger"></i> Frecu Cardiaca</li>
+                          <li><i class="fas fa-diagnoses text-dark"></i> Frec. Respiratoria</li>
+                          <li><i class="fas fa-heartbeat mt-2 text-danger"></i> Frec. Cardiaca</li>
                           <li><i class="fas fa-child mt-2 text-danger"></i> Porcentaje Grasa</li>
                         </ul>
                     </div>

@@ -165,7 +165,10 @@ $route["administracion/crearpagoadicional"] = "administrador/financiero/crearpag
 $route["administracion/ecografiaMamaview"] = "administrador/ecografias/ecografiaMamaview";
 $route["administracion/ecografiaGeneticaview"] = "administrador/ecografias/ecografiaGeneticaview";
 $route["administracion/ecografiaMorfologicaview"] = "administrador/ecografias/ecografiaMorfologicaview";
-
+$route["administracion/ecografiaTrasvaginalview"] = "administrador/ecografias/ecografiaTrasvaginalview";
+$route["administracion/ecografiaPelvicaview"] = "administrador/ecografias/ecografiaPelvicaview";
+$route["administracion/ecografiaObstetricaview"] = "administrador/ecografias/ecografiaObstetricaview";
+$route["administracion/ecografiaAbdominalview"] = "administrador/ecografias/ecografiaAbdominalview";
 /*
 **********************************************************
 ***** SECCION DE CONSULTA DE LABORATORIO PAGINA WEB ******

@@ -22,6 +22,18 @@ class Ecografias extends Admin_Controller {
     public function ecografiaMorfologicaView() {
         $this->load->view("administrador/ecografiamorfologica");
       }
+    public function ecografiaTrasvaginalView() {
+        $this->load->view("administrador/ecografiatrasvaginal");
+      }
+    public function ecografiaPelvicaView() {
+        $this->load->view("administrador/ecografiapelvica");
+      }
+      public function ecografiaObstetricaView() {
+        $this->load->view("administrador/ecografiaobstetrica");
+      }
+      public function ecografiaAbdominalView() {
+        $this->load->view("administrador/ecografiaabdominal");
+      }
 
     
     

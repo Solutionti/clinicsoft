@@ -86,6 +86,18 @@
                      <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaMorfologicaview">
                      <span class="sidenav-normal"> Ecografia Morfologica</span>
                      </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaTrasvaginalview">
+                     <span class="sidenav-normal"> Ecografia Trasvaginal</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaPelvicaview">
+                     <span class="sidenav-normal"> Ecografia Pelvica</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaObstetricaview">
+                     <span class="sidenav-normal"> Ecografia Obstetrica</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaAbdominalview">
+                     <span class="sidenav-normal"> Ecografia Abdominal</span>
+                     </a>
                   </li>
                </ul>
             </div>
