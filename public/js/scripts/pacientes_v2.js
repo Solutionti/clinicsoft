@@ -340,8 +340,9 @@ $("#btn-actualizar").on("click", function () {
 function buscarPacienteBaseDatos() {
   let url = baseurl + "administracion/getpacientetabla",
       apellido = $("#apellido_buscar").val().replace(/%/g, ''),
-      dni = $("#dni_buscar").val();
-
+      dni = $("#dni_buscar").val(),
+	  cadena = "";
+	  response = [];
   $.ajax({
     url: url,
 	method: "POST",
@@ -349,8 +350,8 @@ function buscarPacienteBaseDatos() {
 	  dni: dni,
 	  apellido: apellido	
 	},
-	success: function(response) {
-		console.log(response);
+	success: function(response) { 
+	 
 	  if(response == 'error'){
 		$("body").overhang({
 			type: "error",
@@ -359,11 +360,73 @@ function buscarPacienteBaseDatos() {
 	  }
 	  else {
        paciente = JSON.parse(response);
+	   const tbody  = document.getElementById('table_buscar').querySelector('tbody');
+	   tbody.innerHTML = '';
 	   paciente.forEach(pacientes => {
-		let cadena = "<tr onclick='pasarDatosPaciente(\"" + pacientes.documento + "\")'><td><div class='form-check'><input class='form-check-input' type='radio' name='flexRadioDefault' id='flexRadioDefault1' id='checkpacientes'></div></td><td><div class='d-flex px-2 py-1'><div><img src='https://radiarte.com/application/files/6917/0923/2244/depositphotos_134255588-stock-illustration-empty-photo-of-male-profile.jpg' class='avatar avatar-sm me-3'></div><div class='d-flex flex-column justify-content-center'><p class='mb-0 text-xs text-uppercase'>"+pacientes.nombre + ' ' +pacientes.apellido+"</p><p class='text-xs text-secondary mb-0 text-uppercase'>"+pacientes.documento+"</p></div></div></td><td>"+pacientes.telefono+"</td><td>"+pacientes.fecha_nacimiento+"</td><td>"+pacientes.sexo+"</td><td>"+pacientes.estado_civil+"</td></tr>";
-	     document.getElementById("table_buscar").innerHTML = cadena;
+		// Crea una nueva fila de tabla
+const tr = document.createElement('tr');
+tr.setAttribute('onclick', `pasarDatosPaciente("${pacientes.documento}")`);
+
+// Agrega la celda con el radio button
+const tdRadio = document.createElement('td');
+const divRadio = document.createElement('div');
+divRadio.classList.add('form-check');
+const inputRadio = document.createElement('input');
+inputRadio.classList.add('form-check-input');
+inputRadio.setAttribute('type', 'radio');
+inputRadio.setAttribute('name', 'flexRadioDefault');
+inputRadio.setAttribute('id', `checkpacientes_${pacientes.documento}`); // Aseguramos que el id sea único
+divRadio.appendChild(inputRadio);
+tdRadio.appendChild(divRadio);
+tr.appendChild(tdRadio);
+
+// Agrega la celda con la información del paciente
+const tdInfo = document.createElement('td');
+const divInfo = document.createElement('div');
+divInfo.classList.add('d-flex', 'px-2', 'py-1');
+const divImg = document.createElement('div');
+const img = document.createElement('img');
+img.src = 'https://radiarte.com/application/files/6917/0923/2244/depositphotos_134255588-stock-illustration-empty-photo-of-male-profile.jpg';
+img.classList.add('avatar', 'avatar-sm', 'me-3');
+divImg.appendChild(img);
+const divText = document.createElement('div');
+divText.classList.add('d-flex', 'flex-column', 'justify-content-center');
+const pName = document.createElement('p');
+pName.classList.add('mb-0', 'text-xs', 'text-uppercase');
+pName.textContent = `${pacientes.nombre} ${pacientes.apellido}`;
+const pDoc = document.createElement('p');
+pDoc.classList.add('text-xs', 'text-secondary', 'mb-0', 'text-uppercase');
+pDoc.textContent = pacientes.documento;
+divText.appendChild(pName);
+divText.appendChild(pDoc);
+divInfo.appendChild(divImg);
+divInfo.appendChild(divText);
+tdInfo.appendChild(divInfo);
+tr.appendChild(tdInfo);
+
+// Agrega las demás celdas
+const tdTelefono = document.createElement('td');
+tdTelefono.textContent = pacientes.telefono;
+tr.appendChild(tdTelefono);
+
+const tdFechaNacimiento = document.createElement('td');
+tdFechaNacimiento.textContent = pacientes.fecha_nacimiento;
+tr.appendChild(tdFechaNacimiento);
+
+const tdSexo = document.createElement('td');
+tdSexo.textContent = pacientes.sexo;
+tr.appendChild(tdSexo);
+
+const tdEstadoCivil = document.createElement('td');
+tdEstadoCivil.textContent = pacientes.estado_civil;
+tr.appendChild(tdEstadoCivil);
+
+// Finalmente, agrega la fila al cuerpo de la tabla
+document.getElementById('table_buscar').querySelector('tbody').appendChild(tr);
 	   });
-	  }
+	// cadena = "<tr onclick='pasarDatosPaciente(\"" + pacientes.documento + "\")'><td><div class='form-check'><input class='form-check-input' type='radio' name='flexRadioDefault' id='flexRadioDefault1' id='checkpacientes'></div></td><td><div class='d-flex px-2 py-1'><div><img src='https://radiarte.com/application/files/6917/0923/2244/depositphotos_134255588-stock-illustration-empty-photo-of-male-profile.jpg' class='avatar avatar-sm me-3'></div><div class='d-flex flex-column justify-content-center'><p class='mb-0 text-xs text-uppercase'>"+pacientes.nombre + ' ' +pacientes.apellido+"</p><p class='text-xs text-secondary mb-0 text-uppercase'>"+pacientes.documento+"</p></div></div></td><td>"+pacientes.telefono+"</td><td>"+pacientes.fecha_nacimiento+"</td><td>"+pacientes.sexo+"</td><td>"+pacientes.estado_civil+"</td></tr>";
+	//    document.getElementById("table_buscar").innerHTML = cadena;
+}
 	},
 	error: function() {
 	  $("body").overhang({
