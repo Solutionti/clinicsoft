@@ -195,7 +195,7 @@
           <div class="row mt-3">
             <div class="col-md-12">
               <div class="table-responsive">
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover" id="table_buscar">
                   <thead>
                     <tr class="text-xs text-white bg-default">
                       <th ></th>
@@ -206,7 +206,7 @@
                       <th class="text-xs text-white bg-default">ESTADO CIVIL</th>
                     </tr>
                   </thead>
-                  <tbody id="table_buscar">
+                  <tbody>
                     
                   </tbody>
                 </table>
