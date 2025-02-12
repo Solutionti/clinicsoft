@@ -98,6 +98,24 @@
                      <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaAbdominalview">
                      <span class="sidenav-normal"> Ecografia Abdominal</span>
                      </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaProstaticaview">
+                     <span class="sidenav-normal"> Ecografia Prostatica</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaRenalview">
+                     <span class="sidenav-normal"> Ecografia Renal</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaTiroidesview">
+                     <span class="sidenav-normal"> Ecografia Tiroides</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaHisteronosografiaview">
+                     <span class="sidenav-normal"> Ecografia Histeronosografia</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaArterialview">
+                     <span class="sidenav-normal"> Ecografia Arterial</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaVenosaview">
+                     <span class="sidenav-normal"> Ecografia Venosa</span>
+                     </a>
                   </li>
                </ul>
             </div>

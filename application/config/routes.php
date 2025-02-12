@@ -169,6 +169,12 @@ $route["administracion/ecografiaTrasvaginalview"] = "administrador/ecografias/ec
 $route["administracion/ecografiaPelvicaview"] = "administrador/ecografias/ecografiaPelvicaview";
 $route["administracion/ecografiaObstetricaview"] = "administrador/ecografias/ecografiaObstetricaview";
 $route["administracion/ecografiaAbdominalview"] = "administrador/ecografias/ecografiaAbdominalview";
+$route["administracion/ecografiaProstaticaview"] = "administrador/ecografias/ecografiaProstaticaview";
+$route["administracion/ecografiaRenalview"] = "administrador/ecografias/ecografiaRenalview";
+$route["administracion/ecografiaTiroidesview"] = "administrador/ecografias/ecografiaTiroidesview";
+$route["administracion/ecografiaHisteronosografiaview"] = "administrador/ecografias/ecografiaHisteronosografiaview";
+$route["administracion/ecografiaArterialview"] = "administrador/ecografias/ecografiaArterialview";
+$route["administracion/ecografiaVenosaview"] = "administrador/ecografias/ecografiaVenosaview";
 /*
 **********************************************************
 ***** SECCION DE CONSULTA DE LABORATORIO PAGINA WEB ******
