@@ -187,7 +187,7 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="nombre_ecografia_abdomninal"
+            
         >
     </div>
 
@@ -196,7 +196,6 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="apellido_ecografia_abdomninal"
         >
     </div>
 
@@ -205,7 +204,6 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="edad_ecografia_abdomninal"
         >
     </div>
 
@@ -214,7 +212,6 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="hc_ecografia_abdomninal"
         >
         </div>
         </div>
