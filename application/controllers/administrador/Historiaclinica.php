@@ -1048,7 +1048,7 @@ class Historiaclinica extends Admin_Controller
 		$datosalergias = $this->Historias_model->getAllAlergias($documento);
 		$datosmedicamentos = $this->Historias_model->getMedicamentosHistoria($documento, $triage);
 		$datosdiagnosticos = $this->Historias_model->getDiagnosticosHistoria($documento, $triage);
-
+		
 		$this->load->library('PDF_UTF8');
 		$pdf = new PDF_UTF8();
 		$pdf->AddPage();
@@ -2181,5 +2181,15 @@ class Historiaclinica extends Admin_Controller
 		];			
 		$this->Historias_model->crearExamenAuxiliaresResonancia($data5);
 	  }
+	}
+
+	public function getConsultasGeneralCodigo($codigo, $paciente) {
+		$data = $this->Historias_model->getConsultasGeneralCodigo($codigo, $paciente)->result()[0];
+		echo json_encode($data);
+	}
+
+	public function getGinecologiaCodigo($codigo, $paciente) {
+		$data = $this->Historias_model->getGinecologiaCodigo($codigo, $paciente)->result()[0];
+		echo json_encode($data);
 	}
 }
