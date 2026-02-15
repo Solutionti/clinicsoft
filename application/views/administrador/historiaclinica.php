@@ -1335,8 +1335,6 @@
       <script src="<?php echo base_url(); ?>public/js/scripts/seleccionarPerfil.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/get_Items.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/ecografia.js"></script>
-      <script src="<?php echo base_url(); ?>public/js/scripts/tomografia.js"></script>
-      <script src="<?php echo base_url(); ?>public/js/scripts/resonancia.js"></script>
       <script>
         $(document).ready(function() {
           $('.form-field').on('input', function() {

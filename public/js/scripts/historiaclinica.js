@@ -229,13 +229,6 @@ $('#table-laboratorio-items').on('dblclick', 'tr', function() {
 
 // Función para guardar la orden de laboratorio
 function crearOrdenLaboratorioHistoria() {
-    if (elementos_laboratorio.length === 0) {
-        $("body").overhang({
-            type: "warn",
-            message: "Debe seleccionar al menos un análisis"
-        });
-        return;
-    }
     
     var url = baseurl + "administracion/crearOrdenLaboratorio";
     var documento = $("#documento_historia").val(),
@@ -247,10 +240,7 @@ function crearOrdenLaboratorioHistoria() {
     
     // Recorrer los elementos del laboratorio seleccionados
     for (let i = 0; i < elementos_laboratorio.length; i++) {
-        // Asegurarse de que el elemento tenga un ID antes de agregarlo
-        if (elementos_laboratorio[i] && elementos_laboratorio[i].id) {
-            ordenlab.push(elementos_laboratorio[i].id);
-        }
+       ordenlab.push(elementos_laboratorio[i].id);
     }
     $.ajax({
         url: url,
@@ -804,7 +794,7 @@ $(document).ready(function (){
       method: "POST",
       data: { documento: documento  },
       success: function (data) {
-        console.log(data);
+        
         data = JSON.parse(data);
         document.getElementById('estatura').innerHTML = '<span class="small">' + data.talla + ' cm</span>';
         document.getElementById('cardiaca').innerHTML = '<span class="small">' + data.frecuencia_cardiaca + ' lpm</span>';
@@ -1334,6 +1324,22 @@ function abrirHistoriaClinica(tipo) {
             yesMessage: "Si",
             noMessage: "No",
             callback: function (value) {
+            const pathname = window.location.pathname;  // Obtiene la ruta de la URL actual
+            const parts = pathname.split('/');  // Divide la ruta
+            const id = parts[parts.length - 1];  // Extrae el último valor, que es el ID
+    
+            var url1 = baseurl + "administracion/triajehistorias",
+            documento = id;
+
+            $.ajax({
+              url: url1,
+              method: "POST",
+              data: { documento: documento  },
+              success: function (response) {
+                response = JSON.parse(response);
+                $("#consecutivo_historia").val(response.codigo_triaje);
+              }
+            });
             if(value === false){
               if(tipo == 1) {
                 document.getElementById('tphistoria').value = tipo;
@@ -2104,18 +2110,19 @@ function abrirEditarModalHistoriaClinicaGeneral(codigo) {
        primary: "#5e72e4",
        accent: "#ffffff",
        yesColor: "#3498DB",
-       message: "¿Desea editar la historia clínica general?",
+       message: "¿Desea editar la historia Clínica General?",
        overlay: true,
        callback: function (value) {
          if(value == false){
          }
          else {
+           $("#consecutivo_historia").val(triage);
            $.ajax({
              url: url,
              method: "GET",
              success: function(data) {
                data = JSON.parse(data);
-               console.log(data);
+               
                //
                document.getElementById('tphistoria').value = 1;
                  $('#tphistoria').trigger('change');
@@ -2161,8 +2168,180 @@ function abrirEditarModalHistoriaClinicaGeneral(codigo) {
                $("#plan_referencia").val(data.referencia);
                $("#plan_firma").val(data.firma_medico);
 
+               //DIAGNOSTICOS
+               var url2 = baseurl + "administracion/getdiagnosticoscodigo/" + triage + '/' +  paciente + '/' + 1;
+
+                $.ajax({
+                    url: url2,
+                    method: "GET",
+                    success: function(data) {
+                      data = JSON.parse(data);
+                      data.forEach(function(diagnostico, index) {
+                        elem_lab = [
+                          diagnostico.iddiagnostico,
+                          diagnostico.codigo_diagnosti, 
+                          diagnostico.nombrediagnostico,
+                          diagnostico.tipo, 
+                        ];  
+                        elementos_general.push(elem_lab);
+                        table_general.row(this).remove();
+                        table_lab_mini2.row.add(elem_lab).draw(false);
+                        total_ = 0;
+                        for (let i = 0; i < elementos_general.length; i++) {
+                          total_ += elementos_general[i][2] * 1;
+                        }
+                        $("#total").val((total_).toFixed(2));
+                        table_general.draw(false);
+                      });
+                    }
+                });
+
+                //PROCEDIMIENTOS
+                var url5 = baseurl + "administracion/getprocedimientoscodigo/" + triage + '/' +  paciente + '/' + 1;
+                $.ajax({
+                    url: url5,
+                    method: "GET",
+                    success: function(response) {
+                      response = JSON.parse(response);
+                      response.forEach(function(proce, index) {
+                        elemDiagnosti = [
+                          proce.codigo_procedimiento,
+                          proce.nombreprocedimiento, 
+                          proce.texto_plantilla 
+                        ];
+                        elementos_procedimientos2.push(elemDiagnosti);
+                        table_procedi.row(this).remove();
+                        table_lab_mini4.row.add(elemDiagnosti).draw(false);
+                        total_ = 0;
+                        for (let x = 0; x < elementos_procedimientos2.length; x++) {
+                          total_ += elementos_procedimientos2[x][2] * 1;
+                        }
+                        $("#total").val((total_).toFixed(2));
+                        table_procedi.draw(false);
+                      });
+                    }
+                });
+
+                //EXAMENES AUXILIARES
+                  //ECOGRAFIAS 
+                  let url6 = baseurl + "administracion/auxiliarecografias/" + triage + '/' +  paciente;
+                    $.ajax({
+                        url: url6,
+                        method: "GET",
+                        success: function(data) {
+                            data = JSON.parse(data);
+                            data.forEach(function(ecografia) {
+                                elemEco = [
+                                    ecografia.codigoauxiliar,
+                                    ecografia.nombreauxiliar
+                                ];
+                                elementos_eco.push(elemEco);
+                                table_eco.row(this).remove();
+                                table_eco_mini.row.add(elemEco).draw(false);
+                                total_ = 0;
+                                for (let i = 0; i < elementos_eco.length; i++) {
+                                  total_ += elementos_eco[i][2] * 1;
+                                }
+                                $("#total").val((total_).toFixed(2));
+                                table_eco.draw(false);
+                            });
+                        }
+                    });
+
+                  //TOMOGRAFIAS
+                  let url7 = baseurl + "administracion/auxiliaretomografias/" + triage + '/' +  paciente;
+                    $.ajax({
+                        url: url7,
+                        method: "GET",
+                        success: function(data) {
+                          data = JSON.parse(data);
+                          data.forEach(function(tomografia) {
+                            elemTomo = [
+                                tomografia.codigoauxiliar,
+                                tomografia.nombreauxiliar
+                            ];
+                            elementos_tomo.push(elemTomo);
+                            table_tomo.row(this).remove();
+                            table_tomo_mini.row.add(elemTomo).draw(false);
+                            total_ = 0;
+                            for (let i = 0; i < elementos_tomo.length; i++) {
+                              total_ += elementos_tomo[i][2] * 1;
+                            }
+                            $("#total").val((total_).toFixed(2));
+                            table_tomo.draw(false);
+                          });
+                        }
+                    });
+
+                  //RESONANCIAS
+                  let url8 = baseurl + "administracion/auxiliareresonancias/" + triage + '/' +  paciente;
+                    $.ajax({
+                        url: url8,
+                        method: "GET",
+                        success: function(data) {
+                            data = JSON.parse(data);
+                            data.forEach(function(resonancia) {
+                              elemReso = [
+                                resonancia.codigoauxiliar,
+                                resonancia.nombreauxiliar
+                              ];
+                              elementos_reso.push(elemReso);
+                              table_reso.row(this).remove();
+                              table_reso_mini.row.add(elemReso).draw(false);
+                                total_ = 0;
+                                for (let i = 0; i < elementos_reso.length; i++) {
+                                  total_ += elementos_reso[i][2] * 1;
+                                }
+                                $("#total").val((total_).toFixed(2));
+                                table_reso.draw(false);
+                            });
+                        }
+                    });
+
+                //REECETA MEDICA
+                var url3 = baseurl + "administracion/getmedicamentoscodigo/" + triage + '/' +  paciente;
+                $.ajax({
+                    url: url3,
+                    method: "GET",
+                    success: function(data) {
+                      data = JSON.parse(data);
+                      document.getElementById('listarecetamedica').innerHTML = '';
+                      data.forEach(function(med) {
+                        document.getElementById('listarecetamedica').innerHTML += `
+                        <tr>
+                          <td class="text-xs">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminarMedicamento('${med.medicamento}')">
+                              <i class="fa fa-trash"></i>
+                            </button>
+                          </td>
+                          <td class="text-xs text-uppercase">${med.medicamento}</td>
+                          <td class="text-xs text-uppercase">${med.cantidad}</td>
+                          <td class="text-xs text-uppercase">${med.dosis}</td>
+                          <td class="text-xs text-uppercase">${med.via_aplicacion}</td>
+                          <td class="text-xs text-uppercase">${med.frecuencia}</td>
+                          <td class="text-xs text-uppercase">${med.duracion}</td>
+                        </tr>
+                       `;
+                    });
+                  }
+                });
              }
            });
+           //CITAS MEDICAS 
+           let url4 = baseurl + "administracion/getcitascodigo/" + triage + '/' +  paciente;
+              $.ajax({
+                url: url4,
+                method: "GET",
+                success: function(data) {
+                  data = JSON.parse(data);
+                  $("#medico_cita").val(data.doctor);
+                  $("#fecha_cita").val(data.fecha);
+                  $("#estado_cita").val(data.estado);
+                  $("#comentarios_cita").val(data.comentarios);
+                }
+              });
+                        
+           
          }
        }
   });
@@ -2179,13 +2358,14 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
        primary: "#5e72e4",
        accent: "#ffffff",
        yesColor: "#3498DB",
-       message: "¿Desea editar la historia clínica general?",
+       message: "¿Desea editar la historia Clínica Gineologica?",
        overlay: true,
        callback: function (value) {
          if(value == false){
 
          }
          else {
+           $("#consecutivo_historia").val(triage);
            $.ajax({
              url: url,
              method: "GET",
@@ -2236,9 +2416,180 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
                $("#plan_trabajo1").val(data.plan_trabajo);
                $("#proxima_cita1").val(data.proxima_cita);
                $("#firma_medico1").val(data.firma_medico);
+
+               //DIAGNOSTICOS
+               var url2 = baseurl + "administracion/getdiagnosticoscodigo/" + triage + '/' +  paciente + '/' + 2;
+
+                $.ajax({
+                    url: url2,
+                    method: "GET",
+                    success: function(data) {
+                      data = JSON.parse(data);
+                      data.forEach(function(diagnostico, index) {
+                        elem_lab = [
+                          diagnostico.iddiagnostico,
+                          diagnostico.codigo_diagnosti, 
+                          diagnostico.nombrediagnostico,
+                          diagnostico.tipo, 
+                        ];  
+                        elementos_general.push(elem_lab);
+                        table_general.row(this).remove();
+                        table_lab_mini2.row.add(elem_lab).draw(false);
+                        total_ = 0;
+                        for (let i = 0; i < elementos_general.length; i++) {
+                          total_ += elementos_general[i][2] * 1;
+                        }
+                        $("#total").val((total_).toFixed(2));
+                        table_general.draw(false);
+                      });
+                    }
+                });
+
+                //PROCEDIMIENTOS
+                var url5 = baseurl + "administracion/getprocedimientoscodigo/" + triage + '/' +  paciente + '/' + 2;
+                $.ajax({
+                    url: url5,
+                    method: "GET",
+                    success: function(response) {
+                      response = JSON.parse(response);
+                      response.forEach(function(proce, index) {
+                        elemDiagnosti = [
+                          proce.codigo_procedimiento,
+                          proce.nombreprocedimiento, 
+                          proce.texto_plantilla 
+                        ];
+                        elementos_procedimientos2.push(elemDiagnosti);
+                        table_procedi.row(this).remove();
+                        table_lab_mini4.row.add(elemDiagnosti).draw(false);
+                        total_ = 0;
+                        for (let x = 0; x < elementos_procedimientos2.length; x++) {
+                          total_ += elementos_procedimientos2[x][2] * 1;
+                        }
+                        $("#total").val((total_).toFixed(2));
+                        table_procedi.draw(false);
+                      });
+                    }
+                });
+
+                //EXAMENES AUXILIARES
+                  //ECOGRAFIAS 
+                  let url6 = baseurl + "administracion/auxiliarecografias/" + triage + '/' +  paciente;
+                    $.ajax({
+                        url: url6,
+                        method: "GET",
+                        success: function(data) {
+                            data = JSON.parse(data);
+                            data.forEach(function(ecografia) {
+                                elemEco = [
+                                    ecografia.codigoauxiliar,
+                                    ecografia.nombreauxiliar
+                                ];
+                                elementos_eco.push(elemEco);
+                                table_eco.row(this).remove();
+                                table_eco_mini.row.add(elemEco).draw(false);
+                                total_ = 0;
+                                for (let i = 0; i < elementos_eco.length; i++) {
+                                  total_ += elementos_eco[i][2] * 1;
+                                }
+                                $("#total").val((total_).toFixed(2));
+                                table_eco.draw(false);
+                            });
+                        }
+                    });
+
+                  //TOMOGRAFIAS
+                  let url7 = baseurl + "administracion/auxiliaretomografias/" + triage + '/' +  paciente;
+                    $.ajax({
+                        url: url7,
+                        method: "GET",
+                        success: function(data) {
+                          data = JSON.parse(data);
+                          data.forEach(function(tomografia) {
+                            elemTomo = [
+                                tomografia.codigoauxiliar,
+                                tomografia.nombreauxiliar
+                            ];
+                            elementos_tomo.push(elemTomo);
+                            table_tomo.row(this).remove();
+                            table_tomo_mini.row.add(elemTomo).draw(false);
+                            total_ = 0;
+                            for (let i = 0; i < elementos_tomo.length; i++) {
+                              total_ += elementos_tomo[i][2] * 1;
+                            }
+                            $("#total").val((total_).toFixed(2));
+                            table_tomo.draw(false);
+                          });
+                        }
+                    });
+
+                  //RESONANCIAS
+                  let url8 = baseurl + "administracion/auxiliareresonancias/" + triage + '/' +  paciente;
+                    $.ajax({
+                        url: url8,
+                        method: "GET",
+                        success: function(data) {
+                            data = JSON.parse(data);
+                            data.forEach(function(resonancia) {
+                              elemReso = [
+                                resonancia.codigoauxiliar,
+                                resonancia.nombreauxiliar
+                              ];
+                              elementos_reso.push(elemReso);
+                              table_reso.row(this).remove();
+                              table_reso_mini.row.add(elemReso).draw(false);
+                                total_ = 0;
+                                for (let i = 0; i < elementos_reso.length; i++) {
+                                  total_ += elementos_reso[i][2] * 1;
+                                }
+                                $("#total").val((total_).toFixed(2));
+                                table_reso.draw(false);
+                            });
+                        }
+                    });
+
+                //REECETA MEDICA
+                var url3 = baseurl + "administracion/getmedicamentoscodigo/" + triage + '/' +  paciente;
+                $.ajax({
+                    url: url3,
+                    method: "GET",
+                    success: function(data) {
+                      data = JSON.parse(data);
+                      document.getElementById('listarecetamedica').innerHTML = '';
+                      data.forEach(function(med) {
+                        document.getElementById('listarecetamedica').innerHTML += `
+                        <tr>
+                          <td class="text-xs">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminarMedicamento('${med.medicamento}')">
+                              <i class="fa fa-trash"></i>
+                            </button>
+                          </td>
+                          <td class="text-xs text-uppercase">${med.medicamento}</td>
+                          <td class="text-xs text-uppercase">${med.cantidad}</td>
+                          <td class="text-xs text-uppercase">${med.dosis}</td>
+                          <td class="text-xs text-uppercase">${med.via_aplicacion}</td>
+                          <td class="text-xs text-uppercase">${med.frecuencia}</td>
+                          <td class="text-xs text-uppercase">${med.duracion}</td>
+                        </tr>
+                       `;
+                    });
+                  }
+                });
              }
-          });
-      }
+           });
+           //CITAS MEDICAS 
+           let url4 = baseurl + "administracion/getcitascodigo/" + triage + '/' +  paciente;
+              $.ajax({
+                url: url4,
+                method: "GET",
+                success: function(data) {
+                  data = JSON.parse(data);
+                  $("#medico_cita").val(data.doctor);
+                  $("#fecha_cita").val(data.fecha);
+                  $("#estado_cita").val(data.estado);
+                  $("#comentarios_cita").val(data.comentarios);
+                }
+              });
+       }
     }
   });   
 }

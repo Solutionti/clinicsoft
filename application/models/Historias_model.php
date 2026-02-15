@@ -962,6 +962,90 @@ class Historias_model extends CI_model
 
     return $result;
   }
+
+  //diagnosticos 
+  public function getdiagnosticosEditar($triage, $paciente, $especialidad) {
+    $this->db->select('d.*, dc.descripcion as nombrediagnostico, dc.id as iddiagnostico');
+    $this->db->from('diagnosticos d');
+    $this->db->join('diagnosticoscie10 dc', 'd.codigo_diagnosti = dc.clave');
+    $this->db->where('d.codigo_historia', $triage);
+    $this->db->where('d.paciente', $paciente);
+    $this->db->where('tipo_especialidad', $especialidad);
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  //diagnosticos
+  public function getProcedimientosCodigo($triage, $paciente, $especialidad) {
+    $this->db->select('p.*, pr.nombre as nombreprocedimiento, pr.codigo_cpt as codigoprocedimiento');
+    $this->db->from('procedimiento_historias p');
+    $this->db->join('procedimientos pr', 'p.codigo_procedimiento = pr.codigo_cpt');
+    $this->db->where('p.codigo_historia', $triage);
+    $this->db->where('p.paciente', $paciente);
+    $this->db->where('p.tipo_especialidad', $especialidad);
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  //medicamentos 
+  public function getMedicamentosEditar($triage, $paciente) {
+    $this->db->select('*');
+    $this->db->from('medicamentos');
+    $this->db->where('triaje', $triage);
+    $this->db->where('paciente', $paciente);
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  //citas
+  public function getCitasPaciente($triage, $paciente) {
+    $this->db->select('*');
+    $this->db->from('citas');
+    $this->db->where('triage', $triage);
+    $this->db->where('documento', $paciente);
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  public function examenesAuxiliaresEcografiasEditar($triage, $paciente) {
+    $this->db->select('e.*, ea.nombre as nombreauxiliar');
+    $this->db->from('detalle_examen_auxiliares e');
+    $this->db->join('tb_eco ea', 'e.codigoauxiliar = ea.codigo');
+    $this->db->where('e.triage', $triage);
+    $this->db->where('e.paciente', $paciente);
+    $this->db->where('e.examen', 'Ecografias');
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  public function examenesAuxiliaresTomografiasEditar($triage, $paciente) {
+    $this->db->select('e.*, ea.nombre as nombreauxiliar');
+    $this->db->from('detalle_examen_auxiliares e');
+    $this->db->join('tomografias ea', 'e.codigoauxiliar = ea.codigo');
+    $this->db->where('e.triage', $triage);
+    $this->db->where('e.paciente', $paciente);
+    $this->db->where('e.examen', 'Tomografias');
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  public function examenesAuxiliaresResonanciasEditar($triage, $paciente) {
+    $this->db->select('e.*, ea.nombre as nombreauxiliar');
+    $this->db->from('detalle_examen_auxiliares e');
+    $this->db->join('resonancias ea', 'e.codigoauxiliar = ea.codigo');
+    $this->db->where('e.triage', $triage);
+    $this->db->where('e.paciente', $paciente);
+    $this->db->where('e.examen', 'Resonancias');
+    $result = $this->db->get();
+
+    return $result;
+  }
 }
 
 ?>

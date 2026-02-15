@@ -125,6 +125,14 @@ $route["administracion/ordentomografia"] = "administrador/historiaclinica/Detall
 $route["administracion/ordenresonancia"] = "administrador/historiaclinica/DetalleExamenAuxiliaresResonancia";
 $route["administracion/getconsultasgeneralcodigo/(:num)/(:any)"] = "administrador/historiaclinica/getConsultasGeneralCodigo/$1/$2";
 $route["administracion/getconsultasginecologiacodigo/(:num)/(:any)"] = "administrador/historiaclinica/getGinecologiaCodigo/$1/$2";
+$route["administracion/getdiagnosticoscodigo/(:num)/(:any)/(:any)"] = "administrador/historiaclinica/getdiagnosticosEditar/$1/$2/$3";
+$route["administracion/getmedicamentoscodigo/(:num)/(:any)"] = "administrador/historiaclinica/getMedicamentosEditar/$1/$2";
+$route["administracion/getcitascodigo/(:num)/(:any)"] = "administrador/historiaclinica/getCitasPaciente/$1/$2";
+$route["administracion/getprocedimientoscodigo/(:num)/(:any)/(:any)"] = "administrador/historiaclinica/getProcedimientosCodigo/$1/$2/$3";
+
+$route["administracion/auxiliarecografias/(:num)/(:any)"] = "administrador/historiaclinica/examenesAuxiliaresEcografiasEditar/$1/$2";
+$route["administracion/auxiliaretomografias/(:num)/(:any)"] = "administrador/historiaclinica/examenesAuxiliaresTomografiasEditar/$1/$2";
+$route["administracion/auxiliareresonancias/(:num)/(:any)"] = "administrador/historiaclinica/examenesAuxiliaresResonanciasEditar/$1/$2";
 
 
 /***********************************************************
@@ -209,6 +217,7 @@ $route["administracion/ecografiaTiroidesview"] = "administrador/ecografias/ecogr
 $route["administracion/ecografiaHisteronosografiaview"] = "administrador/ecografias/ecografiaHisteronosografiaview";
 $route["administracion/ecografiaArterialview"] = "administrador/ecografias/ecografiaArterialview";
 $route["administracion/ecografiaVenosaview"] = "administrador/ecografias/ecografiaVenosaview";
+$route["administracion/ecografiaObstetricadopplerview"] = "administrador/ecografias/ecografiaObstetricadopplerview";
 
 /***********************************************************
 ************************ ECOGRAFIAS CREAR ******************
@@ -226,6 +235,7 @@ $route["administracion/ecografiatiroides"] = "administrador/ecografias/createEco
 $route["administracion/ecografiahisterosonografia"] = "administrador/ecografias/createEcografiaHisterosonografia";
 $route["administracion/ecografiaarterial"] = "administrador/ecografias/createEcografiaArterial";
 $route["administracion/ecografiavenosa"] = "administrador/ecografias/createEcografiaVenosa";
+$route["administracion/ecografiaobstetricadoppler"] = "administrador/ecografias/createEcografiaObstetricadoppler";
 
 /***********************************************************
 ******************* PDF DE LAS ECOGRAFIAS ******************
@@ -243,6 +253,7 @@ $route["administracion/pdfecografiatiroides/(:num)"] = "administrador/PdfControl
 $route["administracion/pdfecografiahisterosonografia/(:num)"] = "administrador/PdfController/getEcografiaHisterosonografiaPdf/$1";
 $route["administracion/pdfecografiaarterial/(:num)"] = "administrador/PdfController/getEcografiaArterialPdf/$1";
 $route["administracion/pdfecografiavenosa/(:num)"] = "administrador/PdfController/getEcografiaVenosaPdf/$1";
+$route["administracion/pdfecografiaobstetricadoppler/(:num)"] = "administrador/PdfController/getEcografiaDopplerPdf/$1";
 
 /***********************************************************
 ***** SECCION DE CONSULTA DE LABORATORIO PAGINA WEB ******
