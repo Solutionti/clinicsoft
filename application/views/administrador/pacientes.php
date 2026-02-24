@@ -193,11 +193,13 @@
                   <thead>
                     <tr class="text-xs text-white bg-default">
                       <th ></th>
-                      <th pSortableColumn="docuemento" class="text-xs text-white bg-default" style="width:27%">PACIENTE</th>
-                      <th class="text-xs text-white bg-default">TELEFONO</th>
+                      <th class="text-xs text-white bg-default" style="width:27%">PACIENTE</th>
+                      <th class="text-xs text-white bg-default">CELULAR</th>
                       <th class="text-xs text-white bg-default">FECHA NACIMIENTO</th>
                       <th class="text-xs text-white bg-default">SEXO</th>
                       <th class="text-xs text-white bg-default">ESTADO CIVIL</th>
+                      <th class="text-xs text-white bg-default">RESTABLECER CONTRASEÑA</th>
+
                     </tr>
                   </thead>
                   <tbody>
@@ -211,7 +213,7 @@
           <div class="row mt-2">
             <h6>Datos de los Pacientes</h6>
           </div>
-          <form [formGroup]="crearPacienteForm">
+          <form>
           <div class="row">
             <div class="col-md-2">
               <label>DNI *</label>
@@ -252,11 +254,6 @@
                 id="hc"
                 readonly
               >
-              <div
-                class="error"
-                *ngIf="hcControl.invalid && (hcControl.touched || hcControl.dirty)"
-              >
-              </div>
             </div>
           </div>
           <div class="row mt-1">
@@ -279,11 +276,6 @@
                 <option value="F">Femenino</option>
                 <option value="O">Otro</option>
               </select>
-              <div
-                class="error"
-                *ngIf="sexoControl.invalid && (sexoControl.touched || sexoControl.dirty)"
-              >
-              </div>
             </div>
             <div class="col-md-2">
               <label>Fecha de Nacimiento *</label>
@@ -292,11 +284,6 @@
                 class="form-control form-control-sm"
                 id="fecha_nacimiento"
               >
-              <div
-                class="error"
-                *ngIf="nacimientoControl.invalid && (nacimientoControl.touched || nacimientoControl.dirty)"
-              >
-              </div>
             </div>
             <div class="col-md-1">
               <label>Edad</label>
@@ -408,7 +395,7 @@
                 <label class="form-check-label" for="flexSwitchCheckChecked">Si</label>
               </div>
             </div>
-            <div class="row mt-1" [hidden]="containerResponsable">
+            <div class="row mt-1" hidden>
               <div class="col-md-3">
                 <label>Documento</label>
                 <input

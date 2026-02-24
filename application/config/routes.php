@@ -55,6 +55,7 @@ $route["administracion/actualizarpacientes"] = "administrador/pacientes/actualiz
 $route["administracion/eliminarpaciente/(:num)"] = "administrador/pacientes/eliminarpaciente";
 $route["administracion/editarpaciente/(:num)"] = "administrador/pacientes/editarpaciente"; 
 $route["administracion/getpacientetabla"] = "administrador/pacientes/getpacientetabla"; 
+$route["administracion/pacientes/restablecer_clave_ajax"] = "administrador/pacientes/restablecer_clave_ajax";
 
 /***********************************************************
 ******************* ATENCION *******************************

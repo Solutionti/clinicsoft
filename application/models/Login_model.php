@@ -33,21 +33,34 @@ class Login_model extends CI_model {
         }
     }
 
-    public function iniciarSesionClientes($documento, $password) {
-        $this->db->select("*");
-        $this->db->from("pacientes");
-        $this->db->where("documento", $documento);
-        $this->db->where("password", $password);
-        $resultado = $this->db->get(); 
+   public function iniciarSesionClientes($documento, $password) {
+    // 1. Buscamos al paciente SOLO por su documento (DNI)
+    $this->db->select("*");
+    $this->db->from("pacientes");
+    $this->db->where("documento", $documento);
+    $resultado = $this->db->get(); 
 
-        if($resultado->num_rows() > 0){
-            return $resultado->row();
+    if ($resultado->num_rows() > 0) {
+        $paciente = $resultado->row();
+
+        // 2. VERIFICAMOS LA CONTRASEÑA
+        // Usamos password_verify para comparar lo que escribió el usuario 
+        // contra el código encriptado de la base de datos.
+        if (password_verify($password, $paciente->password)) {
+            return $paciente; // ¡Contraseña Correcta!
         }
-        else {
-            return false;
+        
+        // OPCIONAL: Mantenemos compatibilidad con contraseñas viejas (si aún tienes usuarios sin encriptar)
+        // Si la verificación anterior falló, miramos si es igual en texto plano
+        else if ($paciente->password == $password) {
+             // Aquí podrías aprovechar para encriptarla automáticamente si quisieras
+             return $paciente;
         }
     }
 
+    // Si no encontramos al usuario o la contraseña no coincide
+    return false;
+}
 }
 
 ?>

@@ -53,86 +53,133 @@ class Laboratorio extends Admin_Controller {
     }
 
     public function pdfReciboLaboratorio($id) {
-        $laboratorios = $this->Laboratorio_model->getLaboratoriPdf($id);
-        $laboratorio = $laboratorios->result()[0];
-        $servicios = $this->Laboratorio_model->getLaboratorioServicios($id);
-        $this->load->library("pdf");
-        $pdfAct = new Pdf();
-        $this->load->library('PDF_UTF8');
-        $pdf = new PDF_UTF8();
-        $pdf->addpage();
-        $pdf->Image('public/img/theme/logo.png' , 15,5, 20 , 17,'png');
-        $pdf->Image('public/img/theme/zonac.png' , 40 ,5, 15 , 15,'png');
-        $pdf->Ln();
-        $pdf->SetFont('Times','B',11);
-        $pdf->Ln(13);
-        $pdf->Cell(20,5,'', '', 0,'L', false );
-        $pdf->Cell(1,5,'Clinica', '', 0,'L', false );
-        $pdf->Ln(5);
-        $pdf->Cell(17,5,'', '', 0,'L', false );
-        $pdf->Cell(1,5,'"Mi salud"', '', 0,'L', false );
-        $pdf->Ln(5);
-        $pdf->Cell(4,5,'', '', 0,'L', false );
-        $pdf->Cell(7,5,'Av. Salaverry #1402 - Chiclayo', '', 0,'L', false );
-        $pdf->Ln(2);
-        $pdf->Cell(10,5,'_________________________________', '', 0,'L', false );
-        $pdf->SetFont('Times','',8);
-        $pdf->Ln(5);
-        $pdf->Cell(8,5,'Fecha:', '', 0,'L', false );
-        $pdf->Cell(25,5,date("d-m-Y"), '', 0,'L', false );
-        $pdf->Cell(10,5,'Cajero:', '', 0,'L', false );
-        $pdf->Cell(5,5,$this->session->userdata("nombre"), '', 0,'L', false );
-        $pdf->Ln(5);
-        $pdf->SetFont('Times','b',8);
-        $pdf->Cell(7,5,'DNI:', '', 0,'L', false );
-        $pdf->Cell(4,5,$laboratorio->dni_paciente, '', 0,'L', false ); 
-        $pdf->Ln(5);
-        $pdf->SetFont('Times','b',8);
-        $pdf->Cell(15,5,'Contraseña:', '', 0,'L', false );
-        $pdf->Cell(4,5,$laboratorio->password, '', 0,'L', false );
-        $pdf->SetFont('Times','',8);
-        $pdf->Ln(5);
-        $pdf->Cell(1,5,utf8_decode($laboratorio->apellido." ".$laboratorio->nombre), '', 0,'L', false );
-        $pdf->Ln(5);
-        $pdf->Cell(10,5,'Celular:', '', 0,'L', false );
-        $pdf->Cell(5,5,$laboratorio->telefono, '', 0,'L', false );
-        $pdf->Ln(5);
-        $pdf->Cell(10,5,'Doctor:', '', 0,'L', false );
-        $pdf->Cell(5,5,utf8_decode($laboratorio->doctor), '', 0,'L', false );
-        $pdf->Ln(5);
-        $pdf->Cell(11,5,'Servicio:', '', 0,'L', false );
-        $pdf->Cell(5,5,'Laboratorio', '', 0,'L', false );
-        $pdf->SetFont('Times','',8);
-        $pdf->Ln(5);
-        foreach($servicios->result() as $servicio) {
-          $pdf->MultiCell(55, 4,'* '. $servicio->nombre, '', 'L', false);   
-        }
-        $pdf->SetFont('Times','',8);
-        $pdf->Ln(2);
-        $pdf->Cell(1,5,'', '', 0,'L', false );
-        $pdf->setFontSize(9);
-        $pdf->Cell(43,5,'TOTAL : =============> S/.', '', 0,'L', false );
-        $pdf->setFontSize(15);
-        $pdf->Cell(20,5,$laboratorio->total, '', 0,'L', false );
-        $pdf->setFontSize(8);
-        $pdf->Cell(2,5,'', '', 0,'L', false );
-        $pdf->Ln(2);
-        $pdf->Cell(10,5,'_____________________________________________', '', 0,'L', false );
-        $pdf->SetFont('Times','',8);
-        $pdf->Ln(6);
-        $pdf->Cell(6,5,'', '', 0,'L', false );
-        $pdf->Cell(31,5,'Para consultar sus resultados medicos ingresa :', '', 0,'L', false );
-        $pdf->Ln(4);
-        $pdf->Cell(15,5,'', '', 0,'L', false );
-        $pdf->Cell(10,5,'https://misalud.com/zonac', '', 0,'L', false );
-        $pdf->Ln(4);
-        $pdf->Cell(8,5,'', '', 0,'L', false );
-        $pdf->Cell(25,5,'Ingrese su numero de DNI y Contraseña.', '', 0,'L', false );
-        $pdf->Ln(4);
-        $pdf->Cell(5,5,'', '', 0,'L', false );
-        $pdf->Cell(25,5,'*Puede canjear este ticket por boleta o factura', '', 0,'L', false );
-        $pdf->Output();
+    // 1. OBTENER DATOS
+    $laboratorios = $this->Laboratorio_model->getLaboratoriPdf($id);
+    $laboratorio = $laboratorios->result()[0];
+    $servicios = $this->Laboratorio_model->getLaboratorioServicios($id);
+
+    // 2. GENERAR CLAVE SEGURA
+    $this->load->model('Pacientes_model');
+    $clave_papel = rand(100000, 999999); 
+    $clave_encriptada = password_hash($clave_papel, PASSWORD_BCRYPT);
+    $this->Pacientes_model->actualizar_password($laboratorio->dni_paciente, $clave_encriptada);
+
+    // 3. CONFIGURACIÓN TICKET (80mm)
+    $this->load->library("pdf"); 
+    $pdf = new FPDF('P', 'mm', array(80, 250)); 
+    $pdf->SetMargins(4, 2, 4); // Margen superior reducido
+    $pdf->SetAutoPageBreak(true, 5);
+    $pdf->AddPage();
+
+    // --- ENCABEZADO CON LOGO AL LADO ---
+    // Colocamos el logo a la izquierda (X=5)
+    $pdf->Image('public/img/theme/logo.png', 5, 5, 14, 14, 'png'); 
+    
+    // Movemos el texto a la derecha del logo
+    $pdf->SetXY(20, 6); 
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->Cell(0, 4, utf8_decode('CLÍNICA "MI SALUD"'), 0, 1, 'L');
+    $pdf->SetX(20);
+    $pdf->SetFont('Arial', '', 7);
+    $pdf->Cell(0, 3, utf8_decode('Maternidad y Especialidades'), 0, 1, 'L');
+    $pdf->SetX(20);
+    $pdf->MultiCell(0, 3, utf8_decode('Av. Salaverry #1402 - Chiclayo'), 0, 'L');
+    
+    $pdf->Ln(5);
+    $pdf->Cell(0, 0, '---------------------------------------------------', 0, 1, 'C');
+    $pdf->Ln(2);
+
+    // --- INFO TICKET ---
+    $pdf->SetFont('Arial', '', 8);
+    $pdf->Cell(12, 4, 'Fecha:', 0, 0, 'L');
+    $pdf->Cell(0, 4, date("d/m/Y H:i"), 0, 1, 'L');
+    $pdf->Cell(12, 4, 'Cajero:', 0, 0, 'L');
+    $cajero = substr($this->session->userdata("nombre"), 0, 18);
+    $pdf->Cell(0, 4, utf8_decode($cajero), 0, 1, 'L');
+
+    $pdf->Ln(2);
+
+    // --- DATOS PACIENTE ---
+    $pdf->SetFont('Arial', 'B', 8);
+    $pdf->Cell(0, 4, 'PACIENTE:', 0, 1, 'L');
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->MultiCell(0, 4, utf8_decode($laboratorio->apellido . " " . $laboratorio->nombre), 0, 'L');
+
+    $pdf->SetFont('Arial', 'B', 8);
+    $pdf->Cell(8, 4, 'DNI:', 0, 0, 'L');
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->Cell(22, 4, $laboratorio->dni_paciente, 0, 0, 'L');
+    $pdf->SetFont('Arial', 'B', 8);
+    $pdf->Cell(8, 4, 'Cel:', 0, 0, 'L');
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->Cell(0, 4, $laboratorio->telefono, 0, 1, 'L');
+
+    $pdf->Ln(1);
+    $pdf->SetFont('Arial', 'B', 8);
+    $pdf->Cell(0, 4, 'DOCTOR:', 0, 1, 'L');
+    $pdf->SetFont('Arial', '', 8);
+    $pdf->MultiCell(0, 3, utf8_decode($laboratorio->doctor), 0, 'L');
+
+    // --- CONTRASEÑA ---
+    $pdf->Ln(2);
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(0, 5, utf8_decode('SU CONTRASEÑA WEB:'), 0, 1, 'C');
+    $pdf->SetFont('Courier', 'B', 15); 
+    $pdf->Cell(0, 8, $clave_papel, 1, 1, 'C'); 
+    $pdf->SetFont('Arial', '', 7);
+    $pdf->Cell(0, 4, '(Para ver resultados online)', 0, 1, 'C');
+
+    $pdf->Ln(2);
+    $pdf->Cell(0, 0, '---------------------------------------------------', 0, 1, 'C');
+
+    // --- EXAMENES ---
+    $pdf->Ln(2);
+    $pdf->SetFont('Arial', 'B', 8);
+    $pdf->Cell(0, 4, 'EXAMENES:', 0, 1, 'L');
+    $pdf->SetFont('Arial', '', 7.5); 
+    foreach($servicios->result() as $servicio) {
+        $pdf->MultiCell(0, 4, utf8_decode('- ' . $servicio->nombre), 0, 'L');
     }
+
+    $pdf->Ln(2);
+    $pdf->Cell(0, 0, '---------------------------------------------------', 0, 1, 'C');
+    $pdf->Ln(2);
+
+    // --- TOTAL ---
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(20, 6, 'TOTAL', 0, 0, 'L');
+    $pdf->Cell(0, 6, 'S/. ' . number_format($laboratorio->total, 2), 0, 1, 'R');
+
+    // --- PIE DE PAGINA CON QR AL LADO ---
+    $pdf->Ln(4);
+    $pdf->Cell(0, 0, '---------------------------------------------------', 0, 1, 'C');
+    $pdf->Ln(3);
+    
+    // Dibujamos el QR a la izquierda (X=5)
+    $pdf->Image('public/img/theme/zonac.png', 5, $pdf->GetY(), 16, 16, 'png'); 
+    
+    // Texto al lado del QR
+    $pdf->SetX(23);
+    $pdf->SetFont('Arial', 'B', 7.5);
+    $pdf->Cell(0, 4, 'CONSULTE SUS RESULTADOS EN:', 0, 1, 'L');
+    $pdf->SetX(23);
+    $pdf->SetFont('Arial', '', 8);
+    $pdf->Cell(0, 4, 'clinicamisalud.pe/zonac', 0, 1, 'L');
+    $pdf->SetX(23);
+    $pdf->SetFont('Arial', 'I', 6.5);
+    $pdf->MultiCell(0, 3, utf8_decode('Escanee el QR o use su DNI y clave en la web.'), 0, 'L');
+
+    $pdf->Ln(6);
+    $pdf->SetFont('Arial', 'I', 7);
+    $pdf->MultiCell(0, 3, utf8_decode('Este ticket no tiene valor fiscal. Canjéelo por Boleta/Factura si lo requiere.'), 0, 'C');
+    
+    $pdf->Ln(3);
+    $pdf->SetFont('Arial', 'B', 8);
+    $pdf->Cell(0, 4, utf8_decode('¡Gracias por su visita!'), 0, 1, 'C');
+    $pdf->Cell(0, 2, '.', 0, 1, 'C'); 
+
+    $pdf->Output();
+}
 
     public function crearServicioLaboratorio() {
 
