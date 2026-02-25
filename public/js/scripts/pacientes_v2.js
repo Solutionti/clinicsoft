@@ -482,7 +482,7 @@ function buscarPacienteBaseDatos() {
         btnReset.setAttribute('type', 'button');
         // Clases de Argon/Bootstrap
         btnReset.className = 'btn btn-icon-only btn-rounded btn-outline-warning mb-0 me-3 btn-sm d-flex align-items-center justify-content-center';
-        btnReset.innerHTML = '<i class="fas fa-key" aria-hidden="true"></i>';
+        btnReset.innerHTML = '<i class="fas fa-key" aria-hidden="true" title="Restablecer Contraseña"></i>';
         btnReset.onclick = function(e) { 
             e.stopPropagation(); // Evita que se seleccione la fila al hacer click
             restablecerClave(pacientes.documento); 
