@@ -83,7 +83,7 @@ class Historiaclinica extends Admin_Controller
 		$pacientes = $this->Pacientes_model->getPacienteId($documento);
 		$historias = $this->Historias_model->getHistoriasId($documento);
 		$triaje = $this->Historias_model->getUltimoDatoTriage($documento);
-		$triage = $triaje->row()->codigo_triaje;
+		$triage = ($triaje && $triaje->num_rows() > 0) ? $triaje->row()->codigo_triaje : null;
 		$especialidades = $this->Historias_model->getatencionid($documento);
 		$recetas = $this->Historias_model->getRecetas($documento);
 		$docFisico = $this->Historias_model->getDocumentos($documento, 'hfisico');
@@ -1120,7 +1120,7 @@ class Historiaclinica extends Admin_Controller
 		// --- DIAGNOSTICO (CIE10) ---
 		$pdf->Ln(2);
 		$pdf->SetFont('Arial', 'B', 9);
-		$pdf->Cell(0, 5, utf8_decode('DIAGNÓSTICO: (CIE10)'), 0, 1, 'L');
+		$pdf->Cell(0, 5, ('DIAGNÓSTICO: (CIE10)'), 0, 1, 'L');
 
 		$lista_diagnosticos = [];
 

@@ -36,7 +36,7 @@
               >
                 <option value="">Seleccione el tipo</option>
                 <option value="D">Definitivo</option>
-                <option value="P">Presentivo</option>
+                <option value="P">Presuntivo</option>
                 <option value="R">Repetitivo</option>
               </select>
               </div>
