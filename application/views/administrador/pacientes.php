@@ -198,7 +198,7 @@
                       <th class="text-xs text-white bg-default">FECHA NACIMIENTO</th>
                       <th class="text-xs text-white bg-default">SEXO</th>
                       <th class="text-xs text-white bg-default">ESTADO CIVIL</th>
-                      <th class="text-xs text-white bg-default">RESTABLECER CONTRASEÑA</th>
+                      <th class="text-xs text-white bg-default">CONTRASEÑA</th>
 
                     </tr>
                   </thead>
