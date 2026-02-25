@@ -1,23 +1,34 @@
 $(document).ready(function () {
-    var url = baseurl + "countlaboratorio";
+    // CONDICIONAL DE SEGURIDAD:
+    // Solo ejecutamos esto si existe el input específico del Ticket.
+    // (Asumiendo que en Historia Clínica cambiarás el ID, como acordamos).
+    if ($("#id").length > 0) { 
 
-    $.ajax({
-        url: url,
-        method: "GET",
-        success: function (data) {
-            data = JSON.parse(data);
-            numer = parseInt(data.numero.numero) + 1;
-            $("#id").val(numer);
-        },
-        error: function () {
-            $("body").overhang({
-              type: "error",
-              message: "Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
-            }); 
-          }
-    })
+        var url = baseurl + "countlaboratorio";
+
+        $.ajax({
+            url: url,
+            method: "GET",
+            success: function (data) {
+                // Validación extra por si data viene vacío
+                if(data) {
+                    try {
+                        data = JSON.parse(data);
+                        var numer = parseInt(data.numero.numero) + 1;
+                        $("#id").val(numer);
+                    } catch (e) {
+                        console.error("Error al procesar JSON de laboratorio", e);
+                    }
+                }
+            },
+            error: function () {
+                // Opcional: Quita este error visual si no es crítico, 
+                // para no asustar al usuario si falla en otra pantalla.
+                console.log("No se pudo cargar el correlativo de laboratorio (Ticket)");
+            }
+        });
+    }
 });
-
 var table_lab = $("#table-laboratorio").DataTable({
     "lengthMenu": [5, 50, 100, 200],
     "language": {

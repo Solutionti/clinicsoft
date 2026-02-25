@@ -126,7 +126,7 @@
                         <div class="col-lg mb-3 mb-lg-0">
                           <ul class="list-inline list-separator">
                             <li class="list-inline-item">
-                              <i class="bi-geo-alt-fill text-primary me-1"></i> <?php echo date("d/m/Y", strtotime($pacientes->fecha_nacimiento)); ?> - <?php echo $pacientes->edad; ?> años
+                              <i class="bi-geo-alt-fill text-primary me-1"></i> <?php echo date('d/m/Y', strtotime($pacientes->fecha_nacimiento)); ?> - <?php echo $pacientes->edad; ?> años
                             </li>
                             <li style="position: relative; z-index: 30;">
                               <div class="dropdown d-inline-block">
@@ -350,17 +350,16 @@
                   <table class="table table-striped table-hover">
                     <thead>
                         <tr class="bg-dark text-white">
-                          <th class="text-uppercase text-xs">codigo</th>
+                          <th class="text-uppercase text-xs">Codigo</th>
                           <th class="text-uppercase text-xs">Nombre procedimiento</th>
-                          <th class="text-uppercase text-xs">Texto plantilla</th>
+                          
                         </tr>
                     </thead>
                     <tbody>
                       <?php foreach ($procepaciente->result() as $procedimientoss) { ?>
                       <tr class="text-capitalize">
                         <td><?php echo $procedimientoss->codigo_cpt; ?>  </td>
-                        <td><?php echo $procedimientoss->nombre; ?>  </td>
-                        <td><?php echo $procedimientoss->texto_plantilla; ?>  </td>
+                        <td><?php echo $procedimientoss->nombre_proc; ?>  </td>
                       </tr>
                       <?php } ?>
                     </tbody>
@@ -422,7 +421,7 @@
       <div class="accordion-item">
         <div class="accordion-header" id="btn-icon-start-headingThree">
           <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#examenesauxiliares" aria-expanded="false" aria-controls="examenesauxiliares">
-              <span class="ps-1 text-dark text-bold"><i class="fas fa-briefcase-medical"></i> ORDENAMIENTOS</span>
+              <span class="ps-1 text-dark text-bold"><i class="fas fa-briefcase-medical"></i> ORDENES</span>
           </a>
         </div>
         <div id="examenesauxiliares" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingThree" data-bs-parent="#accordionBtnIconStartExample">
@@ -825,7 +824,7 @@
                             <li class="">
                               <i class="fas fa-calendar-alt text-primary"></i>
                               <span class="text-primary">
-                                <?php echo $historias->fecha;  ?>
+                                <?php echo $historias->fecha; ?>
                               </span>
                                - General (Dr.<?php echo $historias->doctor; ?>) - 
                                <a href="#" onclick="descargarHistoriaGeneral(<?php echo $historias->triaje; ?>)">
@@ -833,9 +832,9 @@
                               </a>
                               <a href="#">
                                 <i 
-                                  class="fas fa-eye text-primary"
+                                  class="fas fa-edit text-primary"
                                   title="Editar historia"
-                                  onclick="abrirEditarModalHistoriaClinicaGeneral(<?php echo $historias->triaje . $historias->paciente; ?> )"></i>
+                                  onclick="abrirEditarModalHistoriaClinicaGeneral(<?php echo $historias->triaje . '2026' . $historias->paciente; ?>)"></i>
                               </a>
                             </li>
                             <?php } else { ?>
@@ -849,9 +848,9 @@
                                 </a>
                                 <a href="#">
                                 <i
-                                  class="fas fa-eye text-danger"
+                                  class="fas fa-edit text-danger"
                                   title="Editar historia"
-                                  onclick="abrirEditarModalHistoriaClinicaGinecologica(<?php echo $historias->triaje . $historias->paciente; ?> )"></i>
+                                  onclick="abrirEditarModalHistoriaClinicaGinecologica(<?php echo $historias->triaje . '2026' . $historias->paciente; ?> )"></i>
                                 </i>
                               </a>
                             </li>
@@ -1296,24 +1295,24 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach ($medicamentofarmacias->result() as $farmacia) { ?>
-                <tr>
+                <?php // foreach ($medicamentofarmacias->result() as $farmacia) { ?>
+                <!-- <tr>
                   <td>
                     <div class="form-check mb-3">
                       <input
                         type="radio"
                         class="form-check-input"
                         name="formRadio"
-                        onchange="asociarmedicamentoFarmacia('<?php echo $farmacia->codigo_producto . ' - ' . utf8_decode($farmacia->nombre_producto); ?>')"
+                        onchange="asociarmedicamentoFarmacia('<?php // echo $farmacia->codigo_producto . ' - ' . utf8_decode($farmacia->nombre_producto); ?>')"
                       >
                     </div> 
                   </td>
-                  <td><?php echo utf8_decode($farmacia->codigo_producto); ?></td>
-                  <td><?php echo utf8_decode($farmacia->nombre_producto); ?></td>
-                  <td><?php echo utf8_decode($farmacia->b1); ?></td>
+                  <td><?php // echo utf8_decode($farmacia->codigo_producto); ?></td>
+                  <td><?php // echo utf8_decode($farmacia->nombre_producto); ?></td>
+                  <td><?php // echo utf8_decode($farmacia->b1); ?></td>
                   <td>Disponible</td>
-                </tr>
-                <?php } ?>
+                </tr> -->
+                <?php // } ?>
               </tbody>
             </table>
           </div>

@@ -231,17 +231,35 @@ $('#table-laboratorio-items').on('dblclick', 'tr', function() {
 function crearOrdenLaboratorioHistoria() {
     
     var url = baseurl + "administracion/crearOrdenLaboratorio";
-    var documento = $("#documento_historia").val(),
+    
+    // 1. CAPTURAMOS LOS DATOS CON LOS NUEVOS IDs DE HISTORIA
+    // Asegúrate de que estos IDs coincidan con los de tus inputs en el HTML
+    var documento = $("#documento_historia").val(), // El DNI del paciente
         nombre = $("#nombre_paciente").val(),
         edad = $("#edad_paciente").val(),
         medico = $("#medico_solicitante").val(),
-        triage = $("#consecutivo_historia").val(),
+        triage = $("#consecutivo_historia").val(), // Este es el ID del triaje actual
         ordenlab = [];
     
-    // Recorrer los elementos del laboratorio seleccionados
-    for (let i = 0; i < elementos_laboratorio.length; i++) {
-       ordenlab.push(elementos_laboratorio[i].id);
+    // 2. RECOLECTAMOS LOS EXÁMENES DESDE LA TABLA DERECHA (LA QUE TIENE LOS INPUT HIDDEN)
+    // Buscamos todos los inputs con name="examenes[]" que agregamos en agregarItemHistoria
+    $("input[name='examenes[]']").each(function() {
+        var id_examen = $(this).val();
+        if (id_examen) {
+            ordenlab.push(id_examen);
+        }
+    });
+
+    // 3. VALIDACIÓN: No enviar si no hay exámenes
+    if (ordenlab.length === 0) {
+        $("body").overhang({
+            type: "warn",
+            message: "Debe seleccionar al menos un examen de laboratorio."
+        });
+        return;
     }
+
+    // 4. ENVÍO AL CONTROLADOR
     $.ajax({
         url: url,
         method: "POST",
@@ -251,19 +269,19 @@ function crearOrdenLaboratorioHistoria() {
           edad: edad,
           medico: medico,
           triage: triage,
-          ordenlab: ordenlab
+          ordenlab: ordenlab // El controlador recibirá esto como un array
         },
         success: function(response) {
-            // $("body").overhang({
-            //     type: "success",
-            //     message: "Orden de laboratorio guardada correctamente"
-            // });
-            // setTimeout(reloadPage, 3000);
+            $("body").overhang({
+                type: "success",
+                message: "Orden de laboratorio guardada correctamente en la historia."
+            });
+            // Opcional: limpiarSeleccion(); 
         },
         error: function() {
             $("body").overhang({
                 type: "error",
-                message: "Error al guardar la orden de laboratorio"
+                message: "Error al conectar con el servidor para guardar la orden."
             });
         }
     });
@@ -533,6 +551,7 @@ $("#saveBtn").on("click", function (){
       tratamiento = $("#plan_tratamiento").val(),
       referencia = $("#plan_referencia").val(),
       firma = $("#plan_firma").val();
+      piel = $("#fisico_piel").val();
 
       $.ajax({
         url: url2,
@@ -566,12 +585,13 @@ $("#saveBtn").on("click", function (){
           apetito: apetito,
           sed: sed,
           orina: orina,
-          // diagnosticosgeneral: diagnosticosgeneral,
           examendx: examendx,
           interconsultas: interconsultas,
           tratamiento: tratamiento,
           referencia: referencia,
-          firma: firma
+          firma: firma,
+          procedimientoss: procedimientos,
+          piel: piel
         },
         success: function () {
             //Diagnosticos
@@ -969,7 +989,7 @@ function crearProcedimientos(tipo) {
 function crearExamenesAuxiliares() {
 
 }
-
+let medicamentosarray = [];
 function crearMedicamento() {
     var url = baseurl + "administracion/crearmedicamento",
     triaje = $("#consecutivo_historia").val(),
@@ -980,6 +1000,7 @@ function crearMedicamento() {
     dosis = $("#dosis_medicamento").val(),
     via_aplicacion = $("#via_aplicacion_medicamento").val(),
     frecuencia = $("#frecuencia_medicamento").val(),
+    especialidad = $("#tphistoria").val(),
     duracion = $("#duracion_medicamento").val();
 
     if(medicamento == "" || cantidad == "" || dosis == "" || via_aplicacion == "" || frecuencia == "" || duracion == "") {
@@ -1001,6 +1022,7 @@ function crearMedicamento() {
             dosis: dosis,
             via_aplicacion: via_aplicacion,
             frecuencia: frecuencia,
+            especialidad: especialidad,
             duracion: duracion
           },
           success: function() {
@@ -1015,9 +1037,9 @@ function crearMedicamento() {
              $("#frecuencia_medicamento").val(''),
              $("#duracion_medicamento").val('');
              
-             let medicamentos = [];
+             
        
-             medicamentos.push({
+             medicamentosarray.push({
                triaje: triaje,
                paciente: paciente,
                medicamento: medicamento,
@@ -1028,7 +1050,8 @@ function crearMedicamento() {
                duracion: duracion
              });
        
-             medicamentos.forEach(function(med) {
+             document.getElementById('listarecetamedica').innerHTML = '';
+             medicamentosarray.forEach(function(med) {
                document.getElementById('listarecetamedica').innerHTML += `
                  <tr>
                    <td class="text-xs">
@@ -1082,11 +1105,31 @@ function eliminarMedicamento(medicamentos) {
               triaje: triaje
             },
             success: function() {
+
+               document.getElementById('listarecetamedica').innerHTML = '';
+               const medact = medicamentosarray.filter(med => med.medicamento !== medicamentos);
+               medact.forEach(function(med) {
+                document.getElementById('listarecetamedica').innerHTML += `
+                 <tr>
+                   <td class="text-xs">
+                     <button type="button" class="btn btn-danger btn-sm" onclick="eliminarMedicamento('${med.medicamento}')">
+                       <i class="fa fa-trash"></i>
+                     </button>
+                   </td>
+                   <td class="text-xs text-uppercase">${med.medicamento}</td>
+                   <td class="text-xs text-uppercase">${med.cantidad}</td>
+                   <td class="text-xs text-uppercase">${med.dosis}</td>
+                   <td class="text-xs text-uppercase">${med.via_aplicacion}</td>
+                   <td class="text-xs text-uppercase">${med.frecuencia}</td>
+                   <td class="text-xs text-uppercase">${med.duracion}</td>
+                 </tr>
+               `;
+               });
+
               $("body").overhang({
                 type: "success",
                 message: "El medicamento se ha eliminado correctamente"
               });
-
               
             }
           });             
@@ -1341,6 +1384,7 @@ function abrirHistoriaClinica(tipo) {
               }
             });
             if(value === false){
+
               if(tipo == 1) {
                 document.getElementById('tphistoria').value = tipo;
                 $('#tphistoria').trigger('change');
@@ -1348,6 +1392,8 @@ function abrirHistoriaClinica(tipo) {
                 modal.show();
                   $("#nav-antecedentesgine").removeClass("show active");
                   $("#nav-home").addClass("show active");
+                  $("#terminarginecologia").prop("hidden", true);
+                  $("#terminargeneral").prop("hidden", false);
                
             }
             else if(tipo == 2) {
@@ -1357,18 +1403,13 @@ function abrirHistoriaClinica(tipo) {
               modal.show();
                 $("#nav-home").removeClass("show active");
                 $("#nav-antecedentesgine").addClass("show active");
+                $("#terminargeneral").prop("hidden", true);
+                $("#terminarginecologia").prop("hidden", false);   
              }         
             }
             else {
-            document.getElementById('tphistoria').value = tipo;
-            $('#tphistoria').trigger('change');
-            var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
-            modal.show();
 
             if(tipo == 1) {
-             $("#nav-antecedentesgine").removeClass("show active");
-             $("#nav-home").addClass("show active");
-             
              $.ajax({
                url: baseurl + "administracion/consecutivohistoria",
                 method: "POST",
@@ -1378,14 +1419,26 @@ function abrirHistoriaClinica(tipo) {
                   tipo: tipo 
                 },
                 success: function(response) {
-                  
+                  if(response === "error") {
+                    $("body").overhang({
+                      type: "error",
+                      message: "Ya existe una historia clinica con este triaje.",
+                    });
+                  }
+                  else {
+                    document.getElementById('tphistoria').value = tipo;
+                    $('#tphistoria').trigger('change');
+                    var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+                    modal.show();
+                    $("#nav-antecedentesgine").removeClass("show active");
+                    $("#nav-home").addClass("show active");
+                    $("#terminarginecologia").prop("hidden", true);
+                    $("#terminargeneral").prop("hidden", false);
+                  }
                 }
               });
             }
             else if(tipo == 2) {
-              $("#nav-home").removeClass("show active");
-             $("#nav-antecedentesgine").addClass("show active");
-             
              $.ajax({
                url: baseurl + "administracion/consecutivohistoria",
                 method: "POST",
@@ -1395,7 +1448,22 @@ function abrirHistoriaClinica(tipo) {
                   tipo: tipo 
                 },
                 success: function(response) {
-                  
+                  if(response === "error") {
+                    $("body").overhang({
+                      type: "error",
+                      message: "Ya existe una historia clinica con este triaje.",
+                    });
+                  }
+                  else {
+                    document.getElementById('tphistoria').value = tipo;
+                    $('#tphistoria').trigger('change');
+                    var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+                    modal.show();
+                    $("#nav-home").removeClass("show active");
+                    $("#nav-antecedentesgine").addClass("show active");
+                    $("#terminargeneral").prop("hidden", true);
+                    $("#terminarginecologia").prop("hidden", false); 
+                  }
                 }
               });
             }
@@ -1587,6 +1655,7 @@ function crearOrdenEcografiaHistoria(tipo) {
     var url = baseurl + "administracion/ordenecografia";
     
     let paciente = $("#documento_historia").val(),
+        especialidad = $("#tphistoria").val(),
         triage = $("#consecutivo_historia").val();
     
     let ordeneco = [];
@@ -1601,6 +1670,7 @@ function crearOrdenEcografiaHistoria(tipo) {
                 paciente: paciente,
                 triage: triage,
                 ecografia: ordeneco,
+                especialidad: especialidad,
                 examen: 'Ecografias',
                 tipo: tipo
             },
@@ -1823,6 +1893,7 @@ $('#table-tomografia-items').on('dblclick', 'tr', function(e) {
 function crearOrdenTomografia(tipo) {
     var url = baseurl + "administracion/ordentomografia";
     let documento = $("#documento_historia").val(),
+        especialidad = $("#tphistoria").val(),
         triage = $("#consecutivo_historia").val();
     
     let ordentomo = [];
@@ -1837,6 +1908,7 @@ function crearOrdenTomografia(tipo) {
                 paciente: documento,
                 tomografia: ordentomo,
                 triage: triage,
+                especialidad: especialidad,
                 examen: 'Tomografias',
                 tipo: tipo
             },
@@ -2058,7 +2130,7 @@ function crearOrdenResonancia(tipo) {
     var url = baseurl + "administracion/ordenresonancia";
     
     let documento = $("#documento_historia").val(),
-       
+        especialidad = $("#tphistoria").val(),
         triage = $("#consecutivo_historia").val();
     
     let ordenreso = [];
@@ -2072,6 +2144,7 @@ function crearOrdenResonancia(tipo) {
                 paciente: documento,
                 triage: triage,
                 resonancia: ordenreso,
+                especialidad: especialidad,
                 examen: 'Resonancias',
                 tipo: tipo
             },
@@ -2100,9 +2173,11 @@ function limpiarSeleccionResonancia() {
 }
 
 function abrirEditarModalHistoriaClinicaGeneral(codigo) {
+   
   //datos de consulta general
-  let triage = String(codigo).slice(0,1);
-  let paciente = String(codigo).slice(1,20);
+  let triage = String(codigo).split('2026')[0];
+  let paciente = String(codigo).split('2026')[1];
+   
   let url = baseurl + "administracion/getconsultasgeneralcodigo/" + triage + '/' +  paciente;
 
   $("body").overhang({
@@ -2130,6 +2205,8 @@ function abrirEditarModalHistoriaClinicaGeneral(codigo) {
                  modal.show();
                    $("#nav-antecedentesgine").removeClass("show active");
                    $("#nav-home").addClass("show active");
+                   $("#terminarginecologia").prop("hidden", true);
+                   $("#terminargeneral").prop("hidden", false);
 
                //DATOS DE ANAMNESIS
                $("#anamnesis_directa").val(data.anamnesis);
@@ -2148,6 +2225,7 @@ function abrirEditarModalHistoriaClinicaGeneral(codigo) {
                $("#anamnesis_sintomas").val(data.sintomas);
 
                //EXAMEN FISICO
+               $("#fisico_piel").val(data.piel);
                $("#fisico_cuello").val(data.cuello);
                $("#fisico_abdomen").val(data.abdomen);
                $("#fisico_respiratorio").val(data.ap_respiratoria);
@@ -2299,7 +2377,7 @@ function abrirEditarModalHistoriaClinicaGeneral(codigo) {
                     });
 
                 //REECETA MEDICA
-                var url3 = baseurl + "administracion/getmedicamentoscodigo/" + triage + '/' +  paciente;
+                var url3 = baseurl + "administracion/getmedicamentoscodigo/" + triage + '/' +  paciente + '/' + 1;
                 $.ajax({
                     url: url3,
                     method: "GET",
@@ -2349,8 +2427,8 @@ function abrirEditarModalHistoriaClinicaGeneral(codigo) {
 
 function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
     //datos de consulta ginecologica
-    let triage = String(codigo).slice(0,1);
-    let paciente = String(codigo).slice(1,20);
+    let triage = String(codigo).split('2026')[0];
+    let paciente = String(codigo).split('2026')[1];
     let url = baseurl + "administracion/getconsultasginecologiacodigo/" + triage + '/' +  paciente;
 
     $("body").overhang({
@@ -2378,10 +2456,12 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
                  modal.show();
                   $("#nav-home").removeClass("show active");
                   $("#nav-antecedentesgine").addClass("show active");
-
+                  $("#terminargeneral").prop("hidden", true);
+                  $("#terminarginecologia").prop("hidden",false);
                // ANTECEDENTES
                $("#antecedentes_familiares").val(data.familiares);
                $("#antecedentes_patologicos").val(data.patologicos);
+               $("#antecedentes_cirugia").val(data.cirugia_ginecologica);
                $("#antecedentes_gineco").val(data.gineco_obstetrico);
                $("#antecedentes_fum").val(data.fum);
                $("#antecedentes_rm").val(data.rm);
@@ -2548,7 +2628,7 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
                     });
 
                 //REECETA MEDICA
-                var url3 = baseurl + "administracion/getmedicamentoscodigo/" + triage + '/' +  paciente;
+                var url3 = baseurl + "administracion/getmedicamentoscodigo/" + triage + '/' +  paciente + '/' + 2;
                 $.ajax({
                     url: url3,
                     method: "GET",
@@ -2592,6 +2672,119 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
        }
     }
   });   
+}
+
+// Variable global para poder acceder desde las funciones
+var table_agregados_historia; 
+var table_lab_historia;
+
+$(document).ready(function() {
+    
+    // --- A. Tabla Izquierda (Catálogo) ---
+    table_lab_historia = $('#table-laboratorio-historia').DataTable({
+        "destroy": true, 
+        "lengthMenu": [5, 10, 20],
+        "language": { "search": "Buscar:", "zeroRecords": "No encontrado", "info": "" },
+        "dom": 'ftip', 
+        "pageLength": 5
+    });
+
+    // --- B. Tabla Derecha (Seleccionados) ---
+    table_agregados_historia = $('#table-laboratorio-agregados-historia').DataTable({
+        "destroy": true, 
+        "paging": false,
+        "searching": false,
+        "info": false,
+        "language": { "zeroRecords": "Ningún examen seleccionado" },
+        // IMPORTANTE: Definimos columnas para que el botón X funcione bien
+        "columnDefs": [
+            { "targets": 0, "width": "10%" }, // Código
+            { "targets": 1, "width": "90%" }  // Nombre + Botón
+        ]
+    });
+
+    // 2. Evento al hacer clic en una fila de la izquierda
+    $('#table-laboratorio-historia tbody').on('click', 'tr', function () {
+        // CORRECCIÓN 1: Usamos el nombre correcto de la variable
+        var data = table_lab_historia.row(this).data();
+        
+        if(data) {
+             // data[0] es Código, data[1] es Nombre
+            agregarItemHistoria(data[0], data[1]);
+        }
+    });
+
+    // 3. Evento para eliminar fila (Delegación de eventos)
+    $('#table-laboratorio-agregados-historia tbody').on('click', '.btn-borrar', function () {
+        // Usamos la API de DataTable para borrar la fila y que se actualice todo
+        table_agregados_historia.row($(this).parents('tr')).remove().draw();
+    });
+});
+
+// 4. Función para mover el ítem a la DERECHA
+function agregarItemHistoria(codigo, nombre) {
+    
+    // Evitar duplicados revisando los inputs hidden existentes
+    var existe = false;
+    // Buscamos dentro de los nodos de la DataTable
+    table_agregados_historia.rows().nodes().to$().find('input[name="examenes[]"]').each(function() {
+        if ($(this).val() == codigo) existe = true;
+    });
+
+    if (existe) {
+        Swal.fire("Aviso", "Este examen ya está en la lista", "warning");
+        return;
+    }
+
+    // CORRECCIÓN 2: Usamos la API 'row.add' en lugar de '.append'
+    // Combinamos el Nombre + Input + Botón en la segunda columna para respetar el diseño de 2 columnas
+    var contenidoColumna2 = `
+        <div class="d-flex justify-content-between align-items-center">
+            <span>${nombre}</span>
+            <div>
+                <input type="hidden" name="examenes[]" value="${codigo}">
+                <button type="button" class="btn btn-sm btn-danger btn-borrar py-0 px-2">X</button>
+            </div>
+        </div>
+    `;
+
+    table_agregados_historia.row.add([
+        codigo,
+        contenidoColumna2
+    ]).draw(false); // .draw() hace que se muestre y quite el mensaje "Ningún examen"
+}
+
+function limpiarSeleccion() {
+    // Limpiamos usando la API de DataTable
+    if(table_agregados_historia) {
+        table_agregados_historia.clear().draw();
+    }
+}
+
+terminarAtenciongeneral = () => {
+  triage = $("#consecutivo_historia").val();
+  id = $("#documento_historia").val();
+  let url = baseurl + "administracion/pdfhistoriaclinica/" + triage + "/" + id;
+  window.open(url, "_blank", " width=1100, height=1000");
+
+  setTimeout(() => {
+    reloadPage();
+  }, 3000);
+}
+
+terminarAtencionginecologia = () => {
+  triage = $("#consecutivo_historia").val();
+  id = $("#documento_historia").val();
+  let url = baseurl + "administracion/pdfhistoriaclinicaginecologica/" + triage + "/" + id;
+  window.open(url, "_blank", " width=1100, height=1000");
+
+  setTimeout(() => {
+    reloadPage();
+  }, 3000);
+}
+
+reloadPage = () => {
+    location.reload();
 }
 
 

@@ -57,7 +57,7 @@
     >
     <span class="mask bg-gradient-dark opacity-6"></span>
     <h6 class="mt-1 text-white font-weight-bolder position-relative">Bienvenido a</h6>
-    <h3 class="text-white font-weight-bolder position-relative">ClinisSoft</span> </h3>
+    <h3 class="text-white font-weight-bolder position-relative">ClinicSoft</span> </h3>
       <p class=" font-weight-bold text-white position-relative">
         Bienvenido a la plataforma de gestión clínica diseñada para llevar su institución al siguiente nivel, 
         facilitando el control de inventarios, la administración de servicios y la organización eficiente
@@ -69,12 +69,12 @@
     <div class="card card-plain">
     <div class="card-header pb-0 text-start">
       <div class="text-center">
-        <img src="<?php echo base_url(); ?>public/img/theme/logo2.png" class="img-fluid mb-3" width="50px;">
+        <!-- <img src="<?php echo base_url(); ?>public/img/theme/logo2.png" class="img-fluid mb-3" width="50px;"> -->
       </div>
       <div class="text-center">
         <span class="mx-3 font-weight-bold h6"> <span class="text-primary h4 text-bold">Clinic</span><span class="text-default h3 text-bold">Soft</span><small class="text-danger text-bold">Peru</small></span>
         <div class="stats">
-          <small class="">Software Para Clinicas y Laboratorios</small>
+          <small class="">Software Para Clinicas y laboratorios</small>
         </div>
       </div>
       <h5 class="font-weight-bolder  mt-4">Iniciar sesión</h5>

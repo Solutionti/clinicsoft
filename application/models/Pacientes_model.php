@@ -55,6 +55,7 @@ class Pacientes_model extends CI_model
 
         if ($result_v2 == NULL) {
             $password = rand(100000, 999999);
+            $password_encriptada = password_hash($password, PASSWORD_BCRYPT);
             $datos = [
                 'hc' => $data['hc'],
                 'nombre' => $data['nombre'],
@@ -77,7 +78,7 @@ class Pacientes_model extends CI_model
                 'creacion_fecha' => date('Y-m-d'),
                 'creacion_hora' => date('h:i A'),
                 'usuario' => $this->session->userdata('nombre'),
-                'password' => $password,
+                'password' => $password_encriptada,
                 'estado' => 'Activo'
             ];
             $this->db->insert('pacientes', $datos);
@@ -211,6 +212,12 @@ class Pacientes_model extends CI_model
         $queryRecords = $this->db->query($sqlRec);
 
         return array('queryRecords' => $queryRecords, 'totalRecords' => $totalRecords, 'params' => $params);
+    }
+    public function actualizar_password($documento, $password_encriptada)
+    {
+        $this->db->where('documento', $documento);
+        // Actualizamos el campo 'password' de la tabla 'pacientes'
+        return $this->db->update('pacientes', ['password' => $password_encriptada]);
     }
 }
 ?>

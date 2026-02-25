@@ -55,6 +55,7 @@ $route["administracion/actualizarpacientes"] = "administrador/pacientes/actualiz
 $route["administracion/eliminarpaciente/(:num)"] = "administrador/pacientes/eliminarpaciente";
 $route["administracion/editarpaciente/(:num)"] = "administrador/pacientes/editarpaciente"; 
 $route["administracion/getpacientetabla"] = "administrador/pacientes/getpacientetabla"; 
+$route["administracion/pacientes/restablecer_clave_ajax"] = "administrador/pacientes/restablecer_clave_ajax";
 
 /***********************************************************
 ******************* ATENCION *******************************
@@ -126,7 +127,7 @@ $route["administracion/ordenresonancia"] = "administrador/historiaclinica/Detall
 $route["administracion/getconsultasgeneralcodigo/(:num)/(:any)"] = "administrador/historiaclinica/getConsultasGeneralCodigo/$1/$2";
 $route["administracion/getconsultasginecologiacodigo/(:num)/(:any)"] = "administrador/historiaclinica/getGinecologiaCodigo/$1/$2";
 $route["administracion/getdiagnosticoscodigo/(:num)/(:any)/(:any)"] = "administrador/historiaclinica/getdiagnosticosEditar/$1/$2/$3";
-$route["administracion/getmedicamentoscodigo/(:num)/(:any)"] = "administrador/historiaclinica/getMedicamentosEditar/$1/$2";
+$route["administracion/getmedicamentoscodigo/(:num)/(:any)/(:any)"] = "administrador/historiaclinica/getMedicamentosEditar/$1/$2/$3";
 $route["administracion/getcitascodigo/(:num)/(:any)"] = "administrador/historiaclinica/getCitasPaciente/$1/$2";
 $route["administracion/getprocedimientoscodigo/(:num)/(:any)/(:any)"] = "administrador/historiaclinica/getProcedimientosCodigo/$1/$2/$3";
 

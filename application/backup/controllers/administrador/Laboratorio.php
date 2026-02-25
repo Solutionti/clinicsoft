@@ -115,13 +115,16 @@ class Laboratorio extends Admin_Controller {
         $pdf->Output();
     }
 
-    public function crearServicioLaboratorio() {
+   public function crearServicioLaboratorio() {
         $dni = $this->input->post("dni");
         $doctor = $this->input->post("doctor");
         $observacion = $this->input->post("observacion");
         $fecha = $this->input->post("fecha");
         $total = $this->input->post("total");
+        
+        // Recibimos los laboratorios (puede venir NULL si no seleccionó nada)
         $laboratorio = $this->input->post("laboratorio");
+        
         $data = [
             "dni" => $dni,
             "doctor" => $doctor,
@@ -129,17 +132,28 @@ class Laboratorio extends Admin_Controller {
             "fecha" => $fecha,
             "total" => $total
         ];
+        
+        // 1. Creamos la cabecera del servicio
         $detallelaboratorio = $this->Laboratorio_model->crearServicioLaboratorio($data);
         
-        for($i=0; $i < sizeof($laboratorio); $i++){
-           $data2 = [
-               "id_laboratorio" => $detallelaboratorio,
-               "servicio" => $laboratorio[$i],
-               "fecha" => $fecha
-           ];
-           $this->Laboratorio_model->crearDetalleLaboratorio($data2);
+        // 2. VALIDACIÓN DE SEGURIDAD (Aquí estaba el error)
+        // Solo intentamos guardar los detalles si $laboratorio es un array válido y no está vacío
+        if (!empty($laboratorio) && is_array($laboratorio)) {
+            
+            // Usamos count() que es más moderno que sizeof(), aunque hacen lo mismo
+            for($i=0; $i < count($laboratorio); $i++){
+               $data2 = [
+                   "id_laboratorio" => $detallelaboratorio,
+                   "servicio" => $laboratorio[$i],
+                   "fecha" => $fecha
+               ];
+               $this->Laboratorio_model->crearDetalleLaboratorio($data2);
+            }
         }
-        $this->Atencion_model->CrearLineaTiempoLaboratorio($dni,'Laboratorio',$doctor);
+
+        // 3. Creamos la línea de tiempo
+        $this->Atencion_model->CrearLineaTiempoLaboratorio($dni, 'Laboratorio', $doctor);
+        
         echo json_encode($detallelaboratorio);
     }
 

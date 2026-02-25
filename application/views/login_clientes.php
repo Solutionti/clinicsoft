@@ -50,7 +50,7 @@
                   <div class="messageError mt-1"></div>
                   <form role="form">
                     <div class="mb-3">
-                      <input type="number" class="form-control form-control-lg" id="correo" placeholder="Usuario">
+                      <input type="number" class="form-control form-control-lg" id="correo" placeholder="DNI">
                     </div>
                     <div class="mb-3">
                       <input type="password" class="form-control form-control-lg" id="password" placeholder="Contraseña">

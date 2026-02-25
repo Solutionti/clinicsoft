@@ -38,7 +38,7 @@
               </div>
               <div class="row mt-3">
                 <div class="col-md-6">
-                  <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio">
+                  <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio-historia">
                      <thead  class="bg-default text-white">
                         <tr>
                            <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
@@ -56,7 +56,7 @@
                    </table>
                 </div>
                 <div class="col-md-6">
-                  <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio-items">
+                  <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio-agregados-historia">
                     <thead>
                       <tr class="bg-default text-white">
                         <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
@@ -69,6 +69,9 @@
                   <div class="d-flex gap-2 mt-3">
                     <button type="button" class="btn btn-warning" onclick="limpiarSeleccion()">
                       <i class="fas fa-broom me-1"></i> Limpiar
+                    </button>
+                    <button onclick="guardarExamenesHistoria()" class="btn btn-primary">
+                      <i class="fas fa-save me-1"></i> Guardar Orden
                     </button>
                   </div>
                 </div>

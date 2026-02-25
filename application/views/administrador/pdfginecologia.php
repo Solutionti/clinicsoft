@@ -13,7 +13,7 @@ $pdf->Cell(40,6,'', '', 0,'L', false );
 $pdf->Cell(60,6,' Mi salud', '', 0,'L', false );
 $pdf->Ln(8);
 $pdf->Cell(58,6,'', '', 0,'L', false );
-$pdf->Cell(1,6,'HISTORIA CLINICA GINECOLOGICA', '', 0,'L', false );
+$pdf->Cell(1,6,'HISTORIA CLINICA GINECOLOGIC', '', 0,'L', false );
 $pdf->SetFont('Times','',9);
 $pdf->Ln(12);
 $pdf->Cell(35,6,'GINECOLOGIA (   )', '', 0,'L', false );
