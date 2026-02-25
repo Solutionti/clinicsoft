@@ -62,24 +62,22 @@ class Historias_model extends CI_model
     ];
     $this->db->insert('historial_pacientes', $datos);
 
-    if($data['tipo'] == 1) {
-     $data = [
-      "codigo_triage" => $data['triaje'],
-      "codigo_paciente" => $data['paciente'],
-      "usuario" => $this->session->userdata('nombre'),
-     ];
-     $this->db->insert('h_consultas', $data);
-    }
-    else if($data['tipo'] == 2) {
+    if ($data['tipo'] == 1) {
       $data = [
-        "codigo_triage" => $data['triaje'],
-        "codigo_historia" => $data['paciente'],
-        "usuario" => $this->session->userdata('nombre'),
-        "estado" => 'Activo'
+        'codigo_triage' => $data['triaje'],
+        'codigo_paciente' => $data['paciente'],
+        'usuario' => $this->session->userdata('nombre'),
+      ];
+      $this->db->insert('h_consultas', $data);
+    } else if ($data['tipo'] == 2) {
+      $data = [
+        'codigo_triage' => $data['triaje'],
+        'codigo_historia' => $data['paciente'],
+        'usuario' => $this->session->userdata('nombre'),
+        'estado' => 'Activo'
       ];
       $this->db->insert('h_ginecologias', $data);
     }
-    
   }
 
   public function crearHconsultasGinecologicas($data)
@@ -125,7 +123,6 @@ class Historias_model extends CI_model
     $this->db->where('codigo_triage', $data['triaje']);
     $this->db->where('codigo_historia', $data['paciente']);
     $this->db->update('h_ginecologias', $datos);
-    
   }
 
   public function crearHconsultasGeneral($data)
@@ -168,11 +165,10 @@ class Historias_model extends CI_model
       'piel' => $data['piel'],
       'usuario' => $this->session->userdata('nombre')
     ];
-    
+
     $this->db->where('codigo_triage', $data['triaje']);
     $this->db->where('codigo_paciente', $data['paciente']);
     $this->db->update('h_consultas', $datos);
-    
   }
 
   public function crearRecetaMedica($data)
@@ -223,11 +219,17 @@ class Historias_model extends CI_model
   {
     $this->db->select('h.*, g.*');
     $this->db->from('historial_pacientes h');
-    $this->db->join('h_ginecologias g', 'h.paciente = g.codigo_historia');
-    // $this->db->join('triajes t', 'h.triaje = t.codigo_triaje');
+
+    // --- CORRECCIÓN AQUÍ ---
+    // Antes solo unías por paciente, ahora unimos TAMBIÉN por el código de triaje
+    // para que traiga los datos exactos de ESA consulta y no de las anteriores.
+    $this->db->join('h_ginecologias g', 'h.triaje = g.codigo_triage');
+    // -----------------------
+
     $this->db->where('h.codigo_historia', $documento);
     $this->db->where('h.triaje', $triage);
-    $this->db->where("h.tipo_consulta", 2);
+    $this->db->where('h.tipo_consulta', 2);
+
     $result = $this->db->get();
 
     return $result;
@@ -258,12 +260,13 @@ class Historias_model extends CI_model
 
   public function eliminarDiagnosticos($historia, $paciente)
   {
-    $this->db->where("codigo_historia", $historia);
-    $this->db->where("paciente", $paciente);
-    $this->db->delete("diagnosticos");
+    $this->db->where('codigo_historia', $historia);
+    $this->db->where('paciente', $paciente);
+    $this->db->delete('diagnosticos');
   }
 
-  public function crearDiagnosticosGeneral($data){
+  public function crearDiagnosticosGeneral($data)
+  {
     $datos = [
       'codigo_historia' => $data['triaje'],
       'paciente' => $data['paciente'],
@@ -448,22 +451,27 @@ class Historias_model extends CI_model
   {
     $this->db->select('d.*, ci.descripcion, ci.clave');
     $this->db->from('diagnosticos d');
-    $this->db->join('diagnosticoscie10 ci', 'd.codigo_diagnosti = ci.id');
+    $this->db->join('diagnosticoscie10 ci', 'd.codigo_diagnosti = ci.clave', 'left');
     $this->db->where('d.paciente', $documento);
+    $this->db->order_by('d.codigo_diagnostico', 'DESC');
     $result = $this->db->get();
 
     return $result;
   }
 
-  public function getProcedimientosHistoria($documento)
-  {
-    $this->db->select('d.*, ci.nombre, ci.codigo_cpt');
-    $this->db->from('procedimiento_historias d');
-    $this->db->join('procedimientos ci', 'd.codigo_procedimiento = ci.codigo_cpt');
-    $this->db->where('d.paciente', $documento);
-    $result = $this->db->get();
+  // En Historias_model.php
 
-    return $result;
+  public function getProcedimientosHistoria($documento, $triage)
+  {
+    // Seleccionamos el código y el nombre del procedimiento desde la tabla maestra
+    $this->db->select('ph.*, p.nombre as nombre_proc, p.codigo_cpt');
+    $this->db->from('procedimiento_historias ph');
+    // JOIN con la tabla de procedimientos (CPT)
+    $this->db->join('procedimientos p', 'ph.codigo_procedimiento = p.codigo_cpt', 'left');
+    $this->db->where('ph.codigo_historia', $triage);
+    $this->db->where('ph.paciente', $documento);
+
+    return $this->db->get();
   }
 
   public function getUltimoDatoTriage($documento)
@@ -513,23 +521,32 @@ class Historias_model extends CI_model
     return $result;
   }
 
+  // En application/models/Historias_model.php
+
   public function getDiagnosticosHistoria($documento, $triaje)
   {
+    // Seleccionamos la descripción y la clave
     $this->db->select('d.*, dc.clave, dc.descripcion');
     $this->db->from('diagnosticos d');
-    $this->db->join('diagnosticoscie10 dc', 'd.codigo_diagnosti = dc.id');
+
+    // CORRECCIÓN: Unimos usando la Clave (que es lo más probable según tu función de editar)
+    // Si esto falla, intenta cambiar 'dc.clave' por 'dc.id' nuevamente, pero 'clave' es lo usual si guardas el código CIE10.
+    $this->db->join('diagnosticoscie10 dc', 'd.codigo_diagnosti = dc.clave', 'left');
+
+    // Aseguramos que busque por el paciente y el triaje correcto
     $this->db->where('d.paciente', $documento);
     $this->db->where('d.codigo_historia', $triaje);
 
     $result = $this->db->get();
 
+    // Verificamos si trajo algo
     if ($result->num_rows() > 0) {
       return $result;
     } else {
+      // DEBUG: Si devuelve false, descomenta la linea de abajo para ver el error en pantalla
+      // echo $this->db->last_query(); die();
       return false;
     }
-
-    return $result;
   }
 
   // ACA CREAR LAS DOS FUNCIONES QUE VAN HACER LOS INSERT
@@ -576,6 +593,18 @@ class Historias_model extends CI_model
     $this->db->insert('ordenes_laboratorio', $orden_laboratorio);
     $id = $this->db->insert_id();
 
+    // Guardar los detalles de los exámenes
+    if (isset($data['examenes']) && is_array($data['examenes'])) {
+      foreach ($data['examenes'] as $examen) {
+        $detalle = [
+          'codigo_lab' => $id,
+          'codigo_procedimiento' => $examen,
+          'fecha' => $data['fecha']
+        ];
+        $this->db->insert('ordenes_laboratorio_detalle', $detalle);
+      }
+    }
+
     return $id;
   }
 
@@ -590,10 +619,11 @@ class Historias_model extends CI_model
     $this->db->insert('ordenes_laboratorio_detalle', $orden_laboratorio);
   }
 
-  public function eliminarProcedimientos($triage, $paciente) {
-    $this->db->where("codigo_historia", $triage);
-    $this->db->where("paciente", $paciente);
-    $this->db->delete("procedimiento_historias");
+  public function eliminarProcedimientos($triage, $paciente)
+  {
+    $this->db->where('codigo_historia', $triage);
+    $this->db->where('paciente', $paciente);
+    $this->db->delete('procedimiento_historias');
   }
 
   public function crearProcedimientosHistoria($data)
@@ -888,62 +918,66 @@ class Historias_model extends CI_model
     $this->db->delete('medicamentos');
   }
 
-  public function crearEncabezadoExamenesAuxiliares($data) {
+  public function crearEncabezadoExamenesAuxiliares($data)
+  {
     $datos = [
-      "documento" => $data['paciente'],
-      "tipo" => $data['tipo'],
-      "triage" => $data['triaje'],
-      "fecha" => date('Y-m-d'),
+      'documento' => $data['paciente'],
+      'tipo' => $data['tipo'],
+      'triage' => $data['triaje'],
+      'fecha' => date('Y-m-d'),
     ];
     $this->db->insert('examenes_auxiliares', $datos);
   }
 
-  public function eliminarexamenesAuxiliares($examen, $triage, $paciente) {
+  public function eliminarexamenesAuxiliares($examen, $triage, $paciente)
+  {
     $this->db->where('examen', $examen);
     $this->db->where('triage', $triage);
     $this->db->where('paciente', $paciente);
     $this->db->delete('detalle_examen_auxiliares');
-
   }
 
-  public function crearExamenAuxiliaresEcografia($data) {
+  public function crearExamenAuxiliaresEcografia($data)
+  {
     $datos = [
-      "codigoauxiliar" => $data['ecografia'],
-      "examen" => $data['examen'],
-      "fecha" => date('Y-m-d'),
-      "triage" => $data['triaje'],
-      "paciente" => $data['paciente'],
-      "especialidad" => $data['especialidad']
+      'codigoauxiliar' => $data['ecografia'],
+      'examen' => $data['examen'],
+      'fecha' => date('Y-m-d'),
+      'triage' => $data['triaje'],
+      'paciente' => $data['paciente'],
+      'especialidad' => $data['especialidad']
     ];
     $this->db->insert('detalle_examen_auxiliares', $datos);
   }
 
-  public function crearExamenAuxiliaresTomografia($data) {
+  public function crearExamenAuxiliaresTomografia($data)
+  {
     $datos = [
-      "codigoauxiliar" => $data['tomografia'],
-      "examen" => $data['examen'],
-      "fecha" => date('Y-m-d'),
-      "triage" => $data['triaje'],
-      "paciente" => $data['paciente'],
-      "especialidad" => $data['especialidad']
+      'codigoauxiliar' => $data['tomografia'],
+      'examen' => $data['examen'],
+      'fecha' => date('Y-m-d'),
+      'triage' => $data['triaje'],
+      'paciente' => $data['paciente'],
+      'especialidad' => $data['especialidad']
     ];
     $this->db->insert('detalle_examen_auxiliares', $datos);
   }
 
-  public function crearExamenAuxiliaresResonancia($data) {
-    
+  public function crearExamenAuxiliaresResonancia($data)
+  {
     $datos = [
-      "codigoauxiliar" => $data['resonancia'],
-      "examen" => $data['examen'],
-      "fecha" => date('Y-m-d'),
-      "triage" => $data['triaje'],
-      "paciente" => $data['paciente'],
-      "especialidad" => $data['especialidad']
+      'codigoauxiliar' => $data['resonancia'],
+      'examen' => $data['examen'],
+      'fecha' => date('Y-m-d'),
+      'triage' => $data['triaje'],
+      'paciente' => $data['paciente'],
+      'especialidad' => $data['especialidad']
     ];
     $this->db->insert('detalle_examen_auxiliares', $datos);
   }
 
-  public function getConsultasGeneralCodigo($codigo, $paciente) {
+  public function getConsultasGeneralCodigo($codigo, $paciente)
+  {
     $this->db->select('*');
     $this->db->from('h_consultas');
     $this->db->where('codigo_triage', $codigo);
@@ -953,7 +987,8 @@ class Historias_model extends CI_model
     return $result;
   }
 
-  public function getGinecologiaCodigo($codigo, $paciente) {
+  public function getGinecologiaCodigo($codigo, $paciente)
+  {
     $this->db->select('*');
     $this->db->from('h_ginecologias');
     $this->db->where('codigo_triage', $codigo);
@@ -963,8 +998,9 @@ class Historias_model extends CI_model
     return $result;
   }
 
-  //diagnosticos 
-  public function getdiagnosticosEditar($triage, $paciente, $especialidad) {
+  // diagnosticos
+  public function getdiagnosticosEditar($triage, $paciente, $especialidad)
+  {
     $this->db->select('d.*, dc.descripcion as nombrediagnostico, dc.id as iddiagnostico');
     $this->db->from('diagnosticos d');
     $this->db->join('diagnosticoscie10 dc', 'd.codigo_diagnosti = dc.clave');
@@ -976,8 +1012,9 @@ class Historias_model extends CI_model
     return $result;
   }
 
-  //diagnosticos
-  public function getProcedimientosCodigo($triage, $paciente, $especialidad) {
+  // diagnosticos
+  public function getProcedimientosCodigo($triage, $paciente, $especialidad)
+  {
     $this->db->select('p.*, pr.nombre as nombreprocedimiento, pr.codigo_cpt as codigoprocedimiento');
     $this->db->from('procedimiento_historias p');
     $this->db->join('procedimientos pr', 'p.codigo_procedimiento = pr.codigo_cpt');
@@ -989,8 +1026,9 @@ class Historias_model extends CI_model
     return $result;
   }
 
-  //medicamentos 
-  public function getMedicamentosEditar($triage, $paciente, $especialidad) {
+  // medicamentos
+  public function getMedicamentosEditar($triage, $paciente, $especialidad)
+  {
     $this->db->select('*');
     $this->db->from('medicamentos');
     $this->db->where('triaje', $triage);
@@ -1001,8 +1039,9 @@ class Historias_model extends CI_model
     return $result;
   }
 
-  //citas
-  public function getCitasPaciente($triage, $paciente) {
+  // citas
+  public function getCitasPaciente($triage, $paciente)
+  {
     $this->db->select('*');
     $this->db->from('citas');
     $this->db->where('triage', $triage);
@@ -1012,7 +1051,8 @@ class Historias_model extends CI_model
     return $result;
   }
 
-  public function examenesAuxiliaresEcografiasEditar($triage, $paciente) {
+  public function examenesAuxiliaresEcografiasEditar($triage, $paciente)
+  {
     $this->db->select('e.*, ea.nombre as nombreauxiliar');
     $this->db->from('detalle_examen_auxiliares e');
     $this->db->join('tb_eco ea', 'e.codigoauxiliar = ea.codigo');
@@ -1024,7 +1064,8 @@ class Historias_model extends CI_model
     return $result;
   }
 
-  public function examenesAuxiliaresTomografiasEditar($triage, $paciente) {
+  public function examenesAuxiliaresTomografiasEditar($triage, $paciente)
+  {
     $this->db->select('e.*, ea.nombre as nombreauxiliar');
     $this->db->from('detalle_examen_auxiliares e');
     $this->db->join('tomografias ea', 'e.codigoauxiliar = ea.codigo');
@@ -1036,7 +1077,8 @@ class Historias_model extends CI_model
     return $result;
   }
 
-  public function examenesAuxiliaresResonanciasEditar($triage, $paciente) {
+  public function examenesAuxiliaresResonanciasEditar($triage, $paciente)
+  {
     $this->db->select('e.*, ea.nombre as nombreauxiliar');
     $this->db->from('detalle_examen_auxiliares e');
     $this->db->join('resonancias ea', 'e.codigoauxiliar = ea.codigo');
@@ -1048,7 +1090,8 @@ class Historias_model extends CI_model
     return $result;
   }
 
-  public function validarexistentegeneral($triage, $paciente) {
+  public function validarexistentegeneral($triage, $paciente)
+  {
     $this->db->select('*');
     $this->db->from('h_consultas');
     $this->db->where('codigo_triage', $triage);
@@ -1062,7 +1105,8 @@ class Historias_model extends CI_model
     }
   }
 
-  public function validarexistenteginecologia($triage, $paciente) {
+  public function validarexistenteginecologia($triage, $paciente)
+  {
     $this->db->select('*');
     $this->db->from('h_ginecologias');
     $this->db->where('codigo_triage', $triage);

@@ -231,17 +231,35 @@ $('#table-laboratorio-items').on('dblclick', 'tr', function() {
 function crearOrdenLaboratorioHistoria() {
     
     var url = baseurl + "administracion/crearOrdenLaboratorio";
-    var documento = $("#documento_historia").val(),
+    
+    // 1. CAPTURAMOS LOS DATOS CON LOS NUEVOS IDs DE HISTORIA
+    // Asegúrate de que estos IDs coincidan con los de tus inputs en el HTML
+    var documento = $("#documento_historia").val(), // El DNI del paciente
         nombre = $("#nombre_paciente").val(),
         edad = $("#edad_paciente").val(),
         medico = $("#medico_solicitante").val(),
-        triage = $("#consecutivo_historia").val(),
+        triage = $("#consecutivo_historia").val(), // Este es el ID del triaje actual
         ordenlab = [];
     
-    // Recorrer los elementos del laboratorio seleccionados
-    for (let i = 0; i < elementos_laboratorio.length; i++) {
-       ordenlab.push(elementos_laboratorio[i].id);
+    // 2. RECOLECTAMOS LOS EXÁMENES DESDE LA TABLA DERECHA (LA QUE TIENE LOS INPUT HIDDEN)
+    // Buscamos todos los inputs con name="examenes[]" que agregamos en agregarItemHistoria
+    $("input[name='examenes[]']").each(function() {
+        var id_examen = $(this).val();
+        if (id_examen) {
+            ordenlab.push(id_examen);
+        }
+    });
+
+    // 3. VALIDACIÓN: No enviar si no hay exámenes
+    if (ordenlab.length === 0) {
+        $("body").overhang({
+            type: "warn",
+            message: "Debe seleccionar al menos un examen de laboratorio."
+        });
+        return;
     }
+
+    // 4. ENVÍO AL CONTROLADOR
     $.ajax({
         url: url,
         method: "POST",
@@ -251,19 +269,19 @@ function crearOrdenLaboratorioHistoria() {
           edad: edad,
           medico: medico,
           triage: triage,
-          ordenlab: ordenlab
+          ordenlab: ordenlab // El controlador recibirá esto como un array
         },
         success: function(response) {
-            // $("body").overhang({
-            //     type: "success",
-            //     message: "Orden de laboratorio guardada correctamente"
-            // });
-            // setTimeout(reloadPage, 3000);
+            $("body").overhang({
+                type: "success",
+                message: "Orden de laboratorio guardada correctamente en la historia."
+            });
+            // Opcional: limpiarSeleccion(); 
         },
         error: function() {
             $("body").overhang({
                 type: "error",
-                message: "Error al guardar la orden de laboratorio"
+                message: "Error al conectar con el servidor para guardar la orden."
             });
         }
     });
@@ -1404,7 +1422,7 @@ function abrirHistoriaClinica(tipo) {
                   if(response === "error") {
                     $("body").overhang({
                       type: "error",
-                      message: "ya existe una historia clinica con el triage .",
+                      message: "Ya existe una historia clinica con este triaje.",
                     });
                   }
                   else {
@@ -1433,7 +1451,7 @@ function abrirHistoriaClinica(tipo) {
                   if(response === "error") {
                     $("body").overhang({
                       type: "error",
-                      message: "ya existe una historia clinica con el triage .",
+                      message: "Ya existe una historia clinica con este triaje.",
                     });
                   }
                   else {
@@ -2654,6 +2672,93 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
        }
     }
   });   
+}
+
+// Variable global para poder acceder desde las funciones
+var table_agregados_historia; 
+var table_lab_historia;
+
+$(document).ready(function() {
+    
+    // --- A. Tabla Izquierda (Catálogo) ---
+    table_lab_historia = $('#table-laboratorio-historia').DataTable({
+        "destroy": true, 
+        "lengthMenu": [5, 10, 20],
+        "language": { "search": "Buscar:", "zeroRecords": "No encontrado", "info": "" },
+        "dom": 'ftip', 
+        "pageLength": 5
+    });
+
+    // --- B. Tabla Derecha (Seleccionados) ---
+    table_agregados_historia = $('#table-laboratorio-agregados-historia').DataTable({
+        "destroy": true, 
+        "paging": false,
+        "searching": false,
+        "info": false,
+        "language": { "zeroRecords": "Ningún examen seleccionado" },
+        // IMPORTANTE: Definimos columnas para que el botón X funcione bien
+        "columnDefs": [
+            { "targets": 0, "width": "10%" }, // Código
+            { "targets": 1, "width": "90%" }  // Nombre + Botón
+        ]
+    });
+
+    // 2. Evento al hacer clic en una fila de la izquierda
+    $('#table-laboratorio-historia tbody').on('click', 'tr', function () {
+        // CORRECCIÓN 1: Usamos el nombre correcto de la variable
+        var data = table_lab_historia.row(this).data();
+        
+        if(data) {
+             // data[0] es Código, data[1] es Nombre
+            agregarItemHistoria(data[0], data[1]);
+        }
+    });
+
+    // 3. Evento para eliminar fila (Delegación de eventos)
+    $('#table-laboratorio-agregados-historia tbody').on('click', '.btn-borrar', function () {
+        // Usamos la API de DataTable para borrar la fila y que se actualice todo
+        table_agregados_historia.row($(this).parents('tr')).remove().draw();
+    });
+});
+
+// 4. Función para mover el ítem a la DERECHA
+function agregarItemHistoria(codigo, nombre) {
+    
+    // Evitar duplicados revisando los inputs hidden existentes
+    var existe = false;
+    // Buscamos dentro de los nodos de la DataTable
+    table_agregados_historia.rows().nodes().to$().find('input[name="examenes[]"]').each(function() {
+        if ($(this).val() == codigo) existe = true;
+    });
+
+    if (existe) {
+        Swal.fire("Aviso", "Este examen ya está en la lista", "warning");
+        return;
+    }
+
+    // CORRECCIÓN 2: Usamos la API 'row.add' en lugar de '.append'
+    // Combinamos el Nombre + Input + Botón en la segunda columna para respetar el diseño de 2 columnas
+    var contenidoColumna2 = `
+        <div class="d-flex justify-content-between align-items-center">
+            <span>${nombre}</span>
+            <div>
+                <input type="hidden" name="examenes[]" value="${codigo}">
+                <button type="button" class="btn btn-sm btn-danger btn-borrar py-0 px-2">X</button>
+            </div>
+        </div>
+    `;
+
+    table_agregados_historia.row.add([
+        codigo,
+        contenidoColumna2
+    ]).draw(false); // .draw() hace que se muestre y quite el mensaje "Ningún examen"
+}
+
+function limpiarSeleccion() {
+    // Limpiamos usando la API de DataTable
+    if(table_agregados_historia) {
+        table_agregados_historia.clear().draw();
+    }
 }
 
 terminarAtenciongeneral = () => {

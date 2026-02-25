@@ -476,6 +476,19 @@ function buscarPacienteBaseDatos() {
        const tdEstadoCivil = document.createElement('td');
              tdEstadoCivil.textContent = pacientes.estado_civil;
              tr.appendChild(tdEstadoCivil);
+      const tdReset = document.createElement('td');
+        tdReset.classList.add('text-center');
+        const btnReset = document.createElement('button');
+        btnReset.setAttribute('type', 'button');
+        // Clases de Argon/Bootstrap
+        btnReset.className = 'btn btn-icon-only btn-rounded btn-outline-warning mb-0 me-3 btn-sm d-flex align-items-center justify-content-center';
+        btnReset.innerHTML = '<i class="fas fa-key" aria-hidden="true"></i>';
+        btnReset.onclick = function(e) { 
+            e.stopPropagation(); // Evita que se seleccione la fila al hacer click
+            restablecerClave(pacientes.documento); 
+        };
+        tdReset.appendChild(btnReset);
+        tr.appendChild(tdReset);
 
        // Finalmente, agrega la fila al cuerpo de la tabla
        document.getElementById('table_buscar').querySelector('tbody').appendChild(tr);
@@ -718,6 +731,61 @@ function actualizarPaciente(id) {
           }
         }
       });
+
+      function restablecerClave(documento_paciente) {
+  // Usamos SweetAlert2 que ya tienes en el proyecto
+  Swal.fire({
+      title: '¿Restablecer Contraseña?',
+      text: "Se generará una NUEVA clave aleatoria. La anterior dejará de funcionar.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#fb6340', // Color naranja de Argon
+      cancelButtonColor: '#secondary',
+      confirmButtonText: 'Sí, generar clave',
+      cancelButtonText: 'Cancelar'
+  }).then((result) => {
+      if (result.isConfirmed) {
+          
+          $.ajax({
+              url: baseurl + "administracion/pacientes/restablecer_clave_ajax",
+              type: "POST",
+              data: { documento: documento_paciente },
+              dataType: "json",
+              beforeSend: function() {
+                  // Opcional: Mostrar loading
+                  Swal.showLoading();
+              },
+              success: function(response) {
+                  if(response.status == 'success') {
+                      Swal.fire({
+                          title: '¡Clave Generada!',
+                          html: `
+                              <p class="mb-3">Dicte esta clave al paciente:</p>
+                              <div class="p-3 bg-secondary rounded mb-3">
+                                <h1 class="display-1 font-weight-bold text-primary mb-0">${response.nueva_clave}</h1>
+                              </div>
+                              <p class="text-sm text-muted">La clave ya está activa.</p>
+                          `,
+                          icon: 'success',
+                          confirmButtonText: 'Entendido'
+                      });
+                  } else {
+                      $("body").overhang({
+                        type: "error",
+                        message: "Error: " + (response.mensaje || "No se pudo actualizar")
+                      });
+                  }
+              },
+              error: function() {
+                 $("body").overhang({
+                    type: "error",
+                    message: "Error de conexión con el servidor"
+                  });
+              }
+          });
+      }
+  })
+}
 
 const reloadPage = () => {
   location.reload();

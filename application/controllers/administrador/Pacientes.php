@@ -159,4 +159,33 @@ class Pacientes extends Admin_Controller
 			echo json_encode($result);
 		}
 	}
+
+	// --- NUEVA FUNCIONALIDAD: RESTABLECER CLAVE ---
+    public function restablecer_clave_ajax()
+    {
+        if (!$this->input->is_ajax_request()) {
+            exit('No direct script access allowed');
+        }
+
+        $documento = $this->input->post('documento');
+        
+        if ($documento) {
+            // Generamos clave aleatoria de 6 dígitos
+            $clave_limpia = rand(100000, 999999);
+            // La guardamos encriptada en la BD
+            $clave_hash = password_hash($clave_limpia, PASSWORD_BCRYPT);
+            $actualizado = $this->Pacientes_model->actualizar_password($documento, $clave_hash);
+            
+            if ($actualizado) {
+                echo json_encode([
+                    'status' => 'success',
+                    'nueva_clave' => $clave_limpia
+                ]);
+            } else {
+                echo json_encode(['status' => 'error', 'mensaje' => 'No se pudo actualizar en BD']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'mensaje' => 'Documento no recibido']);
+        }
+    }
 }
