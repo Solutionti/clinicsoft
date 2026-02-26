@@ -477,6 +477,74 @@
                       <td><?php echo $ordenlabo->fecha; ?></td>
                     </tr>
                     <?php } ?>
+                    <!-- Órdenes de Ecografía -->
+                    <?php if (isset($ordenEcografia) && $ordenEcografia->num_rows() > 0) { ?>
+                      <?php foreach ($ordenEcografia->result() as $ordenecho) { ?>
+                        <tr>
+                          <td>
+                            <div class="row">
+                              <a 
+                                class="icon icon-shape icon-sm bg-gradient-success shadow text-center mx-3"
+                                target="_blank"
+                                title="Generar PDF Ecografía"
+                                href="<?php echo base_url(); ?>administracion/pdfecografiaorden/<?php echo $ordenecho->cod_triage ?>/<?php echo $ordenecho->documento_paciente ?>/<?php echo $ordenecho->codigo_laboratorio ?>"
+                              >
+                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                              </a>
+                            </div>
+                          </td>
+                          <td><?php echo $ordenecho->nombre; ?></td>
+                          <td>Orden Ecografía</td>
+                          <td><?php echo $ordenecho->fecha; ?></td>
+                        </tr>
+                      <?php } ?>
+                    <?php } ?>
+                    
+                     <!-- Órdenes de Tomografía -->
+                    <?php if (isset($ordenTomografia) && $ordenTomografia->num_rows() > 0) { ?>
+                      <?php foreach ($ordenTomografia->result() as $ordentomo) { ?>
+                        <tr>
+                          <td>
+                            <div class="row">
+                              <a 
+                                class="icon icon-shape icon-sm bg-gradient-info shadow text-center mx-3"
+                                target="_blank"
+                                title="Generar PDF Tomografía"
+                                href="<?php echo base_url(); ?>administracion/pdftomografiaorden/<?php echo $ordentomo->cod_triage ?>/<?php echo $ordentomo->documento_paciente ?>/<?php echo $ordentomo->codigo_laboratorio ?>"
+                              >
+                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                              </a>
+                            </div>
+                          </td>
+                          <td><?php echo $ordentomo->nombre; ?></td>
+                          <td>Orden Tomografía</td>
+                          <td><?php echo $ordentomo->fecha; ?></td>
+                        </tr>
+                      <?php } ?>
+                    <?php } ?>
+
+                     <!-- Órdenes de Resonancia -->
+                    <?php if (isset($ordenResonancia) && $ordenResonancia->num_rows() > 0) { ?>
+                      <?php foreach ($ordenResonancia->result() as $ordenreso) { ?>
+                        <tr>
+                          <td>
+                            <div class="row">
+                              <a 
+                                class="icon icon-shape icon-sm bg-gradient-warning shadow text-center mx-3"
+                                target="_blank"
+                                title="Generar PDF Resonancia"
+                                href="<?php echo base_url(); ?>administracion/pdfresonanciaorden/<?php echo $ordenreso->cod_triage ?>/<?php echo $ordenreso->documento_paciente ?>/<?php echo $ordenreso->codigo_laboratorio ?>"
+                              >
+                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                              </a>
+                            </div>
+                          </td>
+                          <td><?php echo $ordenreso->nombre; ?></td>
+                          <td>Orden Resonancia</td>
+                          <td><?php echo $ordenreso->fecha; ?></td>
+                        </tr>
+                      <?php } ?>
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>
@@ -1334,6 +1402,8 @@
       <script src="<?php echo base_url(); ?>public/js/scripts/seleccionarPerfil.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/get_Items.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/ecografia.js"></script>
+      <script src="<?php echo base_url(); ?>public/js/scripts/tomografia.js"></script>
+      <script src="<?php echo base_url(); ?>public/js/scripts/resonancia.js"></script>
       <script>
         $(document).ready(function() {
           $('.form-field').on('input', function() {

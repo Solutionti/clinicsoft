@@ -596,12 +596,26 @@ class Historias_model extends CI_model
     // Guardar los detalles de los exámenes
     if (isset($data['examenes']) && is_array($data['examenes'])) {
       foreach ($data['examenes'] as $examen) {
+        // DEPURACIÓN: Verificar qué valores se están guardando
+        error_log('Guardando examen: ' . $examen . ' | Tipo: ' . gettype($examen));
+
+        // EXTRAER SOLO LA PARTE NUMÉRICA de ECO-004 -> 4
+        $codigo_numerico = preg_replace('/[^0-9]/', '', $examen);
+        error_log('Código extraído: ' . $codigo_numerico);
+
         $detalle = [
           'codigo_lab' => $id,
-          'codigo_procedimiento' => $examen,
+          'codigo_procedimiento' => (int) $codigo_numerico,  // Guardar como número
           'fecha' => $data['fecha']
         ];
+
+        // DEPURACIÓN: Verificar el array completo
+        error_log('Array detalle: ' . print_r($detalle, true));
+
         $this->db->insert('ordenes_laboratorio_detalle', $detalle);
+
+        // DEPURACIÓN: Verificar el último query ejecutado
+        error_log('Query ejecutado: ' . $this->db->last_query());
       }
     }
 
@@ -656,6 +670,40 @@ class Historias_model extends CI_model
     $this->db->select('*');
     $this->db->from('ordenes_laboratorio');
     $this->db->where('documento_paciente', $documento);
+    $this->db->where('codigo_orden', 'LABORATORIO');
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  public function getOrdenesEcografia($documento)
+  {
+    $this->db->select('*');
+    $this->db->from('ordenes_laboratorio');
+    $this->db->where('documento_paciente', $documento);
+    $this->db->where('codigo_orden', 'ECOGRAFIA');
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  public function getOrdenesTomografia($documento)
+  {
+    $this->db->select('*');
+    $this->db->from('ordenes_laboratorio');
+    $this->db->where('documento_paciente', $documento);
+    $this->db->where('codigo_orden', 'TOMOGRAFIA');
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  public function getOrdenesResonancia($documento)
+  {
+    $this->db->select('*');
+    $this->db->from('ordenes_laboratorio');
+    $this->db->where('documento_paciente', $documento);
+    $this->db->where('codigo_orden', 'RESONANCIA');
     $result = $this->db->get();
 
     return $result;
@@ -672,12 +720,61 @@ class Historias_model extends CI_model
     return $result;
   }
 
+  public function getEcografiaPdf($codigo)
+  {
+    // Seleccionar solo ecografías
+    $this->db->select('o.*, eco.nombre as nombre_procedimiento, eco.codigo_ecografia as codigo_procedimientos');
+    $this->db->from('ordenes_laboratorio_detalle o');
+
+    // JOIN con tabla de ecografías
+    $this->db->join('tb_eco eco', 'o.codigo_procedimiento = eco.codigo_ecografia', 'inner');
+
+    $this->db->where('o.codigo_lab', $codigo);
+    $result = $this->db->get();
+
+    return $result;
+  }
+
   public function getLaboratorioPdf($codigo)
   {
+    // Seleccionar solo laboratorios
     $this->db->select('o.*, pr.nombre as nombre_procedimiento, pr.codigo as codigo_procedimientos');
     $this->db->from('ordenes_laboratorio_detalle o');
-    $this->db->join('precio_laboratorio pr', 'o.codigo_procedimiento = pr.codigo');
+
+    // JOIN con tabla de laboratorios
+    $this->db->join('precio_laboratorio pr', 'o.codigo_procedimiento = pr.codigo', 'inner');
+
     $this->db->where('o.codigo_lab', $codigo);
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  public function getTomografiaPdf($codigo)
+{
+    // 1. Seleccionamos los campos necesarios
+    // Usamos 'tomo.nombre' (o el nombre de columna que tengas para la descripción)
+    $this->db->select('o.*, tomo.nombre as nombre_procedimiento, codigo_tomografia as codigo_procedimientos');
+    $this->db->from('ordenes_laboratorio_detalle o');
+
+    // 2. JOIN con la tabla maestra de TOMOGRAFIAS
+    // Cambiamos 'tb_eco' por 'tomografias'
+    $this->db->join('tomografias tomo', 'o.codigo_procedimiento = tomo.codigo_tomografia', 'inner');
+
+    // 3. Filtramos por el ID de la cabecera
+    $this->db->where('o.codigo_lab', $codigo);
+    
+    $result = $this->db->get();
+
+    return $result;
+}
+
+  public function getResonanciaPdf($idlaboratorio)
+  {
+    $this->db->select('o.*, reso.nombre as nombre_procedimiento, codigo_resonancia as codigo_procedimientos');
+    $this->db->from('ordenes_laboratorio_detalle o');
+    $this->db->join('resonancias reso', 'o.codigo_procedimiento = reso.codigo_resonancia', 'inner');
+    $this->db->where('o.codigo_lab', $idlaboratorio);
     $result = $this->db->get();
 
     return $result;
