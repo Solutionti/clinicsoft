@@ -104,6 +104,9 @@ class Historiaclinica extends Admin_Controller
 		$laboratorios = $this->Laboratorio_model->getPreciosLaboratorio();
 		$ordenPatologicas = $this->Historias_model->getOrdenesPatologicas($documento);
 		$ordenLaboratorios = $this->Historias_model->getOrdeneslaboratorio($documento);
+		$ordenEcografias = $this->Historias_model->getOrdenesEcografia($documento);
+		$ordenTomografias = $this->Historias_model->getOrdenesTomografia($documento);
+		$ordenResonancias = $this->Historias_model->getOrdenesResonancia($documento);
 		$documentosPacientes = $this->Historias_model->getDocumentosPacientes($documento);
 		$eco = $this->Historias_model->getEcografias($documento);
 		$tomografias = $this->Historias_model->getTomografias($documento);
@@ -148,6 +151,9 @@ class Historiaclinica extends Admin_Controller
 			'laboratorio' => $laboratorios,
 			'ordenpatologica' => $ordenPatologicas,
 			'ordenLaboratorio' => $ordenLaboratorios,
+			'ordenEcografia' => $ordenEcografias,
+			'ordenTomografia' => $ordenTomografias,
+			'ordenResonancia' => $ordenResonancias,
 			'documentosPacientes' => $documentosPacientes,
 			'recetas' => $recetas,
 			'eco' => $eco,
@@ -1490,6 +1496,411 @@ class Historiaclinica extends Admin_Controller
 		$pdf->Output('I', 'Receta_Medica_A4_' . $datospaciente->documento . '.pdf');
 	}
 
+	public function formatoEcografiaOrdenes($triage, $documento, $idlaboratorio)
+	{
+		$datospaciente = $this->Pacientes_model->getPacienteId($documento)->result()[0];
+		$getEcografiaPdf = $this->Historias_model->getEcografiaPdf($idlaboratorio);
+
+		$this->load->library('PDF_UTF8');
+		$pdf = new PDF_UTF8();
+		$pdf->AddPage();
+		$pdf->SetAlpha(0.2);  // Transparencia (0.1 = 10% opacidad)
+		$pdf->Image('public/img/theme/logo.png', 60, 60, 80);  // Ajusta las coordenadas y tamaño según necesites
+		$pdf->SetAlpha(1);  // Restauramos la opacidad al 100%
+		$pdf->SetDrawColor(0, 24, 0);
+		$pdf->SetFillColor(115, 115, 115);
+		$pdf->Rect(10, 40, 196, 6, 'F');
+		$pdf->Image('public/img/theme/logo.png', 10, 20, 25, 0, 'PNG');
+		$pdf->Ln(15);
+		$pdf->SetFont('Arial', 'B', 10);
+		$pdf->cell(124, 5, '', 0);
+		$pdf->Ln(5);
+		$pdf->cell(110, 5, '', 0);
+		$pdf->cell(40, 5, 'SOLICITUD DE ESTUDIOS DE ECOGRAFIA', 0);
+
+		$pdf->Ln(10);
+		$pdf->SetFont('Courier', 'B', 8);
+
+		// DATOS PERSONALES
+		$pdf->Ln(6);
+		$pdf->SetTextColor(0, 0, 0);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(40, 5, 'APELLIDOS Y NOMBRES', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(100, 5, $datospaciente->nombre . ' ' . $datospaciente->apellido, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(10, 5, 'HC', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(46, 5, $datospaciente->hc, 1);
+
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(40, 5, 'DNI', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(30, 5, $datospaciente->documento, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(10, 5, 'EDAD', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(10, 5, $datospaciente->edad, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20, 5, 'SEXO', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(20, 5, $datospaciente->sexo, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20, 5, 'TELEFONO', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(46, 5, $datospaciente->telefono, 1);
+
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(40, 5, 'DIRECCION', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(45, 5, $datospaciente->direccion, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20, 5, 'DEPARTAMENTO', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(20, 5, $datospaciente->departamento, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(15, 5, 'PROVINCIA', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(20, 5, $datospaciente->provincia, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(15, 5, 'DISTRITO', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(21, 5, $datospaciente->distrito, 1);
+
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(40, 5, 'OCUPACION', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(100, 5, $datospaciente->ocupacion, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20, 5, 'ESTADO CIVIL', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(36, 5, $datospaciente->estado_civil, 1);
+		$pdf->Ln(9);
+
+		$pdf->Ln(5);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20, 5, 'CODIGO', 1);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(163, 5, 'ESTUDIO ECOGRAFICO', 1);
+
+		foreach ($getEcografiaPdf->result() as $eco) {
+			$pdf->Ln(5);
+			$pdf->SetFont('Arial', '', 6);
+			$pdf->cell(20, 5, $eco->codigo_procedimientos, 1);
+			$pdf->SetFont('Arial', '', 6);
+			$pdf->cell(163, 5, $eco->nombre_procedimiento, 1);
+		}
+
+		$pdf->Ln(20);
+		$pdf->SetFont('Arial', 'B', 8);
+		$pdf->cell(100, 5, $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido'), 0);
+		$pdf->cell(30, 5, '', 0);
+		$pdf->Ln(3);
+		$pdf->cell(100, 5, '_________________________________________', 0);
+		$pdf->cell(30, 5, '_________________________________________', 0);
+		$pdf->Ln(4);
+		$pdf->SetFont('Arial', '', 8);
+		$pdf->cell(100, 5, 'Quien Ordena', 0);
+		$pdf->cell(30, 5, 'Quien Recibe', 0);
+		$pdf->Ln(8);
+		$pdf->SetFont('Arial', '', 8);
+		$pdf->cell(100, 5, '', 0);
+		$pdf->cell(30, 5, '*** Fin del reporte ***', 0);
+		$pdf->Output('I', 'ordenecografia.pdf');
+	}
+
+	public function pdfresonanciaorden()
+	{
+		$triage = $this->uri->segment(3);
+		$documento = $this->uri->segment(4);
+		$idlaboratorio = $this->uri->segment(5);
+		$this->formatoResonanciaOrdenes($triage, $documento, $idlaboratorio);
+	}
+
+	public function formatoResonanciaOrdenes($triage, $documento, $idlaboratorio)
+	{
+		$datospaciente = $this->Pacientes_model->getPacienteId($documento)->result()[0];
+		$getResonanciaPdf = $this->Historias_model->getResonanciaPdf($idlaboratorio);
+
+		$this->load->library('PDF_UTF8');
+		$pdf = new PDF_UTF8();
+		$pdf->AddPage();
+		$pdf->SetAlpha(0.2);
+		$pdf->Image('public/img/theme/logo.png', 60, 60, 80);
+		$pdf->SetAlpha(1);
+		$pdf->SetDrawColor(0, 24, 0);
+		$pdf->SetFillColor(115, 115, 115);
+		$pdf->Rect(10, 40, 196, 6, 'F');
+		$pdf->Image('public/img/theme/logo.png', 10, 20, 25, 0, 'PNG');
+		$pdf->Ln(15);
+		$pdf->SetFont('Arial', 'B', 10);
+		$pdf->cell(124, 5, '', 0);
+		$pdf->Ln(5);
+		$pdf->cell(120, 5, '', 0);
+		$pdf->cell(40, 5, 'SOLICITUD DE ESTUDIOS DE RESONANCIA', 0);
+
+		$pdf->Ln(10);
+		$pdf->SetFont('Courier', 'B', 8);
+
+		// DATOS PERSONALES
+		$pdf->cell(40, 5, 'FECHA', 1);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(40, 5, date('d/m/Y'), 1);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20, 5, 'HORA', 1);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(20, 5, date('h:i:s A'), 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(15, 5, 'H.C', 1);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(20, 5, $datospaciente->hc, 1);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(15, 5, 'EDAD', 1);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(21, 5, $datospaciente->edad, 1);
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(40, 5, 'PACIENTE', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(151, 5, $datospaciente->apellido . ' ' . $datospaciente->nombre, 1);
+
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(40, 5, 'DIRECCION', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(45, 5, $datospaciente->direccion, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20, 5, 'DEPARTAMENTO', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(20, 5, $datospaciente->departamento, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(15, 5, 'PROVINCIA', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(20, 5, $datospaciente->provincia, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(15, 5, 'DISTRITO', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(21, 5, $datospaciente->distrito, 1);
+
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(40, 5, 'OCUPACION', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(100, 5, $datospaciente->ocupacion, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20, 5, 'ESTADO CIVIL', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(36, 5, $datospaciente->estado_civil, 1);
+		$pdf->Ln(9);
+
+		$pdf->Ln(5);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20, 5, 'CODIGO', 1);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(163, 5, 'ESTUDIO DE RESONANCIA', 1);
+
+		foreach ($getResonanciaPdf->result() as $resonancia) {
+			$pdf->Ln(5);
+			$pdf->SetFont('Arial', '', 6);
+			$pdf->cell(20, 5, $resonancia->codigo_procedimientos, 1);
+			$pdf->SetFont('Arial', '', 6);
+			$pdf->cell(163, 5, $resonancia->nombre_procedimiento, 1);
+		}
+
+		$pdf->Ln(20);
+		$pdf->SetFont('Arial', 'B', 8);
+		$pdf->cell(100, 5, $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido'), 0);
+		$pdf->cell(30, 5, '', 0);
+		$pdf->Ln(3);
+		$pdf->cell(100, 5, '_________________________________________', 0);
+		$pdf->cell(30, 5, '_________________________________________', 0);
+		$pdf->Ln(4);
+		$pdf->SetFont('Arial', '', 8);
+		$pdf->cell(100, 5, 'Quien Ordena', 0);
+		$pdf->cell(30, 5, 'Quien Recibe', 0);
+		$pdf->Ln(8);
+		$pdf->SetFont('Arial', '', 8);
+		$pdf->cell(100, 5, '', 0);
+		$pdf->cell(30, 5, '*** Fin del reporte ***', 0);
+		$pdf->Output('I', 'ordenresonancia.pdf');
+	}
+
+	public function formatoTomografiaOrdenes($triage, $documento, $idlaboratorio)
+	{
+		$datospaciente = $this->Pacientes_model->getPacienteId($documento)->result()[0];
+		$getTomografiaPdf = $this->Historias_model->getTomografiaPdf($idlaboratorio);
+
+		$this->load->library('PDF_UTF8');
+		$pdf = new PDF_UTF8();
+		$pdf->AddPage();
+		$pdf->SetAlpha(0.2);  // Transparencia (0.1 = 10% opacidad)
+		$pdf->Image('public/img/theme/logo.png', 60, 60, 80);  // Ajusta las coordenadas y tamaño según necesites
+		$pdf->SetAlpha(1);  // Restauramos la opacidad al 100%
+		$pdf->SetDrawColor(0, 24, 0);
+		$pdf->SetFillColor(115, 115, 115);
+		$pdf->Rect(10, 40, 196, 6, 'F');
+		$pdf->Image('public/img/theme/logo.png', 10, 20, 25, 0, 'PNG');
+		$pdf->Ln(15);
+		$pdf->SetFont('Arial', 'B', 10);
+		$pdf->cell(124, 5, '', 0);
+		$pdf->Ln(5);
+		$pdf->cell(110, 5, '', 0);
+		$pdf->cell(40, 5, 'SOLICITUD DE ESTUDIOS DE TOMOGRAFIA', 0);
+
+		$pdf->Ln(10);
+		$pdf->SetFont('Courier', 'B', 8);
+
+		// DATOS PERSONALES
+		$pdf->Ln(6);
+		$pdf->SetTextColor(0, 0, 0);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(40, 5, 'APELLIDOS Y NOMBRES', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(100, 5, $datospaciente->nombre . ' ' . $datospaciente->apellido, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(10, 5, 'HC', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(46, 5, $datospaciente->hc, 1);
+
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(40, 5, 'DNI', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(30, 5, $datospaciente->documento, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(10, 5, 'EDAD', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(10, 5, $datospaciente->edad, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20, 5, 'SEXO', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(20, 5, $datospaciente->sexo, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20, 5, 'TELEFONO', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(46, 5, $datospaciente->telefono, 1);
+
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(40, 5, 'DIRECCION', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(45, 5, $datospaciente->direccion, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20, 5, 'DEPARTAMENTO', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(20, 5, $datospaciente->departamento, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(15, 5, 'PROVINCIA', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(20, 5, $datospaciente->provincia, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(15, 5, 'DISTRITO', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(21, 5, $datospaciente->distrito, 1);
+
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(40, 5, 'OCUPACION', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(100, 5, $datospaciente->ocupacion, 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20, 5, 'ESTADO CIVIL', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(36, 5, $datospaciente->estado_civil, 1);
+		$pdf->Ln(9);
+
+		$pdf->Ln(5);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20, 5, 'CODIGO', 1);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(163, 5, 'ESTUDIO TOMOGRAFICO', 1);
+
+		foreach ($getTomografiaPdf->result() as $tomografia) {
+			$pdf->Ln(5);
+			$pdf->SetFont('Arial', '', 6);
+			$pdf->cell(20, 5, $tomografia->codigo_procedimientos, 1);
+			$pdf->SetFont('Arial', '', 6);
+			$pdf->cell(163, 5, $tomografia->nombre_procedimiento, 1);
+		}
+
+		$pdf->Ln(20);
+		$pdf->SetFont('Arial', 'B', 8);
+		$pdf->cell(100, 5, $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido'), 0);
+		$pdf->cell(30, 5, '', 0);
+		$pdf->Ln(3);
+		$pdf->cell(100, 5, '_________________________________________', 0);
+		$pdf->cell(30, 5, '_________________________________________', 0);
+		$pdf->Ln(4);
+		$pdf->SetFont('Arial', '', 8);
+		$pdf->cell(100, 5, 'Quien Ordena', 0);
+		$pdf->cell(30, 5, 'Quien Recibe', 0);
+		$pdf->Ln(8);
+		$pdf->SetFont('Arial', '', 8);
+		$pdf->cell(100, 5, '', 0);
+		$pdf->cell(30, 5, '*** Fin del reporte ***', 0);
+		$pdf->Output('I', 'ordenegrafia.pdf');
+	}
+
 	public function formatoLaboratorioOrdenes($triage, $documento, $idlaboratorio)
 	{
 		$datospaciente = $this->Pacientes_model->getPacienteId($documento)->result()[0];
@@ -1864,6 +2275,13 @@ class Historiaclinica extends Admin_Controller
 		$triage = $this->input->post('triage');
 		$examenes = $this->input->post('examenes');  // Cambiado de ordenlab a examenes
 		$fecha = date('Y-m-d');
+
+		// DEPURACIÓN: Verificar qué datos se reciben
+		error_log('=== DATOS RECIBIDOS EN CONTROLADOR ===');
+		error_log('Documento: ' . $documento);
+		error_log('Triage: ' . $triage);
+		error_log('Examenes: ' . print_r($examenes, true));
+		error_log('Tipo de examenes: ' . gettype($examenes));
 
 		$data = [
 			'documento' => $documento,

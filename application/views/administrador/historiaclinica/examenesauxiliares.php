@@ -288,6 +288,9 @@
                     <button type="button" class="btn btn-warning" onclick="limpiarSeleccionEcografia()">
                       <i class="fas fa-broom me-1"></i> Limpiar
                     </button>
+                    <button onclick="guardarEcografiaHistoria()" class="btn btn-primary">
+                      <i class="fas fa-save me-1"></i> Guardar Orden
+                    </button>
                   </div>
                               </div>
                             </div>
@@ -339,6 +342,9 @@
                     <button type="button" class="btn btn-warning" onclick="limpiarSeleccionTomografia()">
                       <i class="fas fa-broom me-1"></i> Limpiar
                     </button>
+                     <button onclick="guardarTomografiaHistoria()" class="btn btn-primary">
+                      <i class="fas fa-save me-1"></i> Guardar Orden
+                    </button>
                   </div>
                               </div>
                             </div>
@@ -389,6 +395,9 @@
                     </tbody>
                   </table>
                   <div class="d-flex gap-2 mt-3">
+                     <button onclick="guardarResonanciaHistoria()" class="btn btn-primary">
+                      <i class="fas fa-save me-1"></i> Guardar
+                    </button>
                     <button type="button" class="btn btn-warning" onclick="limpiarSeleccionResonancia()">
                       <i class="fas fa-broom me-1"></i> Limpiar
                     </button>
