@@ -693,7 +693,6 @@
     <div class="min-height-300 bg-default position-absolute w-100"></div>
     
     <main class="main-content position-relative border-radius-lg">
-        <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
@@ -723,7 +722,6 @@
         </nav>
 
         <div class="container-fluid py-4">
-            <!-- Estadísticas Rápidas -->
             <?php
                 $total_hoy = 0;
                 $total_pendientes = 0;
@@ -781,139 +779,112 @@
                 </div>
             </div>
 
-            <!-- Grid Principal -->
             <div class="main-grid">
-                <!-- Panel de Citas -->
+                
                 <div class="appointments-panel">
                     <div class="panel-header">
-                        <h2><i class="fas fa-calendar-check"></i> Lista de Citas</h2>
+                        <h2><i class="fas fa-calendar-check"></i> Gestión de Citas</h2>
                         <div class="header-actions">
-                            <!-- <a class="btn-calendar" target="_blank" href="<?php echo base_url(); ?>administracion/calendario">
-                                <i class="fas fa-calendar-alt"></i> Ver Calendario
-                            </a> -->
+                            <button type="button" class="btn-calendar" id="btnCambiarVista">
+                                <i class="fas fa-list"></i> <span>Ver como Lista</span>
+                            </button>
+                            
                             <button class="btn-add-cita" onclick="$('#AddCITA').trigger('reset');$('#Cont_Horas').empty();" data-bs-toggle="modal" data-bs-target="#AgregarPaciente">
                                 <i class="fas fa-plus"></i> Nueva Cita
                             </button>
                         </div>
                     </div>
 
-                    <div class="filters-bar">
-                        <button class="filter-btn active" data-filter="all">Todas</button>
-                        <button class="filter-btn" data-filter="today">Hoy</button>
-                        <button class="filter-btn" data-filter="Pendiente">Pendientes</button>
-                        <button class="filter-btn" data-filter="Confirmado">Confirmadas</button>
-                        <button class="filter-btn" data-filter="Tratado">Tratadas</button>
-                        <button class="filter-btn" data-filter="Cancelado">Canceladas</button>
+                    <div id="vista_calendario" style="padding: 20px;">
+                        <div id="calendario_medicos"></div>
                     </div>
 
-                    <div class="appointments-list" id="appointments-list">
-                        <?php 
-                        $has_citas = false;
-                        foreach($cita->result() as $citas) { 
-                            $has_citas = true;
-                            $firstDate = strtotime(date("Y-m-d"));
-                            $secondDate = strtotime($citas->fecha);
-                            $intvl = (($secondDate - $firstDate) / 3600) / 24;
-                            
-                            $relative_class = 'future';
-                            $relative_text = "En {$intvl} días";
-                            
-                            if($intvl == 0) {
-                                $relative_class = 'today';
-                                $relative_text = 'Hoy';
-                            } else if($intvl == 1) {
-                                $relative_class = 'tomorrow';
-                                $relative_text = 'Mañana';
-                            } else if($intvl < 0) {
-                                $relative_class = 'past';
-                                $relative_text = "Hace " . abs($intvl) . " días";
-                            }
-                            
-                            $hora_parts = explode(':', $citas->hora);
-                            $hora_12 = date("g:i", strtotime($citas->hora));
-                            $periodo = date("A", strtotime($citas->hora));
-                            
-                            $is_today = ($intvl == 0) ? 'true' : 'false';
-                        ?>
-                        <div class="appointment-card" 
-                             data-status="<?php echo $citas->estado; ?>" 
-                             data-today="<?php echo $is_today; ?>"
-                             onclick="editarCita(<?php echo $citas->codigo_cita; ?>);">
-                            <div class="time-badge">
-                                <div class="time"><?php echo $hora_12; ?></div>
-                                <div class="period"><?php echo $periodo; ?></div>
-                            </div>
-                            <div class="appointment-info">
-                                <h4><?php echo $citas->nombre; ?></h4>
-                                <div class="meta">
-                                    <span><i class="fas fa-id-card"></i> <?php echo $citas->documento; ?></span>
-                                    <span><i class="fas fa-phone"></i> <?php echo $citas->telefono; ?></span>
-                                    <span><i class="fas fa-user-md"></i> <?php echo $citas->doctor; ?></span>
-                                    <span><i class="fas fa-calendar"></i> <?php echo $citas->date_cita; ?></span>
-                                </div>
-                                <?php if($citas->comentarios): ?>
-                                <div class="meta" style="margin-top: 5px;">
-                                    <span><i class="fas fa-comment"></i> <?php echo $citas->comentarios; ?></span>
-                                </div>
-                                <?php endif; ?>
-                            </div>
-                            <div class="appointment-status">
-                                <span class="status-badge <?php echo strtolower($citas->estado); ?>">
-                                    <?php echo $citas->estado; ?>
-                                </span>
-                                <span class="relative-time <?php echo $relative_class; ?>">
-                                    <?php echo $relative_text; ?>
-                                </span>
-                                <button class="btn-edit" onclick="event.stopPropagation(); editarCita(<?php echo $citas->codigo_cita; ?>);">
-                                    <i class="fas fa-pen"></i>
-                                </button>
-                            </div>
+                    <div id="vista_lista" style="display: none;">
+                        <div class="filters-bar">
+                            <button class="filter-btn active" data-filter="all">Todas</button>
+                            <button class="filter-btn" data-filter="today">Hoy</button>
+                            <button class="filter-btn" data-filter="Pendiente">Pendientes</button>
+                            <button class="filter-btn" data-filter="Confirmado">Confirmadas</button>
+                            <button class="filter-btn" data-filter="Tratado">Tratadas</button>
+                            <button class="filter-btn" data-filter="Cancelado">Canceladas</button>
                         </div>
-                        <?php } ?>
-                        
-                        <?php if(!$has_citas): ?>
-                        <div class="empty-state">
-                            <i class="fas fa-calendar-times"></i>
-                            <h4>No hay citas registradas</h4>
+
+                        <div class="appointments-list" id="appointments-list">
+                            <?php 
+                            $has_citas = false;
+                            foreach($cita->result() as $citas) { 
+                                $has_citas = true;
+                                $firstDate = strtotime(date("Y-m-d"));
+                                $secondDate = strtotime($citas->fecha);
+                                $intvl = (($secondDate - $firstDate) / 3600) / 24;
+                                
+                                $relative_class = 'future';
+                                $relative_text = "En {$intvl} días";
+                                
+                                if($intvl == 0) {
+                                    $relative_class = 'today';
+                                    $relative_text = 'Hoy';
+                                } else if($intvl == 1) {
+                                    $relative_class = 'tomorrow';
+                                    $relative_text = 'Mañana';
+                                } else if($intvl < 0) {
+                                    $relative_class = 'past';
+                                    $relative_text = "Hace " . abs($intvl) . " días";
+                                }
+                                
+                                $hora_parts = explode(':', $citas->hora);
+                                $hora_12 = date("g:i", strtotime($citas->hora));
+                                $periodo = date("A", strtotime($citas->hora));
+                                
+                                $is_today = ($intvl == 0) ? 'true' : 'false';
+                            ?>
+                            <div class="appointment-card" 
+                                 data-status="<?php echo $citas->estado; ?>" 
+                                 data-today="<?php echo $is_today; ?>"
+                                 onclick="editarCita(<?php echo $citas->codigo_cita; ?>);">
+                                <div class="time-badge">
+                                    <div class="time"><?php echo $hora_12; ?></div>
+                                    <div class="period"><?php echo $periodo; ?></div>
+                                </div>
+                                <div class="appointment-info">
+                                    <h4><?php echo $citas->nombre; ?></h4>
+                                    <div class="meta">
+                                        <span><i class="fas fa-id-card"></i> <?php echo $citas->documento; ?></span>
+                                        <span><i class="fas fa-phone"></i> <?php echo $citas->telefono; ?></span>
+                                        <span><i class="fas fa-user-md"></i> <?php echo $citas->doctor; ?></span>
+                                        <span><i class="fas fa-calendar"></i> <?php echo $citas->date_cita; ?></span>
+                                    </div>
+                                    <?php if($citas->comentarios): ?>
+                                    <div class="meta" style="margin-top: 5px;">
+                                        <span><i class="fas fa-comment"></i> <?php echo $citas->comentarios; ?></span>
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="appointment-status">
+                                    <span class="status-badge <?php echo strtolower($citas->estado); ?>">
+                                        <?php echo $citas->estado; ?>
+                                    </span>
+                                    <span class="relative-time <?php echo $relative_class; ?>">
+                                        <?php echo $relative_text; ?>
+                                    </span>
+                                    <button class="btn-edit" onclick="event.stopPropagation(); editarCita(<?php echo $citas->codigo_cita; ?>);">
+                                        <i class="fas fa-pen"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <?php } ?>
+                            
+                            <?php if(!$has_citas): ?>
+                            <div class="empty-state">
+                                <i class="fas fa-calendar-times"></i>
+                                <h4>No hay citas registradas</h4>
+                            </div>
+                            <?php endif; ?>
                         </div>
-                        <?php endif; ?>
                     </div>
                 </div>
 
-                <!-- Panel Lateral -->
                 <div class="side-panel">
-                    <!-- Próximos días -->
-                    <div class="schedule-card">
-                        <div class="schedule-header">
-                            <h3><i class="fas fa-clock"></i> Horarios Disponibles</h3>
-                            <p>Selecciona un día para ver disponibilidad</p>
-                        </div>
-                        <div class="days-grid">
-                            <?php
-                            $dias_semana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-                            for($i = 0; $i < 6; $i++) {
-                                $fecha = date('Y-m-d', strtotime("+{$i} days"));
-                                $dia_num = date('d', strtotime($fecha));
-                                $dia_nombre = $dias_semana[date('w', strtotime($fecha))];
-                                $active = ($i == 0) ? 'active' : '';
-                                $label = ($i == 0) ? 'Hoy' : (($i == 1) ? 'Mañana' : $dia_nombre);
-                            ?>
-                            <div class="day-card <?php echo $active; ?>" data-date="<?php echo $fecha; ?>">
-                                <div class="day-name"><?php echo $label; ?></div>
-                                <div class="day-num"><?php echo $dia_num; ?></div>
-                                <div class="appointments-count cont_day"></div>
-                            </div>
-                            <?php } ?>
-                        </div>
-                        <div class="hours-section">
-                            <h4><i class="fas fa-clock"></i> Horas del día seleccionado</h4>
-                            <div class="hours-grid" id="hours-preview">
-                                <!-- Se llena dinámicamente -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Doctores Disponibles -->
                     <div class="doctors-card">
                         <h4><i class="fas fa-user-md"></i> Doctores</h4>
                         <?php foreach($doctor->result() as $doc) { 
@@ -936,7 +907,6 @@
 
     <?php require_once("componentes/personalizar.php"); ?>
 
-    <!-- Modal Agregar Cita (Mejorado) -->
     <div class="modal fade" id="AgregarPaciente" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <form class="modal-content" id="AddCITA">
@@ -1041,7 +1011,6 @@
                         </div>
                     </div>
 
-                    <!-- Campos ocultos necesarios -->
                     <div style="display:none;">
                         <select id="hora" required><option value="">Seleccionar</option></select>
                         <select id="statee"><option value="Registrar">Registrar</option><option value="Actualizar">Actualizar</option></select>
@@ -1056,7 +1025,6 @@
         </div>
     </div>
 
-    <!-- Modal Editar Cita (Mejorado) -->
     <div class="modal fade" id="modaleditarcita" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -1068,7 +1036,6 @@
                 </div>
                 <div class="modal-body modern">
                     <div class="messageError"></div>
-                    
                     <div class="form-section">
                         <div class="form-section-title">
                             <i class="fas fa-user"></i> Datos del Paciente
@@ -1089,7 +1056,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="form-section">
                         <div class="form-section-title">
                             <i class="fas fa-calendar-alt"></i> Reprogramar Cita
@@ -1143,7 +1109,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="form-section">
                         <div class="form-section-title">
                             <i class="fas fa-tasks"></i> Estado y Observaciones
@@ -1176,8 +1141,17 @@
             </div>
         </div>
     </div>
-
+    
     <?php require_once("componentes/scripts.php"); ?>
+    
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    
+    <script>
+        var arr_doctors = <?php echo json_encode($doctor->result()); ?>;
+        var arr_diass = <?php echo json_encode($dias); ?>;
+        var horarios_diarios = <?php echo json_encode($horarios_diarios); ?>;
+    </script>
+
     <script src="<?php echo base_url(); ?>public/js/scripts/citas_v2.js"></script>
     
     <script>
@@ -1186,7 +1160,34 @@
                 Reset_Horarios();
             }, 1500);
 
-            // Filtros de citas
+            // ====== LÓGICA DEL BOTÓN: ALTERNAR VISTA ======
+            $('#btnCambiarVista').click(function() {
+                var $btnIcon = $(this).find('i');
+                var $btnText = $(this).find('span');
+                
+                if ($('#vista_calendario').is(':visible')) {
+                    // Ocultar calendario, mostrar lista
+                    $('#vista_calendario').hide();
+                    $('#vista_lista').fadeIn();
+                    
+                    // Cambiar diseño del botón
+                    $btnIcon.removeClass('fa-list').addClass('fa-calendar-alt');
+                    $btnText.text(' Ver Calendario');
+                } else {
+                    // Ocultar lista, mostrar calendario
+                    $('#vista_lista').hide();
+                    $('#vista_calendario').fadeIn();
+                    
+                    // Disparar evento para que el calendario recalcule su tamaño al volver a verse
+                    window.dispatchEvent(new Event('resize')); 
+                    
+                    // Cambiar diseño del botón
+                    $btnIcon.removeClass('fa-calendar-alt').addClass('fa-list');
+                    $btnText.text(' Ver como Lista');
+                }
+            });
+
+            // ====== LÓGICA DE FILTROS PARA LA LISTA ======
             $('.filter-btn').click(function() {
                 $('.filter-btn').removeClass('active');
                 $(this).addClass('active');
@@ -1212,18 +1213,82 @@
                     }
                 });
             });
-
-            // Click en tarjetas de días
-            $('.day-card').click(function() {
-                $('.day-card').removeClass('active');
-                $(this).addClass('active');
-                // Aquí puedes agregar lógica para cargar horarios del día seleccionado
-            });
         });
 
-        var arr_doctors = <?php echo json_encode($doctor->result()); ?>;
-        var arr_diass = <?php echo json_encode($dias); ?>;
-        var horarios_diarios = <?php echo json_encode($horarios_diarios); ?>;
+        // ====== LÓGICA DEL FULLCALENDAR ======
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendario_medicos');
+            if(!calendarEl) return; 
+
+            // Diccionario para traducir tu BD al formato del Calendario
+            var dias_bd = {
+                'Horas_domingo': 0, 
+                'Horas_lunes': 1, 
+                'Horas_martes': 2,
+                'Horas_miercoles': 3, 
+                'Horas_jueves': 4, 
+                'Horas_viernes': 5, 
+                'Horas_sabado': 6
+            };
+
+            var colores = ["#5e72e4", "#2dce89", "#f5365c", "#fb6340", "#11cdef", "#825ee4"];
+            var eventos_mensuales = [];
+
+            // Convertimos tu BD en eventos para el calendario
+            if(typeof arr_doctors !== 'undefined') {
+                arr_doctors.forEach(function(doc, index) {
+                    var color_asignado = colores[index % colores.length]; 
+                    for (var key in dias_bd) {
+                        if (doc[key] !== null && doc[key].trim() !== "" && doc[key].trim() !== "0") {
+                            var nombreCorto = doc.nombre.split(' ')[0]; 
+                            eventos_mensuales.push({
+                                title: 'Dr. ' + nombreCorto,
+                                daysOfWeek: [ dias_bd[key] ], 
+                                color: color_asignado,
+                                allDay: true,
+                                extendedProps: { id_doctor: doc.codigo_doctor }
+                            });
+                        }
+                    }
+                });
+            }
+
+            // Inicializar el Calendario
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'es',
+                height: 'auto',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,listWeek'
+                },
+                buttonText: {
+                    today: 'Hoy',
+                    month: 'Mes',
+                    list: 'Agenda'
+                },
+                events: eventos_mensuales,
+                
+                eventClick: function(info) {
+                    var fechaClickeada = info.event.start;
+                    var anio = fechaClickeada.getFullYear();
+                    var mes = ("0" + (fechaClickeada.getMonth() + 1)).slice(-2);
+                    var dia = ("0" + fechaClickeada.getDate()).slice(-2);
+                    var fechaFormateada = anio + "-" + mes + "-" + dia;
+                    var idMedico = info.event.extendedProps.id_doctor;
+
+                    // Llama a tu función JS existente (call_reg_cita)
+                    if(typeof call_reg_cita === 'function') {
+                        call_reg_cita(fechaFormateada, idMedico);
+                    } else {
+                        console.error("No se encontró la función call_reg_cita()");
+                    }
+                }
+            });
+
+            calendar.render();
+        });
     </script>
 </body>
 </html>
