@@ -920,4 +920,86 @@ function call_reg_cita(fecha, medico) {
 
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendario_medicos');
+    if(!calendarEl) return; // Si no existe el div, no hace nada
 
+    // 1. DICCIONARIO DE DÍAS (FullCalendar usa 0 para Domingo, 1 para Lunes, etc.)
+    var dias_bd = {
+        'Horas_domingo': 0, 
+        'Horas_lunes': 1, 
+        'Horas_martes': 2,
+        'Horas_miercoles': 3, 
+        'Horas_jueves': 4, 
+        'Horas_viernes': 5, 
+        'Horas_sabado': 6
+    };
+
+    // Colores para que cada doctor se vea distinto (puedes usar tu arreglo __colores)
+    var colores = ["#5e72e4", "#2dce89", "#f5365c", "#fb6340", "#11cdef", "#825ee4"];
+    var eventos_mensuales = [];
+
+    // 2. CREAR LOS EVENTOS AUTOMÁTICAMENTE LEYENDO TU VARIABLE arr_doctors
+    // (Esta variable viene del PHP en el footer de tu vista)
+    arr_doctors.forEach(function(doc, index) {
+        var color_asignado = colores[index % colores.length]; 
+
+        // Revisamos cada día de la semana para este doctor
+        for (var key in dias_bd) {
+            // Si el campo tiene datos (no es nulo, no está vacío y no es "0")
+            if (doc[key] !== null && doc[key].trim() !== "" && doc[key].trim() !== "0") {
+                
+                // Extraemos solo el apellido o primer nombre para que quepa en el cuadrito
+                var nombreCorto = doc.nombre.split(' ')[0]; 
+
+                eventos_mensuales.push({
+                    title: 'Dr. ' + nombreCorto,
+                    daysOfWeek: [ dias_bd[key] ], // MAGIA: Se repite todos los lunes (o martes, etc.)
+                    color: color_asignado,
+                    allDay: true, // Para que aparezca como un bloque sólido en el día
+                    extendedProps: {
+                        id_doctor: doc.codigo_doctor // Guardamos el ID oculto
+                    }
+                });
+            }
+        }
+    });
+
+    // 3. INICIALIZAR EL CALENDARIO
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth', // Vista mensual clásica
+        locale: 'es', // Español
+        height: 'auto', // Se ajusta al contenedor
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,listWeek'
+        },
+        buttonText: {
+            today: 'Hoy',
+            month: 'Mes',
+            list: 'Agenda'
+        },
+        events: eventos_mensuales, // Cargamos los bloques de los doctores
+        
+        // 4. EL EVENTO CLICK (EL PUENTE HACIA TU CÓDIGO)
+        eventClick: function(info) {
+            // A. Extraemos la fecha exacta del cuadrito que la secretaria clickeó
+            var fechaClickeada = info.event.start;
+            
+            // B. Formateamos la fecha a YYYY-MM-DD para que tu PHP la entienda
+            var anio = fechaClickeada.getFullYear();
+            var mes = ("0" + (fechaClickeada.getMonth() + 1)).slice(-2);
+            var dia = ("0" + fechaClickeada.getDate()).slice(-2);
+            var fechaFormateada = anio + "-" + mes + "-" + dia;
+
+            // C. Extraemos el ID del doctor
+            var idMedico = info.event.extendedProps.id_doctor;
+
+            // D. LLAMAMOS A TU FUNCIÓN QUE YA HACE TODO
+            call_reg_cita(fechaFormateada, idMedico);
+        }
+    });
+
+    calendar.render();
+});
