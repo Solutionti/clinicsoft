@@ -96,6 +96,7 @@ $route['administracion/citasmedico'] = 'administrador/citas/getdatacalendario';
 $route['administracion/allcitas'] = 'administrador/citas/getalldatacalendario';
 $route['administracion/getcitasid'] = 'administrador/citas/getcitasid';
 $route['administracion/editarcita'] = 'administrador/citas/editarcitas';
+$route['administracion/verificar_nuevas_citas'] = 'administrador/citas/verificar_nuevas_citas';
 
 /*
  * ******************* PRECIOS *******************************

@@ -219,18 +219,43 @@ function Get_Horarios(insert_hora) {
 						message: "Horarios obtenidos",
 
 					});
+			} else if (data.acction == 2) {
+                    // 1. (Opcional) Limpia cualquier alerta overhang anterior
+                    if (typeof $.overhang === 'function') {
+                        $("body").overhang("close"); 
+                    }
 
-				} else if (data.acction == 2) {
-					$("#Cont_Horas").append(
-						"No se encontraron horarios libres para esta fecha, intente con otra fecha o doctor."
-					);
+                    // 2. INYECTAMOS EL RELOJ MANUAL REFINADO Y SUTIL
+                    // Usamos .html() para sobreescribir cualquier mensaje previo
+                    $("#Cont_Horas").html(`
+                        <div class="refined-manual-overide shadow-sm p-3 mb-3" style="background-color: #fcfcfc; border: 1px solid #e3e6f0; border-left: 4px solid #f6c23e; border-radius: 6px;">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-exclamation-triangle text-warning me-2" style="font-size: 0.9rem;"></i>
+                                <span class="text-muted fw-bold" style="font-size: 0.85rem; letter-spacing: 0.5px;">FORZAR HORARIO (FUERA DE TURNO)</span>
+                            </div>
+                            <p class="text-muted mb-2" style="font-size: 0.8rem; line-height: 1.4;">
+                                El doctor no tiene horarios programados para esta fecha. Ingrese la hora acordada manualmente:
+                            </p>
+                            <input type="time" class="form-control" id="hora_cita_manual" name="hora_cita_manual" style="border-color: #ffeeba; background-color: white;" required>
+                        </div>
+                    `);
 
-					$("body").overhang({
-						type: "info",
-						message: "No se encontraron horarios libres para esta fecha, intente con otra fecha o doctor."
-					});
-				}
-			},
+                    // ==========================================
+                    // 3. EL PUENTE MÁGICO PARA GUARDAR
+                    // ==========================================
+                    // Le quitamos el 'required' al select original oculto para que no bloquee
+                    $("#hora").removeAttr("required");
+
+                    // Cuando la secretaria escribe la hora en el nuevo campo...
+                    $("#hora_cita_manual").on("change", function() {
+                        var horaElegida = $(this).val();
+                        
+                        // ...la inyectamos silenciosamente en tu select original
+                        $("#hora").html('<option value="' + horaElegida + '">' + horaElegida + '</option>');
+                        $("#hora").val(horaElegida);
+                    });
+                }
+            }, // Aquí sigue el resto de tu código (el 'error: function...' o lo que tengas debajo)
 
 			error: function () {
 
@@ -330,83 +355,76 @@ function Suubtmit() {
 	}
 
 	var url1 = baseurl + "administracion/" + rruta,
-
 		dni = $("#dni").val(),
-
 		idee = $("#idee").val(),
-
 		nombre = $("#nombre").val(),
-
 		telefono = $("#telefono").val(),
-
 		medico = $("#medico").val(),
-
 		fecha = $("#fecha").val(),
-
 		hora = $("#hora").val(),
-
 		estado = $("#estado").val(),
-
 		observaciones = $("#observaciones").val();
 
+    // Debug: Verificar datos antes de enviar
+    console.log("Enviando datos a: " + url1);
+    console.log({
+        idee: idee,
+        dni: dni,
+        nombre: nombre,
+        telefono: telefono,
+        medico: medico,
+        fecha: fecha,
+        hora: hora,
+        estado: estado,
+        observaciones: observaciones
+    });
+
+    if (!nombre || !dni || !medico || !fecha || !hora) {
+        $("body").overhang({
+            type: "error",
+            message: "Por favor complete todos los campos obligatorios."
+        });
+        return;
+    }
+
 	$.ajax({
-
 		url: url1,
-
 		method: "POST",
-
+		dataType: "json", // Esperamos respuesta JSON del servidor
 		data: {
-
 			idee: idee,
-
 			dni: dni,
-
 			nombre: nombre,
-
 			telefono: telefono,
-
 			medico: medico,
-
 			fecha: fecha,
-
 			hora: hora,
-
 			estado: estado,
-
 			observaciones: observaciones,
-
 		},
-
-		success: function () {
-
-			$("body").overhang({
-
-				type: "success",
-
-				message: "Listo",
-
-			});
-
-			setTimeout(reloadPage, 3000);
-
+		success: function (response) {
+            if(response.status === 'error') {
+                $("body").overhang({
+                    type: "error",
+                    message: response.message
+                });
+            } else {
+                $("body").overhang({
+                    type: "success",
+                    message: "Listo"
+                });
+                setTimeout(reloadPage, 3000);
+            }
 		},
-
-		error: function () {
-
+		error: function (jqXHR, textStatus, errorThrown) {
+            console.error("Error AJAX:", textStatus, errorThrown);
+            console.error("Respuesta:", jqXHR.responseText);
 			$("body").overhang({
-
 				type: "warning",
-
-				message:
-
-					"No se realizo la operacion.",
-
+				message: "No se realizo la operacion. Ver consola para detalles."
 			});
-
 		},
-
 	});
-
 }
 
 
@@ -1103,6 +1121,8 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     });
 
+	
+
         html_doctores += '</div>';
 
         // 5. Inyectamos el resultado en la pantalla
@@ -1117,4 +1137,61 @@ document.addEventListener('DOMContentLoaded', function() {
             `);
         }
     }
+	// =========================================================
+// SISTEMA DE NOTIFICACIONES EN TIEMPO REAL (AJAX POLLING)
+// =========================================================
+
+var ultimo_id_conocido = 0; // 0 significa que recién abrimos el sistema
+
+function vigilarNuevasCitas() {
+    $.ajax({
+        url: baseurl + "administracion/verificar_nuevas_citas", 
+        type: 'POST',
+        data: { ultimo_id: ultimo_id_conocido },
+        dataType: 'json',
+        success: function(respuesta) {
+            
+            if (ultimo_id_conocido === 0) {
+                // Primera vez que carga la página: solo guardamos el ID actual en silencio
+                ultimo_id_conocido = respuesta.max_id;
+            } else {
+                // Ya estábamos vigilando. ¡Revisamos si hay nuevas!
+                if (respuesta.hay_nuevas) {
+                    
+                    // Actualizamos nuestro ID para no repetir la alerta
+                    ultimo_id_conocido = respuesta.max_id; 
+                    
+                    // Texto dinámico (singular o plural)
+                    var texto_alerta = respuesta.cantidad === 1 
+                        ? "¡Ha ingresado 1 nueva reserva online!" 
+                        : "¡Han ingresado " + respuesta.cantidad + " nuevas reservas online!";
+                    
+                    // Lanzamos la notificación bonita desde arriba
+                    $("body").overhang({
+                        type: "success",
+                        message: texto_alerta,
+                        duration: 6,
+                        upper: true
+                    });
+
+                    // (Opcional) Si quieres que suene una campanilla, descomenta estas dos líneas y pon un mp3
+                    // var sonido = new Audio('assets/sonidos/campana.mp3');
+                    // sonido.play();
+                }
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            // Depuración: ver qué error real está ocurriendo
+            console.error("Error en vigilarNuevasCitas:", textStatus, errorThrown);
+            console.error("Respuesta del servidor:", jqXHR.responseText);
+        }
+    });
+}
+
+// 1. Ejecutamos al instante para obtener el ID base sin hacer ruido
+vigilarNuevasCitas();
+
+// 2. Programamos al vigilante para que pregunte cada 30 segundos (30000 milisegundos)
+// Es el balance perfecto: no consume recursos y la secretaria se entera casi al instante.
+setInterval(vigilarNuevasCitas, 30000);
 });
