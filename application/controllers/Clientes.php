@@ -45,4 +45,11 @@ class Clientes extends CI_Controller {
 	public function citasDoctores() {
 	  $this->load->view("clientes/citas_doctores");
 	}
+
+	public function reservarCita() {
+		$this->load->model("Doctores_model");
+		$doctores = $this->Doctores_model->getDoctores();
+		$data = ["doctor" => $doctores];
+		$this->load->view("web/reservar_cita", $data);
+	}
 }

@@ -268,6 +268,7 @@ $route['cerrarsesionclientes'] = 'login/cerrarsesionclientes';
 /*
  * **** PARA AGENDAMIENTO DE CITAS PARA LA WEB ******
  */
+$route['reservar-cita'] = 'clientes/reservarCita';
 $route['agendarcitas'] = 'clientes/citasDoctores';
 
 /*

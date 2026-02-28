@@ -408,7 +408,7 @@
   <!-- LARGE MODAL -->
 
   <div class="modal fade" id="Agregarusuario" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header bg-default">
         <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Agregar Usuario</h5>
@@ -417,42 +417,47 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="form-group input-group-sm">
-            <label>Apellido</label>
-            <input type="text" class="form-control" id="apellido">
-        </div>
-        <div class="form-group input-group-sm">
-            <label>Nombre</label>
-            <input type="text" class="form-control" id="nombre">
-        </div>
-        <div class="form-group input-group-sm">
-            <label>Tipo de Usuario</label>
-              <select class="form-control" id="tp_usuario">
-                <option value="">Seleccione el tipo de usuario</option>
-                <option value="Administrador">Administrador</option>
-                <!-- <option value="Atencion">Atencion</option> -->
-                <option value="Enfermera">Enfermera</option>
-                <option value="Doctor">Doctor</option>
-                <option value="Laboratorista">Laboratorista</option>
-                <option value="Patologo">Patologo</option>
-              </select>
-        </div>
-        <div class="form-group input-group-sm">
-            <label>Telefono</label>
-            <input type="number" class="form-control" id="telefono">
-        </div>
-        
-        <div class="form-group input-group-sm">
-            <label>Correo</label>
-            <input type="email" class="form-control" id="correo">
-        </div>
-        <div class="form-group input-group-sm">
-            <label>Usuario</label>
-            <input type="text" class="form-control" id="usuario">
-        </div>
-        <div class="form-group input-group-sm">
-            <label>Contraseña</label>
-            <input type="password" class="form-control" id="password">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group input-group-sm">
+                <label>Apellidos</label>
+                <input type="text" class="form-control" id="apellido">
+            </div>
+            <div class="form-group input-group-sm">
+                <label>Nombre</label>
+                <input type="text" class="form-control" id="nombre">
+            </div>
+            <div class="form-group input-group-sm">
+                <label>Tipo de Usuario</label>
+                  <select class="form-control" id="tp_usuario">
+                    <option value="">Seleccione el tipo de usuario</option>
+                    <option value="Administrador">Administrador</option>
+                    <!-- <option value="Atencion">Atencion</option> -->
+                    <option value="Enfermera">Enfermera</option>
+                    <option value="Doctor">Doctor</option>
+                    <option value="Laboratorista">Laboratorista</option>
+                    <option value="Patologo">Patologo</option>
+                  </select>
+            </div>
+            <div class="form-group input-group-sm">
+                <label>Telefono</label>
+                <input type="number" class="form-control" id="telefono">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group input-group-sm">
+                <label>Correo</label>
+                <input type="email" class="form-control" id="correo">
+            </div>
+            <div class="form-group input-group-sm">
+                <label>Usuario</label>
+                <input type="text" class="form-control" id="usuario">
+            </div>
+            <div class="form-group input-group-sm">
+                <label>Contraseña</label>
+                <input type="password" class="form-control" id="password">
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
@@ -464,7 +469,7 @@
 
 
   <div class="modal fade" id="actualizarUsuario" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header bg-default">
         <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Actualizar Usuario</h5>
@@ -522,6 +527,7 @@
 </div>
 <?php require_once("componentes/scripts.php"); ?>
   <script src="<?php echo base_url(); ?>public/js/scripts/usuarios.js"></script>
+  
   
 </body>
 </html>
