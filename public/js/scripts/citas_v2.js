@@ -939,37 +939,50 @@ document.addEventListener('DOMContentLoaded', function() {
     var colores = ["#5e72e4", "#2dce89", "#f5365c", "#fb6340", "#11cdef", "#825ee4"];
     var eventos_mensuales = [];
 
+    // 1. OBTENEMOS LA FECHA DE HOY EN FORMATO YYYY-MM-DD
+    var hoy = new Date();
+    var yyyy = hoy.getFullYear();
+    var mm = String(hoy.getMonth() + 1).padStart(2, '0');
+    var dd = String(hoy.getDate()).padStart(2, '0');
+    var fecha_actual = yyyy + '-' + mm + '-' + dd; 
+
     // 2. CREAR LOS EVENTOS AUTOMÁTICAMENTE LEYENDO TU VARIABLE arr_doctors
-    // (Esta variable viene del PHP en el footer de tu vista)
-    arr_doctors.forEach(function(doc, index) {
-        var color_asignado = colores[index % colores.length]; 
+    if(typeof arr_doctors !== 'undefined') {
+        arr_doctors.forEach(function(doc, index) {
+            var color_asignado = colores[index % colores.length]; 
 
-        // Revisamos cada día de la semana para este doctor
-        for (var key in dias_bd) {
-            // Si el campo tiene datos (no es nulo, no está vacío y no es "0")
-            if (doc[key] !== null && doc[key].trim() !== "" && doc[key].trim() !== "0") {
-                
-                // Extraemos solo el apellido o primer nombre para que quepa en el cuadrito
-                var nombreCorto = doc.nombre.split(' ')[0]; 
+            // Revisamos cada día de la semana para este doctor
+            for (var key in dias_bd) {
+                // Si el campo tiene datos (no es nulo, no está vacío y no es "0")
+                if (doc[key] !== null && doc[key].trim() !== "" && doc[key].trim() !== "0") {
+                    
+                    // Extraemos solo el apellido o primer nombre para que quepa en el cuadrito
+                    var nombreCorto = doc.nombre.split(' ')[0]; 
 
-                eventos_mensuales.push({
-                    title: 'Dr. ' + nombreCorto,
-                    daysOfWeek: [ dias_bd[key] ], // MAGIA: Se repite todos los lunes (o martes, etc.)
-                    color: color_asignado,
-                    allDay: true, // Para que aparezca como un bloque sólido en el día
-                    extendedProps: {
-                        id_doctor: doc.codigo_doctor // Guardamos el ID oculto
-                    }
-                });
+                    eventos_mensuales.push({
+                        title: 'Dr. ' + nombreCorto,
+                        daysOfWeek: [ dias_bd[key] ], // MAGIA 1: Se repite el día de la semana
+                        startRecur: fecha_actual, // MAGIA 2: Evita pintar en los días del pasado
+                        color: color_asignado,
+                        allDay: true, // Para que aparezca como un bloque sólido en el día
+                        extendedProps: {
+                            id_doctor: doc.codigo_doctor // Guardamos el ID oculto
+                        }
+                    });
+                }
             }
-        }
-    });
+        });
+    }
 
     // 3. INICIALIZAR EL CALENDARIO
+    // 3. INICIALIZAR EL CALENDARIO
     var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth', // Vista mensual clásica
-        locale: 'es', // Español
-        height: 'auto', // Se ajusta al contenedor
+        initialView: 'dayGridMonth',
+        locale: 'es',
+        height: 'auto',
+        
+        // BORRAMOS EL validRange QUE LO PONÍA GRIS
+        
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
@@ -980,26 +993,33 @@ document.addEventListener('DOMContentLoaded', function() {
             month: 'Mes',
             list: 'Agenda'
         },
-        events: eventos_mensuales, // Cargamos los bloques de los doctores
+        events: eventos_mensuales,
         
-        // 4. EL EVENTO CLICK (EL PUENTE HACIA TU CÓDIGO)
-        eventClick: function(info) {
-            // A. Extraemos la fecha exacta del cuadrito que la secretaria clickeó
-            var fechaClickeada = info.event.start;
+        // ====== EL TRUCO NINJA PARA OCULTAR EL PASADO ======
+        eventClassNames: function(info) {
+            var fechaEvento = info.event.start;
+            var hoy = new Date();
+            hoy.setHours(0,0,0,0); // Reseteamos la hora para comparar solo el día
             
-            // B. Formateamos la fecha a YYYY-MM-DD para que tu PHP la entienda
+            // Si el bloque del doctor cae en un día antes de hoy...
+            if (fechaEvento < hoy) {
+                return ['d-none']; // Clase de Bootstrap que lo hace invisible
+            }
+            return [];
+        },
+        // ====================================================
+
+        eventClick: function(info) {
+            var fechaClickeada = info.event.start;
             var anio = fechaClickeada.getFullYear();
             var mes = ("0" + (fechaClickeada.getMonth() + 1)).slice(-2);
             var dia = ("0" + fechaClickeada.getDate()).slice(-2);
             var fechaFormateada = anio + "-" + mes + "-" + dia;
-
-            // C. Extraemos el ID del doctor
             var idMedico = info.event.extendedProps.id_doctor;
 
-            // D. LLAMAMOS A TU FUNCIÓN QUE YA HACE TODO
             call_reg_cita(fechaFormateada, idMedico);
         }
     });
 
     calendar.render();
-});
+	});

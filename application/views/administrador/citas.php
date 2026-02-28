@@ -908,12 +908,12 @@
     <?php require_once("componentes/personalizar.php"); ?>
 
     <div class="modal fade" id="AgregarPaciente" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <form class="modal-content" id="AddCITA">
                 <div class="modal-header modern">
                     <h5 class="modal-title"><i class="fas fa-calendar-plus"></i> Nueva Cita</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="color: white !important; opacity: 0.8 !important; text-shadow: none; background: transparent; border: none;">
+                        <i class="fas fa-times" style="font-size: 1.2rem;"></i>
                     </button>
                 </div>
                 <div class="modal-body modern">
@@ -924,7 +924,7 @@
                             <i class="fas fa-user-md"></i> Información del Médico y Horario
                         </div>
                         <div class="row">
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Médico</label>
                                     <select class="form-control form-control-modern" id="medico" required>
@@ -935,14 +935,16 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Fecha</label>
                                     <div class="input-group">
-                                        <input type="date" class="form-control form-control-modern" id="fecha" required min="<?php echo date("Y-m-d"); ?>">
-                                        <button type="button" class="btn btn-primary" id="lupa_Horario" style="border-radius: 0 10px 10px 0;">
-                                            <i class="fa fa-search"></i>
-                                        </button>
+                                        <input type="date" class="form-control form-control-modern" id="fecha" required min="<?php echo date("Y-m-d"); ?>" style="border-radius: 10px 0 0 10px; border-right: none;">
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-primary" id="lupa_Horario" style="border-radius: 0 10px 10px 0; height: 100%; margin: 0;">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -964,10 +966,12 @@
                                 <div class="form-group">
                                     <label>DNI Paciente</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control form-control-modern" id="dni" minlength="7" maxlength="11" required>
-                                        <button type="button" class="btn btn-primary" id="lupa_DNI" style="border-radius: 0 10px 10px 0;">
-                                            <i class="fa fa-search"></i>
-                                        </button>
+                                        <input type="text" class="form-control form-control-modern" id="dni" minlength="7" maxlength="11" required style="border-radius: 10px 0 0 10px; border-right: none;">
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-primary" id="lupa_DNI" style="border-radius: 0 10px 10px 0; height: 100%; margin: 0;">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1026,12 +1030,12 @@
     </div>
 
     <div class="modal fade" id="modaleditarcita" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header modern">
                     <h5 class="modal-title"><i class="fas fa-edit"></i> Editar Cita</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="color: white !important; opacity: 1 !important; text-shadow: none;">
+                        <span aria-hidden="true" style="font-size: 1.5rem;">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body modern">
@@ -1215,80 +1219,6 @@
             });
         });
 
-        // ====== LÓGICA DEL FULLCALENDAR ======
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendario_medicos');
-            if(!calendarEl) return; 
-
-            // Diccionario para traducir tu BD al formato del Calendario
-            var dias_bd = {
-                'Horas_domingo': 0, 
-                'Horas_lunes': 1, 
-                'Horas_martes': 2,
-                'Horas_miercoles': 3, 
-                'Horas_jueves': 4, 
-                'Horas_viernes': 5, 
-                'Horas_sabado': 6
-            };
-
-            var colores = ["#5e72e4", "#2dce89", "#f5365c", "#fb6340", "#11cdef", "#825ee4"];
-            var eventos_mensuales = [];
-
-            // Convertimos tu BD en eventos para el calendario
-            if(typeof arr_doctors !== 'undefined') {
-                arr_doctors.forEach(function(doc, index) {
-                    var color_asignado = colores[index % colores.length]; 
-                    for (var key in dias_bd) {
-                        if (doc[key] !== null && doc[key].trim() !== "" && doc[key].trim() !== "0") {
-                            var nombreCorto = doc.nombre.split(' ')[0]; 
-                            eventos_mensuales.push({
-                                title: 'Dr. ' + nombreCorto,
-                                daysOfWeek: [ dias_bd[key] ], 
-                                color: color_asignado,
-                                allDay: true,
-                                extendedProps: { id_doctor: doc.codigo_doctor }
-                            });
-                        }
-                    }
-                });
-            }
-
-            // Inicializar el Calendario
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                locale: 'es',
-                height: 'auto',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,listWeek'
-                },
-                buttonText: {
-                    today: 'Hoy',
-                    month: 'Mes',
-                    list: 'Agenda'
-                },
-                events: eventos_mensuales,
-                
-                eventClick: function(info) {
-                    var fechaClickeada = info.event.start;
-                    var anio = fechaClickeada.getFullYear();
-                    var mes = ("0" + (fechaClickeada.getMonth() + 1)).slice(-2);
-                    var dia = ("0" + fechaClickeada.getDate()).slice(-2);
-                    var fechaFormateada = anio + "-" + mes + "-" + dia;
-                    var idMedico = info.event.extendedProps.id_doctor;
-
-                    // Llama a tu función JS existente (call_reg_cita)
-                    if(typeof call_reg_cita === 'function') {
-                        call_reg_cita(fechaFormateada, idMedico);
-                    } else {
-                        console.error("No se encontró la función call_reg_cita()");
-                    }
-                }
-            });
-
-            calendar.render();
-        });
     </script>
 </body>
 </html>
