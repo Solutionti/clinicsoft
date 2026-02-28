@@ -123,3 +123,56 @@ $("#actualizarUsuariom").on("click", function (){
 const reloadPage = () => {
     location.reload();
   }
+
+
+    // Optimización del modal Agregar Usuario con jQuery
+    $(document).ready(function() {
+        $('#Agregarusuario').on('show.bs.modal', function (event) {
+             // 1. Encontrar el botón activo del tab
+             // Buscamos por la clase active O por el atributo aria-selected="true"
+             var activeTab = $('#myTab .nav-link.active');
+             
+             // Si no encuentra por clase active, intenta por aria-selected
+             if (activeTab.length === 0) {
+                 activeTab = $('#myTab .nav-link[aria-selected="true"]');
+             }
+
+             var activeTabId = activeTab.attr('id');
+             var selectRol = $('#tp_usuario');
+             var divSelect = selectRol.closest('.form-group'); // El div que contiene el select
+             
+             // Resetear (mostrar por defecto si no coincide nada)
+             selectRol.val("");
+             divSelect.show();
+             
+             // Debug
+             console.log("Tab Activo ID:", activeTabId);
+
+             // Mapeo de IDs de pestañas a valores del select
+             // Asegúrate de que estos IDs coincidan exactamente con los del HTML
+             var mapaRoles = {
+                 'home-tab': 'Administrador',
+                 'profile-tab': 'Enfermera',
+                 'contact-tab': 'Doctor',
+                 'contact1-tab': 'Laboratorista',
+                 'contact-tab2': 'Patologo' // Corregido: contact-tab2
+             };
+     
+             if (activeTabId && mapaRoles[activeTabId]) {
+                 var rolDestino = mapaRoles[activeTabId];
+                 console.log("Asignando rol:", rolDestino);
+                 
+                 // Asignar valor
+                 selectRol.val(rolDestino);
+                 
+                 // Verificar si se asignó correctamente (por si el value no coincide)
+                 if (selectRol.val() === rolDestino) {
+                     // Ocultar el campo para que "no lo pida"
+                     divSelect.hide();
+                 } else {
+                     console.warn("El valor '" + rolDestino + "' no existe en el select #tp_usuario");
+                 }
+             }
+        });
+    });
+  

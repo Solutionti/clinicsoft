@@ -935,8 +935,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'Horas_sabado': 6
     };
 
-    // Colores para que cada doctor se vea distinto (puedes usar tu arreglo __colores)
-    var colores = ["#5e72e4", "#2dce89", "#f5365c", "#fb6340", "#11cdef", "#825ee4"];
+    // Ya no necesitamos la variable "colores", la borramos para limpiar el código
     var eventos_mensuales = [];
 
     // 1. OBTENEMOS LA FECHA DE HOY EN FORMATO YYYY-MM-DD
@@ -948,33 +947,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 2. CREAR LOS EVENTOS AUTOMÁTICAMENTE LEYENDO TU VARIABLE arr_doctors
     if(typeof arr_doctors !== 'undefined') {
-        arr_doctors.forEach(function(doc, index) {
-            var color_asignado = colores[index % colores.length]; 
+        arr_doctors.forEach(function(doc) {
+            
+            // ==========================================
+            // EXTRACCIÓN DE COLOR INTELIGENTE (Una vez por doctor)
+            var colorFondo = "#6c757d"; // Gris por defecto
+            
+            if (doc.color && doc.color.trim() !== "") {
+                var colorDB = doc.color.trim();
+                // Si el color es un código pero no tiene el "#", se lo agregamos
+                if (!colorDB.startsWith("#") && /^[0-9A-Fa-f]{3,6}$/.test(colorDB)) {
+                    colorFondo = "#" + colorDB;
+                } else {
+                    colorFondo = colorDB;
+                }
+            }
+            // ==========================================
 
             // Revisamos cada día de la semana para este doctor
             for (var key in dias_bd) {
                 // Si el campo tiene datos (no es nulo, no está vacío y no es "0")
                 if (doc[key] !== null && doc[key].trim() !== "" && doc[key].trim() !== "0") {
-                    
-                    // Extraemos solo el apellido o primer nombre para que quepa en el cuadrito
-                    var nombreCorto = doc.nombre.split(' ')[0]; 
 
                     eventos_mensuales.push({
-                        title: 'Dr. ' + nombreCorto,
-                        daysOfWeek: [ dias_bd[key] ], // MAGIA 1: Se repite el día de la semana
-                        startRecur: fecha_actual, // MAGIA 2: Evita pintar en los días del pasado
-                        color: color_asignado,
-                        allDay: true, // Para que aparezca como un bloque sólido en el día
-                        extendedProps: {
-                            id_doctor: doc.codigo_doctor // Guardamos el ID oculto
-                        }
+                        title: ' ', // Un espacio en blanco para que no salga texto
+                        daysOfWeek: [ dias_bd[key] ],
+                        color: colorFondo, // ¡MAGIA! Toma el color exacto de la base de datos
+                        display: 'list-item', // Lo convierte en un puntito
+                        allDay: true
                     });
                 }
             }
         });
     }
 
-    // 3. INICIALIZAR EL CALENDARIO
     // 3. INICIALIZAR EL CALENDARIO
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
@@ -1007,19 +1013,108 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             return [];
         },
-        // ====================================================
+       
+        // =========================================================
+        // MAGIA: AL HACER CLIC EN UN DÍA
+        // =========================================================
+        dateClick: function(info) {
+           mostrarDoctoresDelDia(info.dateStr); // Llamamos a la función empaquetada
+        },
+     
+    });
+    
+    calendar.render();
 
-        eventClick: function(info) {
-            var fechaClickeada = info.event.start;
-            var anio = fechaClickeada.getFullYear();
-            var mes = ("0" + (fechaClickeada.getMonth() + 1)).slice(-2);
-            var dia = ("0" + fechaClickeada.getDate()).slice(-2);
-            var fechaFormateada = anio + "-" + mes + "-" + dia;
-            var idMedico = info.event.extendedProps.id_doctor;
+	// =========================================================
+    // MAGIA: CARGAR EL DÍA DE HOY AUTOMÁTICAMENTE AL INICIAR
+    // =========================================================
+    var hoy = new Date();
+    var yyyy = hoy.getFullYear();
+    var mm = String(hoy.getMonth() + 1).padStart(2, '0');
+    var dd = String(hoy.getDate()).padStart(2, '0');
+    var fecha_hoy_str = yyyy + '-' + mm + '-' + dd;
+    
+    // Disparamos la función con la fecha de hoy
+    mostrarDoctoresDelDia(fecha_hoy_str);
+    // =========================================================
+    // FUNCIÓN PARA PINTAR DOCTORES EN EL PANEL DERECHO
+    // =========================================================
+    function mostrarDoctoresDelDia(fecha_str) {
+        var fecha_clic = new Date(fecha_str + 'T00:00:00'); 
+        var dia_semana = fecha_clic.getDay(); 
 
-            call_reg_cita(fechaFormateada, idMedico);
+        var opciones_fecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        var fecha_texto = fecha_clic.toLocaleDateString('es-ES', opciones_fecha);
+        $("#titulo_panel_dia").html('<i class="fas fa-calendar-day"></i> ' + fecha_texto);
+
+        var html_doctores = '<div class="list-group">';
+        var contador_doctores = 0;
+
+        arr_doctors.forEach(function(doc) {
+        // 1. Verificamos si es su día normal de trabajo
+        var trabaja = false;
+        if (dia_semana === 0 && doc.Horas_domingo && doc.Horas_domingo.trim() !== "0" && doc.Horas_domingo.trim() !== "") trabaja = true;
+        if (dia_semana === 1 && doc.Horas_lunes && doc.Horas_lunes.trim() !== "0" && doc.Horas_lunes.trim() !== "") trabaja = true;
+        if (dia_semana === 2 && doc.Horas_martes && doc.Horas_martes.trim() !== "0" && doc.Horas_martes.trim() !== "") trabaja = true;
+        if (dia_semana === 3 && doc.Horas_miercoles && doc.Horas_miercoles.trim() !== "0" && doc.Horas_miercoles.trim() !== "") trabaja = true;
+        if (dia_semana === 4 && doc.Horas_jueves && doc.Horas_jueves.trim() !== "0" && doc.Horas_jueves.trim() !== "") trabaja = true;
+        if (dia_semana === 5 && doc.Horas_viernes && doc.Horas_viernes.trim() !== "0" && doc.Horas_viernes.trim() !== "") trabaja = true;
+        if (dia_semana === 6 && doc.Horas_sabado && doc.Horas_sabado.trim() !== "0" && doc.Horas_sabado.trim() !== "") trabaja = true;
+
+        contador_doctores++;
+        var primerNombre = doc.nombre.split(' ')[0]; 
+        var primerApellido = (doc.apellido && doc.apellido.trim() !== "") ? doc.apellido.trim().split(' ')[0] : "";
+        
+        var colorFondo = "#6c757d"; 
+        if (doc.color && doc.color.trim() !== "") {
+            var colorDB = doc.color.trim();
+            if (!colorDB.startsWith("#") && /^[0-9A-Fa-f]{3,6}$/.test(colorDB)) {
+                colorFondo = "#" + colorDB;
+            } else {
+                colorFondo = colorDB;
+            }
         }
+
+        // 2. CREAMOS UNA ETIQUETA VISUAL
+        // 2. CREAMOS UNA ETIQUETA VISUAL MÁS PEQUEÑA Y ORDENADA
+        var etiqueta_estado = trabaja 
+            ? '<span class="badge bg-success" style="font-size: 0.65rem; padding: 0.4em 0.6em;">EN TURNO</span>' 
+            : '<span class="badge bg-secondary" style="font-size: 0.65rem; padding: 0.4em 0.6em;">FUERA DE HORARIO</span>';
+
+        // 3. DIBUJAMOS LA TARJETA CON EL DISEÑO CORREGIDO
+        html_doctores += `
+            <a href="javascript:void(0)" onclick="call_reg_cita('${fecha_str}', '${doc.codigo_doctor}')" class="list-group-item list-group-item-action d-flex align-items-center p-3">
+                
+                <div class="rounded-circle text-white d-flex justify-content-center align-items-center flex-shrink-0" style="background-color: ${colorFondo}; width: 45px; height: 45px; min-width: 45px; font-size: 1.2rem; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                
+                <div class="ms-3 flex-grow-1" style="min-width: 0;">
+                    <h6 class="mb-1 fw-bold text-dark text-truncate" style="font-size: 0.95rem;">Dr. ${primerNombre} ${primerApellido}</h6>
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted text-truncate me-2" style="font-size: 0.8rem;">
+                            <i class="fas fa-stethoscope"></i> ${doc.perfil}
+                        </small>
+                        ${etiqueta_estado}
+                    </div>
+                </div>
+            </a>
+        `;
     });
 
-    calendar.render();
-	});
+        html_doctores += '</div>';
+
+        // 5. Inyectamos el resultado en la pantalla
+        if (contador_doctores > 0) {
+            $("#panel_doctores_dia").html(html_doctores);
+        } else {
+            $("#panel_doctores_dia").html(`
+                <div class="alert alert-light border text-center text-muted">
+                    <i class="fas fa-bed fs-2 mb-2"></i><br>
+                    Ningún doctor tiene turnos programados para este día.
+                </div>
+            `);
+        }
+    }
+});

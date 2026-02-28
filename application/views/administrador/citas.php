@@ -884,22 +884,17 @@
                     </div>
                 </div>
 
-                <div class="side-panel">
-                    <div class="doctors-card">
-                        <h4><i class="fas fa-user-md"></i> Doctores</h4>
-                        <?php foreach($doctor->result() as $doc) { 
-                            $initials = strtoupper(substr($doc->nombre, 0, 2));
-                        ?>
-                        <div class="doctor-item">
-                            <div class="doctor-avatar"><?php echo $initials; ?></div>
-                            <div class="doctor-info">
-                                <h5><?php echo $doc->nombre; ?></h5>
-                                <span><?php echo $doc->perfil; ?></span>
-                            </div>
-                            <div class="doctor-status"></div>
-                        </div>
-                        <?php } $doctor->data_seek(0); ?>
+                <div class="card shadow-sm">
+                    <div class="card-header bg-default text-white">
+                        <h5 class="mb-0 text-white" id="titulo_panel_dia"><i class="fas fa-calendar-day"></i> Doctores del Día</h5>
                     </div>
+                    <div class="card-body" id="panel_doctores_dia">
+                        <div class="text-center text-muted my-4">
+                            <i class="fas fa-hand-pointer fs-1 mb-3"></i>
+                            <p>Haz clic en un día del calendario para ver los especialistas programados.</p>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
