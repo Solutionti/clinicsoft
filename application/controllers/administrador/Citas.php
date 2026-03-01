@@ -113,6 +113,16 @@ class Citas extends Admin_Controller {
 		$triage = $this->input->post("triage");
 		$observaciones = $this->input->post("observaciones");
 
+        // VALIDACIÓN BÁSICA PARA EVITAR ERROR DE BD
+        if (empty($nombre) || empty($dni)) {
+            // Log para depuración (puedes verlo en application/logs si está habilitado, o crear un archivo temporal)
+            file_put_contents('debug_crearcita.txt', print_r($_POST, true));
+            
+            $this->output->set_content_type('application/json');
+            echo json_encode(['status' => 'error', 'message' => 'Faltan datos obligatorios (Nombre o DNI)']);
+            return;
+        }
+
 		$datos = [
 			"dni" => $dni,
 			"nombre" => $nombre,
@@ -122,9 +132,28 @@ class Citas extends Admin_Controller {
 			"hora" => $hora,
 			"estado" => $estado,
 			"observaciones" => $observaciones,
-			"triage" => $triage
+			"triage" => $triage ? $triage : 0 // Asegurar que no sea NULL
 		];
 		$this->Citas_model->crearCita($datos);
+		
+        // 2. ENVIAR WHATSAPP (Nueva lógica)
+        try {
+            $this->load->helper('whatsapp');
+            
+            $mensaje = "🌸 *Clínica Mujer Plena*\n\n";
+            $mensaje .= "Hola *$nombre*, su cita ha sido reservada con éxito.\n";
+            $mensaje .= "📅 *Fecha:* $fecha\n";
+            $mensaje .= "⏰ *Hora:* $hora\n\n";
+            $mensaje .= "¡La esperamos! 🚀";
+    
+            enviar_whatsapp_cita($telefono, $mensaje);
+        } catch (Exception $e) {
+            // Ignorar error de whatsapp para no fallar la respuesta principal
+            log_message('error', 'Error enviando whatsapp: ' . $e->getMessage());
+        }
+
+        // Respuesta exitosa para AJAX
+        echo json_encode(['status' => 'success', 'message' => 'Cita creada correctamente']);
 	}
 
 	public function calendario () {
@@ -309,7 +338,47 @@ class Citas extends Admin_Controller {
 			"observaciones" => $observaciones,
 		];
 		$this->Citas_model->editarCitas($data, $id);
+        
+        // Respuesta JSON para evitar el error "Unexpected end of JSON input"
+        echo json_encode(['status' => 'success', 'message' => 'Cita actualizada correctamente']);
 	}
+
+	public function verificar_nuevas_citas() {
+        // Recibimos el último ID que tiene el navegador de la secretaria
+        $ultimo_id = $this->input->post('ultimo_id');
+        
+        // 1. Buscamos cuál es el ID más alto actualmente en la base de datos
+        $this->db->select_max('codigo_cita'); // Cambia 'id_cita' por el nombre de tu columna ID
+        $query_max = $this->db->get('citas'); // Cambia 'citas' por el nombre de tu tabla
+        $max_id_actual = $query_max->row()->codigo_cita;
+        
+        if ($max_id_actual == null) $max_id_actual = 0;
+
+        // 2. Si el navegador envió un 0, significa que recién abrió la página.
+        // Solo le devolvemos el ID actual para que empiece a vigilar desde ahí.
+        if ($ultimo_id == 0) {
+            echo json_encode(['hay_nuevas' => false, 'max_id' => $max_id_actual]);
+            return;
+        }
+
+        // 3. Si el navegador ya tenía un ID, contamos cuántas citas nuevas entraron después de ese ID
+        $this->db->where('codigo_cita >', $ultimo_id);
+        $cantidad_nuevas = $this->db->count_all_results('citas');
+
+        // 4. Respondemos al navegador
+        if ($cantidad_nuevas > 0) {
+            echo json_encode([
+                'hay_nuevas' => true,
+                'cantidad' => $cantidad_nuevas,
+                'max_id' => $max_id_actual
+            ]);
+        } else {
+            echo json_encode([
+                'hay_nuevas' => false,
+                'max_id' => $max_id_actual
+            ]);
+        }
+    }
 
 }
 

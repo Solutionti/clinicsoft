@@ -121,17 +121,38 @@ class Publico extends CI_Controller {
     // 2. FUNCIÓN PÚBLICA PARA CREAR LA CITA
     // =========================================================
     public function crearcita() {
+        $nombre = $this->input->post("nombre");
+        $telefono = $this->input->post("telefono");
+        $fecha = $this->input->post("fecha");
+        $hora = $this->input->post("hora");
+
         $datos = [
             "dni" => $this->input->post("dni"),
-            "nombre" => $this->input->post("nombre"),
-            "telefono" => $this->input->post("telefono"),
+            "nombre" => $nombre,
+            "telefono" => $telefono,
             "medico" => $this->input->post("medico"),
-            "fecha" => $this->input->post("fecha"),
-            "hora" => $this->input->post("hora"),
+            "fecha" => $fecha,
+            "hora" => $hora,
             "estado" => $this->input->post("estado"),
             "observaciones" => $this->input->post("observaciones"),
             "triage" => "No" // No hay triage desde la web
         ];
         $this->Citas_model->crearCita($datos);
+
+        // 2. ENVIAR WHATSAPP (Nueva lógica)
+        try {
+            $this->load->helper('whatsapp');
+            
+            $mensaje = "🌸 *Clínica Mujer Plena*\n\n";
+            $mensaje .= "Hola *$nombre*, su cita ha sido reservada con éxito desde la Web.\n";
+            $mensaje .= "📅 *Fecha:* $fecha\n";
+            $mensaje .= "⏰ *Hora:* $hora\n\n";
+            $mensaje .= "¡La esperamos en Chiclayo! 🚀";
+    
+            enviar_whatsapp_cita($telefono, $mensaje);
+        } catch (Exception $e) {
+            // Ignorar error de whatsapp para no fallar la respuesta principal
+            log_message('error', 'Error enviando whatsapp: ' . $e->getMessage());
+        }
     }
 }
