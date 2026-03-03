@@ -1,8 +1,10 @@
 <?php
 function enviar_whatsapp_cita($numero, $mensaje) {
+    // La estructura exacta que Evolution API exige para bloquear la tarjeta
     $data = [
         "number" => "51" . $numero,
-        "text" => $mensaje
+        "text" => $mensaje,
+        "linkPreview" => false // 🚫 ESTE COMANDO AHORA VA EN LA RAÍZ
     ];
 
     $ch = curl_init(WA_API_URL);

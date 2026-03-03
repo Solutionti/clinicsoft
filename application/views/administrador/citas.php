@@ -925,7 +925,7 @@
                                     <select class="form-control form-control-modern" id="medico" required>
                                         <option value="">Seleccione un doctor</option>
                                         <?php foreach($doctor->result() as $doctores) { ?>
-                                        <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre." (".$doctores->perfil.")"; ?></option>
+                                        <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre." ".$doctores->apellido." (".$doctores->perfil.")"; ?></option>
                                         <?php } $doctor->data_seek(0); ?>
                                     </select>
                                 </div>
@@ -1066,7 +1066,7 @@
                                     <select class="form-control form-control-modern" id="medico2">
                                         <option value="">Seleccione un doctor</option>
                                         <?php foreach($doctor->result() as $doctores) { ?>
-                                        <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre." (".$doctores->perfil.")"; ?></option>
+                                        <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre." ".$doctores->apellido." (".$doctores->perfil.")"; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>

@@ -43,11 +43,12 @@ class Publico extends CI_Controller {
                 }
             }
         }
-        echo $this->Set_All_Horarios__($horario__,$CitasIdxFecha);
+        // LE AGREGAMOS $fecha AQUÍ
+        echo $this->Set_All_Horarios__($horario__, $CitasIdxFecha, $fecha);
     }
 
     // Funciones matemáticas auxiliares de tu sistema original
-    private function Set_All_Horarios__($horario__,$CitasIdxFecha){
+   private function Set_All_Horarios__($horario__, $CitasIdxFecha, $fecha_elegida = ""){
         $horario__ = str_replace(" ", "", $horario__);
         if($horario__!=""){
             $horarios_mostrar = array();
@@ -93,15 +94,35 @@ class Publico extends CI_Controller {
                     $horarios_mostrar_new = $this->eliminar__($horarios_mostrar_new,$row->hora);
                 }
             }
-            if(sizeof($horarios_mostrar)>0){
+
+            // =========================================================
+            // EL FILTRO INTELIGENTE PARA LA WEB (OCULTA HORAS PASADAS)
+            // =========================================================
+            date_default_timezone_set('America/Lima');
+            $fecha_hoy = date('Y-m-d');
+            $hora_actual = date('H:i'); 
+
+            if ($fecha_elegida === $fecha_hoy) {
+                $horarios_filtrados = array();
+                for($i=0; $i < sizeof($horarios_mostrar_new); $i++){
+                    if ($horarios_mostrar_new[$i]['hora'] > $hora_actual) {
+                        array_push($horarios_filtrados, $horarios_mostrar_new[$i]);
+                    }
+                }
+                $horarios_mostrar_new = $horarios_filtrados;
+            }
+            // =========================================================
+
+            // CORRECCIÓN DE BUG: Validar la lista limpia, no la sucia
+            if(sizeof($horarios_mostrar_new) > 0){
                 echo json_encode(["horarios_mostrar" => $horarios_mostrar_new, "sms" => "Horarios Disponibles", "acction" => 1]);
             }else{
-                echo json_encode(["horarios_mostrar" => $horarios_mostrar_new, "sms" => "Dia No Disponible", "acction" => 2]);
+                echo json_encode(["horarios_mostrar" => array(), "sms" => "No quedan turnos para hoy", "acction" => 2]);
             }
         }else{
             echo json_encode(["horarios_mostrar" => array(), "sms" => "Dia No Disponible", "acction" => 2]);
         }
-    } 
+    }
 
     private function eliminar__($arrr,$hora__){
         for($iaa=0; $iaa < sizeof($arrr);$iaa++){
@@ -125,34 +146,80 @@ class Publico extends CI_Controller {
         $telefono = $this->input->post("telefono");
         $fecha = $this->input->post("fecha");
         $hora = $this->input->post("hora");
+        $id_medico = $this->input->post("medico");
+        $servicio = $this->input->post("observaciones"); // Aquí viaja el servicio
 
         $datos = [
             "dni" => $this->input->post("dni"),
             "nombre" => $nombre,
             "telefono" => $telefono,
-            "medico" => $this->input->post("medico"),
+            "medico" => $id_medico,
             "fecha" => $fecha,
             "hora" => $hora,
             "estado" => $this->input->post("estado"),
-            "observaciones" => $this->input->post("observaciones"),
+            "observaciones" => $servicio,
             "triage" => "No" // No hay triage desde la web
         ];
+        
+        // 1. Guardamos la cita en MySQL
         $this->Citas_model->crearCita($datos);
 
-        // 2. ENVIAR WHATSAPP (Nueva lógica)
+        // ==========================================
+        // 2. BUSCAR Y LIMPIAR EL NOMBRE DEL DOCTOR
+        // ==========================================
+        $nombre_doctor = "su especialista"; 
+        
+        $query_doc = $this->db->select('nombre, apellido')
+                              ->where('codigo_doctor', $id_medico)
+                              ->get('doctores'); 
+                              
+        if($query_doc->num_rows() > 0) {
+            $doc = $query_doc->row();
+            
+            // Extraemos SOLO el primer nombre y primer apellido
+            $primer_nombre = explode(' ', trim($doc->nombre))[0];
+            $primer_apellido = isset($doc->apellido) ? explode(' ', trim($doc->apellido))[0] : "";
+            
+            // Convertimos a Formato Título (Juan Malambo)
+            $primer_nombre = ucwords(strtolower($primer_nombre));
+            $primer_apellido = ucwords(strtolower($primer_apellido));
+            
+            $nombre_doctor = trim($primer_nombre . " " . $primer_apellido);
+        }
+
+        // ==========================================
+        // 3. DARLE ELEGANCIA A LA FECHA, HORA Y PACIENTE
+        // ==========================================
+        $fecha_bonita = date("d/m/Y", strtotime($fecha)); // Queda: 03/03/2026
+        $hora_bonita = date("h:i A", strtotime($hora));   // Queda: 02:15 PM
+        
+        // Limpiamos el nombre del paciente (Extraemos solo las dos primeras palabras)
+        $partes_nombre = explode(' ', trim($nombre));
+        $nombre_paciente_limpio = $partes_nombre[0]; // Primer nombre
+        
+        // Si escribió al menos una segunda palabra (apellido), la agregamos
+        if (isset($partes_nombre[1])) {
+            $nombre_paciente_limpio .= " " . $partes_nombre[1]; 
+        }
+        
+        // Pasamos a Formato Título (Ej: CESAR ANTHONY -> Cesar Anthony)
+        $nombre_paciente_limpio = ucwords(strtolower($nombre_paciente_limpio));
+        // ==========================================
+        // 4. ENVIAR WHATSAPP (Mensaje Premium)
+        // ==========================================
         try {
             $this->load->helper('whatsapp');
             
             $mensaje = "🌸 *Clínica Mujer Plena*\n\n";
-            $mensaje .= "Hola *$nombre*, su cita ha sido reservada con éxito desde la Web.\n";
-            $mensaje .= "📅 *Fecha:* $fecha\n";
-            $mensaje .= "⏰ *Hora:* $hora\n\n";
-            $mensaje .= "¡La esperamos en Chiclayo! 🚀";
+            $mensaje .= "Hola *$nombre_paciente_limpio*, su cita ha sido reservada con éxito desde la Web.\n\n";
+            $mensaje .= "👩‍⚕️ *Especialista:* Dr(a). $nombre_doctor\n";
+            $mensaje .= "📅 *Fecha:* $fecha_bonita\n";
+            $mensaje .= "⏰ *Hora:* $hora_bonita\n\n";
+            $mensaje .= "📍 ¡La esperamos!";
     
             enviar_whatsapp_cita($telefono, $mensaje);
         } catch (Exception $e) {
-            // Ignorar error de whatsapp para no fallar la respuesta principal
             log_message('error', 'Error enviando whatsapp: ' . $e->getMessage());
         }
     }
-}
+    }

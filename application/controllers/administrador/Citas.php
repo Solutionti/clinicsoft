@@ -103,19 +103,19 @@ class Citas extends Admin_Controller {
     } 
 
 	public function crearCita() {
-		$dni = $this->input->post("dni");
-		$nombre = $this->input->post("nombre");
-		$telefono = $this->input->post("telefono");
-		$medico = $this->input->post("medico");
-		$fecha = $this->input->post("fecha");
-		$hora = $this->input->post("hora");
-		$estado = $this->input->post("estado");
-		$triage = $this->input->post("triage");
-		$observaciones = $this->input->post("observaciones");
+        $dni = $this->input->post("dni");
+        $nombre = $this->input->post("nombre");
+        $telefono = $this->input->post("telefono");
+        $medico = $this->input->post("medico");
+        $fecha = $this->input->post("fecha");
+        $hora = $this->input->post("hora");
+        $estado = $this->input->post("estado");
+        $triage = $this->input->post("triage");
+        $observaciones = $this->input->post("observaciones");
 
         // VALIDACIÓN BÁSICA PARA EVITAR ERROR DE BD
         if (empty($nombre) || empty($dni)) {
-            // Log para depuración (puedes verlo en application/logs si está habilitado, o crear un archivo temporal)
+            // Log para depuración
             file_put_contents('debug_crearcita.txt', print_r($_POST, true));
             
             $this->output->set_content_type('application/json');
@@ -123,28 +123,86 @@ class Citas extends Admin_Controller {
             return;
         }
 
-		$datos = [
-			"dni" => $dni,
-			"nombre" => $nombre,
-			"telefono" => $telefono,
-			"medico" => $medico,
-			"fecha" => $fecha,
-			"hora" => $hora,
-			"estado" => $estado,
-			"observaciones" => $observaciones,
-			"triage" => $triage ? $triage : 0 // Asegurar que no sea NULL
-		];
-		$this->Citas_model->crearCita($datos);
-		
-        // 2. ENVIAR WHATSAPP (Nueva lógica)
+        $datos = [
+            "dni" => $dni,
+            "nombre" => $nombre,
+            "telefono" => $telefono,
+            "medico" => $medico,
+            "fecha" => $fecha,
+            "hora" => $hora,
+            "estado" => $estado,
+            "observaciones" => $observaciones,
+            "triage" => $triage ? $triage : 0 // Asegurar que no sea NULL
+        ];
+        
+        // 1. Guardamos la cita en MySQL
+        $this->Citas_model->crearCita($datos);
+
+        // ==========================================
+        // 2. BUSCAR Y LIMPIAR EL NOMBRE DEL DOCTOR
+        // ==========================================
+        $nombre_doctor = "su especialista"; 
+        
+        $query_doc = $this->db->select('nombre, apellido')
+                              ->where('codigo_doctor', $medico)
+                              ->get('doctores'); 
+                              
+        if($query_doc->num_rows() > 0) {
+            $doc = $query_doc->row();
+            
+            // Extraemos SOLO el primer nombre y primer apellido
+            $primer_nombre = explode(' ', trim($doc->nombre))[0];
+            $primer_apellido = isset($doc->apellido) ? explode(' ', trim($doc->apellido))[0] : "";
+            
+            // Convertimos a Formato Título (Ej: Juan Malambo)
+            $primer_nombre = ucwords(strtolower($primer_nombre));
+            $primer_apellido = ucwords(strtolower($primer_apellido));
+            
+            $nombre_doctor = trim($primer_nombre . " " . $primer_apellido);
+        }
+
+        // ==========================================
+        // 3. DARLE ELEGANCIA A LA FECHA, HORA Y PACIENTE
+        // ==========================================
+        $fecha_bonita = date("d/m/Y", strtotime($fecha)); // Queda: 03/03/2026
+        $hora_bonita = date("h:i A", strtotime($hora));   // Queda: 03:15 PM
+        
+        // Limpiamos el nombre del paciente (Formato RENIEC: Apellido_Paterno Apellido_Materno Nombres)
+        // array_filter quita los espacios dobles por si acaso
+        $partes_nombre = array_values(array_filter(explode(' ', trim($nombre))));
+        $total_partes = count($partes_nombre);
+        
+        if ($total_partes >= 3) {
+            // Ejemplo: QUIROZ [0] IGNACIO [1] CESAR [2] ANTHONY [3]
+            $primer_apellido = $partes_nombre[0];
+            $primer_nombre = $partes_nombre[2]; // El primer nombre siempre está en la posición 3 (índice 2)
+            $nombre_paciente_limpio = $primer_nombre . " " . $primer_apellido;
+        } elseif ($total_partes == 2) {
+            // Ejemplo raro de 2 palabras: QUIROZ CESAR
+            $nombre_paciente_limpio = $partes_nombre[1] . " " . $partes_nombre[0];
+        } else {
+            // Si solo puso una palabra
+            $nombre_paciente_limpio = $nombre;
+        }
+        
+        // Convertimos a Formato Título (Ej: CESAR QUIROZ -> Cesar Quiroz)
+        $nombre_paciente_limpio = ucwords(strtolower($nombre_paciente_limpio));
+
+        // ==========================================
+        // 4. ENVIAR WHATSAPP (Mensaje Premium)
+        // ==========================================
         try {
             $this->load->helper('whatsapp');
             
             $mensaje = "🌸 *Clínica Mujer Plena*\n\n";
-            $mensaje .= "Hola *$nombre*, su cita ha sido reservada con éxito.\n";
-            $mensaje .= "📅 *Fecha:* $fecha\n";
-            $mensaje .= "⏰ *Hora:* $hora\n\n";
-            $mensaje .= "¡La esperamos! 🚀";
+            $mensaje .= "Hola *$nombre_paciente_limpio*, su cita ha sido reservada con éxito.\n\n";
+            $mensaje .= "👩‍⚕️ *Especialista:* Dr(a). $nombre_doctor\n";
+            $mensaje .= "🩺 *Servicio:* $observaciones\n";
+            $mensaje .= "📅 *Fecha:* $fecha_bonita\n";
+            $mensaje .= "⏰ *Hora:* $hora_bonita\n\n";
+            $mensaje .= "📍 ¡La esperamos en Av. Grau 671, Chiclayo! 🚀\n";
+			$mensaje .= "🗺️ Clic aquí para ver el mapa:\n";
+			$mensaje .= "https://www.google.com/maps/search/?api=1&query=Centro+Medico+Mujer+Plena+Chiclayo\n";
     
             enviar_whatsapp_cita($telefono, $mensaje);
         } catch (Exception $e) {
@@ -152,9 +210,9 @@ class Citas extends Admin_Controller {
             log_message('error', 'Error enviando whatsapp: ' . $e->getMessage());
         }
 
-        // Respuesta exitosa para AJAX
+        // Respuesta exitosa para AJAX (Intacta para la secretaria)
         echo json_encode(['status' => 'success', 'message' => 'Cita creada correctamente']);
-	}
+    }
 
 	public function calendario () {
 		$doctores = $this->Doctores_model->getDoctores();
@@ -198,102 +256,126 @@ class Citas extends Admin_Controller {
 	}
 
 	public function getHorariosDoc() {
-		$fecha = $this->input->post("fecha");//var_dump($fecha);
-		$medico = $this->input->post("medico");//var_dump($medico);
-		$CitasIdxFecha = $this->Citas_model->getCitasIdxFecha($fecha,$medico);
-		$HorariosDoc 		= $this->Citas_model->getHorariosDoc($medico);
-		$horario__ = "";//Horario del dia para este Doctor
-		$timestamp = strtotime($fecha);
-		$day = date('N', $timestamp);
-		//var_dump($day);
-		//var_dump($CitasIdxFecha);
-		if ($HorariosDoc->num_rows() > 0)
+        $fecha = $this->input->post("fecha");
+        $medico = $this->input->post("medico");
+        $CitasIdxFecha = $this->Citas_model->getCitasIdxFecha($fecha,$medico);
+        $HorariosDoc        = $this->Citas_model->getHorariosDoc($medico);
+        $horario__ = "";//Horario del dia para este Doctor
+        $timestamp = strtotime($fecha);
+        $day = date('N', $timestamp);
+        
+        if ($HorariosDoc->num_rows() > 0)
         {
-			foreach ($HorariosDoc->result() as $row)
+            foreach ($HorariosDoc->result() as $row)
             {
-				switch ($day){
-					case 1: $horario__ = $row->Horas_lunes;break;
-					case 2: $horario__ = $row->Horas_martes;break;
-					case 3: $horario__ = $row->Horas_miercoles;break;
-					case 4: $horario__ = $row->Horas_jueves;break;
-					case 5: $horario__ = $row->Horas_viernes;break;
-					case 6: $horario__ = $row->Horas_sabado;break;
-					case 7: $horario__ = $row->Horas_domingo;break;
-				}
+                switch ($day){
+                    case 1: $horario__ = $row->Horas_lunes;break;
+                    case 2: $horario__ = $row->Horas_martes;break;
+                    case 3: $horario__ = $row->Horas_miercoles;break;
+                    case 4: $horario__ = $row->Horas_jueves;break;
+                    case 5: $horario__ = $row->Horas_viernes;break;
+                    case 6: $horario__ = $row->Horas_sabado;break;
+                    case 7: $horario__ = $row->Horas_domingo;break;
+                }
             }
         }
-		echo $this->Set_All_Horarios__($horario__,$CitasIdxFecha);
-	}
-	public function Set_All_Horarios__($horario__,$CitasIdxFecha){
-		$horario__ 		= str_replace(" ", "", $horario__);
-		if($horario__!=""){
-			$horarios_mostrar = array();
-			$horas__ = explode(";", $horario__);
-			$duracion__ = $horas__[0];
-			array_splice($horas__,0,1);
-			for($i=0; $i < sizeof($horas__);$i++){
-				$hor__as = explode("-", $horas__[$i]);
-				if(sizeof($hor__as)>1){
-					$hor__min_1 = explode(":", $hor__as[0]);
-					$hor__min_2 = explode(":", $hor__as[1]);
-					$hor__1 = ($hor__min_1[0]*1);	$min__1 = 0;
-					if(sizeof($hor__min_1)>1){	$min__1 = ($hor__min_1[1]*1);}
-					$hor__2 = ($hor__min_2[0]*1);	
-					$min__2 = 0;
+        // LE AGREGAMOS $fecha AL FINAL PARA QUE LA FUNCION SEPA QUÉ DÍA ES
+        echo $this->Set_All_Horarios__($horario__, $CitasIdxFecha, $fecha);
+    }
 
-					if(sizeof($hor__min_2)>1){	$min__2 = ($hor__min_2[1]*1);}
-					$hor________min_1 = $this->ceros($hor__1*1,2).":".$this->ceros($min__1*1,2).":00";
-					$hor________min_1 = strtotime($hor________min_1);
-					array_push($horarios_mostrar,array("hora" =>$hor________min_1));
-					$hor________min_1 = strtotime('.'.$duracion__.' minute',$hor________min_1);
-					array_push($horarios_mostrar,array("hora" =>$hor________min_1));
-					$hor________min_2 = $this->ceros($hor__2*1,2).":".$this->ceros($min__2*1,2).":00";
-					$hor________min_2 = strtotime($hor________min_2);
-					for($iaxx=0; $iaxx < 50;$iaxx++){
-						if($hor________min_1>=$hor________min_2){
-							$iaxx = 50;
-						}else{
-							$hor________min_1 = strtotime('.'.$duracion__.' minute',$hor________min_1);
-							array_push($horarios_mostrar,array("hora" =>$hor________min_1));
-						}
-					}
-					$horarios_mostrar_new = array();
-					for($iaa=0; $iaa < sizeof($horarios_mostrar);$iaa++){
-						$horarios_mostrar_new[$iaa]['hora'] = date('H:i',$horarios_mostrar[$iaa]['hora']);
-					}
-				}
-				
-			}
+	public function Set_All_Horarios__($horario__, $CitasIdxFecha, $fecha_elegida = ""){
+        $horario__      = str_replace(" ", "", $horario__);
+        if($horario__!=""){
+            $horarios_mostrar = array();
+            $horas__ = explode(";", $horario__);
+            $duracion__ = $horas__[0];
+            array_splice($horas__,0,1);
+            for($i=0; $i < sizeof($horas__);$i++){
+                $hor__as = explode("-", $horas__[$i]);
+                if(sizeof($hor__as)>1){
+                    $hor__min_1 = explode(":", $hor__as[0]);
+                    $hor__min_2 = explode(":", $hor__as[1]);
+                    $hor__1 = ($hor__min_1[0]*1);   $min__1 = 0;
+                    if(sizeof($hor__min_1)>1){  $min__1 = ($hor__min_1[1]*1);}
+                    $hor__2 = ($hor__min_2[0]*1);   
+                    $min__2 = 0;
 
-			if ($CitasIdxFecha->num_rows() > 0){
-				foreach ($CitasIdxFecha->result() as $row)
-				{
-					$horarios_mostrar_new = $this->eliminar__($horarios_mostrar_new,$row->hora);
-				}
-			}
-			if(sizeof($horarios_mostrar)>0){
-				$data = [
-					"horarios_mostrar" => $horarios_mostrar_new,
-					"sms" => "Horarios Disponibles",
-					"acction" => 1
-				];
-				echo json_encode($data);
-			}else{
-				$data = [
-					"horarios_mostrar" => $horarios_mostrar_new,
-					"sms" => "Dia No Disponible",
-					"acction" => 2
-				];
-				echo json_encode($data);
-			}
-		}else{
-			$data = [
-				"horarios_mostrar" => array(),
-				"sms" => "Dia No Disponible",
-				"acction" => 2
-			];
-			echo json_encode($data);
-		}
+                    if(sizeof($hor__min_2)>1){  $min__2 = ($hor__min_2[1]*1);}
+                    $hor________min_1 = $this->ceros($hor__1*1,2).":".$this->ceros($min__1*1,2).":00";
+                    $hor________min_1 = strtotime($hor________min_1);
+                    array_push($horarios_mostrar,array("hora" =>$hor________min_1));
+                    $hor________min_1 = strtotime('.'.$duracion__.' minute',$hor________min_1);
+                    array_push($horarios_mostrar,array("hora" =>$hor________min_1));
+                    $hor________min_2 = $this->ceros($hor__2*1,2).":".$this->ceros($min__2*1,2).":00";
+                    $hor________min_2 = strtotime($hor________min_2);
+                    for($iaxx=0; $iaxx < 50;$iaxx++){
+                        if($hor________min_1>=$hor________min_2){
+                            $iaxx = 50;
+                        }else{
+                            $hor________min_1 = strtotime('.'.$duracion__.' minute',$hor________min_1);
+                            array_push($horarios_mostrar,array("hora" =>$hor________min_1));
+                        }
+                    }
+                    $horarios_mostrar_new = array();
+                    for($iaa=0; $iaa < sizeof($horarios_mostrar);$iaa++){
+                        $horarios_mostrar_new[$iaa]['hora'] = date('H:i',$horarios_mostrar[$iaa]['hora']);
+                    }
+                }
+            }
+
+            if ($CitasIdxFecha->num_rows() > 0){
+                foreach ($CitasIdxFecha->result() as $row)
+                {
+                    $horarios_mostrar_new = $this->eliminar__($horarios_mostrar_new,$row->hora);
+                }
+            }
+
+            // =========================================================
+            // MAGIA INGENIERA: FILTRO DE HORA ACTUAL
+            // =========================================================
+            date_default_timezone_set('America/Lima');
+            $fecha_hoy = date('Y-m-d');
+            $hora_actual = date('H:i'); // Formato militar (Ej: 13:45)
+
+            // Si la secretaria o el bot están consultando para HOY mismo
+            if ($fecha_elegida === $fecha_hoy) {
+                $horarios_filtrados = array();
+                for($i=0; $i < sizeof($horarios_mostrar_new); $i++){
+                    // Solo guardamos los horarios que sean MAYORES a la hora en este segundo
+                    if ($horarios_mostrar_new[$i]['hora'] > $hora_actual) {
+                        array_push($horarios_filtrados, $horarios_mostrar_new[$i]);
+                    }
+                }
+                // Sobreescribimos la lista vieja con la lista ya filtrada
+                $horarios_mostrar_new = $horarios_filtrados;
+            }
+            // =========================================================
+
+            // IMPORTANTE: Cambié sizeof($horarios_mostrar) por $horarios_mostrar_new
+            // para que detecte correctamente si todos los turnos ya pasaron
+            if(sizeof($horarios_mostrar_new) > 0){
+                $data = [
+                    "horarios_mostrar" => $horarios_mostrar_new,
+                    "sms" => "Horarios Disponibles",
+                    "acction" => 1
+                ];
+                echo json_encode($data);
+            }else{
+                $data = [
+                    "horarios_mostrar" => array(),
+                    "sms" => "No quedan turnos para hoy",
+                    "acction" => 2
+                ];
+                echo json_encode($data);
+            }
+        }else{
+            $data = [
+                "horarios_mostrar" => array(),
+                "sms" => "Dia No Disponible",
+                "acction" => 2
+            ];
+            echo json_encode($data);
+        }
     } 
 
     public function eliminar__($arrr,$hora__){
