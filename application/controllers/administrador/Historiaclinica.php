@@ -75,6 +75,7 @@ class Historiaclinica extends Admin_Controller
 		$this->load->model('Generic_model');
 		$this->load->model('Doctores_model');
 		$this->load->model('Laboratorio_model');
+		
 	}
 
 	public function historiasClinicas()
@@ -128,7 +129,7 @@ class Historiaclinica extends Admin_Controller
 		$ecoVenosa = $this->Historias_model->getEcografiaVenosa($documento);
 
 		// medicamentos de la farmacia
-		// $farmaciaMedicamento = $this->Historias_model->getMedicamentosFarmacia();
+		$farmaciaMedicamento = $this->Historias_model->getMedicamentosFarmacia();
 		$data = [
 			'paciente' => $pacientes,
 			'historia' => $historias,
@@ -173,7 +174,7 @@ class Historiaclinica extends Admin_Controller
 			'ecoHisterosonografias' => $ecoHisterosonografia,
 			'ecoArterials' => $ecoArterial,
 			'ecoVenosas' => $ecoVenosa,
-			// 'medicamentofarmacias' => $farmaciaMedicamento
+			'medicamentofarmacias' => $farmaciaMedicamento
 		];
 		$this->load->view('administrador/historiaclinica', $data);
 	}
