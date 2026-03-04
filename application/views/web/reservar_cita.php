@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reserva de Citas | Clínica Mujer Plena</title>
+    <title>Reserva de Citas | Clinica Mi Salud</title>
     <!-- Google Fonts: Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
@@ -267,7 +267,7 @@
                     <div class="wizard-header">
                         <div class="text-center mb-4">
                             <h3 class="mb-1">Reserva tu Cita</h3>
-                            <p class="text-muted">Clínica Mujer Plena - Servicio en Línea</p>
+                            <p class="text-muted">Clínica Mi Salud - Servicio en Línea</p>
                         </div>
                         
                         <div class="step-indicator">
@@ -414,7 +414,7 @@
                 </div>
                 
                 <div class="text-center mt-4 text-white opacity-75">
-                    <small>&copy; <?php echo date('Y'); ?> Clínica Mujer Plena. Todos los derechos reservados.</small>
+                    <small>&copy; <?php echo date('Y'); ?> Clínica Mi Salud. Todos los derechos reservados.</small>
                 </div>
 
             </div>
