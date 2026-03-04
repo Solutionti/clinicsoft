@@ -7,6 +7,17 @@
     <title>Administración / Citas</title>
     <?php require_once("componentes/head.php"); ?>
     <style>
+        /* ===== MAGIA FULLCALENDAR ===== */
+        /* Ocultar el texto del doctor solo en la vista de Mes (deja solo el punto) */
+        .fc-dayGridMonth-view .fc-event-title {
+            display: none !important;
+        }
+        
+        /* Asegurar que en la vista Agenda sí se vea bonito */
+        .fc-list-view .fc-list-event-title {
+            font-weight: 600;
+            color: var(--dark);
+        }
         :root {
             --primary: #5e72e4;
             --success: #2dce89;

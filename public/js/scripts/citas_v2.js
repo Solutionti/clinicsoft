@@ -984,14 +984,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Revisamos cada día de la semana para este doctor
             for (var key in dias_bd) {
-                // Si el campo tiene datos (no es nulo, no está vacío y no es "0")
                 if (doc[key] !== null && doc[key].trim() !== "" && doc[key].trim() !== "0") {
+                    
+                    // Limpiamos el nombre para que se vea elegante
+                    var primerNombre = doc.nombre.split(' ')[0]; 
+                    var primerApellido = (doc.apellido && doc.apellido.trim() !== "") ? doc.apellido.trim().split(' ')[0] : "";
+                    var tituloElegante = "Dr(a). " + primerNombre + " " + primerApellido + " (" + doc.perfil + ")";
 
                     eventos_mensuales.push({
-                        title: ' ', // Un espacio en blanco para que no salga texto
+                        title: tituloElegante, // AHORA SÍ LE PASAMOS EL NOMBRE
                         daysOfWeek: [ dias_bd[key] ],
-                        color: colorFondo, // ¡MAGIA! Toma el color exacto de la base de datos
-                        display: 'list-item', // Lo convierte en un puntito
+                        color: colorFondo, 
+                        display: 'list-item', 
                         allDay: true
                     });
                 }
@@ -1003,7 +1007,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         locale: 'es',
+		allDayText: 'Turno', // Agrega esta línea justo debajo de locale: 'es',
         height: 'auto',
+		
         
         // BORRAMOS EL validRange QUE LO PONÍA GRIS
         
