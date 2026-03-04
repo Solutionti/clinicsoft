@@ -27,7 +27,7 @@
             background-color: var(--bg-color); 
             font-family: 'Poppins', sans-serif; 
             color: var(--text-color);
-            background-image: linear-gradient(310deg, #5e72e4 0%, #825ee4 100%);
+            background-image: linear-gradient(310deg, #B47CB5 0%, #F6F0FA 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -266,6 +266,7 @@
                 <div class="wizard-container">
                     <div class="wizard-header">
                         <div class="text-center mb-4">
+                            <img src="<?php echo base_url(); ?>public/img/theme/logo.png" alt="Clínica Mujer Plena" style="max-width: 200px; margin-bottom: 30px;">
                             <h3 class="mb-1">Reserva tu Cita</h3>
                             <p class="text-muted">Clínica Mujer Plena - Servicio en Línea</p>
                         </div>
@@ -298,20 +299,21 @@
                                             <span class="input-group-text bg-white"><i class="fas fa-stethoscope text-primary"></i></span>
                                             <select class="form-select" id="web_medico">
                                                 <option value="">-- Selecciona un Especialista --</option>
-                                                <?php foreach($doctor->result() as $doc) { 
+                                                <?php
+                                                foreach ($doctor->result() as $doc) {
                                                     // 1. Tijeras mágicas: Cortamos por los espacios y sacamos solo el primer elemento [0]
                                                     $primer_nombre = explode(' ', trim($doc->nombre))[0];
                                                     $primer_apellido = explode(' ', trim($doc->apellido))[0];
-                                                ?>
+                                                    ?>
                                                     <option value="<?php echo $doc->codigo_doctor; ?>">
-                                                        <?php echo "Dr. " . $primer_nombre . " " . $primer_apellido . " - " . $doc->perfil; ?>
+                                                        <?php echo 'Dr. ' . $primer_nombre . ' ' . $primer_apellido . ' - ' . $doc->perfil; ?>
                                                     </option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="text-end">
-                                        <button class="btn btn-primary btn-lg px-5 shadow-lg" id="btn-next-1">
+                                    <div class="text-center text-md-end">
+                                        <button type="button" class="btn btn-primary btn-lg px-5 shadow-lg w-100 w-md-auto" id="btn-next-1">
                                             Siguiente <i class="fas fa-arrow-right ms-2"></i>
                                         </button>
                                     </div>
