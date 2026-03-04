@@ -130,7 +130,7 @@
                   <div class="row mt-3">
                      <div class="col-md-12">
                      <div class="d-flex flex-row-reverse">
-                       <a class="btn bg-gradient-danger btn-xs" data-bs-toggle="modal" href="#AgregarDoctor" role="button">Agregar <i class="fas fa-plus"></i> </a>
+                       <!-- <a class="btn bg-gradient-danger btn-xs" data-bs-toggle="modal" href="#AgregarDoctor" role="button">Agregar <i class="fas fa-plus"></i> </a> -->
                      </div>
                      </div>
                   </div>
@@ -320,8 +320,22 @@
                                 <input type="text" class="form-control" id="perfil1">
                               </div>
                           </div>
+                          <div class="col-md-12">
+                        <div class="form-group input-group-sm">
+                            <label><i class="fas fa-palette"></i> Color identificador en Agenda</label>
+                            <div class="d-flex align-items-center">
+                                <input type="color" class="form-control" id="color1" name="color" 
+                                      style="height: 38px; cursor: pointer; padding: 2px;" 
+                                      title="Elige el color para este doctor">
+                                <small class="text-muted ms-2" style="margin-left: 10px;">
+                                    Este color se usará para sus citas y puntos en el calendario.
+                                </small>
+                            </div>
+                          </div>
+                        </div>
                         </div>
                     </div>
+                    
                     <div class="col-md-6 ">
                         <div class="row ">
                           <label>Dias laborables</label>

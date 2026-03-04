@@ -400,30 +400,101 @@ class Citas extends Admin_Controller {
 	}
 
 	public function editarCitas() {
-		$id = $this->input->post("idee");
-		$dni = $this->input->post("dni");
-		$nombre = $this->input->post("nombre");
-		$telefono = $this->input->post("telefono");
-		$medico = $this->input->post("medico");
-		$fecha = $this->input->post("fecha");
-		$hora = $this->input->post("hora");
-		$estado  = $this->input->post("estado");
-		$observaciones = $this->input->post("observaciones");
-		$data = [
-			"dni" => $dni,
-			"nombre" => $nombre,
-			"telefono" => $telefono,
-			"medico" => $medico,
-			"fecha" => $fecha,
-			"hora" => $hora,
-			"estado" => $estado,
-			"observaciones" => $observaciones,
-		];
-		$this->Citas_model->editarCitas($data, $id);
+        $id = $this->input->post("idee");
+        $dni = $this->input->post("dni");
+        $nombre = $this->input->post("nombre");
+        $telefono = $this->input->post("telefono");
+        $medico = $this->input->post("medico");
+        $fecha = $this->input->post("fecha");
+        $hora = $this->input->post("hora");
+        $estado  = $this->input->post("estado");
+        $observaciones = $this->input->post("observaciones");
         
-        // Respuesta JSON para evitar el error "Unexpected end of JSON input"
+        $data = [
+            "dni" => $dni,
+            "nombre" => $nombre,
+            "telefono" => $telefono,
+            "medico" => $medico,
+            "fecha" => $fecha,
+            "hora" => $hora,
+            "estado" => $estado,
+            "observaciones" => $observaciones,
+        ];
+        
+        // 1. Guardamos los cambios en MySQL
+        $this->Citas_model->editarCitas($data, $id);
+        
+        // ==========================================
+        // 2. BUSCAR Y LIMPIAR EL NOMBRE DEL DOCTOR
+        // ==========================================
+        $nombre_doctor = "su especialista"; 
+        
+        $query_doc = $this->db->select('nombre, apellido')
+                              ->where('codigo_doctor', $medico)
+                              ->get('doctores'); 
+                              
+        if($query_doc->num_rows() > 0) {
+            $doc = $query_doc->row();
+            $primer_nombre = explode(' ', trim($doc->nombre))[0];
+            $primer_apellido = isset($doc->apellido) ? explode(' ', trim($doc->apellido))[0] : "";
+            
+            $primer_nombre = ucwords(strtolower($primer_nombre));
+            $primer_apellido = ucwords(strtolower($primer_apellido));
+            $nombre_doctor = trim($primer_nombre . " " . $primer_apellido);
+        }
+
+        // ==========================================
+        // 3. DARLE ELEGANCIA A LA FECHA, HORA Y PACIENTE
+        // ==========================================
+        $fecha_bonita = date("d/m/Y", strtotime($fecha)); 
+        $hora_bonita = date("h:i A", strtotime($hora));   
+        
+        // Limpieza de nombre formato RENIEC
+        $partes_nombre = array_values(array_filter(explode(' ', trim($nombre))));
+        $total_partes = count($partes_nombre);
+        
+        if ($total_partes >= 3) {
+            $primer_apellido = $partes_nombre[0];
+            $primer_nombre = $partes_nombre[2]; 
+            $nombre_paciente_limpio = $primer_nombre . " " . $primer_apellido;
+        } elseif ($total_partes == 2) {
+            $nombre_paciente_limpio = $partes_nombre[1] . " " . $partes_nombre[0];
+        } else {
+            $nombre_paciente_limpio = $nombre;
+        }
+        $nombre_paciente_limpio = ucwords(strtolower($nombre_paciente_limpio));
+
+        // ==========================================
+        // 4. ENVIAR WHATSAPP (Reprogramación o Cancelación)
+        // ==========================================
+        try {
+            $this->load->helper('whatsapp');
+            
+            if ($estado == 'Cancelado') {
+                // Mensaje si la cita se CANCELA
+                $mensaje = "🚫 *Clínica Mujer Plena - Cita Cancelada*\n\n";
+                $mensaje .= "Hola *$nombre_paciente_limpio*, le confirmamos que su cita con el Dr(a). $nombre_doctor ha sido *cancelada* en nuestro sistema.\n\n";
+                $mensaje .= "Si desea agendar nuevamente en el futuro, estamos a su entera disposición. ¡Que tenga un excelente día!";
+            } else {
+                // Mensaje si la cita se REPROGRAMA / ACTUALIZA
+                $mensaje = "🔄 *Clínica Mujer Plena - Reprogramación de Cita*\n\n";
+                $mensaje .= "Hola *$nombre_paciente_limpio*, le informamos que su cita ha sido *reprogramada*.\n\n";
+                $mensaje .= "👩‍⚕️ *Especialista:* Dr(a). $nombre_doctor\n";
+                $mensaje .= "🩺 *Servicio:* $observaciones\n";
+                $mensaje .= "📅 *Nueva Fecha:* $fecha_bonita\n";
+                $mensaje .= "⏰ *Nueva Hora:* $hora_bonita\n\n";
+                $mensaje .= "📍 ¡La esperamos en Av. Grau 671, Chiclayo! 🚀\n";
+                $mensaje .= "🗺️ *Ver mapa:* https://www.google.com/maps/search/?api=1&query=Centro+Medico+Mujer+Plena+Chiclayo\n\n";
+            }
+    
+            enviar_whatsapp_cita($telefono, $mensaje);
+        } catch (Exception $e) {
+            log_message('error', 'Error enviando whatsapp en edición: ' . $e->getMessage());
+        }
+        
+        // Respuesta JSON intacta para la secretaria
         echo json_encode(['status' => 'success', 'message' => 'Cita actualizada correctamente']);
-	}
+    }
 
 	public function verificar_nuevas_citas() {
         // Recibimos el último ID que tiene el navegador de la secretaria

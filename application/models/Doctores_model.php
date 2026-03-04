@@ -130,6 +130,7 @@ class Doctores_model extends CI_model {
             "direccion" => $data["direccion"],
             "telefono" => $data["telefono"],
             "perfil" => $data["perfil"],
+            "color" => $data["color"],
             "estado" => "Activo",
             "usuario" => $this->session->userdata("nombre")
         ];
@@ -146,12 +147,12 @@ class Doctores_model extends CI_model {
 
     public function actualizarDoctor($data) {
         $datos = [
-           "cpe" => $data["documento"], 
-           "nombre" => $data["nombre"], 
+           "cpe" => $data["documento"],  
            "email" => $data["correo"], 
            "direccion" => $data["direccion"], 
            "telefono" => $data["telefono"], 
            "perfil" => $data["perfil"], 
+	        "color" => $data["color"], // Agregado el campo color
            "lunes" => $data["lunes"], 
            "martes" => $data["martes"], 
            "miercoles" => $data["miercoles"], 

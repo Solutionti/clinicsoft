@@ -79,7 +79,7 @@
           <p class="mb-0 text-secondary">
             Copyright © <script>
               document.write(new Date().getFullYear())
-            </script> gofuturedigitalsolution.com
+            </script> solutionTI.com
           </p>
         </div>
       </div>
