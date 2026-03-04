@@ -23,6 +23,7 @@ class Doctores extends Admin_Controller {
         $direccion = $this->input->post("direccion");
         $correo = $this->input->post("correo");
         $password = $this->input->post("password");
+        $color = $this->input->post("color"); // Agregado el campo color
 
 		$data = [
 			"cpe" => $cpe,
@@ -31,7 +32,8 @@ class Doctores extends Admin_Controller {
 			"telefono" => $telefono,
 			"direccion" => $direccion,
 			"correo" => $correo,
-			"password" => $password
+			"password" => $password,
+			"color" => $color // Agregado el campo color
 		];
 		$this->Doctores_model->crearDoctor($data);
     }
@@ -52,11 +54,11 @@ class Doctores extends Admin_Controller {
 	public function actualizarDoctor() {
 		$id = $this->input->post("id");
         $documento = $this->input->post("documento");
-        $nombre = $this->input->post("nombre");
         $perfil = $this->input->post("perfil");
         $telefono = $this->input->post("telefono");
         $direccion = $this->input->post("direccion");
         $correo = $this->input->post("correo");
+        $color = $this->input->post("color"); // Agregado el campo color
 
         $lunes = $this->input->post("lunes");
         $martes = $this->input->post("martes");
@@ -107,7 +109,8 @@ class Doctores extends Admin_Controller {
 			"telefono" => $telefono,
 			"direccion" => $direccion,
 			"correo" => $correo,
-			"id" => $id
+			"id" => $id,
+			"color" => $color // Agregado el campo color
 		];
 		$this->Doctores_model->actualizarDoctor($datos);
     }

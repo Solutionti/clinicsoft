@@ -1058,18 +1058,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // FUNCIÓN PARA PINTAR DOCTORES EN EL PANEL DERECHO
     // =========================================================
     function mostrarDoctoresDelDia(fecha_str) {
-        var fecha_clic = new Date(fecha_str + 'T00:00:00'); 
-        var dia_semana = fecha_clic.getDay(); 
+    var fecha_clic = new Date(fecha_str + 'T00:00:00'); 
+    var dia_semana = fecha_clic.getDay(); 
 
-        var opciones_fecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        var fecha_texto = fecha_clic.toLocaleDateString('es-ES', opciones_fecha);
-        $("#titulo_panel_dia").html('<i class="fas fa-calendar-day"></i> ' + fecha_texto);
+    var opciones_fecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var fecha_texto = fecha_clic.toLocaleDateString('es-ES', opciones_fecha);
+    $("#titulo_panel_dia").html('<i class="fas fa-calendar-day"></i> ' + fecha_texto);
 
-        var html_doctores = '<div class="list-group">';
-        var contador_doctores = 0;
-
-        arr_doctors.forEach(function(doc) {
-        // 1. Verificamos si es su día normal de trabajo
+    // =========================================================
+    // 1. PRIMERO: Identificar quién trabaja hoy
+    // =========================================================
+    var lista_ordenada = arr_doctors.map(function(doc) {
         var trabaja = false;
         if (dia_semana === 0 && doc.Horas_domingo && doc.Horas_domingo.trim() !== "0" && doc.Horas_domingo.trim() !== "") trabaja = true;
         if (dia_semana === 1 && doc.Horas_lunes && doc.Horas_lunes.trim() !== "0" && doc.Horas_lunes.trim() !== "") trabaja = true;
@@ -1078,38 +1077,46 @@ document.addEventListener('DOMContentLoaded', function() {
         if (dia_semana === 4 && doc.Horas_jueves && doc.Horas_jueves.trim() !== "0" && doc.Horas_jueves.trim() !== "") trabaja = true;
         if (dia_semana === 5 && doc.Horas_viernes && doc.Horas_viernes.trim() !== "0" && doc.Horas_viernes.trim() !== "") trabaja = true;
         if (dia_semana === 6 && doc.Horas_sabado && doc.Horas_sabado.trim() !== "0" && doc.Horas_sabado.trim() !== "") trabaja = true;
+        
+        doc.en_turno_ahora = trabaja; // Propiedad temporal para ordenar
+        return doc;
+    });
 
+    // =========================================================
+    // 2. SEGUNDO: ORDENAR (True va antes que False)
+    // =========================================================
+    lista_ordenada.sort(function(a, b) {
+        return (b.en_turno_ahora === a.en_turno_ahora) ? 0 : b.en_turno_ahora ? 1 : -1;
+    });
+
+    // =========================================================
+    // 3. TERCERO: DIBUJAR LA LISTA
+    // =========================================================
+    var html_doctores = '<div class="list-group">';
+    var contador_doctores = 0;
+
+    lista_ordenada.forEach(function(doc) {
         contador_doctores++;
+        
+        // Limpieza de nombres para la tarjeta
         var primerNombre = doc.nombre.split(' ')[0]; 
         var primerApellido = (doc.apellido && doc.apellido.trim() !== "") ? doc.apellido.trim().split(' ')[0] : "";
         
-        var colorFondo = "#6c757d"; 
-        if (doc.color && doc.color.trim() !== "") {
-            var colorDB = doc.color.trim();
-            if (!colorDB.startsWith("#") && /^[0-9A-Fa-f]{3,6}$/.test(colorDB)) {
-                colorFondo = "#" + colorDB;
-            } else {
-                colorFondo = colorDB;
-            }
-        }
+        // Color desde base de datos o gris por defecto
+        var colorFondo = (doc.color && doc.color.trim() !== "") ? doc.color.trim() : "#6c757d";
+        if (!colorFondo.startsWith("#")) colorFondo = "#" + colorFondo;
 
-        // 2. CREAMOS UNA ETIQUETA VISUAL
-        // 2. CREAMOS UNA ETIQUETA VISUAL MÁS PEQUEÑA Y ORDENADA
-        var etiqueta_estado = trabaja 
+        var etiqueta_estado = doc.en_turno_ahora 
             ? '<span class="badge bg-success" style="font-size: 0.65rem; padding: 0.4em 0.6em;">EN TURNO</span>' 
             : '<span class="badge bg-secondary" style="font-size: 0.65rem; padding: 0.4em 0.6em;">FUERA DE HORARIO</span>';
 
-        // 3. DIBUJAMOS LA TARJETA CON EL DISEÑO CORREGIDO
         html_doctores += `
             <a href="javascript:void(0)" onclick="call_reg_cita('${fecha_str}', '${doc.codigo_doctor}')" class="list-group-item list-group-item-action d-flex align-items-center p-3">
-                
                 <div class="rounded-circle text-white d-flex justify-content-center align-items-center flex-shrink-0" style="background-color: ${colorFondo}; width: 45px; height: 45px; min-width: 45px; font-size: 1.2rem; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
                     <i class="fas fa-user-md"></i>
                 </div>
-                
                 <div class="ms-3 flex-grow-1" style="min-width: 0;">
                     <h6 class="mb-1 fw-bold text-dark text-truncate" style="font-size: 0.95rem;">Dr. ${primerNombre} ${primerApellido}</h6>
-                    
                     <div class="d-flex justify-content-between align-items-center">
                         <small class="text-muted text-truncate me-2" style="font-size: 0.8rem;">
                             <i class="fas fa-stethoscope"></i> ${doc.perfil}
@@ -1121,22 +1128,19 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     });
 
-	
+    html_doctores += '</div>';
 
-        html_doctores += '</div>';
-
-        // 5. Inyectamos el resultado en la pantalla
-        if (contador_doctores > 0) {
-            $("#panel_doctores_dia").html(html_doctores);
-        } else {
-            $("#panel_doctores_dia").html(`
-                <div class="alert alert-light border text-center text-muted">
-                    <i class="fas fa-bed fs-2 mb-2"></i><br>
-                    Ningún doctor tiene turnos programados para este día.
-                </div>
-            `);
-        }
+    if (contador_doctores > 0) {
+        $("#panel_doctores_dia").html(html_doctores);
+    } else {
+        $("#panel_doctores_dia").html(`
+            <div class="alert alert-light border text-center text-muted">
+                <i class="fas fa-bed fs-2 mb-2"></i><br>
+                Ningún doctor registrado.
+            </div>
+        `);
     }
+}
 	// =========================================================
 // SISTEMA DE NOTIFICACIONES EN TIEMPO REAL (AJAX POLLING)
 // =========================================================

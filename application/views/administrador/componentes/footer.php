@@ -7,7 +7,7 @@
                   document.write(new Date().getFullYear())
                 </script>,
                 
-                <a href="#" class="font-weight-bold" target="_blank">gofuturedigitalsolution.com</a>
+                <a href="#" class="font-weight-bold" target="_blank">solutionTI.com</a>
               </div>
             </div>
             <div class="col-lg-6">

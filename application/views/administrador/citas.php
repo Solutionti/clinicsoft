@@ -686,6 +686,28 @@
             color: #8898aa;
             font-weight: 500;
         }
+
+        /* ===== RESALTADO ÚNICAMENTE DEL NÚMERO DEL DÍA ACTUAL ===== */
+        
+        /* Quitamos el fondo amarillo de todo el cuadro para que sea blanco/limpio */
+        .fc .fc-day-today {
+            background-color: transparent !important;
+        }
+
+        /* Resaltamos solo el número con un círculo vibrante */
+        .fc .fc-day-today .fc-daygrid-day-number {
+            background-color: #ffc107 !important; /* Amarillo fuerte */
+            color: #000 !important; /* Texto negro para contraste */
+            border-radius: 50%; /* Lo hace un círculo perfecto */
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 4px;
+            font-weight: 800 !important;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15); /* Sombra para que "salte" de la pantalla */
+        }
     </style>
 </head>
 
@@ -807,6 +829,12 @@
                             <button class="filter-btn" data-filter="Confirmado">Confirmadas</button>
                             <button class="filter-btn" data-filter="Tratado">Tratadas</button>
                             <button class="filter-btn" data-filter="Cancelado">Canceladas</button>
+                            <select id="filtro_doctor_lista" style="margin-left: auto; border-radius: 25px; border: 2px solid #e0e6ed; padding: 6px 15px; font-size: 13px; color: #525f7f; font-weight: 500; outline: none; background: white; cursor: pointer;">
+                                <option value="all">👨‍⚕️ Todos los especialistas</option>
+                                <?php if(isset($doctor)): foreach($doctor->result() as $doc): ?>
+                                    <option value="<?php echo htmlspecialchars($doc->nombre); ?>"><?php echo htmlspecialchars($doc->nombre); ?></option>
+                                <?php endforeach; endif; ?>
+                            </select>
                         </div>
 
                         <div class="appointments-list" id="appointments-list">
@@ -841,6 +869,7 @@
                             <div class="appointment-card" 
                                  data-status="<?php echo $citas->estado; ?>" 
                                  data-today="<?php echo $is_today; ?>"
+                                 data-doctor="<?php echo $citas->doctor; ?>"
                                  onclick="editarCita(<?php echo $citas->codigo_cita; ?>);">
                                 <div class="time-badge">
                                     <div class="time"><?php echo $hora_12; ?></div>
@@ -903,19 +932,21 @@
     <?php require_once("componentes/personalizar.php"); ?>
 
     <div class="modal fade" id="AgregarPaciente" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <form class="modal-content" id="AddCITA">
-                <div class="modal-header modern">
-                    <h5 class="modal-title"><i class="fas fa-calendar-plus"></i> Nueva Cita</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="color: white !important; opacity: 0.8 !important; text-shadow: none; background: transparent; border: none;">
-                        <i class="fas fa-times" style="font-size: 1.2rem;"></i>
-                    </button>
-                </div>
-                <div class="modal-body modern">
-                    <div class="messageError"></div>
-                    
-                    <div class="form-section">
-                        <div class="form-section-title">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <form class="modal-content" id="AddCITA">
+            <div class="modal-header modern" style="padding: 15px 30px;">
+                <h5 class="modal-title"><i class="fas fa-calendar-plus"></i> Nueva Cita</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="color: white !important; opacity: 0.8 !important; text-shadow: none; background: transparent; border: none;">
+                    <i class="fas fa-times" style="font-size: 1.2rem;"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body modern" style="padding: 20px 30px;">
+                <div class="messageError"></div>
+                
+                <div class="row">
+                    <div class="col-lg-6" style="border-right: 1px solid #f0f0f0; padding-right: 25px;">
+                        <div class="form-section-title" style="margin-top: 0; margin-bottom: 15px;">
                             <i class="fas fa-user-md"></i> Información del Médico y Horario
                         </div>
                         <div class="row">
@@ -924,8 +955,13 @@
                                     <label>Médico</label>
                                     <select class="form-control form-control-modern" id="medico" required>
                                         <option value="">Seleccione un doctor</option>
-                                        <?php foreach($doctor->result() as $doctores) { ?>
-                                        <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre." (".$doctores->perfil.")"; ?></option>
+                                        <?php foreach($doctor->result() as $doctores) { 
+                                            $nombre_parts = explode(' ', $doctores->nombre);
+                                            $primer_nombre = $nombre_parts[0];
+                                            $apellido_parts = explode(' ', $doctores->apellido);
+                                            $primer_apellido = $apellido_parts[0];
+                                        ?>
+                                        <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $primer_nombre." ".$primer_apellido." (".$doctores->perfil.")"; ?></option>
                                         <?php } $doctor->data_seek(0); ?>
                                     </select>
                                 </div>
@@ -945,19 +981,19 @@
                             </div>
                             <div class="col-md-12">
                                 <label>Horarios Disponibles</label>
-                                <div class="hours-container" id="Cont_Horas">
-                                    <span style="color: #8898aa; font-size: 13px;">Seleccione médico y fecha para ver horarios</span>
+                                <div class="hours-container" id="Cont_Horas" style="max-height: 180px; overflow-y: auto; align-content: flex-start; border: 1px solid #e9ecef; background: #f8f9fe; padding: 10px; border-radius: 10px;">
+                                    <span style="color: #8898aa; font-size: 13px; width: 100%; text-align: center;">Seleccione médico y fecha para ver horarios</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-section">
-                        <div class="form-section-title">
+                    <div class="col-lg-6" style="padding-left: 25px;">
+                        <div class="form-section-title" style="margin-top: 0; margin-bottom: 15px;">
                             <i class="fas fa-user"></i> Información del Paciente
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="form-group">
                                     <label>DNI Paciente</label>
                                     <div class="input-group">
@@ -970,27 +1006,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-7">
                                 <div class="form-group">
                                     <label>Apellidos y Nombres</label>
                                     <input type="text" class="form-control form-control-modern" id="nombre" required>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-5">
                                 <div class="form-group">
                                     <label>Celular</label>
                                     <input type="text" class="form-control form-control-modern" id="telefono">
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="form-section">
-                        <div class="form-section-title">
-                            <i class="fas fa-info-circle"></i> Detalles de la Cita
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                 <div class="form-group">
                                     <label>Estado</label>
                                     <select class="form-control form-control-modern" id="estado" required>
@@ -1001,28 +1029,30 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Observaciones</label>
-                                    <input type="text" class="form-control form-control-modern" id="observaciones" placeholder="Notas adicionales...">
+                            <div class="col-md-12">
+                                <div class="form-group mb-0">
+                                    <label>Observaciones / Servicio</label>
+                                    <input type="text" class="form-control form-control-modern" id="observaciones" placeholder="Ej: ECO. GENETICA...">
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div style="display:none;">
-                        <select id="hora" required><option value="">Seleccionar</option></select>
-                        <select id="statee"><option value="Registrar">Registrar</option><option value="Actualizar">Actualizar</option></select>
-                        <input type="number" id="idee">
-                    </div>
+                <div style="display:none;">
+                    <select id="hora" required><option value="">Seleccionar</option></select>
+                    <select id="statee"><option value="Registrar">Registrar</option><option value="Actualizar">Actualizar</option></select>
+                    <input type="number" id="idee">
                 </div>
-                <div class="modal-footer modern">
-                    <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn-save"><i class="fas fa-save"></i> Guardar Cita</button>
-                </div>
-            </form>
-        </div>
+            </div>
+            
+            <div class="modal-footer modern" style="padding: 15px 30px;">
+                <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn-save"><i class="fas fa-save"></i> Guardar Cita</button>
+            </div>
+        </form>
     </div>
+</div>
 
     <div class="modal fade" id="modaleditarcita" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -1065,8 +1095,13 @@
                                     <label>Médico</label>
                                     <select class="form-control form-control-modern" id="medico2">
                                         <option value="">Seleccione un doctor</option>
-                                        <?php foreach($doctor->result() as $doctores) { ?>
-                                        <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre." (".$doctores->perfil.")"; ?></option>
+                                        <?php foreach($doctor->result() as $doctores) { 
+                                            $nombre_parts = explode(' ', $doctores->nombre);
+                                            $primer_nombre = $nombre_parts[0];
+                                            $apellido_parts = explode(' ', $doctores->apellido);
+                                            $primer_apellido = $apellido_parts[0];
+                                        ?>
+                                        <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $primer_nombre." ".$primer_apellido." (".$doctores->perfil.")"; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -1165,55 +1200,68 @@
                 var $btnText = $(this).find('span');
                 
                 if ($('#vista_calendario').is(':visible')) {
-                    // Ocultar calendario, mostrar lista
                     $('#vista_calendario').hide();
                     $('#vista_lista').fadeIn();
-                    
-                    // Cambiar diseño del botón
                     $btnIcon.removeClass('fa-list').addClass('fa-calendar-alt');
                     $btnText.text(' Ver Calendario');
                 } else {
-                    // Ocultar lista, mostrar calendario
                     $('#vista_lista').hide();
                     $('#vista_calendario').fadeIn();
-                    
-                    // Disparar evento para que el calendario recalcule su tamaño al volver a verse
                     window.dispatchEvent(new Event('resize')); 
-                    
-                    // Cambiar diseño del botón
                     $btnIcon.removeClass('fa-calendar-alt').addClass('fa-list');
                     $btnText.text(' Ver como Lista');
                 }
             });
 
-            // ====== LÓGICA DE FILTROS PARA LA LISTA ======
-            $('.filter-btn').click(function() {
-                $('.filter-btn').removeClass('active');
-                $(this).addClass('active');
-                
-                var filter = $(this).data('filter');
-                
+            // ====== LÓGICA DE FILTROS AVANZADA (ESTADO + DOCTOR) ======
+            function aplicarFiltros() {
+                var activeStatus = $('.filter-btn.active').data('filter');
+                var activeDoctor = $('#filtro_doctor_lista').val();
+
                 $('.appointment-card').each(function() {
                     var status = $(this).data('status');
                     var isToday = $(this).data('today');
-                    
-                    if (filter === 'all') {
-                        $(this).fadeIn(300);
-                    } else if (filter === 'today') {
-                        if (isToday === true || isToday === 'true') {
-                            $(this).fadeIn(300);
-                        } else {
-                            $(this).fadeOut(200);
-                        }
-                    } else if (status === filter) {
+                    var doctor = $(this).data('doctor');
+
+                    // 1. Validar filtro de botones (Estado/Hoy)
+                    var pasaEstado = false;
+                    if (activeStatus === 'all') {
+                        pasaEstado = true;
+                    } else if (activeStatus === 'today') {
+                        pasaEstado = (isToday === true || isToday === 'true');
+                    } else {
+                        pasaEstado = (status === activeStatus);
+                    }
+
+                    // 2. Validar filtro de select (Doctor)
+                    var pasaDoctor = false;
+                    if (activeDoctor === 'all') {
+                        pasaDoctor = true;
+                    } else {
+                        pasaDoctor = (doctor === activeDoctor);
+                    }
+
+                    // 3. Mostrar solo si cumple AMBAS condiciones
+                    if (pasaEstado && pasaDoctor) {
                         $(this).fadeIn(300);
                     } else {
                         $(this).fadeOut(200);
                     }
                 });
+            }
+
+            // Cuando hacen clic en un botón de estado
+            $('.filter-btn').click(function() {
+                $('.filter-btn').removeClass('active');
+                $(this).addClass('active');
+                aplicarFiltros();
+            });
+
+            // Cuando cambian el doctor en el desplegable
+            $('#filtro_doctor_lista').change(function() {
+                aplicarFiltros();
             });
         });
-
     </script>
 </body>
 </html>
