@@ -25,7 +25,8 @@
             telefono  = $("#telefono").val(),
             direccion = $("#direccion").val(),
             correo = $("#correo").val(),
-            password = $("#password").val();
+            password = $("#password").val(),
+            color = $("#color").val(); // Agregado el campo color
           //VALIDACION 
             if (cpe === "") {
               $("#cpe").addClass("is-invalid");
@@ -53,7 +54,8 @@
                     telefono: telefono,
                     direccion: direccion,
                     correo: correo,
-                    password: password
+                    password: password,
+                    color: color
                  },
                 success: function () {
                   $("body").overhang({
@@ -82,6 +84,7 @@
             data = JSON.parse(data);
             console.log(data);
             $("#Doctorparametrizar").modal("show");
+            $("#color1").val(data.color ? data.color : "#5e72e4");
              $("#id_doctor1").val(data.codigo_doctor );
              $("#cpe1").val(data.cpe);
              $("#nombre1").val(data.nombre + ' ' + data.apellido);
@@ -319,6 +322,7 @@ $("#actualizardoctor").on("click", function () {
         direccion = $("#direccion1").val();
         correo = $("#correo1").val();
         id = $("#id_doctor1").val();
+        color = $("#color1").val(); // Agregado el campo color
         $("#Horas_lunes").val(($("#Horas_lunes").val()).replace(" ", ""));    Horas_lunes = $("#Horas_lunes").val()
         $("#Horas_martes").val(($("#Horas_martes").val()).replace(" ", ""));     Horas_martes = $("#Horas_martes").val()
         $("#Horas_miercoles").val(($("#Horas_miercoles").val()).replace(" ", ""));    Horas_miercoles = $("#Horas_miercoles").val()
@@ -422,7 +426,8 @@ $("#actualizardoctor").on("click", function () {
             telefono: telefono,
             direccion: direccion,
             correo: correo,
-            id: id
+            id: id,
+            color: color
           },
         
           success: function (){

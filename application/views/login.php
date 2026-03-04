@@ -139,7 +139,7 @@
         <p class="mb-0 text-secondary">
           Todos los derechos © <script>
             document.write(new Date().getFullYear())
-          </script> gofuturedigitalsolution.com
+          </script> solutionTI.com
         </p>
       </div>
     </div>
