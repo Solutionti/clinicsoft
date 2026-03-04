@@ -77,9 +77,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'clinicsoft',
+	'username' => 'CAQI_misaludcix',
+	'password' => 'Q(Qs%%TJ5RB5G:ly',
+	'database' => 'CAQI_misaludcix',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -99,10 +99,10 @@ $db['default'] = array(
 // base de datos de farmacia
 $db['farmacia'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'clinicsoft',
+	'hostname' => '127.0.0.1',
+	'username' => 'CAQI_farmaciacmscix',
+	'password' => 'p8;ONuquwA=ml-ZD',
+	'database' => 'CAQI_farmaciacmscix',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
