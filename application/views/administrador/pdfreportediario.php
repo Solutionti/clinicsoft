@@ -20,7 +20,7 @@ $pdf->Ln(5);
 
 $pdf->Cell(72, 6, '', '', 0, 'L', false);
 
-$pdf->Cell(1, 6, 'Mi salud', '', 0, 'L', false);
+$pdf->Cell(1, 6, 'Mujer Plena', '', 0, 'L', false);
 
 $pdf->Ln(5);
 

@@ -83,7 +83,7 @@ class Usuarios_model extends CI_model {
             "email" => $data["email"],
             "nombre" => $data["nombre"],
             "apellido" => $data["apellido"],
-            "empresa" => "Salud madre y mujer",
+            "empresa" => "Mujer Plena",
             "telefono" => $data["telefono"],
             "rol_usuario" => $data["tp_usuario"],
             "estado" => "Activo",

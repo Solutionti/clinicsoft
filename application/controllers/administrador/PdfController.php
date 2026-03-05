@@ -204,10 +204,10 @@ class PdfController extends CI_Controller {
     $pdf->SetTextColor(128,128,128);
     
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios', 0, 0, 'L');
+    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Grau # 671 - Chiclayo', 0, 0, 'L');
     
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 987833720', 0, 0, 'R');
     
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
@@ -402,10 +402,10 @@ public function getEcografiaGeneticaPdf($dni) {
     $pdf->SetTextColor(128,128,128);
     
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
+    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Grau # 671 - Chiclayo'), 0, 0, 'L');
     
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 987833720', 0, 0, 'R');
     
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
@@ -651,9 +651,9 @@ public function getEcografiaMorfologicaPdf($dni) {
     $pdf->SetFont('Arial', '', 9);
     $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
+    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Grau # 671 - Chiclayo'), 0, 0, 'L');
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 987833720', 0, 0, 'R');
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
@@ -903,9 +903,9 @@ public function getEcografiaTrasvaginalPdf($dni) {
     $pdf->SetFont('Arial', '', 9);
     $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, utf8_decode('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
+    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Grau # 671 - Chiclayo'), 0, 0, 'L');
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 987833720', 0, 0, 'R');
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
@@ -1166,9 +1166,9 @@ public function getEcografiaPelvicaPdf($dni) {
     $pdf->SetFont('Arial', '', 9);
     $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, utf8_decode('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
+    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Grau # 671 - Chiclayo'), 0, 0, 'L');
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 987833720', 0, 0, 'R');
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
@@ -1376,8 +1376,8 @@ public function getEcografiaObstetricaPdf($dni) {
     // PIE DE PÁGINA
     $pdf->SetFillColor(0,24,0); $pdf->Rect(10, 290, 190, 2, 'F');
     $pdf->SetFont('Arial', '', 9); $pdf->SetTextColor(128,128,128);
-    $pdf->SetXY(60, 283); $pdf->Cell(100, 5, utf8_decode('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
-    $pdf->SetXY(140, 283); $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->SetXY(60, 283); $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Grau # 671 - Chiclayo'), 0, 0, 'L');
+    $pdf->SetXY(140, 283); $pdf->Cell(30, 5, 'CELULAR: 987833720', 0, 0, 'R');
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
@@ -1624,9 +1624,9 @@ public function getEcografiaAbdominalPdf($dni) {
     $pdf->SetFont('Arial', '', 9);
     $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, utf8_decode('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
+    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Grau # 671 - Chiclayo'), 0, 0, 'L');
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 987833720', 0, 0, 'R');
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
@@ -1815,9 +1815,9 @@ public function getEcografiaProstaticaPdf($dni) {
     $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
     // Textos directos (si tu editor guarda en UTF8, los acentos se verán bien con PDF_UTF8)
-    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios', 0, 0, 'L');
+    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Grau # 671 - Chiclayo', 0, 0, 'L');
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 987833720', 0, 0, 'R');
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
@@ -2072,9 +2072,9 @@ public function getEcografiaRenalPdf($dni) {
     $pdf->SetFont('Arial', '', 9);
     $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios', 0, 0, 'L');
+    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Grau # 671 - Chiclayo', 0, 0, 'L');
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 987833720', 0, 0, 'R');
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
@@ -2291,9 +2291,9 @@ public function getEcografiaTiroidesPdf($dni) {
     $pdf->SetFont('Arial', '', 9);
     $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios', 0, 0, 'L');
+    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Grau # 671 - Chiclayo', 0, 0, 'L');
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 987833720', 0, 0, 'R');
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
@@ -2423,9 +2423,9 @@ public function getEcografiaHisterosonografiaPdf($dni) {
     $pdf->SetFont('Arial', '', 9);
     $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios', 0, 0, 'L');
+    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Grau # 671 - Chiclayo', 0, 0, 'L');
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 987833720', 0, 0, 'R');
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
@@ -2628,9 +2628,9 @@ public function getEcografiaHisterosonografiaPdf($dni) {
     $pdf->SetFont('Arial', '', 9);
     $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, utf8_decode('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
+    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Grau # 671 - Chiclayo'), 0, 0, 'L');
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 987833720', 0, 0, 'R');
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
@@ -2932,10 +2932,10 @@ public function getEcografiaHisterosonografiaPdf($dni) {
     $pdf->SetFont('Arial', '', 9);
     $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, utf8_decode('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
+    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Grau # 671 - Chiclayo'), 0, 0, 'L');
 
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 987833720', 0, 0, 'R');
     
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
@@ -3140,8 +3140,8 @@ public function getEcografiaDopplerPdf($dni) {
     // Pie
     $pdf->SetFillColor(0,24,0); $pdf->Rect(10, 290, 190, 2, 'F');
     $pdf->SetFont('Arial', '', 9); $pdf->SetTextColor(128,128,128);
-    $pdf->SetXY(60, 283); $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
-    $pdf->SetXY(140, 283); $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->SetXY(60, 283); $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Grau # 671 - Chiclayo'), 0, 0, 'L');
+    $pdf->SetXY(140, 283); $pdf->Cell(30, 5, 'CELULAR: 987833720', 0, 0, 'R');
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4); $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4); $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
 
     $pdf->Output('I', 'ecografia_doppler.pdf');

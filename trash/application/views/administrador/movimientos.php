@@ -71,7 +71,7 @@
             <div class="form-group">
               <label>Sección</label>
               <select id="seccion_reporte" class="form-control-sm form-control">
-                <option value="">Salud madre y mujer</option>
+                <option value="">Mujer Plena</option>
               </select>
             </div>
           </div>
@@ -161,7 +161,7 @@
                 <div class="form-group">
                     <label>Sección</label>
                     <select id="seccion_e" class="form-control form-control-sm">
-                      <option value="Salud madre y mujer">Sede principal</option>
+                      <option value="Mujer Plena">Sede principal</option>
                     </select>
                 </div>
             </div>
@@ -235,7 +235,7 @@
                 <div class="form-group">
                     <label>Sección</label>
                     <select id="seccion_s" class="form-control form-control-sm">
-                      <option value="Salud madre y mujer">Sede principal</option>
+                      <option value="Mujer Plena">Sede principal</option>
                     </select>
                 </div>
             </div>

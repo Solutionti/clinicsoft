@@ -133,28 +133,19 @@
                                 <button class="btn btn-primary btn-xs mt-3" type="button" id="dropdownNuevaConsulta" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
                                   Nueva Consulta <i class="fas fa-chevron-down ms-1"></i>
                                 </button>
-                                <ul class="dropdown-menu border-0 shadow" aria-labelledby="dropdownNuevaConsulta" style="z-index: 1000;">
+                               <ul class="dropdown-menu border-0 shadow" aria-labelledby="dropdownNuevaConsulta" style="z-index: 1000;">
                                   <style>.dropdown-menu::before, .dropdown-menu::after { display: none !important; content: none !important; }</style>
                                   <li><a class="dropdown-item" href="#" onclick="abrirHistoriaClinica('1')">Consulta General</a></li>
                                   <li><a class="dropdown-item" href="#" onclick="abrirHistoriaClinica('2')">Consulta Ginecología</a></li>
                                 </ul>
                               </div>
-                              <!-- <a
-                                class="btn btn-danger btn-xs mt-3"
-                                data-bs-toggle="modal"
-                                data-bs-target="#descargamodalhc"
-                              >
-                                Ver HC
-                              </a> -->
                             </li>
                           </ul>
                         </div>
                       </div>
                     </div>
-                </div>
-            </div>
-            <!--  -->
-            <div class="card card-dashed h-900" style="position: relative; z-index: 1;">
+                  </div>
+                </div> <div class="card card-dashed h-900 mt-4" style="position: relative; z-index: 1;">
               <div class="card-header bg-default"><h6 class="text-white text-uppercase">Ultimos signos vitales</h6></div>
               <div class="card-body px-2">
                 <div class="row gx-0">
@@ -237,22 +228,15 @@
                           
                         <?php } ?>
                       </ul>
-                      <button
-                        class="btn btn-primary btn-xs"
-                        data-bs-toggle="modal"
-                        data-bs-target="#archivos"
-                        
-                      >
+                      <button class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#archivos">
                         Subir archivo
                       </button>
                     </div>
                   </div>
               </div>
-            </div>
-             </div>
-             <div class="col-md-5">
-               <div class="card card-dashed h-200">
-                 <div class="card-header bg-default"><h6 class="text-white text-uppercase">seguimiento de Procesos clinicos anteriores y actual</h6></div> 
+            </div> </div> <div class="col-md-5">
+            <div class="card card-dashed h-200">
+              <div class="card-header bg-default"><h6 class="text-white text-uppercase">seguimiento de Procesos clinicos anteriores y actual</h6></div>
                    <div class="card-body">
                      <div class="accordion accordion-btn-icon-start" id="accordionBtnIconStartExample">
                        <div class="accordion-item">
@@ -366,7 +350,6 @@
                   </table>
                 </div>
               </div>
-              </div>
             </div>
           </div>
         </div>
@@ -418,442 +401,340 @@
           </div>
         </div>
       </div>
-      <div class="accordion-item">
-        <div class="accordion-header" id="btn-icon-start-headingThree">
-          <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#examenesauxiliares" aria-expanded="false" aria-controls="examenesauxiliares">
-              <span class="ps-1 text-dark text-bold"><i class="fas fa-briefcase-medical"></i> ORDENES</span>
-          </a>
-        </div>
-        <div id="examenesauxiliares" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingThree" data-bs-parent="#accordionBtnIconStartExample">
-          <div class="accordion-body">
+     <div class="accordion-item">
+    <div class="accordion-header" id="btn-icon-start-headingThree">
+        <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#examenesauxiliares" aria-expanded="false" aria-controls="examenesauxiliares">
+            <span class="ps-1 text-dark text-bold"><i class="fas fa-briefcase-medical"></i> ORDENES</span>
+        </a>
+    </div>
+    <div id="examenesauxiliares" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingThree" data-bs-parent="#accordionBtnIconStartExample">
+        <div class="accordion-body">
             <div class="row">
-              <div class="col-md-12">
-                <table class="table table-striped table-hover">
-                  <thead>
-                    <tr class="bg-dark text-white">
-                      <th></th>
-                      <th class="text-uppercase text-xs">Nombre Paciente</th>
-                      <th class="text-uppercase text-xs">Tipo ordenamiento</th>
-                      <th class="text-uppercase text-xs">Fecha</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php foreach ($ordenpatologica->result() as $ordenpato) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                          <a 
-                            href="<?php echo base_url(); ?>administracion/pdfpatologiaorden/<?php echo $ordenpato->triage ?>/<?php echo $ordenpato->documento ?>"
-                            class="icon icon-shape icon-sm bg-gradient-danger shadow text-center mx-3"
-                            target="_blank"
-                            title="Generar tiquet"
-                          >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                          </a>
-                        </div>
-                      </td>
-                      <td><?php echo $ordenpato->nombre; ?></td>
-                      <td>Orden Patologica</td>
-                      <td><?php echo $ordenpato->fecha; ?></td>
-                    </tr>
-                    <?php } ?>
-                    <!--  -->
-                    <?php foreach ($ordenLaboratorio->result() as $ordenlabo) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                          <a 
-                            class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
-                            target="_blank"
-                            title="Generar tiquet"
-                            href="<?php echo base_url(); ?>administracion/pdflaboratoriorden/<?php echo $ordenlabo->cod_triage ?>/<?php echo $ordenlabo->documento_paciente ?>/<?php echo $ordenlabo->codigo_laboratorio ?>"
-                          >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                          </a>
-                        </div>
-                      </td>
-                      <td><?php echo $ordenlabo->nombre; ?></td>
-                      <td>Orden Laboratorio</td>
-                      <td><?php echo $ordenlabo->fecha; ?></td>
-                    </tr>
-                    <?php } ?>
-                    <!-- Órdenes de Ecografía -->
-                    <?php if (isset($ordenEcografia) && $ordenEcografia->num_rows() > 0) { ?>
-                      <?php foreach ($ordenEcografia->result() as $ordenecho) { ?>
-                        <tr>
-                          <td>
-                            <div class="row">
-                              <a 
-                                class="icon icon-shape icon-sm bg-gradient-success shadow text-center mx-3"
-                                target="_blank"
-                                title="Generar PDF Ecografía"
-                                href="<?php echo base_url(); ?>administracion/pdfecografiaorden/<?php echo $ordenecho->cod_triage ?>/<?php echo $ordenecho->documento_paciente ?>/<?php echo $ordenecho->codigo_laboratorio ?>"
-                              >
-                                <i class="fas fa-file-pdf text-white opacity-10"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td><?php echo $ordenecho->nombre; ?></td>
-                          <td>Orden Ecografía</td>
-                          <td><?php echo $ordenecho->fecha; ?></td>
-                        </tr>
-                      <?php } ?>
-                    <?php } ?>
+                <div class="col-md-12">
                     
-                     <!-- Órdenes de Tomografía -->
-                    <?php if (isset($ordenTomografia) && $ordenTomografia->num_rows() > 0) { ?>
-                      <?php foreach ($ordenTomografia->result() as $ordentomo) { ?>
-                        <tr>
-                          <td>
-                            <div class="row">
-                              <a 
-                                class="icon icon-shape icon-sm bg-gradient-info shadow text-center mx-3"
-                                target="_blank"
-                                title="Generar PDF Tomografía"
-                                href="<?php echo base_url(); ?>administracion/pdftomografiaorden/<?php echo $ordentomo->cod_triage ?>/<?php echo $ordentomo->documento_paciente ?>/<?php echo $ordentomo->codigo_laboratorio ?>"
-                              >
-                                <i class="fas fa-file-pdf text-white opacity-10"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td><?php echo $ordentomo->nombre; ?></td>
-                          <td>Orden Tomografía</td>
-                          <td><?php echo $ordentomo->fecha; ?></td>
-                        </tr>
-                      <?php } ?>
-                    <?php } ?>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-sm text-nowrap align-items-center mb-0">
+                            <thead>
+                                <tr class="bg-dark text-white">
+                                    <th></th>
+                                    <th class="text-uppercase text-xs">Nombre Paciente</th>
+                                    <th class="text-uppercase text-xs">Tipo ordenamiento</th>
+                                    <th class="text-uppercase text-xs">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody> <?php foreach ($ordenpatologica->result() as $ordenpato) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a href="<?php echo base_url(); ?>administracion/pdfpatologiaorden/<?php echo $ordenpato->triage ?>/<?php echo $ordenpato->documento ?>" class="icon icon-shape icon-sm bg-gradient-danger shadow text-center mx-3" target="_blank" title="Generar tiquet">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td><?php echo $ordenpato->nombre; ?></td>
+                                    <td>Orden Patologica</td>
+                                    <td><?php echo $ordenpato->fecha; ?></td>
+                                </tr>
+                                <?php } ?>
 
-                     <!-- Órdenes de Resonancia -->
-                    <?php if (isset($ordenResonancia) && $ordenResonancia->num_rows() > 0) { ?>
-                      <?php foreach ($ordenResonancia->result() as $ordenreso) { ?>
-                        <tr>
-                          <td>
-                            <div class="row">
-                              <a 
-                                class="icon icon-shape icon-sm bg-gradient-warning shadow text-center mx-3"
-                                target="_blank"
-                                title="Generar PDF Resonancia"
-                                href="<?php echo base_url(); ?>administracion/pdfresonanciaorden/<?php echo $ordenreso->cod_triage ?>/<?php echo $ordenreso->documento_paciente ?>/<?php echo $ordenreso->codigo_laboratorio ?>"
-                              >
-                                <i class="fas fa-file-pdf text-white opacity-10"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td><?php echo $ordenreso->nombre; ?></td>
-                          <td>Orden Resonancia</td>
-                          <td><?php echo $ordenreso->fecha; ?></td>
-                        </tr>
-                      <?php } ?>
-                    <?php } ?>
-                  </tbody>
-                </table>
-              </div>
+                                <?php foreach ($ordenLaboratorio->result() as $ordenlabo) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3" target="_blank" title="Generar tiquet" href="<?php echo base_url(); ?>administracion/pdflaboratoriorden/<?php echo $ordenlabo->cod_triage ?>/<?php echo $ordenlabo->documento_paciente ?>/<?php echo $ordenlabo->codigo_laboratorio ?>">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td><?php echo $ordenlabo->nombre; ?></td>
+                                    <td>Orden Laboratorio</td>
+                                    <td><?php echo $ordenlabo->fecha; ?></td>
+                                </tr>
+                                <?php } ?>
+
+                                <?php if (isset($ordenEcografia) && $ordenEcografia->num_rows() > 0) { ?>
+                                    <?php foreach ($ordenEcografia->result() as $ordenecho) { ?>
+                                    <tr>
+                                        <td>
+                                            <div class="row">
+                                                <a class="icon icon-shape icon-sm bg-gradient-success shadow text-center mx-3" target="_blank" title="Generar PDF Ecografía" href="<?php echo base_url(); ?>administracion/pdfecografiaorden/<?php echo $ordenecho->cod_triage ?>/<?php echo $ordenecho->documento_paciente ?>/<?php echo $ordenecho->codigo_laboratorio ?>">
+                                                    <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td><?php echo $ordenecho->nombre; ?></td>
+                                        <td>Orden Ecografía</td>
+                                        <td><?php echo $ordenecho->fecha; ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                <?php } ?>
+                                
+                                <?php if (isset($ordenTomografia) && $ordenTomografia->num_rows() > 0) { ?>
+                                    <?php foreach ($ordenTomografia->result() as $ordentomo) { ?>
+                                    <tr>
+                                        <td>
+                                            <div class="row">
+                                                <a class="icon icon-shape icon-sm bg-gradient-info shadow text-center mx-3" target="_blank" title="Generar PDF Tomografía" href="<?php echo base_url(); ?>administracion/pdftomografiaorden/<?php echo $ordentomo->cod_triage ?>/<?php echo $ordentomo->documento_paciente ?>/<?php echo $ordentomo->codigo_laboratorio ?>">
+                                                    <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td><?php echo $ordentomo->nombre; ?></td>
+                                        <td>Orden Tomografía</td>
+                                        <td><?php echo $ordentomo->fecha; ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                <?php } ?>
+
+                                <?php if (isset($ordenResonancia) && $ordenResonancia->num_rows() > 0) { ?>
+                                    <?php foreach ($ordenResonancia->result() as $ordenreso) { ?>
+                                    <tr>
+                                        <td>
+                                            <div class="row">
+                                                <a class="icon icon-shape icon-sm bg-gradient-warning shadow text-center mx-3" target="_blank" title="Generar PDF Resonancia" href="<?php echo base_url(); ?>administracion/pdfresonanciaorden/<?php echo $ordenreso->cod_triage ?>/<?php echo $ordenreso->documento_paciente ?>/<?php echo $ordenreso->codigo_laboratorio ?>">
+                                                    <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td><?php echo $ordenreso->nombre; ?></td>
+                                        <td>Orden Resonancia</td>
+                                        <td><?php echo $ordenreso->fecha; ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                <?php } ?>
+
+                            </tbody> </table>
+                    </div> </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
       <!--  -->
       <div class="accordion-item">
-        <div class="accordion-header" id="btn-icon-start-headingThree">
-          <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#ecografias" aria-expanded="false" aria-controls="ecografias">
-              <span class="ps-1 text-dark text-bold"><i class="fas fa-x-ray"></i> ECOGRAFÍAS</span>
-          </a>
-        </div>
-        <div id="ecografias" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingThree" data-bs-parent="#accordionBtnIconStartExample">
-          <div class="accordion-body">
+    <div class="accordion-header" id="btn-icon-start-headingThree">
+        <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#ecografias" aria-expanded="false" aria-controls="ecografias">
+            <span class="ps-1 text-dark text-bold"><i class="fas fa-x-ray"></i> ECOGRAFÍAS</span>
+        </a>
+    </div>
+    <div id="ecografias" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingThree" data-bs-parent="#accordionBtnIconStartExample">
+        <div class="accordion-body">
             <div class="row">
-              <div class="col-md-12">
-                <table class="table table-striped table-hover">
-                  <thead  class="bg-dark text-white">
-                    <th>
-                      
-                    </th>
-                    <th class="text-uppercase text-xs">Tipo de ecografia</th>
-                    <th class="text-uppercase text-xs">Doctor</th>
-                    <th class="text-uppercase text-xs">fecha y hora</th>
-                  </thead>
-                  <tbody>
-                    <?php foreach ($ecoAbdominales->result() as $acoabdominal) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                        <a 
-                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
-                          target="_blank"
-                          title="Generar tiquet"
-                          href="<?php echo base_url(); ?>administracion/pdfecografiaabdominal/<?php echo $acoabdominal->documento_paciente; ?>"
-                        >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                        </a>
-                        </div>
-                      </td>
-                      <td>Ecografia Abdominal</td>
-                      <td><?php echo $acoabdominal->codigo_doctor; ?></td>
-                      <td><?php echo $acoabdominal->fecha; ?></td>
-                    </tr>
-                    <?php } ?>
-                      
-                    <?php foreach ($ecoMamas->result() as $ecoMama) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                        <a 
-                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
-                          target="_blank"
-                          title="Generar tiquet"
-                          href="<?php echo base_url(); ?>administracion/pdfecografiamama/<?php echo $ecoMama->documento_paciente; ?>"
-                        >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                        </a>
-                        </div>
-                      </td>
-                      <td>Ecografia Mama</td>
-                      <td><?php echo $ecoMama->codigo_doctor ?></td>
-                      <td><?php echo $ecoMama->fecha ?></td>
-                    </tr>
-                    <?php } ?>
+                <div class="col-md-12">
+                    
+                    <div class="table-responsive">
+                        
+                        <table class="table table-striped table-hover table-sm text-nowrap align-items-center mb-0">
+                            
+                            <thead style="background-color: #2c3e50 !important; color: white;">
+                                <tr class="bg-dark text-white">
+                                    <th></th>
+                                    <th class="text-uppercase text-xs">Tipo de ecografía</th>
+                                    <th class="text-uppercase text-xs">Doctor</th>
+                                    <th class="text-uppercase text-xs">Fecha y hora</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <?php foreach ($ecoAbdominales->result() as $acoabdominal) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3" target="_blank" title="Generar tiquet" href="<?php echo base_url(); ?>administracion/pdfecografiaabdominal/<?php echo $acoabdominal->documento_paciente; ?>">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>Ecografia Abdominal</td>
+                                    <td><?php echo $acoabdominal->codigo_doctor; ?></td>
+                                    <td><?php echo $acoabdominal->fecha; ?></td>
+                                </tr>
+                                <?php } ?>
+                                  
+                                <?php foreach ($ecoMamas->result() as $ecoMama) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3" target="_blank" title="Generar tiquet" href="<?php echo base_url(); ?>administracion/pdfecografiamama/<?php echo $ecoMama->documento_paciente; ?>">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>Ecografia Mama</td>
+                                    <td><?php echo $ecoMama->codigo_doctor ?></td>
+                                    <td><?php echo $ecoMama->fecha ?></td>
+                                </tr>
+                                <?php } ?>
 
-                     <?php foreach ($ecoGeneticas->result() as $ecoGenetica) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                        <a 
-                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
-                          target="_blank"
-                          title="Generar tiquet"
-                          href="<?php echo base_url(); ?>administracion/pdfecografiagenetica/<?php echo $ecoGenetica->documento_paciente; ?>"
-                        >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                        </a>
-                        </div>
-                      </td>
-                      <td>Ecografia Genetica</td>
-                      <td><?php echo $ecoGenetica->codigo_doctor ?></td>
-                      <td><?php echo $ecoGenetica->fecha ?></td>
-                    </tr>
-                    <?php } ?>
+                                <?php foreach ($ecoGeneticas->result() as $ecoGenetica) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3" target="_blank" title="Generar tiquet" href="<?php echo base_url(); ?>administracion/pdfecografiagenetica/<?php echo $ecoGenetica->documento_paciente; ?>">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>Ecografia Genetica</td>
+                                    <td><?php echo $ecoGenetica->codigo_doctor ?></td>
+                                    <td><?php echo $ecoGenetica->fecha ?></td>
+                                </tr>
+                                <?php } ?>
 
+                                <?php foreach ($ecoMorfologicas->result() as $ecoMorfologica) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3" target="_blank" title="Generar tiquet" href="<?php echo base_url(); ?>administracion/pdfecografiamorfologica/<?php echo $ecoMorfologica->documento_paciente; ?>">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>Ecografia Morfologica</td>
+                                    <td><?php echo $ecoMorfologica->codigo_doctor ?></td>
+                                    <td><?php echo $ecoMorfologica->fecha ?></td>
+                                </tr>
+                                <?php } ?>
 
-                     <?php foreach ($ecoMorfologicas->result() as $ecoMorfologica) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                        <a 
-                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
-                          target="_blank"
-                          title="Generar tiquet"
-                          href="<?php echo base_url(); ?>administracion/pdfecografiamorfologica/<?php echo $ecoMorfologica->documento_paciente; ?>"
-                        >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                        </a>
-                        </div>
-                      </td>
-                      <td>Ecografia Morfologica</td>
-                      <td><?php echo $ecoMorfologica->codigo_doctor ?></td>
-                      <td><?php echo $ecoMorfologica->fecha ?></td>
-                    </tr>
-                    <?php } ?>
+                                <?php foreach ($ecoTrasvaginals->result() as $ecoTrasvaginal) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3" target="_blank" title="Generar tiquet" href="<?php echo base_url(); ?>administracion/pdfecografiatrasvaginal/<?php echo $ecoTrasvaginal->documento_paciente; ?>">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>Ecografia Trasvaginal</td>
+                                    <td><?php echo $ecoTrasvaginal->codigo_doctor ?></td>
+                                    <td><?php echo $ecoTrasvaginal->fecha ?></td>
+                                </tr>
+                                <?php } ?>
 
+                                <?php foreach ($ecoPelvicas->result() as $ecoPelvica) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3" target="_blank" title="Generar tiquet" href="<?php echo base_url(); ?>administracion/pdfecografiapelvica/<?php echo $ecoPelvica->documento_paciente; ?>">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>Ecografia Pelvica</td>
+                                    <td><?php echo $ecoPelvica->codigo_doctor ?></td>
+                                    <td><?php echo $ecoPelvica->fecha ?></td>
+                                </tr>
+                                <?php } ?>
 
-                     <?php foreach ($ecoTrasvaginals->result() as $ecoTrasvaginal) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                        <a 
-                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
-                          target="_blank"
-                          title="Generar tiquet"
-                          href="<?php echo base_url(); ?>administracion/pdfecografiatrasvaginal/<?php echo $ecoTrasvaginal->documento_paciente; ?>"
-                        >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                        </a>
-                        </div>
-                      </td>
-                      <td>Ecografia Trasvaginal</td>
-                      <td><?php echo $ecoTrasvaginal->codigo_doctor ?></td>
-                      <td><?php echo $ecoTrasvaginal->fecha ?></td>
-                    </tr>
-                    <?php } ?>
+                                <?php foreach ($ecoObstetricas->result() as $ecoObstetrica) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3" target="_blank" title="Generar tiquet" href="<?php echo base_url(); ?>administracion/pdfecografiaobstetrica/<?php echo $ecoObstetrica->documento_paciente; ?>">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>Ecografia Obstetrica</td>
+                                    <td><?php echo $ecoObstetrica->codigo_doctor ?></td>
+                                    <td><?php echo $ecoObstetrica->fecha ?></td>
+                                </tr>
+                                <?php } ?>
 
-                    <?php foreach ($ecoPelvicas->result() as $ecoPelvica) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                        <a 
-                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
-                          target="_blank"
-                          title="Generar tiquet"
-                          href="<?php echo base_url(); ?>administracion/pdfecografiapelvica/<?php echo $ecoPelvica->documento_paciente; ?>"
-                        >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                        </a>
-                        </div>
-                      </td>
-                      <td>Ecografia Pelvica</td>
-                      <td><?php echo $ecoPelvica->codigo_doctor ?></td>
-                      <td><?php echo $ecoPelvica->fecha ?></td>
-                    </tr>
-                    <?php } ?>
+                                <?php foreach ($ecoProstaticas->result() as $ecoProstatica) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3" target="_blank" title="Generar tiquet" href="<?php echo base_url(); ?>administracion/pdfecografiaprostatica/<?php echo $ecoProstatica->documento_paciente; ?>">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>Ecografia Prostatica</td>
+                                    <td><?php echo $ecoProstatica->codigo_doctor ?></td>
+                                    <td><?php echo $ecoProstatica->fecha ?></td>
+                                </tr>
+                                <?php } ?>
 
-                    <?php foreach ($ecoObstetricas->result() as $ecoObstetrica) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                        <a 
-                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
-                          target="_blank"
-                          title="Generar tiquet"
-                          href="<?php echo base_url(); ?>administracion/pdfecografiaobstetrica/<?php echo $ecoObstetrica->documento_paciente; ?>"
-                        >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                        </a>
-                        </div>
-                      </td>
-                      <td>Ecografia Obstetrica</td>
-                      <td><?php echo $ecoObstetrica->codigo_doctor ?></td>
-                      <td><?php echo $ecoObstetrica->fecha ?></td>
-                    </tr>
-                    <?php } ?>
+                                <?php foreach ($ecoRenals->result() as $ecoRenal) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3" target="_blank" title="Generar tiquet" href="<?php echo base_url(); ?>administracion/pdfecografiarenal/<?php echo $ecoRenal->documento_paciente; ?>">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>Ecografia Renal</td>
+                                    <td><?php echo $ecoRenal->codigo_doctor ?></td>
+                                    <td><?php echo $ecoRenal->fecha ?></td>
+                                </tr>
+                                <?php } ?>
 
-                     <?php foreach ($ecoProstaticas->result() as $ecoProstatica) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                        <a 
-                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
-                          target="_blank"
-                          title="Generar tiquet"
-                          href="<?php echo base_url(); ?>administracion/pdfecografiaprostatica/<?php echo $ecoProstatica->documento_paciente; ?>"
-                        >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                        </a>
-                        </div>
-                      </td>
-                      <td>Ecografia Prostatica</td>
-                      <td><?php echo $ecoProstatica->codigo_doctor ?></td>
-                      <td><?php echo $ecoProstatica->fecha ?></td>
-                    </tr>
-                    <?php } ?>
+                                <?php foreach ($ecoTiroidess->result() as $ecoTiroides) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3" target="_blank" title="Generar tiquet" href="<?php echo base_url(); ?>administracion/pdfecografiatiroides/<?php echo $ecoTiroides->documento_paciente; ?>">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>Ecografia Tiroides</td>
+                                    <td><?php echo $ecoTiroides->codigo_doctor ?></td>
+                                    <td><?php echo $ecoTiroides->fecha ?></td>
+                                </tr>
+                                <?php } ?>
 
-                    <?php foreach ($ecoRenals->result() as $ecoRenal) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                        <a 
-                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
-                          target="_blank"
-                          title="Generar tiquet"
-                          href="<?php echo base_url(); ?>administracion/pdfecografiarenal/<?php echo $ecoRenal->documento_paciente; ?>"
-                        >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                        </a>
-                        </div>
-                      </td>
-                      <td>Ecografia Renal</td>
-                      <td><?php echo $ecoRenal->codigo_doctor ?></td>
-                      <td><?php echo $ecoRenal->fecha ?></td>
-                    </tr>
-                    <?php } ?>
+                                <?php foreach ($ecoHisterosonografias->result() as $ecoHisterosonografia) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3" target="_blank" title="Generar tiquet" href="<?php echo base_url(); ?>administracion/pdfecografiaHisterosonografia/<?php echo $ecoHisterosonografia->documento_paciente; ?>">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>Ecografia Histerosonografia</td>
+                                    <td><?php echo $ecoHisterosonografia->codigo_doctor ?></td>
+                                    <td><?php echo $ecoHisterosonografia->fecha ?></td>
+                                </tr>
+                                <?php } ?>
 
+                                <?php foreach ($ecoArterials->result() as $ecoArterial) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3" target="_blank" title="Generar tiquet" href="<?php echo base_url(); ?>administracion/pdfecografiaarterial/<?php echo $ecoArterial->documento_paciente; ?>">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>Ecografia Arterial</td>
+                                    <td><?php echo $ecoArterial->codigo_doctor ?></td>
+                                    <td><?php echo $ecoArterial->fecha ?></td>
+                                </tr>
+                                <?php } ?>
 
-                     <?php foreach ($ecoTiroidess->result() as $ecoTiroides) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                        <a 
-                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
-                          target="_blank"
-                          title="Generar tiquet"
-                          href="<?php echo base_url(); ?>administracion/pdfecografiatiroides/<?php echo $ecoTiroides->documento_paciente; ?>"
-                        >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                        </a>
-                        </div>
-                      </td>
-                      <td>Ecografia Tiroides</td>
-                      <td><?php echo $ecoTiroides->codigo_doctor ?></td>
-                      <td><?php echo $ecoTiroides->fecha ?></td>
-                    </tr>
-                    <?php } ?>
-
-                     <?php foreach ($ecoHisterosonografias->result() as $ecoHisterosonografia) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                        <a 
-                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
-                          target="_blank"
-                          title="Generar tiquet"
-                          href="<?php echo base_url(); ?>administracion/pdfecografiaHisterosonografia/<?php echo $ecoHisterosonografia->documento_paciente; ?>"
-                        >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                        </a>
-                        </div>
-                      </td>
-                      <td>Ecografia Histerosonografia</td>
-                      <td><?php echo $ecoHisterosonografia->codigo_doctor ?></td>
-                      <td><?php echo $ecoHisterosonografia->fecha ?></td>
-                    </tr>
-                    <?php } ?>
-
-                      <?php foreach ($ecoArterials->result() as $ecoArterial) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                        <a 
-                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
-                          target="_blank"
-                          title="Generar tiquet"
-                          href="<?php echo base_url(); ?>administracion/pdfecografiaarterial/<?php echo $ecoArterial->documento_paciente; ?>"
-                        >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                        </a>
-                        </div>
-                      </td>
-                      <td>Ecografia Arterial</td>
-                      <td><?php echo $ecoArterial->codigo_doctor ?></td>
-                      <td><?php echo $ecoArterial->fecha ?></td>
-                    </tr>
-                    <?php } ?>
-
-
-                      <?php foreach ($ecoVenosas->result() as $ecoVenosa) { ?>
-                    <tr>
-                      <td>
-                        <div class="row">
-                        <a 
-                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
-                          target="_blank"
-                          title="Generar tiquet"
-                          href="<?php echo base_url(); ?>administracion/pdfecografiavenosa/<?php echo $ecoVenosa->documento_paciente; ?>"
-                        >
-                            <i class="fas fa-file-pdf text-white opacity-10"></i>
-                        </a>
-                        </div>
-                      </td>
-                      <td>Ecografia Venosa</td>
-                      <td><?php echo $ecoVenosa->codigo_doctor ?></td>
-                      <td><?php echo $ecoVenosa->fecha ?></td>
-                    </tr>
-                    <?php } ?>
-
-
-
-
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  </div>
-  <!-- End Accordion -->
-                   </div>
-               </div>
-               <div class="col-md-4">
-                <div class="card card-dashed h-900">
-                    <div class="card-header bg-default"><h6 class="text-white text-uppercase">consulta</h6></div>
+                                <?php foreach ($ecoVenosas->result() as $ecoVenosa) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <a class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3" target="_blank" title="Generar tiquet" href="<?php echo base_url(); ?>administracion/pdfecografiavenosa/<?php echo $ecoVenosa->documento_paciente; ?>">
+                                                <i class="fas fa-file-pdf text-white opacity-10"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>Ecografia Venosa</td>
+                                    <td><?php echo $ecoVenosa->codigo_doctor ?></td>
+                                    <td><?php echo $ecoVenosa->fecha ?></td>
+                                </tr>
+                                <?php } ?>
+                                
+                                </tbody>
+                            </table>
+                        </div> </div> </div> </div> </div> </div> </div> </div> </div> </div> <div class="col-md-4">
+        <div class="card card-dashed h-900">
+            <div class="card-header bg-default"><h6 class="text-white text-uppercase">consulta</h6></div>
                     <div class="card-body">
                       <div class="row">
                         <div class="col-md-12">

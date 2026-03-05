@@ -141,7 +141,7 @@
           <div class="d-flex">
           <div class="me-4">
           <p class="text-white text-sm opacity-8 mb-0">Titular de la tarjeta</p>
-          <h6 class="text-white mb-0">Mi Salud Clinica</h6>
+          <h6 class="text-white mb-0">Mujer Plena</h6>
           </div>
           <div>
           <p class="text-white text-sm opacity-8 mb-0">Expiración</p>

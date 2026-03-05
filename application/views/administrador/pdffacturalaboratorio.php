@@ -14,7 +14,7 @@ $pdf->Ln(13);
 
 $pdf->Cell(7, 5, '', '', 0, 'L', false);
 
-$pdf->Cell(1, 5, 'Mi salud', '', 0, 'L', false);
+$pdf->Cell(1, 5, 'Mujer Plena', '', 0, 'L', false);
 
 $pdf->Ln(4);
 
