@@ -146,7 +146,6 @@ class Generic_model extends CI_model {
 		$pass_encrypt = password_hash($texto, PASSWORD_DEFAULT);
 		return $pass_encrypt;
 	}
+    }
 
-
-}
 ?>

@@ -75,6 +75,20 @@
         border-color: #4660e2;
         transform: translateY(-1px);
     }
+    
+    @media (max-width: 768px) {
+        .card-plain {
+            padding: 1rem;
+        }
+        .form-control {
+            padding: 1rem; /* Inputs más grandes en mobile */
+            font-size: 1.1rem;
+        }
+        .min-vh-100 {
+            min-height: auto !important; /* Quitar altura mínima forzada */
+            padding-top: 2rem !important; /* Reducir padding superior */
+        }
+    }
   </style>
 </head>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  * -->
@@ -112,7 +126,7 @@
       </p>
     </div>
     </div>
-    <div class="col-xl-5 col-lg-6 col-md-10 d-flex flex-column mx-lg-0 mx-auto">
+    <div class="col-xl-5 col-lg-6 col-md-10 col-12 d-flex flex-column mx-lg-0 mx-auto">
     <div class="card card-plain">
     <div class="card-header pb-0 text-start">
       <div class="text-center">
