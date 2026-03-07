@@ -178,7 +178,8 @@ class Laboratorio_model extends CI_model {
 
         $this->db->where("paciente", $this->session->userdata("documento"));
 
-        $this->db->where("tp_documento", "laboratorio");
+        // $this->db->where("tp_documento", "laboratorio");
+        $this->db->where_in("tp_documento", ["laboratorio", "LB"]);
 
         $result = $this->db->get();
 

@@ -8,6 +8,7 @@ class Clientes extends CI_Controller {
 		$this->load->model("Patologia_model");
 		$this->load->model("Laboratorio_model");
 		$this->load->model("Lineatiempo_model");
+		$this->load->model("Historias_model");
 	}
 
     public function index() {
@@ -39,7 +40,27 @@ class Clientes extends CI_Controller {
 	}
 
 	public function ecografias() {
-	  $this->load->view("clientes/ecografias");
+		if(!$this->session->userdata("login")){ redirect(base_url()."iniciarsesion"); }
+
+		$documento = $this->session->userdata("documento");
+
+		$data = [
+			'ecoAbdominales' => $this->Historias_model->getEcografiaAbdominal($documento),
+			'ecoMamas' => $this->Historias_model->getEcografiaMama($documento),
+			'ecoGeneticas' => $this->Historias_model->getEcografiaGenetica($documento),
+			'ecoMorfologicas' => $this->Historias_model->getEcografiaMorfologica($documento),
+			'ecoTrasvaginals' => $this->Historias_model->getEcografiaTrasvaginal($documento),
+			'ecoPelvicas' => $this->Historias_model->getEcografiaPelvica($documento),
+			'ecoObstetricas' => $this->Historias_model->getEcografiaObstetrica($documento),
+			'ecoProstaticas' => $this->Historias_model->getEcografiaProstatica($documento),
+			'ecoRenals' => $this->Historias_model->getEcografiaRenal($documento),
+			'ecoTiroidess' => $this->Historias_model->getEcografiaTiroides($documento),
+			'ecoHisterosonografias' => $this->Historias_model->getEcografiaHisterosonografia($documento),
+			'ecoArterials' => $this->Historias_model->getEcografiaArterial($documento),
+			'ecoVenosas' => $this->Historias_model->getEcografiaVenosa($documento),
+		];
+
+		$this->load->view("clientes/ecografias", $data);
 	}
 
 	public function citasDoctores() {
