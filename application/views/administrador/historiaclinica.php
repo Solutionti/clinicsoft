@@ -836,10 +836,6 @@
                       <td><?php echo $ecoVenosa->fecha ?></td>
                     </tr>
                     <?php } ?>
-
-
-
-
                   </tbody>
                 </table>
               </div>

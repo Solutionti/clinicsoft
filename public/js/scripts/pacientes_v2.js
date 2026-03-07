@@ -482,7 +482,7 @@ function buscarPacienteBaseDatos() {
         btnReset.setAttribute('type', 'button');
         // Clases de Argon/Bootstrap
         btnReset.className = 'btn btn-icon-only btn-rounded btn-outline-warning mb-0 me-3 btn-sm d-flex align-items-center justify-content-center';
-        btnReset.innerHTML = '<i class="fas fa-key" aria-hidden="true"></i>';
+        btnReset.innerHTML = '<i class="fas fa-key" aria-hidden="true" title="Restablecer Contraseña"></i>';
         btnReset.onclick = function(e) { 
             e.stopPropagation(); // Evita que se seleccione la fila al hacer click
             restablecerClave(pacientes.documento); 
@@ -739,10 +739,15 @@ function actualizarPaciente(id) {
       text: "Se generará una NUEVA clave aleatoria. La anterior dejará de funcionar.",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#fb6340', // Color naranja de Argon
-      cancelButtonColor: '#secondary',
+      confirmButtonColor: '#5e72e4', // Color naranja de Argon
+      cancelButtonColor: '#6c757d',
       confirmButtonText: 'Sí, generar clave',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
+      // Centrado de botones:
+      buttonsStyling: true, 
+      customClass: {
+        actions: 'd-flex justify-content-center w-100 gap-2' // Clases Bootstrap para flex y centrado
+      }
   }).then((result) => {
       if (result.isConfirmed) {
           
