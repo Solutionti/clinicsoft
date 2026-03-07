@@ -194,15 +194,15 @@ class Citas extends Admin_Controller {
         try {
             $this->load->helper('whatsapp');
             
-            $mensaje = "🌸 *Clínica Mujer Plena*\n\n";
+            $mensaje = "*Clínica Mi Salud*\n\n";
             $mensaje .= "Hola *$nombre_paciente_limpio*, su cita ha sido reservada con éxito.\n\n";
             $mensaje .= "👩‍⚕️ *Especialista:* Dr(a). $nombre_doctor\n";
             $mensaje .= "🩺 *Servicio:* $observaciones\n";
             $mensaje .= "📅 *Fecha:* $fecha_bonita\n";
             $mensaje .= "⏰ *Hora:* $hora_bonita\n\n";
-            $mensaje .= "📍 ¡La esperamos en Av. Grau 671, Chiclayo! 🚀\n";
+            $mensaje .= "📍 ¡La esperamos en Av. Salaverry #1402, Chiclayo! 🚀\n";
 			$mensaje .= "🗺️ Clic aquí para ver el mapa:\n";
-			$mensaje .= "https://www.google.com/maps/search/?api=1&query=Centro+Medico+Mujer+Plena+Chiclayo\n";
+			$mensaje .= "https://maps.app.goo.gl/q5QysatLe6ZZqPJi7\n";
     
             enviar_whatsapp_cita($telefono, $mensaje);
         } catch (Exception $e) {
@@ -472,19 +472,19 @@ class Citas extends Admin_Controller {
             
             if ($estado == 'Cancelado') {
                 // Mensaje si la cita se CANCELA
-                $mensaje = "🚫 *Clínica Mujer Plena - Cita Cancelada*\n\n";
+                $mensaje = "🚫 *Clínica Mi Salud - Cita Cancelada*\n\n";
                 $mensaje .= "Hola *$nombre_paciente_limpio*, le confirmamos que su cita con el Dr(a). $nombre_doctor ha sido *cancelada* en nuestro sistema.\n\n";
                 $mensaje .= "Si desea agendar nuevamente en el futuro, estamos a su entera disposición. ¡Que tenga un excelente día!";
             } else {
                 // Mensaje si la cita se REPROGRAMA / ACTUALIZA
-                $mensaje = "🔄 *Clínica Mujer Plena - Reprogramación de Cita*\n\n";
+                $mensaje = "🔄 *Clínica Mi Salud - Reprogramación de Cita*\n\n";
                 $mensaje .= "Hola *$nombre_paciente_limpio*, le informamos que su cita ha sido *reprogramada*.\n\n";
                 $mensaje .= "👩‍⚕️ *Especialista:* Dr(a). $nombre_doctor\n";
                 $mensaje .= "🩺 *Servicio:* $observaciones\n";
                 $mensaje .= "📅 *Nueva Fecha:* $fecha_bonita\n";
                 $mensaje .= "⏰ *Nueva Hora:* $hora_bonita\n\n";
-                $mensaje .= "📍 ¡La esperamos en Av. Grau 671, Chiclayo! 🚀\n";
-                $mensaje .= "🗺️ *Ver mapa:* https://www.google.com/maps/search/?api=1&query=Centro+Medico+Mujer+Plena+Chiclayo\n\n";
+                $mensaje .= "📍 ¡La esperamos en Av. Salaverry #1402, Chiclayo! 🚀\n";
+                $mensaje .= "🗺️ *Ver mapa:* https://maps.app.goo.gl/q5QysatLe6ZZqPJi7\n\n";
             }
     
             enviar_whatsapp_cita($telefono, $mensaje);

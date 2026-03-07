@@ -210,7 +210,7 @@ class Publico extends CI_Controller {
         try {
             $this->load->helper('whatsapp');
             
-            $mensaje = "🌸 *Clínica Mujer Plena*\n\n";
+            $mensaje = "*Clínica Mi Salud*\n\n";
             $mensaje .= "Hola *$nombre_paciente_limpio*, su cita ha sido reservada con éxito desde la Web.\n\n";
             $mensaje .= "👩‍⚕️ *Especialista:* Dr(a). $nombre_doctor\n";
             $mensaje .= "📅 *Fecha:* $fecha_bonita\n";
