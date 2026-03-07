@@ -72,19 +72,12 @@ class Laboratorio extends Admin_Controller {
     $pdf->AddPage();
 
     // --- ENCABEZADO CON LOGO AL LADO ---
-    // Colocamos el logo a la izquierda (X=5)
-    $pdf->Image('public/img/theme/logo.png', 5, 5, 14, 14, 'png'); 
-    
-    // Movemos el texto a la derecha del logo
-    $pdf->SetXY(20, 6); 
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(0, 4, utf8_decode('CLÍNICA "MI SALUD"'), 0, 1, 'L');
-    $pdf->SetX(20);
-    $pdf->SetFont('Arial', '', 7);
-    $pdf->Cell(0, 3, utf8_decode('Maternidad y Especialidades'), 0, 1, 'L');
+    $pdf->Image('public/img/theme/logo.png', 27, 5, 25, 18, 'png'); 
+    // Texto de la clínica a la derecha del logo (Bajamos solo el texto)
+    $pdf->SetFont('Arial', '', 7); // Establecemos la fuente ANTES de escribir
+    $pdf->SetXY(20, 25); 
     $pdf->SetX(20);
     $pdf->MultiCell(0, 3, utf8_decode('Av. Salaverry #1402 - Chiclayo'), 0, 'L');
-    
     $pdf->Ln(5);
     $pdf->Cell(0, 0, '---------------------------------------------------', 0, 1, 'C');
     $pdf->Ln(2);
@@ -156,7 +149,7 @@ class Laboratorio extends Admin_Controller {
     $pdf->Ln(3);
     
     // Dibujamos el QR a la izquierda (X=5)
-    $pdf->Image('public/img/theme/zonac.png', 5, $pdf->GetY(), 16, 16, 'png'); 
+    $pdf->Image('public/img/theme/qr-zonac.png', 5, $pdf->GetY(), 16, 16, 'png'); 
     
     // Texto al lado del QR
     $pdf->SetX(23);
@@ -164,14 +157,14 @@ class Laboratorio extends Admin_Controller {
     $pdf->Cell(0, 4, 'CONSULTE SUS RESULTADOS EN:', 0, 1, 'L');
     $pdf->SetX(23);
     $pdf->SetFont('Arial', '', 8);
-    $pdf->Cell(0, 4, 'clinicamisalud.pe/zonac', 0, 1, 'L');
+    $pdf->Cell(0, 4, 'clinicsoft.clinicamisalud.pe/zonac', 0, 1, 'L');
     $pdf->SetX(23);
     $pdf->SetFont('Arial', 'I', 6.5);
     $pdf->MultiCell(0, 3, utf8_decode('Escanee el QR o use su DNI y clave en la web.'), 0, 'L');
 
     $pdf->Ln(6);
     $pdf->SetFont('Arial', 'I', 7);
-    $pdf->MultiCell(0, 3, utf8_decode('Este ticket no tiene valor fiscal. Canjéelo por Boleta/Factura si lo requiere.'), 0, 'C');
+    $pdf->MultiCell(0, 3, utf8_decode('Este ticket no tiene valor.Canjéelo por Boleta/Factura si lo requiere.'), 0, 'C');
     
     $pdf->Ln(3);
     $pdf->SetFont('Arial', 'B', 8);

@@ -48,7 +48,7 @@ class Laboratorio extends Admin_Controller {
         $pdf->addpage();
 
         $pdf->Image('public/img/theme/logo.png' , 10,5, 20 , 17,'png');
-        $pdf->Image('public/img/theme/zonac.png' , 35 ,5, 15 , 15,'png');
+        $pdf->Image('public/img/theme/qr-zonac.png' , 35 ,5, 15 , 15,'png');
         $pdf->Ln();
         $pdf->SetFont('Times','',8);
         $pdf->Ln(13);
@@ -105,13 +105,13 @@ class Laboratorio extends Admin_Controller {
         $pdf->Cell(31,5,'Para consultar sus resultados medicos ingresa', '', 0,'L', false );
         $pdf->Ln(4);
         $pdf->Cell(5,5,'', '', 0,'L', false );
-        $pdf->Cell(10,5,'https://saludmadreymujer.com/zonac', '', 0,'L', false );
+        $pdf->Cell(10,5,'https://clinicsoft.clinicamisalud.pe/zonac', '', 0,'L', false );
         $pdf->Ln(4);
         $pdf->Cell(3,5,'', '', 0,'L', false );
         $pdf->Cell(25,5,utf8_decode('Digitar su numero de DNI y Contraseña.'), '', 0,'L', false );
         $pdf->Ln(5);
         $pdf->Cell(11,5,'', '', 0,'L', false );
-        $pdf->Cell(25,5,'www.clinicaenfoquesalud.com', '', 0,'L', false );
+        $pdf->Cell(25,5,'www.clinicamisalud.pe', '', 0,'L', false );
         $pdf->Output();
     }
 
