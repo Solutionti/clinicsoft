@@ -654,7 +654,7 @@
                 success: function() {
                     Swal.fire({
                         title: "¡Reserva Exitosa!",
-                        text: "Te esperamos en la Clínica Mujer Plena.",
+                        text: "Te esperamos en la Clínica Mi Salud.",
                         icon: "success",
                         confirmButtonColor: "#2dce89",
                         confirmButtonText: "Entendido"

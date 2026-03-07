@@ -11,6 +11,7 @@
   <script src="<?php echo base_url(); ?>public/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="<?php echo base_url(); ?>public/js/plugins/chartjs.min.js"></script>
   <script src="<?php echo base_url(); ?>public/js/argon-dashboard.min.js?v=2.0.2"></script>
+  <script src="<?php echo base_url(); ?>public/js/scripts/global.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     document.documentElement.addEventListener('click', function (e) {
