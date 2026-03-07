@@ -12,16 +12,12 @@ $pdf->SetAutoPageBreak(true, 5);
 $pdf->AddPage();
 
 // --- ENCABEZADO: LOGO AL LADO DEL NOMBRE ---
-// Colocamos el logo a la izquierda
-$pdf->Image('public/img/theme/logo.png', 5, 5, 14, 14, 'png'); 
+// Colocamos el logo a la izquierda (Posición original)
+$pdf->Image('public/img/theme/logo.png', 27, 5, 25, 18, 'png'); 
 
-// Texto de la clínica a la derecha del logo
-$pdf->SetXY(20, 6); 
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(0, 4, utf8_decode('CLÍNICA "MI SALUD"'), 0, 1, 'L');
-$pdf->SetX(20);
-$pdf->SetFont('Arial', '', 7);
-$pdf->Cell(0, 3, utf8_decode('Maternidad y Especialidades'), 0, 1, 'L');
+// Texto de la clínica a la derecha del logo (Bajamos solo el texto)
+$pdf->SetFont('Arial', '', 7); // Establecemos la fuente ANTES de escribir
+$pdf->SetXY(20, 25); 
 $pdf->SetX(20);
 $pdf->MultiCell(0, 3, utf8_decode('Av. Salaverry #1402 - Chiclayo'), 0, 'L');
 
@@ -93,7 +89,7 @@ $pdf->Cell(0, 0, '---------------------------------------------------', 0, 1, 'C
 // --- PIE DE PÁGINA CON QR / WEB ---
 $pdf->Ln(4);
 // Colocamos la imagen de la web/QR al lado de la URL
-$pdf->Image('public/img/theme/web.png', 5, $pdf->GetY(), 16, 16, 'png'); 
+$pdf->Image('public/img/theme/web-misalud.png', 5, $pdf->GetY(), 16, 16, 'png'); 
 
 $pdf->SetX(23);
 $pdf->SetFont('Arial', 'B', 8);

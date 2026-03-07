@@ -66,7 +66,7 @@
               <?php echo $this->session->userdata("nombre")." ".$this->session->userdata("apellido"); ?>
               </h5>
               <p class="mb-0 font-weight-bold text-sm">
-                Paciente Salud madre mujer
+                Paciente
               </p>
             </div>
           </div>

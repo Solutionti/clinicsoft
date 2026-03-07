@@ -739,10 +739,15 @@ function actualizarPaciente(id) {
       text: "Se generará una NUEVA clave aleatoria. La anterior dejará de funcionar.",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#fb6340', // Color naranja de Argon
-      cancelButtonColor: '#secondary',
+      confirmButtonColor: '#5e72e4', // Color naranja de Argon
+      cancelButtonColor: '#6c757d',
       confirmButtonText: 'Sí, generar clave',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
+      // Centrado de botones:
+      buttonsStyling: true, 
+      customClass: {
+        actions: 'd-flex justify-content-center w-100 gap-2' // Clases Bootstrap para flex y centrado
+      }
   }).then((result) => {
       if (result.isConfirmed) {
           
