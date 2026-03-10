@@ -1300,11 +1300,11 @@ class Historiaclinica extends Admin_Controller
 			$pdf->SetTextColor(180, 20, 40);
 			$pdf->SetFont('Arial', '', 6);
 			$pdf->SetXY($x, 22);
-			$pdf->Cell($w_col, 3, utf8_decode('Av. Salaverry 1402 - Urb. Bancarios - Chiclayo (Costado de Condominios Colibrí)'), 0, 1, 'C');
+			$pdf->Cell($w_col, 3, utf8_decode('Av. Grau # 671 - Chiclayo - Chiclayo (Costado de Condominios Colibrí)'), 0, 1, 'C');
 			$pdf->SetX($x);
 			$pdf->Cell($w_col, 3, utf8_decode('074600891 - 902 720 312'), 0, 1, 'C');
 			$pdf->SetX($x);
-			$pdf->Cell($w_col, 3, utf8_decode('Jr. Juan Ugaz 622 - Santa Cruz - 948 608 819 - CLINICA "MI SALUD"'), 0, 1, 'C');
+			$pdf->Cell($w_col, 3, utf8_decode('Jr. Juan Ugaz 622 - Santa Cruz - 948 608 819 - CLINICA "Mujer Plena"'), 0, 1, 'C');
 
 			// Línea Azul Separadora
 			$pdf->SetDrawColor(0, 102, 204);

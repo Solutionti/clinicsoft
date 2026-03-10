@@ -230,7 +230,7 @@
             </a>
          </li>
          <li class="nav-item">
-            <a class="nav-link " href="https://boticasmm.saludmadreymujer.com" target="_blank">
+            <a class="nav-link " href="" target="_blank">
             <i class="fas text-dark fa-laptop-medical"></i>
             <span class="sidenav-normal text-dark">Farmacia</span>
             </a>

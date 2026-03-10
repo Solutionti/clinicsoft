@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
     <link  rel="icon"  href="<?php echo base_url(); ?>public/img/theme/logo2.ico" type="image/ico" />
-    <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>public/fontawesome/css/all.min.css">
     <link id="pagestyle" href="<?php echo base_url(); ?>public/css/argon-dashboard.css?v=2.0.2" rel="stylesheet" />
-	  <link href="<?php echo base_url(); ?>public/fontawesome/css/fontawesome.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>public/fontawesome/css/brands.css" rel="stylesheet">
-  	<link href="<?php echo base_url(); ?>public/fontawesome/css/solid.css" rel="stylesheet">
+    <!-- Eliminamos las referencias duplicadas e incorrectas a fontawesome que causaban 404 -->
   <style>
     .color-rosa {
       background-color: #CF1B77 !important;
@@ -25,8 +23,71 @@
       color: #CF1B77 !important;
     }
     body {
-      background-color: #fbf8ff;
-      background-image: url('public/img/theme/fondoagua.png');
+      /* Fondo base sólido */
+      background-color: #f8f9fe;
+      /* Aseguramos que el body ocupe todo el alto */
+      min-height: 100vh;
+      position: relative;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    /* Pseudo-elemento para la imagen de fondo con transparencia */
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('public/img/theme/fondoagua.png');
+        background-repeat: repeat; /* O cover, según prefieras */
+        background-position: center;
+        opacity: 0.3; /* Ajusta este valor para más o menos transparencia (0.0 a 1.0) */
+        z-index: -1; /* Para que quede detrás del contenido */
+    }
+    
+    .card-plain {
+        background-color: #fff;
+        border-radius: 1rem;
+        box-shadow: 0 20px 27px 0 rgba(0,0,0,0.05);
+        padding: 2rem;
+    }
+    
+    .form-control {
+        border: 1px solid #e9ecef;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+    }
+    
+    .form-control:focus {
+        border-color: #5e72e4;
+        box-shadow: 0 0 0 2px rgba(94, 114, 228, 0.2);
+    }
+    
+    .btn-primary {
+        background-color: #5e72e4;
+        border-color: #5e72e4;
+        box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+    
+    .btn-primary:hover {
+        background-color: #4660e2;
+        border-color: #4660e2;
+        transform: translateY(-1px);
+    }
+    
+    @media (max-width: 768px) {
+        .card-plain {
+            padding: 1rem;
+        }
+        .form-control {
+            padding: 1rem; /* Inputs más grandes en mobile */
+            font-size: 1.1rem;
+        }
+        .min-vh-100 {
+            min-height: auto !important; /* Quitar altura mínima forzada */
+            padding-top: 2rem !important; /* Reducir padding superior */
+        }
     }
   </style>
 </head>
@@ -65,7 +126,7 @@
       </p>
     </div>
     </div>
-    <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+    <div class="col-xl-5 col-lg-6 col-md-10 col-12 d-flex flex-column mx-lg-0 mx-auto">
     <div class="card card-plain">
     <div class="card-header pb-0 text-start">
       <div class="text-center">
@@ -153,8 +214,12 @@
   <script src="<?php echo base_url(); ?>public/js/core/bootstrap.min.js"></script>
   <script src="<?php echo base_url(); ?>public/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="<?php echo base_url(); ?>public/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="<?php echo base_url(); ?>public/js/plugins/chartjs.min.js"></script>
-  <script src="<?php echo base_url(); ?>public/js/argon-dashboard.min.js?v=2.0.2"></script>
+  <!-- ChartJS no es necesario en login y puede causar errores si no hay canvas -->
+  <!-- <script src="<?php echo base_url(); ?>public/js/plugins/chartjs.min.js"></script> -->
+  
+  <!-- Evitar cargar argon-dashboard.min.js en login si causa conflictos con navbarColorOnResize -->
+  <!-- <script src="<?php echo base_url(); ?>public/js/argon-dashboard.min.js?v=2.0.2"></script> -->
+  
   <script>
      var url1 = "<?php echo base_url(); ?>iniciarsesion";
      var baseurl = "<?php echo base_url();?>";

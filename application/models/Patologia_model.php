@@ -17,7 +17,8 @@ class Patologia_model extends CI_model {
         $this->db->select("*");
         $this->db->from("documentos_pacientes");
         $this->db->where("paciente", $this->session->userdata("documento"));
-        $this->db->where("tp_documento", "patologia");
+        // $this->db->where("tp_documento", "patologia");
+        $this->db->where_in("tp_documento", ["patologia", "PA"]);
         $result = $this->db->get();
 
         return $result;

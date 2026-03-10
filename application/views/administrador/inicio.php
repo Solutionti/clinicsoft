@@ -71,7 +71,7 @@
                       <?php echo $pacientes->pacientes; ?>
                     </h5>
                     <p class="mb-0">
-                      <span class="text-success text-sm font-weight-bolder">+90%</span>
+                      <span class="text-success text-sm font-weight-bolder">+9%</span>
                       
                     </p>
                   </div>

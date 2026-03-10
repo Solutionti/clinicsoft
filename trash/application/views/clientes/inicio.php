@@ -249,7 +249,7 @@
                             </div>
                             <div class="ms-4">
                               <p class="text-xs font-weight-bold mb-0">Lugar:</p>
-                              <h6 class="text-sm mb-0">Salud madre y mujer</h6>
+                              <h6 class="text-sm mb-0">Mujer Plena</h6>
                             </div>
                           </div>
                         </td>
