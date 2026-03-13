@@ -33,9 +33,16 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 #PRODUCCION IGNORE
 /public/colposcopia/*
+!/public/colposcopia/.gitkeep
+
 /public/documentos/*
+!/public/documentos/.gitkeep
+
 /public/img/*
+!/public/img/.gitkeep
+
 /public/laboratorio/*
+!/public/laboratorio/.gitkeep
 
 #BASE DE DATOS
 application/config/database.php
