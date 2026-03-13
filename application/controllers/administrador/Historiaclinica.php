@@ -472,39 +472,54 @@ class Historiaclinica extends Admin_Controller
 		$ruta_archivo = $dir_subida . $nuevo_nombre;
 
 		// Mover el archivo subido al directorio de destino
-		if (move_uploaded_file($archivo_temporal, $ruta_archivo)) {
-			$datos = array(
-				'paciente' => $paciente,
-				'titulo' => $titulo,
-				'icono' => $carpeta . '/' . $nuevo_nombre,
-				'tipo_archivo' => $tipoarc
-			);
+		// Mover el archivo subido al directorio de destino
+        if (move_uploaded_file($archivo_temporal, $ruta_archivo)) {
+            
+            $datos = array(
+                'paciente' => $paciente,
+                'titulo' => $titulo,
+                'icono' => $carpeta . '/' . $nuevo_nombre,
+                'tipo_archivo' => $tipoarc
+            );
 
-			$this->Historias_model->subirDocumentos($datos);
-			$mensaje = 'Archivo subido correctamente.';
+            // 1. INTENTAMOS GUARDAR EN LA BASE DE DATOS
+            $this->Historias_model->subirDocumentos($datos);
+            
+            // 2. TRAMPA CAZADORA DE ERRORES SQL
+            $error_db = $this->db->error();
+            if (!empty($error_db['code'])) {
+                // Si la BD falla, MATAMOS el proceso y mostramos el error
+                die("<div style='background:red; color:white; padding:20px; font-size:20px;'>
+                        <h1>ERROR EN LA BASE DE DATOS:</h1>
+                        <p>No se pudo guardar el registro.</p>
+                        <p><b>Mensaje de MySQL:</b> " . $error_db['message'] . "</p>
+                     </div>");
+            }
 
-			if ($this->input->is_ajax_request()) {
-				echo json_encode(['success' => true, 'alerta' => $mensaje, 'tipo_alerta' => 'success']);
-				return;
-			} else {
-				$this->session->set_flashdata('alerta', $mensaje);
-				$this->session->set_flashdata('tipo_alerta', 'success');
-				redirect(base_url('administracion/historia/' . $paciente));
-				return;
-			}
-		} else {
-			$mensaje = 'Error al mover el archivo subido.';
+            // Si pasa la trampa, todo fue perfecto
+            $mensaje = 'Archivo subido correctamente.';
+            if ($this->input->is_ajax_request()) {
+                echo json_encode(['success' => true, 'alerta' => $mensaje, 'tipo_alerta' => 'success']);
+                return;
+            } else {
+                $this->session->set_flashdata('alerta', $mensaje);
+                $this->session->set_flashdata('tipo_alerta', 'success');
+                redirect(base_url('administracion/historia/' . $paciente));
+                return;
+            }
 
-			if ($this->input->is_ajax_request()) {
-				echo json_encode(['success' => false, 'alerta' => $mensaje, 'tipo_alerta' => 'danger']);
-				return;
-			} else {
-				$this->session->set_flashdata('alerta', $mensaje);
-				$this->session->set_flashdata('tipo_alerta', 'danger');
-				redirect(base_url('administracion/historia/' . $paciente));
-				return;
-			}
-		}
+        } else {
+            // TRAMPA CAZADORA DE ERRORES DE CARPETA/PERMISOS
+            $error_php = error_get_last();
+            $motivo = $error_php ? $error_php['message'] : 'Problema de permisos o ruta incorrecta';
+            
+            die("<div style='background:orange; color:black; padding:20px; font-size:20px;'>
+                    <h1>ERROR AL MOVER EL ARCHIVO:</h1>
+                    <p>Linux no dejó guardar el PDF en la carpeta.</p>
+                    <p><b>Motivo exacto:</b> " . $motivo . "</p>
+                    <p><b>Intentó guardar en:</b> " . $ruta_archivo . "</p>
+                 </div>");
+        }
 	}
 
 	public function GenerarPdfGinecologia()
