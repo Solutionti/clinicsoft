@@ -38,11 +38,11 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /public/documentos/*
 !/public/documentos/.gitkeep
 
-/public/img/*
-!/public/img/.gitkeep
-
 /public/laboratorio/*
 !/public/laboratorio/.gitkeep
+
+/public/patologia/*
+!/public/patologia/.gitkeep
 
 #BASE DE DATOS
 application/config/database.php
