@@ -1490,9 +1490,9 @@ class Historiaclinica extends Admin_Controller
 			$pdf->SetTextColor(150, 150, 150);
 			$pdf->Cell(45, 3, 'Sello / Firma / Coleg. Profesional', 0, 0, 'C');
 			$pdf->Cell(2, 3, '', 0, 0);
-			$pdf->Cell(22, 3, utf8_decode('Fecha de atención'), 0, 0, 'C');
+			$pdf->Cell(22, 3, ('Fecha de atención'), 0, 0, 'C');
 			$pdf->Cell(2, 3, '', 0, 0);
-			$pdf->Cell(23, 3, utf8_decode('Válido hasta'), 0, 1, 'C');
+			$pdf->Cell(23, 3, ('Válido hasta'), 0, 1, 'C');
 			$pdf->SetTextColor(0, 0, 0);
 
 			// Llenado automático de Fecha (Opcional)
