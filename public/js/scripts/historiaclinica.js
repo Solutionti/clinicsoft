@@ -1162,7 +1162,8 @@ function crearCita() {
 		  hora: hora,
 		  estado: estado,
 		  observaciones: observaciones,
-          triage: triage
+          triage: triage,
+          enviar_whatsapp: 0
 		},
 
 		success: function () {

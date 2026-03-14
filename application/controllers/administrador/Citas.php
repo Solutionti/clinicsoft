@@ -112,6 +112,8 @@ class Citas extends Admin_Controller {
         $estado = $this->input->post("estado");
         $triage = $this->input->post("triage");
         $observaciones = $this->input->post("observaciones");
+        $enviar_whatsapp = $this->input->post("enviar_whatsapp");
+        $debe_enviar_whatsapp = !($enviar_whatsapp === '0' || $enviar_whatsapp === 0 || $enviar_whatsapp === false || $enviar_whatsapp === 'false');
 
         // VALIDACIÓN BÁSICA PARA EVITAR ERROR DE BD
         if (empty($nombre) || empty($dni)) {
@@ -191,23 +193,24 @@ class Citas extends Admin_Controller {
         // ==========================================
         // 4. ENVIAR WHATSAPP (Mensaje Premium)
         // ==========================================
-        try {
-            $this->load->helper('whatsapp');
-            
-            $mensaje = "*Clínica Mi Salud*\n\n";
-            $mensaje .= "Hola *$nombre_paciente_limpio*, su cita ha sido reservada con éxito.\n\n";
-            $mensaje .= "👩‍⚕️ *Especialista:* Dr(a). $nombre_doctor\n";
-            $mensaje .= "🩺 *Servicio:* $observaciones\n";
-            $mensaje .= "📅 *Fecha:* $fecha_bonita\n";
-            $mensaje .= "⏰ *Hora:* $hora_bonita\n\n";
-            $mensaje .= "📍 ¡La esperamos en Av. Salaverry #1402, Chiclayo! 🚀\n";
-			$mensaje .= "🗺️ Clic aquí para ver el mapa:\n";
-			$mensaje .= "https://maps.app.goo.gl/q5QysatLe6ZZqPJi7\n";
-    
-            enviar_whatsapp_cita($telefono, $mensaje);
-        } catch (Exception $e) {
-            // Ignorar error de whatsapp para no fallar la respuesta principal
-            log_message('error', 'Error enviando whatsapp: ' . $e->getMessage());
+        if ($debe_enviar_whatsapp && !empty($telefono)) {
+            try {
+                $this->load->helper('whatsapp');
+                
+                $mensaje = "*Clínica Mi Salud*\n\n";
+                $mensaje .= "Hola *$nombre_paciente_limpio*, su cita ha sido reservada con éxito.\n\n";
+                $mensaje .= "👩‍⚕️ *Especialista:* Dr(a). $nombre_doctor\n";
+                $mensaje .= "🩺 *Servicio:* $observaciones\n";
+                $mensaje .= "📅 *Fecha:* $fecha_bonita\n";
+                $mensaje .= "⏰ *Hora:* $hora_bonita\n\n";
+                $mensaje .= "📍 ¡La esperamos en Av. Salaverry #1402, Chiclayo! 🚀\n";
+                $mensaje .= "🗺️ Clic aquí para ver el mapa:\n";
+                $mensaje .= "https://maps.app.goo.gl/q5QysatLe6ZZqPJi7\n";
+        
+                enviar_whatsapp_cita($telefono, $mensaje);
+            } catch (Exception $e) {
+                log_message('error', 'Error enviando whatsapp: ' . $e->getMessage());
+            }
         }
 
         // Respuesta exitosa para AJAX (Intacta para la secretaria)
