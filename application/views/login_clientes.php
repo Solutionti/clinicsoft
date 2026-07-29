@@ -125,21 +125,6 @@
                   </p>
                 </div>
               </div>
-              
-              <footer class="footer py-3 mt-auto">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-12 mx-auto text-center">
-                      <p class="mb-0 text-secondary text-sm">
-                        <i class="fas fa-shield-alt me-1"></i> Plataforma Segura | ClinicSoft Peru © <script>document.write(new Date().getFullYear())</script>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </footer>
-            </div>
-            
-            <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
               <div 
                 class="position-relative bg-gradient-dark h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" 
                 style="background-image: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'); background-size: cover; background-position: center;"
@@ -152,7 +137,6 @@
                       Accede a tu historial médico de forma rápida, segura y sin salir de casa.
                     </p>
                     
-                    <ul class="list-unstyled feature-list">
                         <li><i class="fas fa-microscope"></i> Análisis de Laboratorio</li>
                         <li><i class="fas fa-x-ray"></i> Reportes de Ecografías</li>
                         <li><i class="fas fa-file-medical-alt"></i> Resultados de Patología</li>

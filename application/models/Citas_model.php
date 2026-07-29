@@ -153,7 +153,7 @@ class Citas_model extends CI_model {
 
 
 
-    public function getAllDataCalendario() {
+    public function getAllDataCalendario($medico) {
 
         $this->db->select("CONCAT(p.apellido,' ',p.nombre, ' ( ',c.paciente,' )  DESCRIPCION => ',c.comentarios, ' <= DOCTOR => ',  d.nombre) as title,CONCAT(c.fecha,' ',c.hora) as start, CONCAT(c.fecha,' ',c.hora) as end,c.*,d.color");
 
