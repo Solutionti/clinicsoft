@@ -215,7 +215,8 @@ class Publico extends CI_Controller {
             $mensaje .= "👩‍⚕️ *Especialista:* Dr(a). $nombre_doctor\n";
             $mensaje .= "📅 *Fecha:* $fecha_bonita\n";
             $mensaje .= "⏰ *Hora:* $hora_bonita\n\n";
-            $mensaje .= "📍 ¡La esperamos!";
+            $mensaje .= "📋 *Nota:* La atención será por orden de llegada.\n\n";
+            $mensaje .= "📍 ¡La esperamos en Av. Grau 671, Chiclayo! 🚀\n";
     
             enviar_whatsapp_cita($telefono, $mensaje);
         } catch (Exception $e) {
